@@ -2,10 +2,31 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Trophy, TrendingUp, FileText, Rocket, ArrowRight } from "lucide-react";
+import {
+  Trophy,
+  TrendingUp,
+  FileText,
+  Rocket,
+  ArrowRight,
+  Star,
+  Clock,
+  Users,
+  Zap,
+  Send,
+  Vote,
+  Award,
+  Gift,
+  ChevronRight,
+} from "lucide-react";
 import { LeaderboardTable } from "@/components/creator/LeaderboardTable";
 import { CampaignList } from "@/components/campaign/CampaignList";
-import { MOCK_CREATORS, MOCK_CAMPAIGNS } from "@/lib/mock-data";
+import {
+  MOCK_CREATORS,
+  MOCK_CAMPAIGNS,
+  MOCK_SUBMISSIONS,
+  MOCK_ACTIVITY,
+} from "@/lib/mock-data";
+import { shortenAddress, getTimeRemaining } from "@/lib/injective";
 import type { Creator, LeaderboardSortBy, Campaign } from "@/types/creator-settlement";
 
 function AnimatedCounter({ target, suffix = "", prefix = "", duration = 2000 }: {
@@ -48,6 +69,28 @@ function AnimatedCounter({ target, suffix = "", prefix = "", duration = 2000 }: 
   );
 }
 
+function timeAgo(timestamp: number): string {
+  const diff = Math.floor(Date.now() / 1000) - timestamp;
+  if (diff < 60) return "just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  return `${Math.floor(diff / 86400)}d ago`;
+}
+
+const activityIcons: Record<string, typeof Send> = {
+  submission: Send,
+  vote: Vote,
+  settle: Award,
+  claim: Gift,
+};
+
+const activityColors: Record<string, string> = {
+  submission: "text-cyan-400 bg-cyan-500/10",
+  vote: "text-emerald-400 bg-emerald-500/10",
+  settle: "text-amber-400 bg-amber-500/10",
+  claim: "text-purple-400 bg-purple-500/10",
+};
+
 export default function HomePage() {
   const [sortBy, setSortBy] = useState<LeaderboardSortBy>("earnings");
 
@@ -63,6 +106,13 @@ export default function HomePage() {
     submissionCount: c.submissionCount,
     settled: c.settled,
   }));
+
+  // Featured campaign = highest reward active campaign
+  const featuredCampaign = MOCK_CAMPAIGNS
+    .filter((c) => !c.settled && c.deadline > Math.floor(Date.now() / 1000))
+    .sort((a, b) => Number(b.totalReward - a.totalReward))[0];
+
+  const featuredSubmissions = MOCK_SUBMISSIONS[featuredCampaign?.id] ?? [];
 
   const totalEarnings = MOCK_CREATORS.reduce(
     (sum, c) => sum + c.totalEarnings,
@@ -162,7 +212,7 @@ export default function HomePage() {
       {/* Animated Stats */}
       <section className="px-6 pb-12 lg:px-8">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
-          {stats.map((stat, i) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className={`animate-stat-pulse card-hover-glow rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 text-center transition-all ${stat.glow} ${stat.border}`}
@@ -181,11 +231,225 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Campaign */}
+      {featuredCampaign && (
+        <section className="px-6 pb-12 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-6 flex items-center gap-2">
+              <Star className="h-5 w-5 text-amber-400" />
+              <h2 className="text-2xl font-bold text-white">Featured Campaign</h2>
+            </div>
+            <Link href={`/campaign/${featuredCampaign.id}`}>
+              <div className="group relative overflow-hidden rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/5 via-white/[0.02] to-cyan-500/5 p-6 transition-all hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 lg:p-8">
+                {/* Glow effect */}
+                <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-amber-500/10 blur-3xl" />
+
+                <div className="relative flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                  <div className="flex-1">
+                    <div className="mb-3 flex flex-wrap items-center gap-3">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-400">
+                        <Zap className="h-3 w-3" />
+                        Featured
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-medium text-emerald-400">
+                        Active
+                      </span>
+                    </div>
+                    <h3 className="mb-2 text-2xl font-bold text-white transition group-hover:text-amber-200">
+                      {featuredCampaign.title}
+                    </h3>
+                    <p className="mb-4 max-w-xl text-gray-400">
+                      {featuredCampaign.description}
+                    </p>
+                    <div className="flex flex-wrap gap-6 text-sm">
+                      <div className="flex items-center gap-2">
+                        <Trophy className="h-4 w-4 text-amber-400" />
+                        <span className="text-gray-400">Reward:</span>
+                        <span className="font-semibold text-amber-400">
+                          {(Number(featuredCampaign.totalReward) / 1e6).toLocaleString()} USDC
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4 text-cyan-400" />
+                        <span className="text-gray-400">Deadline:</span>
+                        <span className="font-semibold text-white">
+                          {getTimeRemaining(featuredCampaign.deadline)}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-purple-400" />
+                        <span className="text-gray-400">Submissions:</span>
+                        <span className="font-semibold text-white">
+                          {featuredCampaign.submissionCount}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top submissions preview */}
+                  {featuredSubmissions.length > 0 && (
+                    <div className="w-full shrink-0 lg:w-72">
+                      <p className="mb-3 text-xs font-medium uppercase tracking-wider text-gray-500">
+                        Top Submissions
+                      </p>
+                      <div className="space-y-2">
+                        {featuredSubmissions.slice(0, 3).map((sub, i) => (
+                          <div
+                            key={sub.id}
+                            className="flex items-center gap-3 rounded-lg bg-white/[0.03] px-3 py-2"
+                          >
+                            <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                              i === 0 ? "bg-amber-500/20 text-amber-400" :
+                              i === 1 ? "bg-gray-400/20 text-gray-300" :
+                              "bg-orange-500/20 text-orange-400"
+                            }`}>
+                              {i + 1}
+                            </span>
+                            <span className="flex-1 truncate text-sm text-gray-300">
+                              {shortenAddress(sub.creator)}
+                            </span>
+                            <span className="text-sm font-medium text-emerald-400">
+                              {sub.votes} votes
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-4 flex items-center gap-1 text-sm text-amber-400 transition group-hover:gap-2">
+                  View campaign details
+                  <ChevronRight className="h-4 w-4" />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Top Creators Cards */}
+      <section className="px-6 pb-12 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-white">Top Creators</h2>
+              <p className="text-sm text-gray-500">Highest earning creators this month</p>
+            </div>
+            <Link
+              href="/leaderboard"
+              className="flex items-center gap-1.5 text-sm text-cyan-400 transition hover:text-cyan-300"
+            >
+              View all
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {topCreators.map((creator, i) => {
+              const rankStyles = [
+                "border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent",
+                "border-gray-400/20 bg-gradient-to-br from-gray-400/5 to-transparent",
+                "border-orange-500/20 bg-gradient-to-br from-orange-500/5 to-transparent",
+                "border-white/[0.06] bg-white/[0.02]",
+                "border-white/[0.06] bg-white/[0.02]",
+              ];
+              const badgeStyles = [
+                "bg-amber-500/20 text-amber-400",
+                "bg-gray-400/15 text-gray-300",
+                "bg-orange-500/15 text-orange-400",
+                "bg-white/[0.06] text-gray-400",
+                "bg-white/[0.06] text-gray-400",
+              ];
+              return (
+                <Link
+                  key={creator.address}
+                  href="/leaderboard"
+                  className={`group rounded-xl border p-4 transition-all hover:scale-[1.02] hover:shadow-lg ${rankStyles[i]}`}
+                >
+                  <div className="mb-3 flex items-center justify-between">
+                    <div
+                      className="h-10 w-10 rounded-full"
+                      style={{
+                        background: `linear-gradient(135deg, hsl(${(i * 60) % 360}, 70%, 50%), hsl(${(i * 60 + 120) % 360}, 70%, 50%))`,
+                      }}
+                    />
+                    <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${badgeStyles[i]}`}>
+                      #{i + 1}
+                    </span>
+                  </div>
+                  <p className="mb-1 truncate font-mono text-sm text-gray-300">
+                    {shortenAddress(creator.address)}
+                  </p>
+                  <p className="text-lg font-bold text-white">
+                    {(Number(creator.totalEarnings) / 1e6).toLocaleString()} <span className="text-xs text-gray-500">USDC</span>
+                  </p>
+                  <div className="mt-2 flex gap-3 text-xs text-gray-500">
+                    <span>{creator.totalVotes} votes</span>
+                    <span>{creator.totalSubmissions} works</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Activity Feed */}
+      <section className="px-6 pb-12 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-white">Recent Activity</h2>
+            <p className="text-sm text-gray-500">Latest submissions, votes, and settlements</p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+            {MOCK_ACTIVITY.slice(0, 8).map((activity) => {
+              const Icon = activityIcons[activity.type] ?? Send;
+              const colorClass = activityColors[activity.type] ?? "text-gray-400 bg-gray-500/10";
+              return (
+                <div
+                  key={activity.id}
+                  className="flex items-start gap-3 rounded-xl border border-white/[0.04] bg-white/[0.015] p-4 transition hover:bg-white/[0.03]"
+                >
+                  <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${colorClass}`}>
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm text-gray-200">
+                      <span className="font-mono text-gray-400">
+                        {shortenAddress(activity.creator)}
+                      </span>{" "}
+                      <span className="text-gray-500">
+                        {activity.type === "submission" && "submitted to"}
+                        {activity.type === "vote" && "voted in"}
+                        {activity.type === "settle" && "settled"}
+                        {activity.type === "claim" && "claimed reward from"}
+                      </span>{" "}
+                      <Link
+                        href={`/campaign/${activity.campaignId}`}
+                        className="font-medium text-cyan-400 hover:text-cyan-300"
+                      >
+                        {activity.campaignTitle}
+                      </Link>
+                    </p>
+                    {activity.detail && (
+                      <p className="mt-0.5 text-xs text-gray-500">{activity.detail}</p>
+                    )}
+                  </div>
+                  <span className="shrink-0 text-xs text-gray-600">
+                    {timeAgo(activity.timestamp)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Campaigns */}
       <section className="px-6 pb-12 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-white">Active Campaigns</h2>
+            <h2 className="text-2xl font-bold text-white">All Campaigns</h2>
             <p className="text-sm text-gray-500">Earn USDC by creating content</p>
           </div>
           <CampaignList campaigns={campaigns} />
@@ -197,7 +461,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-white">Top Creators</h2>
+              <h2 className="text-2xl font-bold text-white">Leaderboard</h2>
               <p className="text-sm text-gray-500">
                 Leading the Injective Creator Hub
               </p>
