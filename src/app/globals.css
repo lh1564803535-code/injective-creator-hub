@@ -1,26 +1,194 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --card: #1a1a1a;
+  --card-foreground: #ededed;
+  --primary: #22c55e;
+  --primary-foreground: #ffffff;
+  --secondary: #262626;
+  --secondary-foreground: #ededed;
+  --muted: #262626;
+  --muted-foreground: #a1a1aa;
+  --accent: #22c55e;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #22c55e;
+  --radius: 1rem;
 }
 
 @theme inline {
+  --font-sans: var(--font-geist-sans), 'Inter', system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'JetBrains Mono', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #0a0a0a;
+  color: #ededed;
+}
+
+::selection {
+  background: rgba(34, 197, 94, 0.28);
+  color: #ffffff;
+}
+
+* {
+  scrollbar-color: rgba(148, 163, 184, 0.28) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  background: rgba(148, 163, 184, 0.22);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.38);
+  background-clip: content-box;
+}
+
+/* === Animations === */
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card-hover:active {
+  transform: scale(0.98);
+}
+
+/* Golden particle flow animation */
+@keyframes particle-flow {
+  0% {
+    transform: translate(var(--start-x), var(--start-y)) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+}
+
+.golden-particle {
+  animation: particle-flow 1.5s ease-in-out forwards;
+  background: radial-gradient(circle, #fbbf24, #f59e0b);
+  border-radius: 50%;
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Reward counter animation */
+@keyframes counter-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-counter-pop {
+  animation: counter-pop 0.5s ease-out;
+}
+
+/* Card enter animation */
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-enter {
+  animation: card-enter 0.4s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Settlement success glow */
+@keyframes settlement-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.4); }
+}
+
+.animate-settlement-glow {
+  animation: settlement-glow 2s ease-in-out infinite;
+}
+
+/* Smooth press effect for all interactive elements */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Better focus styles */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Safe area padding for mobile */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 8px);
 }
