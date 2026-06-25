@@ -11,6 +11,11 @@
 - [x] 从 imtoken-wallet-demo 复制可用文件（组件、页面、lib、类型）
 - [x] 检查并修复 injective.ts（确保没有 sdk-ts 导入）
 - [x] 创建 Mock 数据（src/lib/mock-data.ts）— 10 个创作者、5 个活动、12 个提交
+- [x] 增强 Mock 数据 — 15 个创作者、8 个活动、50 个提交、活动时间戳、活动流
+- [x] 首页增强 — Featured Campaign 区块、Top Creators 卡片、Recent Activity 流
+- [x] 排行榜增强 — 分页（每页 10 个）、按活动筛选、CSV 导出、CampaignSearch 集成
+- [x] Dashboard 增强 — Quick Actions、Notifications、Recent Activity 区块
+- [x] 新组件 CampaignSearch — 搜索、状态筛选、排序、活动筛选器
 - [x] 更新 layout.tsx（标题、描述、钱包提供者）
 - [x] 更新 globals.css（深色主题）
 - [x] 创建首页（src/app/page.tsx — 排行榜 + 活动列表）
@@ -30,6 +35,7 @@
 - [x] 钱包集成 — wagmi.ts（Injective EVM chainId 2525、MetaMask/WalletConnect connectors、RPC URL）
 - [x] 钱包集成 — app-navigation.tsx（ConnectButton、余额显示、移动端汉堡菜单）
 - [x] 排行榜页面 — 10 个 mock 创作者、排序（earnings/votes/submissions）、搜索过滤
+- [x] 排行榜页面 v2 — 15 个创作者、分页、活动筛选、CSV 导出、CampaignSearch
 - [x] 活动详情页 — 活动信息、提交列表、投票按钮、Settle 按钮
 - [x] 创建活动页 — 表单（标题/描述/奖励/时长）、mock 提交流程
 - [x] 最终验证 — npx tsc --noEmit 无错误（排除 contracts/ 目录）
