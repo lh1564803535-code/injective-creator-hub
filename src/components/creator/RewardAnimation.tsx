@@ -2,30 +2,31 @@
 
 import { useEffect, useState, useCallback } from "react";
 import confetti from "canvas-confetti";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, PartyPopper } from "lucide-react";
 
 interface RewardAnimationProps {
   amount: number;
   creatorAddress: string;
   onComplete?: () => void;
+  onClaim?: () => void;
 }
 
 export function RewardAnimation({
   amount,
   creatorAddress,
   onComplete,
+  onClaim,
 }: RewardAnimationProps) {
   const [currentAmount, setCurrentAmount] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [showParticles, setShowParticles] = useState(true);
 
-  // Animate counter
   const animateCounter = useCallback((target: number, duration: number = 2000) => {
     const start = performance.now();
     function update(now: number) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       setCurrentAmount(target * eased);
       if (progress < 1) {
         requestAnimationFrame(update);
@@ -37,43 +38,57 @@ export function RewardAnimation({
     requestAnimationFrame(update);
   }, [onComplete]);
 
-  // Trigger confetti
+  // Dramatic multi-burst confetti
   const triggerConfetti = useCallback(() => {
-    const count = 200;
-    const defaults = { origin: { y: 0.7 }, zIndex: 9999 };
-
-    function fire(particleRatio: number, opts: Record<string, unknown>) {
+    const burst = (originX: number, originY: number, opts: Record<string, unknown>) => {
       confetti({
-        ...defaults,
-        particleCount: Math.floor(count * particleRatio),
+        particleCount: 80,
+        spread: 70,
+        origin: { x: originX, y: originY },
+        zIndex: 9999,
+        colors: ["#fbbf24", "#f59e0b", "#22c55e", "#06b6d4", "#8b5cf6", "#ec4899"],
         ...opts,
       });
-    }
+    };
 
-    fire(0.25, { spread: 26, startVelocity: 55 });
-    fire(0.2, { spread: 60 });
-    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-    fire(0.1, { spread: 120, startVelocity: 45 });
+    // Burst 1: center
+    burst(0.5, 0.6, { startVelocity: 45, spread: 90 });
+    // Burst 2: left
+    setTimeout(() => burst(0.2, 0.7, { startVelocity: 35, spread: 60, scalar: 0.8 }), 200);
+    // Burst 3: right
+    setTimeout(() => burst(0.8, 0.7, { startVelocity: 35, spread: 60, scalar: 0.8 }), 400);
+    // Burst 4: top center
+    setTimeout(() => burst(0.5, 0.3, { startVelocity: 50, spread: 120, decay: 0.9, scalar: 1.2 }), 600);
+    // Burst 5: delayed dramatic center
+    setTimeout(() => {
+      confetti({
+        particleCount: 150,
+        spread: 140,
+        startVelocity: 30,
+        origin: { x: 0.5, y: 0.5 },
+        zIndex: 9999,
+        colors: ["#fbbf24", "#f59e0b", "#d97706", "#fcd34d"],
+        gravity: 0.6,
+        scalar: 1.1,
+        drift: 0,
+      });
+    }, 1000);
   }, []);
 
-  // Start animation
   useEffect(() => {
     triggerConfetti();
     animateCounter(amount);
-
-    // Hide particles after animation
-    const timer = setTimeout(() => setShowParticles(false), 3000);
+    const timer = setTimeout(() => setShowParticles(false), 3500);
     return () => clearTimeout(timer);
   }, [amount, animateCounter, triggerConfetti]);
 
-  // Generate random particles
-  const particles = Array.from({ length: 20 }, (_, i) => ({
+  const particles = Array.from({ length: 40 }, (_, i) => ({
     id: i,
     startX: `${Math.random() * 100}vw`,
     startY: `${Math.random() * 100}vh`,
-    delay: Math.random() * 0.5,
-    duration: 1 + Math.random() * 1,
+    delay: Math.random() * 0.8,
+    duration: 0.8 + Math.random() * 1.2,
+    size: 4 + Math.random() * 8,
   }));
 
   return (
@@ -89,6 +104,8 @@ export function RewardAnimation({
               top: particle.startY,
               animationDelay: `${particle.delay}s`,
               animationDuration: `${particle.duration}s`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
             }}
           />
         ))}
@@ -100,11 +117,11 @@ export function RewardAnimation({
           <Sparkles className="h-12 w-12 text-amber-400" />
         </div>
 
-        {/* Amount Display */}
+        {/* Amount Display with Golden Glow */}
         <div className="text-center">
           <p className="mb-2 text-lg text-gray-400">Reward Settled</p>
-          <div className="flex items-baseline gap-2">
-            <span className="text-6xl font-bold tabular-nums text-white">
+          <div className="animate-golden-glow flex items-baseline justify-center gap-2">
+            <span className="text-6xl font-bold tabular-nums text-amber-300">
               {currentAmount.toFixed(2)}
             </span>
             <span className="text-2xl font-semibold text-amber-400">USDC</span>
@@ -120,9 +137,22 @@ export function RewardAnimation({
 
         {/* Completion Status */}
         {isComplete && (
-          <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 px-6 py-3 text-emerald-400">
-            <Check className="h-5 w-5" />
-            <span className="font-medium">Settlement Complete</span>
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 px-6 py-3 text-emerald-400">
+              <Check className="h-5 w-5" />
+              <span className="font-medium">Settlement Complete</span>
+            </div>
+
+            {/* Claim Reward Button */}
+            {onClaim && (
+              <button
+                onClick={onClaim}
+                className="btn-glow flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 px-8 py-3 font-bold text-black shadow-lg shadow-amber-500/25 transition-all hover:shadow-amber-500/40"
+              >
+                <PartyPopper className="h-5 w-5" />
+                Claim Reward
+              </button>
+            )}
           </div>
         )}
 
@@ -135,22 +165,20 @@ export function RewardAnimation({
   );
 }
 
-// Trigger confetti function (can be used independently)
 export function triggerSettleConfetti() {
-  const count = 200;
-  const defaults = { origin: { y: 0.7 }, zIndex: 9999 };
-
-  function fire(particleRatio: number, opts: Record<string, unknown>) {
+  const burst = (originX: number, originY: number, opts: Record<string, unknown>) => {
     confetti({
-      ...defaults,
-      particleCount: Math.floor(count * particleRatio),
+      particleCount: 80,
+      spread: 70,
+      origin: { x: originX, y: originY },
+      zIndex: 9999,
+      colors: ["#fbbf24", "#f59e0b", "#22c55e", "#06b6d4"],
       ...opts,
     });
-  }
+  };
 
-  fire(0.25, { spread: 26, startVelocity: 55 });
-  fire(0.2, { spread: 60 });
-  fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-  fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-  fire(0.1, { spread: 120, startVelocity: 45 });
+  burst(0.5, 0.6, { startVelocity: 45, spread: 90 });
+  setTimeout(() => burst(0.2, 0.7, { startVelocity: 35, spread: 60 }), 200);
+  setTimeout(() => burst(0.8, 0.7, { startVelocity: 35, spread: 60 }), 400);
+  setTimeout(() => burst(0.5, 0.3, { startVelocity: 50, spread: 120 }), 600);
 }

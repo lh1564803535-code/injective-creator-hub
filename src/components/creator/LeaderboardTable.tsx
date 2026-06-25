@@ -29,6 +29,9 @@ export function LeaderboardTable({
           glow: "shadow-amber-500/40 shadow-lg",
           icon: <Crown className="h-4 w-4 text-white" />,
           ring: "ring-2 ring-amber-400/30",
+          rowBg: "bg-gradient-to-r from-amber-500/[0.06] via-amber-400/[0.03] to-transparent",
+          border: "border-l-2 border-l-amber-400/40",
+          textClass: "text-amber-400",
         };
       case 2:
         return {
@@ -36,6 +39,9 @@ export function LeaderboardTable({
           glow: "shadow-gray-400/30 shadow-md",
           icon: <Medal className="h-4 w-4 text-white" />,
           ring: "ring-2 ring-gray-400/20",
+          rowBg: "bg-gradient-to-r from-gray-400/[0.05] via-gray-300/[0.02] to-transparent",
+          border: "border-l-2 border-l-gray-400/30",
+          textClass: "text-gray-300",
         };
       case 3:
         return {
@@ -43,6 +49,9 @@ export function LeaderboardTable({
           glow: "shadow-orange-500/30 shadow-md",
           icon: <Medal className="h-4 w-4 text-white" />,
           ring: "ring-2 ring-orange-400/20",
+          rowBg: "bg-gradient-to-r from-orange-500/[0.05] via-orange-400/[0.02] to-transparent",
+          border: "border-l-2 border-l-orange-400/30",
+          textClass: "text-orange-400",
         };
       default:
         return {
@@ -50,6 +59,9 @@ export function LeaderboardTable({
           glow: "",
           icon: null,
           ring: "",
+          rowBg: "",
+          border: "",
+          textClass: "text-gray-400",
         };
     }
   };
@@ -100,9 +112,7 @@ export function LeaderboardTable({
             return (
               <div
                 key={creator.address}
-                className={`group flex items-center gap-4 p-4 transition-all ${
-                  isTop3 ? "bg-white/[0.01]" : ""
-                } hover:bg-white/[0.03]`}
+                className={`group flex items-center gap-4 p-4 transition-all ${rankVis.rowBg} ${rankVis.border} hover:bg-white/[0.03] hover:translate-x-0.5`}
               >
                 {/* Rank */}
                 <div
@@ -143,24 +153,19 @@ export function LeaderboardTable({
                   </p>
                 </div>
 
-                {/* Earnings */}
-                <div className="text-right">
-                  <p
-                    className={`text-sm font-semibold ${
-                      creator.rank === 1
-                        ? "text-amber-400"
-                        : creator.rank === 2
-                          ? "text-gray-300"
-                          : creator.rank === 3
-                            ? "text-orange-400"
-                            : "text-gray-400"
-                    }`}
-                  >
-                    {formatUSDC(creator.totalEarnings)}
-                  </p>
-                  <p className="text-[10px] uppercase tracking-wider text-gray-600">
-                    USDC
-                  </p>
+                {/* Earnings with USDC icon */}
+                <div className="flex items-center gap-2 text-right">
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15">
+                    <span className="text-[9px] font-bold text-emerald-400">$</span>
+                  </div>
+                  <div>
+                    <p className={`text-sm font-semibold ${rankVis.textClass}`}>
+                      {formatUSDC(creator.totalEarnings)}
+                    </p>
+                    <p className="text-[10px] uppercase tracking-wider text-gray-600">
+                      USDC
+                    </p>
+                  </div>
                 </div>
               </div>
             );
