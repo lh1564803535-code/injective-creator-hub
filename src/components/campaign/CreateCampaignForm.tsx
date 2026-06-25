@@ -10,10 +10,8 @@ import {
   ExternalLink,
   AlertCircle,
   Eye,
-  EyeOff,
 } from "lucide-react";
 import Link from "next/link";
-import { formatUSDC } from "@/lib/injective";
 import type { Address } from "viem";
 
 // ---------------------------------------------------------------------------

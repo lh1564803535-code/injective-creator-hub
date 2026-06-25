@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   Wallet,
-  TrendingUp,
   Vote,
   FileText,
   ExternalLink,
