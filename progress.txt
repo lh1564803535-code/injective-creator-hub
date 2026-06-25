@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：基础搭建 ✅ 验证通过
+## 当前阶段：钱包集成 & 最终验证 ✅ 全部完成
 
 ## 待办
 （全部完成）
@@ -10,7 +10,7 @@
 - [x] 安装依赖（viem, wagmi, rainbowkit, canvas-confetti, zod）
 - [x] 从 imtoken-wallet-demo 复制可用文件（组件、页面、lib、类型）
 - [x] 检查并修复 injective.ts（确保没有 sdk-ts 导入）
-- [x] 创建 Mock 数据（src/lib/mock-data.ts）
+- [x] 创建 Mock 数据（src/lib/mock-data.ts）— 10 个创作者、5 个活动、12 个提交
 - [x] 更新 layout.tsx（标题、描述、钱包提供者）
 - [x] 更新 globals.css（深色主题）
 - [x] 创建首页（src/app/page.tsx — 排行榜 + 活动列表）
@@ -24,16 +24,26 @@
 - [x] UI 打磨 — 奖励动画增强（5 波彩带、金色发光、Claim 按钮）
 - [x] UI 打磨 — CSS 全局动画（smooth scroll、card-hover-glow、skeleton、golden-glow）
 - [x] 创建 Footer 组件 — Built on Injective、社交链接、区块浏览器链接
-
-## 下一步
-进入下一阶段开发
+- [x] 创建智能合约（BountyCampaign.sol）— 含 Campaign/Submit/Vote/Settle/Claim 流程
+- [x] 创建部署脚本（contracts/scripts/deploy.ts）— Injective mainnet USDC 配置
+- [x] 钱包集成 — wallet-provider.tsx（RainbowKit + wagmi + QueryClientProvider + darkTheme）
+- [x] 钱包集成 — wagmi.ts（Injective EVM chainId 2525、MetaMask/WalletConnect connectors、RPC URL）
+- [x] 钱包集成 — app-navigation.tsx（ConnectButton、余额显示、移动端汉堡菜单）
+- [x] 排行榜页面 — 10 个 mock 创作者、排序（earnings/votes/submissions）、搜索过滤
+- [x] 活动详情页 — 活动信息、提交列表、投票按钮、Settle 按钮
+- [x] 创建活动页 — 表单（标题/描述/奖励/时长）、mock 提交流程
+- [x] 最终验证 — npx tsc --noEmit 无错误（排除 contracts/ 目录）
+- [x] 最终验证 — npm run dev 所有页面 HTTP 200
+- [x] 最终验证 — tsconfig.json 排除 contracts/ 目录避免 Hardhat 类型错误
 
 ## 注意事项
 - 禁止使用 @injectivelabs/sdk-ts
 - 用 viem 直接调 Injective EVM
 - 深色主题：背景 #0a0a0a，卡片 #1a1a1a，强调色 #22c55e
 - 参考 imtoken-wallet-demo 中已有的组件
+- 安装依赖时需要 --legacy-peer-deps（React 19 与部分 Radix UI 包有 peer dependency 冲突）
+- tsconfig.json 已排除 contracts/ 目录（Hardhat 项目独立管理依赖）
 
 ## 已知问题
-- campaign/[id]/page.tsx 和 create/page.tsx 已改为使用 mock 数据（原版依赖 @/hooks/useBounty 和 @/lib/contracts，这两个文件不存在）
-- 安装依赖时需要 --legacy-peer-deps（React 19 与部分 Radix UI 包有 peer dependency 冲突）
+- campaign/[id]/page.tsx 和 create/page.tsx 使用 mock 数据（原版依赖 @/hooks/useBounty 和 @/lib/contracts）
+- contracts/ 目录是独立的 Hardhat 项目，需要在该目录下单独安装依赖
