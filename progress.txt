@@ -1,30 +1,33 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：基础搭建
+## 当前阶段：基础搭建 ✅ 验证通过
 
 ## 待办
-- [x] 初始化 git 仓库
-- [x] 安装依赖（viem, wagmi, rainbowkit, canvas-confetti, zod）
-- [ ] 从 imtoken-wallet-demo 复制可用文件（组件、页面、lib、类型）
-- [ ] 检查并修复 injective.ts（确保没有 sdk-ts 导入）
-- [ ] 创建 Mock 数据（src/lib/mock-data.ts）
-- [ ] 更新 layout.tsx（标题、描述、钱包提供者）
-- [ ] 更新 globals.css（深色主题）
-- [ ] 创建首页（src/app/page.tsx — 排行榜 + 活动列表）
-- [ ] 验证：npm run dev 启动成功
-- [ ] 验证：所有页面可访问
-- [ ] 验证：npx tsc --noEmit 无错误
-- [ ] 验证：没有 import @injectivelabs/sdk-ts
+（全部完成）
 
 ## 已完成
 - [x] 初始化 git 仓库
 - [x] 安装依赖（viem, wagmi, rainbowkit, canvas-confetti, zod）
+- [x] 从 imtoken-wallet-demo 复制可用文件（组件、页面、lib、类型）
+- [x] 检查并修复 injective.ts（确保没有 sdk-ts 导入）
+- [x] 创建 Mock 数据（src/lib/mock-data.ts）
+- [x] 更新 layout.tsx（标题、描述、钱包提供者）
+- [x] 更新 globals.css（深色主题）
+- [x] 创建首页（src/app/page.tsx — 排行榜 + 活动列表）
+- [x] 验证：npm run dev 启动成功（HTTP 200）
+- [x] 验证：所有页面可访问（page.tsx, leaderboard, campaign/[id], create）
+- [x] 验证：npx tsc --noEmit 无错误
+- [x] 验证：没有 import @injectivelabs/sdk-ts
 
 ## 下一步
-从 imtoken-wallet-demo 复制可用文件
+进入下一阶段开发
 
 ## 注意事项
 - 禁止使用 @injectivelabs/sdk-ts
 - 用 viem 直接调 Injective EVM
 - 深色主题：背景 #0a0a0a，卡片 #1a1a1a，强调色 #22c55e
 - 参考 imtoken-wallet-demo 中已有的组件
+
+## 已知问题
+- campaign/[id]/page.tsx 和 create/page.tsx 已改为使用 mock 数据（原版依赖 @/hooks/useBounty 和 @/lib/contracts，这两个文件不存在）
+- 安装依赖时需要 --legacy-peer-deps（React 19 与部分 Radix UI 包有 peer dependency 冲突）
