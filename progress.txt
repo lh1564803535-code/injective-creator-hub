@@ -3,8 +3,8 @@
 ## 当前阶段：基础搭建
 
 ## 待办
-- [ ] 初始化 git 仓库
-- [ ] 安装依赖（viem, wagmi, rainbowkit, canvas-confetti, zod）
+- [x] 初始化 git 仓库
+- [x] 安装依赖（viem, wagmi, rainbowkit, canvas-confetti, zod）
 - [ ] 从 imtoken-wallet-demo 复制可用文件（组件、页面、lib、类型）
 - [ ] 检查并修复 injective.ts（确保没有 sdk-ts 导入）
 - [ ] 创建 Mock 数据（src/lib/mock-data.ts）
@@ -17,10 +17,11 @@
 - [ ] 验证：没有 import @injectivelabs/sdk-ts
 
 ## 已完成
-（无）
+- [x] 初始化 git 仓库
+- [x] 安装依赖（viem, wagmi, rainbowkit, canvas-confetti, zod）
 
 ## 下一步
-初始化 git 仓库，安装依赖
+从 imtoken-wallet-demo 复制可用文件
 
 ## 注意事项
 - 禁止使用 @injectivelabs/sdk-ts
