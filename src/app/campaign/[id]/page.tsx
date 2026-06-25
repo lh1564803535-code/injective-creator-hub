@@ -21,6 +21,7 @@ import { SettleDialog } from "@/components/campaign/SettleDialog";
 import { VoteDialog } from "@/components/campaign/VoteDialog";
 import { CreatorProfile } from "@/components/creator/CreatorProfile";
 import { CampaignStats } from "@/components/campaign/CampaignStats";
+import { CampaignTimeline } from "@/components/campaign/CampaignTimeline";
 import type { SubmissionData } from "@/lib/injective";
 
 export default function CampaignDetailPage() {
@@ -158,6 +159,14 @@ export default function CampaignDetailPage() {
               Settle & Distribute Rewards
             </button>
           )}
+        </div>
+
+        {/* Campaign Timeline */}
+        <div className="mb-6">
+          <CampaignTimeline
+            deadline={campaign.deadline}
+            settled={campaign.settled}
+          />
         </div>
 
         {/* Campaign Stats */}

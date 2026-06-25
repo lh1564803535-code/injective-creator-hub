@@ -1,17 +1,19 @@
 "use client";
 
-import { ArrowLeft, Rocket } from "lucide-react";
+import { ArrowLeft, BarChart3 } from "lucide-react";
 import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
-import { CreateCampaignForm } from "@/components/campaign/CreateCampaignForm";
+import { CreatorDashboard } from "@/components/creator/CreatorDashboard";
+import { shortenAddress } from "@/lib/injective";
+import type { Address } from "viem";
 
-export default function CreateCampaignPage() {
+export default function DashboardPage() {
   const { isConnected, address } = useAccount();
 
   return (
     <div className="min-h-screen bg-[#08080f] p-6 pt-22 lg:p-8 lg:pt-24">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-4xl">
         <Link
           href="/"
           className="mb-6 inline-flex items-center gap-2 text-sm text-gray-400 transition hover:text-white"
@@ -21,25 +23,25 @@ export default function CreateCampaignPage() {
 
         <div className="mb-8">
           <h1 className="mb-2 text-2xl font-bold text-white">
-            Create Campaign
+            Creator Dashboard
           </h1>
           <p className="text-gray-400">
-            Launch a bounty for content creators on Injective
+            {isConnected && address
+              ? `Viewing dashboard for ${shortenAddress(address)}`
+              : "Connect your wallet to view your submissions and earnings"}
           </p>
         </div>
 
         {!isConnected ? (
           <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-12 text-center backdrop-blur-sm">
-            <Rocket className="mx-auto mb-4 h-12 w-12 text-gray-600" />
+            <BarChart3 className="mx-auto mb-4 h-12 w-12 text-gray-600" />
             <p className="mb-4 text-gray-400">
-              Connect your wallet to create a campaign
+              Connect your wallet to access your dashboard
             </p>
             <ConnectButton />
           </div>
         ) : (
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-sm">
-            <CreateCampaignForm sponsorAddress={address} />
-          </div>
+          <CreatorDashboard address={address as Address} />
         )}
       </div>
     </div>

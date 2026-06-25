@@ -10,6 +10,7 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Create", href: "/create" },
+  { label: "Dashboard", href: "/dashboard" },
 ];
 
 export function AppNavigation() {
