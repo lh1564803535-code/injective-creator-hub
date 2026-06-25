@@ -60,6 +60,9 @@
 - [x] 最终验证 — 所有页面可访问（/, /leaderboard, /campaign/[id], /create, /dashboard）
 - [x] 最终验证 — 所有组件完整（Navbar, LeaderboardTable, CampaignCard, RewardAnimation, SettleDialog, VoteDialog, CreatorDashboard, CampaignTimeline, Footer）
 - [x] 最终验证 — npm run build 成功（7/7 静态页面生成）
+- [x] 最终验证 — 生产构建零错误（Next.js 16.2.9 Turbopack, 7/7 页面生成）
+- [x] 文档 — README.md 完整（功能列表、技术栈、本地运行、部署指南、项目结构）
+- [x] 文档 — .env.example 创建（合约地址、RPC、Chain ID、WalletConnect）
 
 ## 注意事项
 - 禁止使用 @injectivelabs/sdk-ts
