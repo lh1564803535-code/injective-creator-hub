@@ -18,6 +18,12 @@
 - [x] 验证：所有页面可访问（page.tsx, leaderboard, campaign/[id], create）
 - [x] 验证：npx tsc --noEmit 无错误
 - [x] 验证：没有 import @injectivelabs/sdk-ts
+- [x] 创建导航栏（app-navigation.tsx）— 含 active 状态、移动端响应式、钱包余额显示
+- [x] UI 打磨 — 首页动画计数器、渐变英雄区、按钮发光效果
+- [x] UI 打磨 — 排行榜金/银/铜渐变行样式、hover 效果、USDC 图标
+- [x] UI 打磨 — 奖励动画增强（5 波彩带、金色发光、Claim 按钮）
+- [x] UI 打磨 — CSS 全局动画（smooth scroll、card-hover-glow、skeleton、golden-glow）
+- [x] 创建 Footer 组件 — Built on Injective、社交链接、区块浏览器链接
 
 ## 下一步
 进入下一阶段开发
