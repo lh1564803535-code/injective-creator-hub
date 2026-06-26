@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v157)
+- [x] WASM API — GET /api/wasm 返回 WASM 数据（合约/执行次数）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v156)
 - [x] IBC API — GET /api/ibc 返回 IBC 数据（通道/成交量）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
