@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v166)
+- [x] Trade API — GET /api/trade 返回最近交易（市场/方向/价格/数量）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v165)
 - [x] Orderbook API — GET /api/orderbook 返回订单簿数据（买盘/卖盘/价差）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
