@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v113)
+- [x] Invoice API — GET /api/invoice 返回发票列表（下载链接）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v112)
 - [x] Billing API — GET /api/billing 返回账单数据（余额/费用/发票）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
