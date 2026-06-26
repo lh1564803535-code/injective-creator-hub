@@ -275,3 +275,34 @@
 - [ ] 使用 useOptimistic 优化投票体验
 - [ ] 使用 useActionState 简化表单提交
 - [ ] 配合 Server Actions 使用
+
+## 2026-06-27 — Web3 Gaming & Play-to-Earn 调研
+
+### 关键发现
+
+**1. 行业趋势**
+- 从简单 P2E 转向技能型区块链游戏
+- 竞技 PvP 和移动端体验
+- 区块链成为基础设施而非设计主导
+
+**2. 头部项目**
+- Illuvium: AAA 级开放世界 RPG（Ethereum + Immutable X）
+- Shrapnel: 竞技 FPS（Avalanche 子网）
+- EXAVERSE: Immutable Play 上线
+- Cambria: 技能型区块链游戏
+
+**3. 收益模式**
+- 竞技奖励
+- 地图创作者版税
+- 排名奖励
+- 游戏内资产交易
+
+**4. 关键转变**
+- 玩家被视为"玩家"而非"投资者"
+- 奖励与表现挂钩
+- 控制经济模型
+
+### 对项目的启示
+- [x] 我们的活动系统类似 GameFi 模型
+- [ ] 考虑添加竞技排名奖励
+- [ ] 考虑创作者版税机制
