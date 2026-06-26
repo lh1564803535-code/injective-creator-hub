@@ -51,3 +51,37 @@
 - [ ] 首页添加 "0.64s block time" 展示
 - [ ] MCPIntegration 添加真实 MCP Server 链接
 - [ ] AIAssistant Gas 相关回答更新为真实数据
+
+## 2026-06-26 — Web3 创作者变现工具调研
+
+### 关键发现
+
+**1. 4 种 Web3 变现模型**
+- 交易手续费（DEX/NFT 市场）
+- NFT/Token-gated 订阅
+- 直接打赏/P2P 支付
+- 内容代币化（每篇文章可铸造为 NFT）
+
+**2. Token Gating 工具（27+）**
+- GateRepo: GitHub 仓库 token-gating
+- Novel: 无代码 token-gated 电商
+- Lens Protocol: 社交图谱集成
+- Mirror.xyz: 去中心化发布 + NFT
+
+**3. 关键教训**
+- NFT-first 策略失败率极高（2021-2022 的艺术家 0% 持续盈利）
+- 成功的模型：Spotify + Bandcamp + email + 付费推广
+- Token-gated 粉丝俱乐部是可行的 Patreon 替代品
+- AI 权利许可是 2026 年的新前沿
+
+**4. 关键指标**
+- ARPU (Average Revenue Per User)
+- CLV (Customer Lifetime Value)
+- 钱包激活率
+- 链上活动量
+
+### 对项目的启示
+- [ ] 添加 token-gated 活动功能
+- [ ] 实现内容 NFT 铸造
+- [ ] 添加创作者打赏功能
+- [ ] 追踪链上指标（ARPU/CLV）
