@@ -35,6 +35,7 @@ import { CTASection } from "@/components/ui/CTASection";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { RoadmapTimeline } from "@/components/ui/RoadmapTimeline";
 import { FAQ } from "@/components/ui/FAQ";
+import { NewsletterSignup } from "@/components/ui/NewsletterSignup";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -674,6 +675,13 @@ export default function HomePage() {
             </p>
           </div>
           <FAQ />
+        </div>
+      </ScrollRevealSection>
+
+      {/* Newsletter Signup */}
+      <ScrollRevealSection className="px-6 pb-16 lg:px-8">
+        <div className="mx-auto max-w-2xl">
+          <NewsletterSignup />
         </div>
       </ScrollRevealSection>
 
