@@ -58,7 +58,9 @@ export function CampaignTooltip({
   };
 
   const hide = () => {
-    clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     setIsVisible(false);
   };
 

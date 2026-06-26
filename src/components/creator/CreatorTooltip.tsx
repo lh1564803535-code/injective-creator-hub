@@ -62,7 +62,7 @@ export function CreatorTooltip({
   position = "top",
 }: CreatorTooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const rankLabel =
     creator.rank === 1
@@ -78,7 +78,9 @@ export function CreatorTooltip({
   };
 
   const hide = () => {
-    clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
     setIsVisible(false);
   };
 
