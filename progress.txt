@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v128)
+- [x] Capacity API — GET /api/capacity 返回容量数据（当前使用/限制/利用率）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v127)
 - [x] SLA API — GET /api/sla 返回 SLA 指标（正常运行时间/响应时间/解决时间）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
