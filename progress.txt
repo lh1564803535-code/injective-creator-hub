@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v83)
+- [x] Social API — GET /api/social 返回社交媒体数据（Farcaster/Lens/Twitter）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v82)
 - [x] Yield API — GET /api/yield 返回收益数据（收益分解/预测）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
