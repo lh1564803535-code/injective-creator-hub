@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bot, Terminal, Zap, Shield, ChevronRight, Code2, ArrowRight } from "lucide-react";
+import { Bot, Terminal, Zap, Shield, ChevronRight, Code2, ArrowRight, Activity, TrendingUp } from "lucide-react";
 
 const MCP_TOOLS = [
   {
@@ -69,7 +69,7 @@ export function MCPIntegration() {
       setConsoleOutput((prev) => [
         ...prev,
         `> Transaction confirmed! Hash: 0x${Math.random().toString(16).slice(2, 10)}...`,
-        `> Gas used: 0.001 INJ ($0.02)`,
+        `> Gas used: 0.000003 INJ ($0.00008)`,
       ]);
       setIsRunning(false);
     }, 2000);
@@ -95,6 +95,22 @@ export function MCPIntegration() {
         >
           Docs <ArrowRight className="h-3 w-3" />
         </a>
+      </div>
+
+      {/* Stats */}
+      <div className="mb-4 grid grid-cols-3 gap-2">
+        <div className="rounded-lg bg-white/[0.02] p-2 text-center">
+          <p className="text-[10px] text-gray-500">Volume</p>
+          <p className="text-sm font-bold text-emerald-400">$30M+</p>
+        </div>
+        <div className="rounded-lg bg-white/[0.02] p-2 text-center">
+          <p className="text-[10px] text-gray-500">Active Agents</p>
+          <p className="text-sm font-bold text-cyan-400">69K</p>
+        </div>
+        <div className="rounded-lg bg-white/[0.02] p-2 text-center">
+          <p className="text-[10px] text-gray-500">Tools</p>
+          <p className="text-sm font-bold text-purple-400">11</p>
+        </div>
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-3 lg:grid-cols-2">
