@@ -816,3 +816,31 @@
 - [x] 我们已有 AchievementBadges 组件
 - [ ] 考虑添加 SBT 显示
 - [ ] 考虑添加声誉评分系统
+
+## 2026-06-27 — Web3 Social Graph 调研
+
+### 关键发现
+
+**1. 市场规模**
+- 2025 年：$185 亿
+- 2035 年预计：$1416 亿
+- SocialFi 市场：2030 年 $100 亿
+
+**2. 两大协议对比**
+- Farcaster: 协议中心化社交图谱，$10 亿估值，60K DAU
+- Lens: 智能合约+NFT 社交关系，$3100 万融资
+
+**3. 技术架构**
+- Farcaster: 统一 Warpcast 体验，Hub 存储
+- Lens: 多客户端碎片化（Phaver/Orb/Hey），Lens Chain
+
+**4. 关键挑战**
+- 冷启动问题
+- 用户留存
+- 监管合规
+- 可持续收入
+
+### 对项目的启示
+- [x] 我们已有 SocialLinks 组件
+- [ ] 考虑添加 Farcaster/Lens 集成
+- [ ] 考虑添加社交图谱显示
