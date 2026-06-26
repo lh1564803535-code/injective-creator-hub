@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v52)
+- [x] Checkbox 组件 — 复选框工具（标签、错误状态、自定义勾选图标）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v51)
 - [x] Select 组件 — 下拉选择工具（标签、错误状态、帮助文本、选项列表）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
