@@ -8,7 +8,7 @@ interface SkeletonBaseProps {
   style?: React.CSSProperties;
 }
 
-function SkeletonPulse({ className, animate = true }: SkeletonBaseProps) {
+function SkeletonPulse({ className, animate = true, style }: SkeletonBaseProps) {
   return (
     <div
       className={cn(
@@ -16,6 +16,7 @@ function SkeletonPulse({ className, animate = true }: SkeletonBaseProps) {
         animate && "animate-pulse",
         className
       )}
+      style={style}
     />
   );
 }
