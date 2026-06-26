@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import {
-  Twitter,
+  AtSign,
   TrendingUp,
   Users,
   MessageSquare,
@@ -265,7 +265,7 @@ export function TwitterAnalytics() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-500/10">
-            <Twitter className="h-4.5 w-4.5 text-sky-400" />
+            <AtSign className="h-4.5 w-4.5 text-sky-400" />
           </div>
           <div>
             <h3 className="text-sm font-semibold text-white">Twitter Analytics</h3>
