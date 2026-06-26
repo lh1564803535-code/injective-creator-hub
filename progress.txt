@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v32 - 循环改进续)
+- [x] ProposalCard — 提案卡片组件（投票条/状态/投票数）
+- [x] VoteWeight — 投票权重组件（1-5星选择器）
+- [x] 调研 — DAO Governance 投票机制
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v31 - 循环改进续)
 - [x] BridgeStatus — 跨桥状态组件（链显示/状态/交易链接）
 - [x] SecurityScore — 安全评分组件（分数/详情/图标）
