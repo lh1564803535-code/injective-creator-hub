@@ -1,9 +1,15 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：UX 增强 — Toast + Stats + A11y ✅ 完成
+## 当前阶段：UX 增强 — How It Works + Search UX + Engagement Viz ✅ 完成
 
 ## 待办
 （全部完成）
+
+## 本次改进 (2026-06-26 v2)
+- [x] 首页添加 "How It Works" 三步引导（创建活动 -> 提交内容 -> 赚取 USDC）
+- [x] CampaignSearch 添加 "/" 键盘快捷键聚焦搜索框 + 提示徽章
+- [x] CampaignStats 添加投票参与度可视化（votes/sub 比率 + 分段进度条）
+- [x] 研究日志更新：AI Coding Agent 自主工作流模式调研
 
 ## 本次改进 (2026-06-26)
 - [x] 创建 Toast 通知系统（Toast.tsx）— 5 种变体、自动消失、portal 渲染、aria-live 无障碍
