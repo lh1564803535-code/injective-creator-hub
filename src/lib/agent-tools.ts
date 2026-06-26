@@ -10,7 +10,7 @@ const client = createPublicClient({
 export async function getBalance(address: string) {
   try {
     const balance = await client.getBalance({ address: address as `0x${string}` })
-    return { success: true, balance: formatUnits(balance.value, 18) + ' INJ' }
+    return { success: true, balance: formatUnits(balance, 18) + ' INJ' }
   } catch (e) {
     return { success: false, error: '查询失败' }
   }

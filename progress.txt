@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v47)
+- [x] Card 组件 — 卡片工具（Card/Header/Title/Description/Content/Footer）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v46)
 - [x] Table 组件 — 表格工具（通用列定义、自定义渲染、行点击）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
