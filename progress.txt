@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v36)
+- [x] Switch 组件 — 开关切换工具（2 种尺寸、无障碍支持、禁用状态）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v35)
 - [x] Progress 组件 — 进度条工具（3 种尺寸、4 种颜色、可选标签）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
