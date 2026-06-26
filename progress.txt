@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v37 - 循环改进续)
+- [x] LiveIndicator — 实时状态指示器（连接/离线/脉冲动画）
+- [x] StreamStatus — 流状态组件（速率/运行时间）
+- [x] 调研 — Real-Time Data Streaming
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v36 - 循环改进续)
 - [x] DIDBadge — DID 徽章组件（验证状态/Explorer 链接）
 - [x] VerifiedBadge — 认证徽章组件（3 种类型/3 种尺寸）
