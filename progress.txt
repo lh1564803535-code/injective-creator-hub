@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v34 - 循环改进续)
+- [x] PortfolioSummary — 投资组合摘要组件（总资产/资产列表）
+- [x] PriceTicker — 价格行情组件（实时更新/闪烁效果）
+- [x] 调研 — DeFi Portfolio Tracker
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v33 - 循环改进续)
 - [x] SmartWalletBadge — 智能钱包徽章组件（功能展示）
 - [x] GaslessBadge — Gasless 徽章组件（赞助/需要）
