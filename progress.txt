@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v39 - 循环改进续)
+- [x] TradeCard — 交易卡片组件（买/卖/状态/保护）
+- [x] CopyTradeCard — 跟单卡片组件（交易者信息/统计/跟单按钮）
+- [x] 调研 — Web3 Social Trading & Copy Trading
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v38 - 循环改进续)
 - [x] ChainSwitcher — 链切换组件（多链下拉选择）
 - [x] AssetRow — 资产行组件（代币信息/余额/涨跌）
