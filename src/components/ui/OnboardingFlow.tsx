@@ -48,7 +48,7 @@ const STEPS: Step[] = [
     id: 2,
     title: "Bind Twitter",
     description: "Connect your Twitter for social verification",
-    icon: Twitter,
+    icon: TwitterIcon,
     color: "text-[#1DA1F2]",
     bg: "bg-[#1DA1F2]/15",
     detail:
