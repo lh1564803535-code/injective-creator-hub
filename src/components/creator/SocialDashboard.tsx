@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import {
-  Twitter,
   TrendingUp,
   TrendingDown,
   MessageCircle,
@@ -16,6 +15,14 @@ import {
   Check,
   Unlink,
 } from "lucide-react";
+
+function TwitterIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 import {
   connectTwitter,
   getTwitterStats,
@@ -85,7 +92,7 @@ export function SocialDashboard() {
     return (
       <div className="rounded-2xl border border-white/[0.06] bg-[#1a1a1a] p-6">
         <div className="mb-2 flex items-center gap-3">
-          <Twitter className="h-5 w-5 text-[#1DA1F2]" />
+          <TwitterIcon className="h-5 w-5 text-[#1DA1F2]" />
           <h3 className="text-lg font-semibold text-white">Social Dashboard</h3>
         </div>
         <p className="mb-6 text-sm text-gray-400">
@@ -95,7 +102,7 @@ export function SocialDashboard() {
           onClick={handleConnect}
           className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#1DA1F2] px-6 py-3 font-medium text-white transition-all hover:bg-[#1a8cd8] hover:shadow-[0_0_20px_rgba(29,161,242,0.3)]"
         >
-          <Twitter className="h-5 w-5" />
+          <TwitterIcon className="h-5 w-5" />
           Connect Twitter
         </button>
       </div>
