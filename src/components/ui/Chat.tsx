@@ -9,37 +9,19 @@ import { Send, MessageCircle } from "lucide-react";
 
 export interface ChatMessage {
   id: string;
-  role: "user" | "other";
+  role: "user" | "assistant";
   text: string;
   sender?: string;
-  avatar?: string;
   timestamp: number;
 }
 
 interface ChatProps {
-  /** Initial messages to display */
   messages?: ChatMessage[];
-  /** Placeholder text for the input */
   placeholder?: string;
-  /** Callback when a message is sent */
   onSend?: (text: string) => void;
-  /** Whether to show the empty-state illustration */
-  showEmpty?: boolean;
-  /** Additional class names */
   className?: string;
-}
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-function formatTime(ts: number): string {
-  const d = new Date(ts);
-  return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-}
-
-function makeId(): string {
-  return `msg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  title?: string;
+  height?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -50,8 +32,9 @@ export function Chat({
   messages: initialMessages = [],
   placeholder = "Type a message...",
   onSend,
-  showEmpty = true,
   className = "",
+  title = "Chat",
+  height = "h-[400px]",
 }: ChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState("");
@@ -70,13 +53,13 @@ export function Chat({
       const trimmed = text.trim();
       if (!trimmed) return;
 
-      const msg: ChatMessage = {
-        id: makeId(),
+      const userMsg: ChatMessage = {
+        id: `msg-${Date.now()}`,
         role: "user",
         text: trimmed,
         timestamp: Date.now(),
       };
-      setMessages((prev) => [...prev, msg]);
+      setMessages((prev) => [...prev, userMsg]);
       setInput("");
       onSend?.(trimmed);
     },
@@ -90,6 +73,9 @@ export function Chat({
     }
   };
 
+  const formatTime = (ts: number) =>
+    new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
   return (
     <div
       className={`flex flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#1a1a1a] ${className}`}
@@ -97,57 +83,44 @@ export function Chat({
       {/* Header */}
       <div className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
         <MessageCircle className="h-4 w-4 text-cyan-400" />
-        <span className="text-sm font-semibold text-white">Chat</span>
-        <span className="ml-auto text-[10px] text-gray-500">
-          {messages.length} message{messages.length !== 1 ? "s" : ""}
-        </span>
+        <span className="text-sm font-semibold text-white">{title}</span>
       </div>
 
       {/* Messages */}
-      <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4" style={{ minHeight: 200 }}>
-        {messages.length === 0 && showEmpty ? (
-          <div className="flex flex-col items-center justify-center py-8 text-center">
-            <MessageCircle className="mb-2 h-8 w-8 text-gray-600" />
+      <div ref={listRef} className={`flex-1 space-y-3 overflow-y-auto px-4 py-4 ${height}`}>
+        {messages.length === 0 && (
+          <div className="flex h-full items-center justify-center">
             <p className="text-sm text-gray-500">No messages yet</p>
-            <p className="text-xs text-gray-600">Start the conversation</p>
           </div>
-        ) : (
-          messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-            >
-              {msg.role !== "user" && msg.avatar && (
-                <img
-                  src={msg.avatar}
-                  alt={msg.sender ?? "avatar"}
-                  className="mr-2 h-7 w-7 shrink-0 rounded-full object-cover"
-                />
-              )}
-              <div className="max-w-[75%]">
-                {msg.role !== "user" && msg.sender && (
-                  <p className="mb-0.5 text-[10px] font-medium text-gray-500">{msg.sender}</p>
-                )}
-                <div
-                  className={`rounded-2xl px-4 py-2 text-sm leading-relaxed whitespace-pre-line ${
-                    msg.role === "user"
-                      ? "rounded-br-md bg-cyan-600 text-white"
-                      : "rounded-bl-md bg-white/[0.06] text-gray-200"
-                  }`}
-                >
-                  {msg.text}
-                </div>
-                <p
-                  className={`mt-0.5 text-[10px] text-gray-600 ${
-                    msg.role === "user" ? "text-right" : ""
-                  }`}
-                >
-                  {formatTime(msg.timestamp)}
-                </p>
-              </div>
-            </div>
-          ))
         )}
+        {messages.map((msg) => (
+          <div
+            key={msg.id}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+          >
+            <div className="max-w-[80%]">
+              {msg.sender && msg.role === "assistant" && (
+                <p className="mb-1 text-[10px] font-medium text-gray-500">{msg.sender}</p>
+              )}
+              <div
+                className={`rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${
+                  msg.role === "user"
+                    ? "rounded-br-md bg-cyan-600 text-white"
+                    : "rounded-bl-md bg-white/[0.06] text-gray-200"
+                }`}
+              >
+                {msg.text}
+              </div>
+              <p
+                className={`mt-1 text-[10px] text-gray-600 ${
+                  msg.role === "user" ? "text-right" : ""
+                }`}
+              >
+                {formatTime(msg.timestamp)}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Input */}
@@ -165,7 +138,7 @@ export function Chat({
           <button
             onClick={() => sendMessage(input)}
             disabled={!input.trim()}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600 text-white transition hover:bg-cyan-500 disabled:opacity-30"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600 text-white transition hover:bg-cyan-500 disabled:opacity-30 disabled:hover:bg-cyan-600"
             aria-label="Send"
           >
             <Send className="h-4 w-4" />
