@@ -126,7 +126,7 @@ export function SocialDashboard() {
       <div className="rounded-2xl border border-white/[0.06] bg-[#1a1a1a] p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Twitter className="h-5 w-5 text-[#1DA1F2]" />
+            <TwitterIcon className="h-5 w-5 text-[#1DA1F2]" />
             <h3 className="text-lg font-semibold text-white">Social Dashboard</h3>
           </div>
           <div className="flex items-center gap-3">
