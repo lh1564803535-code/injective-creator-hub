@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Web3 Social — On-Chain Reputation & Creator Identity
+## 当前阶段：Chrome Extension UX Patterns — Floating Toolbar & Quick Actions
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -8,6 +8,15 @@
 - [ ] Add optional USDC tips alongside votes
 - [ ] Integrate iAgent SDK for real campaign matching
 - [ ] Add cross-chain submission flows via IBC
+- [ ] Add transaction preview step to VoteDialog/SettleDialog (Rabby-style simulation)
+- [ ] Add sponsor verification badges on campaigns
+- [ ] Consider MetaMask Snap for in-wallet notifications
+
+## 本次改进 (2026-06-26 v7)
+- [x] 研究日志更新：Chrome Extension Crypto Tools & Web3 UX Patterns 调研（Rabby transaction simulation、MetaMask Snaps、ERC-4337 account abstraction、Zerion/DeBank in-wallet dashboards、phishing detection）
+- [x] 创建 QuickActionsToolbar 组件 — 浮动底部工具栏（Create/Search/Ranks/Dashboard 快捷操作）、钱包状态指示器（绿色脉冲+地址）、滚动到顶部按钮、可展开面板（快捷键提示+钱包信息+统计）、Ctrl+K 切换、响应式布局
+- [x] layout.tsx 集成 QuickActionsToolbar（WalletProvider 内、Footer 之后）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v6)
 - [x] 研究日志更新：Web3 Social Media Platforms & On-Chain Reputation 调研（Lens Protocol、Farcaster、SBTs、radar charts、tiered reputation、streak mechanics）
