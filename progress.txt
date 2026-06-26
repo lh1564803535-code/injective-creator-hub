@@ -634,6 +634,28 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-26 v23 - 循环改进续)
+- [x] GlassCard — 玻璃态卡片组件
+- [x] GlowEffect — 悬停发光效果
+- [x] NoiseOverlay — 噪点纹理覆盖
+- [x] ScrollProgress — 滚动进度条
+- [x] Ripple — 点击涟漪效果
+- [x] HoverCard — 悬停弹出卡片
+- [x] Stepper — 步骤指示器
+- [x] Timeline — 时间线组件
+- [x] TreeView — 树形视图
+- [x] AspectRatio — 宽高比容器
+- [x] VisuallyHidden — 无障碍隐藏内容
+- [x] FocusTrap — 焦点捕获
+- [x] ErrorBoundary — 错误边界
+- [x] Portal — Portal 渲染
+- [x] ScrollArea — 带阴影的滚动区域
+- [x] Collapsible — 折叠内容
+- [x] Truncate — 文本截断
+- [x] RelativeTime — 相对时间显示
+- [x] Kbd — 键盘快捷键显示
+- [x] Code — 内联代码显示
+
 ## 本次改进 (2026-06-26 v22 - 循环改进续)
 - [x] AnimatedCounter — 计数动画组件（IntersectionObserver 触发）
 - [x] GradientText — 渐变文字组件
