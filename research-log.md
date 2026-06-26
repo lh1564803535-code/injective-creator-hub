@@ -247,3 +247,31 @@
 - [x] 我们已有交易预览
 - [ ] 添加更清晰的导航
 - [ ] 改善错误处理 UX
+
+## 2026-06-27 — React 19 新 Hooks 调研
+
+### 关键发现
+
+**1. useOptimistic — 乐观更新**
+- 立即显示更新后的状态
+- 异步请求完成后自动切换回实际值
+- 用于聊天、点赞、评论等场景
+
+**2. useActionState — 简化异步操作**
+- 在一个地方处理异步逻辑和状态更新
+- 返回 isPending 状态
+- 替代 useFormStatus 的简单场景
+
+**3. use() — 新数据读取 API**
+- 在渲染中读取资源
+- 配合 Suspense 使用
+- 渐进式采用
+
+**4. useFormStatus — 表单状态**
+- 获取表单提交状态
+- 配合 Server Actions 使用
+
+### 对项目的启示
+- [ ] 使用 useOptimistic 优化投票体验
+- [ ] 使用 useActionState 简化表单提交
+- [ ] 配合 Server Actions 使用
