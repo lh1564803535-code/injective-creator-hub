@@ -9,55 +9,13 @@ import { YieldStaking } from "@/components/creator/YieldStaking";
 import { CreatorReputation } from "@/components/creator/CreatorReputation";
 import { CreatorStreak } from "@/components/creator/CreatorStreak";
 import { CreatorAnalytics } from "@/components/creator/CreatorAnalytics";
+import { CampaignRecommendations } from "@/components/creator/CampaignRecommendations";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
+import { useNotifications } from "@/components/ui/NotificationCenter";
 import type { Address } from "viem";
 
 const now = Math.floor(Date.now() / 1000);
-
-interface Notification {
-  id: number;
-  type: "reward" | "vote" | "deadline" | "settle";
-  title: string;
-  detail: string;
-  timestamp: number;
-  read: boolean;
-}
-
-const MOCK_NOTIFICATIONS: Notification[] = [
-  {
-    id: 1,
-    type: "reward",
-    title: "Reward Available",
-    detail: "You have 600 USDC unclaimed from Community Art Drop",
-    timestamp: now - 3600,
-    read: false,
-  },
-  {
-    id: 2,
-    type: "vote",
-    title: "New Votes",
-    detail: "Your submission in XHunt Content Sprint received 12 new votes",
-    timestamp: now - 7200,
-    read: false,
-  },
-  {
-    id: 3,
-    type: "deadline",
-    title: "Deadline Approaching",
-    detail: "DeFi Tutorial Challenge ends in 3 days",
-    timestamp: now - 86400,
-    read: true,
-  },
-  {
-    id: 4,
-    type: "settle",
-    title: "Campaign Settled",
-    detail: "DEX UI Redesign Sprint has been settled. Check your rewards!",
-    timestamp: now - 86400 * 18,
-    read: true,
-  },
-];
 
 function timeAgo(timestamp: number): string {
   const diff = Math.floor(Date.now() / 1000) - timestamp;
@@ -83,6 +41,7 @@ const notifColors: Record<string, string> = {
 
 export default function DashboardPage() {
   const { isConnected, address } = useAccount();
+  const { notifications, unreadCount, markRead, markAllRead } = useNotifications();
 
   const activeCampaigns = MOCK_CAMPAIGNS.filter(
     (c) => !c.settled && c.deadline > now
@@ -162,6 +121,9 @@ export default function DashboardPage() {
               </div>
             </div>
 
+            {/* AI Campaign Recommendations */}
+            <CampaignRecommendations />
+
             {/* Main Dashboard */}
             <CreatorDashboard address={address as Address} />
 
@@ -183,34 +145,40 @@ export default function DashboardPage() {
                 <h2 className="flex items-center gap-2 text-lg font-semibold text-white">
                   <Bell className="h-5 w-5 text-gray-400" />
                   Notifications
-                  {MOCK_NOTIFICATIONS.filter((n) => !n.read).length > 0 && (
+                  {unreadCount > 0 && (
                     <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500/20 text-[10px] font-bold text-red-400">
-                      {MOCK_NOTIFICATIONS.filter((n) => !n.read).length}
+                      {unreadCount}
                     </span>
                   )}
                 </h2>
-                <button className="text-xs text-gray-500 transition hover:text-gray-300">
-                  Mark all read
-                </button>
+                {unreadCount > 0 && (
+                  <button
+                    onClick={markAllRead}
+                    className="text-xs text-gray-500 transition hover:text-gray-300"
+                  >
+                    Mark all read
+                  </button>
+                )}
               </div>
               <div className="space-y-2">
-                {MOCK_NOTIFICATIONS.map((notif) => {
+                {notifications.map((notif) => {
                   const Icon = notifIcons[notif.type] ?? Bell;
                   const colorClass = notifColors[notif.type] ?? "text-gray-400 bg-gray-500/10";
                   return (
                     <div
                       key={notif.id}
-                      className={`flex items-start gap-3 rounded-xl border p-4 transition ${
+                      onClick={() => markRead(notif.id)}
+                      className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${
                         notif.read
                           ? "border-white/[0.04] bg-white/[0.015]"
-                          : "border-cyan-500/10 bg-cyan-500/[0.03]"
+                          : "border-cyan-500/10 bg-cyan-500/[0.03] hover:bg-cyan-500/[0.06]"
                       }`}
                     >
                       <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${colorClass}`}>
                         <Icon className="h-4 w-4" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-gray-200">{notif.title}</p>
+                        <p className={`text-sm ${notif.read ? "font-normal text-gray-400" : "font-medium text-gray-200"}`}>{notif.title}</p>
                         <p className="text-xs text-gray-500">{notif.detail}</p>
                       </div>
                       <div className="flex shrink-0 flex-col items-end gap-1">

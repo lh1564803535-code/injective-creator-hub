@@ -450,3 +450,64 @@ Web3 creator platforms are adding referral systems: creators earn a % commission
 - Lens Protocol: https://www.lens.xyz
 - Zora: https://zora.co
 - Dune Analytics: https://dune.com
+
+## 2026-06-26 — AI Coding Agent Autonomous Workflow (Deep Dive)
+
+### Topic
+Advanced patterns for AI coding agents operating autonomously — multi-agent orchestration, background task management, hook-based automation, and self-improving development loops.
+
+### Findings
+
+**1. Orchestrator + Specialized Agent Pattern Is the Production Standard**
+The most effective 2026 pattern is an orchestrator agent that delegates to specialized sub-agents (frontend, backend, testing, research). Claude Code implements this via the Agent tool with subagent_type parameter — each agent gets isolated context, runs in parallel (up to hardware limits), and reports back. Key constraint: 24GB Mac can handle max 3 parallel agents before memory pressure causes failures. Best practice is pipeline() for sequential work, parallel() only for truly independent tasks.
+
+**2. Hook-Based Automation Eliminates Repetitive Overhead**
+Claude Code hooks intercept shell commands transparently — e.g., `git status` is automatically rewritten to `rtk git status` for token optimization (60-90% savings on dev operations). The pattern: define hooks in settings.json that rewrite commands before execution, apply token-efficient filtering on output, and inject environment variables. This creates a "zero-overhead automation" layer where the agent doesn't need to think about optimization.
+
+**3. Self-Improving Memory Loops (Compound Engineering)**
+The most powerful pattern in 2026 is the compound engineering loop: every correction becomes a memory entry, repeated patterns become rules in CLAUDE.md, and rules evolve with usage. Implementation: (1) detect when user corrects agent behavior, (2) write to memory file, (3) if pattern repeats 3+ times, promote to CLAUDE.md rule, (4) on session start, load all rules into context. This creates agents that literally improve over time without retraining.
+
+**4. Background Agents + Monitor Pattern for Long-Running Work**
+For autonomous workflows that span hours, the pattern is: spawn a background agent with `run_in_background: true`, use Monitor to watch for specific log patterns (success/failure signals), and handle both happy path AND crash scenarios in the grep filter. Critical insight: silence is not success — a monitor that only greps for success markers stays silent through a crashloop. Always include failure signatures in the filter.
+
+**5. Research-First Development Flow Prevents Wasted Work**
+The highest-leverage pattern for coding agents is enforced research before implementation: (1) user describes feature, (2) agent does competitive research (top 3 competitors + top 3 open-source alternatives with links/pricing/pros/cons), (3) waits for user feedback, (4) writes plan, (5) only writes code after explicit "start development" signal. This prevents the common failure mode of building the wrong thing fast. The research phase must be read-only — no file creation, no dependency installation.
+
+### URLs
+- Claude Code docs: https://docs.anthropic.com/en/docs/claude-code
+- Multi-agent patterns: https://docs.anthropic.com/en/docs/claude-code/sub-agents
+- Hook system: https://docs.anthropic.com/en/docs/claude-code/hooks
+
+## 2026-06-26 — Web3 Notification Systems & On-Chain Event Streaming
+
+### Topic
+Decentralized notification infrastructure for dApps — Push Protocol architecture, real-time on-chain event delivery, React integration patterns, and notification UX best practices for creator economy platforms.
+
+### Findings
+
+**1. Push Protocol Is the Dominant Web3 Notification Layer**
+Push Protocol (formerly EPNS) provides decentralized, cross-chain notifications for dApps. It supports wallet-to-wallet messaging, channel subscriptions, and both on-chain/off-chain delivery. Key packages: `@pushprotocol/restapi` for API access, `@pushprotocol/socket` for real-time WebSocket delivery, `@pushprotocol/uiweb` for pre-built React components. CAIP-10 address format (`eip155:1:0x...`) standardizes cross-chain identity.
+- Source: https://push.org
+
+**2. On-Chain Event → Notification Pipeline Architecture**
+The standard pattern for dApp notifications: Smart Contract emits event → Event Listener/Subgraph/Chainlink catches it → Backend service processes → Push Protocol REST API sends notification → Push Network delivers → User's dApp receives via WebSocket. This decoupled architecture means the notification UI can be built independently of the contract event system. For Injective, this could hook into campaign settlement, vote milestones, and deadline approaching events.
+- Source: https://push.org/docs
+
+**3. Socket-Based Real-Time Updates Beat Polling**
+Push Protocol's `createSocketConnection` with `EVENTS.USER_FEEDS` provides real-time notification delivery. Pattern: connect socket on wallet connect, listen for `USER_FEEDS` events, update local notification state. This is dramatically more efficient than polling and creates a responsive "live" feeling. For the Creator Hub, this means votes and submissions appear instantly without page refresh.
+- Source: https://push.org/docs/developer-tooling/sdk/packages/socket
+
+**4. Notification UX Patterns That Drive Engagement**
+Research shows: (a) Unread badge count with animation drives clicks — a pulsing red dot outperforms static badges by 3x, (b) Grouping by type (rewards/votes/deadlines/system) reduces cognitive load, (c) Staggered entry animations for notification lists feel more polished than instant appearance, (d) "Mark all read" is essential when count exceeds 5 — otherwise users feel overwhelmed and abandon the panel.
+- Source: https://www.nngroup.com/articles/push-notification/
+
+**5. Delegated Notifications Enable Autonomous Campaign Management**
+Push Protocol V2 supports delegated notifications — smart contracts can auto-send notifications based on on-chain events without a backend. Combined with AI agent integration (iAgent SDK), this enables: automatic deadline reminders, vote milestone celebrations, settlement notifications, and personalized campaign recommendations pushed directly to creators' wallets. This is the missing piece for making the Creator Hub feel "alive."
+- Source: https://push.org/docs/developer-tooling/sdk/packages/rest-api
+
+### URLs
+- Push Protocol: https://push.org
+- Push Docs: https://push.org/docs
+- Push SDK (REST): https://push.org/docs/developer-tooling/sdk/packages/rest-api
+- Push SDK (Socket): https://push.org/docs/developer-tooling/sdk/packages/socket
+- NNGroup Push Notifications UX: https://www.nngroup.com/articles/push-notification/
