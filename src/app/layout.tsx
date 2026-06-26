@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { QuickActionsToolbar } from "@/components/ui/QuickActionsToolbar";
 import { AIAssistant } from "@/components/creator/AIAssistant";
 import { TestnetBanner } from "@/components/ui/TestnetBanner";
+import { BackToTop } from "@/components/ui/BackToTop";
 import { NotificationProvider } from "@/components/ui/NotificationCenter";
 import { CommandPaletteProvider } from "@/components/ui/CommandPalette";
 import "./globals.css";
@@ -44,6 +45,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
               <QuickActionsToolbar />
+              <BackToTop />
               <AIAssistant />
             </CommandPaletteProvider>
           </NotificationProvider>
