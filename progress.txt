@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v29 - 循环改进续)
+- [x] RewardCard — 奖励卡片组件（状态/排名/截止日期）
+- [x] LeaderboardRow — 排行榜行组件（排名/地址/收益/投票）
+- [x] 调研 — Web3 Gaming & Play-to-Earn
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v28 - 循环改进续)
 - [x] VoteButton — 投票按钮组件（upvote/downvote）
 - [x] ShareButton — 分享按钮组件（Web Share API + clipboard）
