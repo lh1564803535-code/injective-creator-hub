@@ -17,6 +17,7 @@ import { NetworkStatus } from "@/components/ui/NetworkStatus";
 import { WalletOnboarding } from "@/components/ui/WalletOnboarding";
 import { AchievementBadges } from "@/components/creator/AchievementBadges";
 import { RewardsBreakdown } from "@/components/creator/RewardsBreakdown";
+import { SecurityTips } from "@/components/ui/SecurityTips";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import { useNotifications } from "@/components/ui/NotificationCenter";
@@ -163,6 +164,9 @@ export default function DashboardPage() {
 
             {/* Rewards Breakdown */}
             <RewardsBreakdown />
+
+            {/* Security Tips */}
+            <SecurityTips />
 
             {/* Notifications */}
             <div>
