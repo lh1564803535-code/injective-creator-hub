@@ -230,14 +230,15 @@ export function AIAssistant() {
   const { address, isConnected } = useAccount();
   const { data: balanceData } = useBalance({ address });
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([getWelcomeMsg(address, balanceStr)]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
 
   const balanceStr = balanceData
-    ? `${parseFloat(balanceData.formatted).toFixed(4)} ${balanceData.symbol}`
+    ? `${(Number(balanceData.value) / 10 ** balanceData.decimals).toFixed(4)} ${balanceData.symbol}`
     : undefined;
+
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMsg(address, balanceStr)]);
 
   // Update welcome message when wallet connects
   useEffect(() => {
