@@ -82,8 +82,8 @@ export function CreatorGrid({
 
   return (
     <ResponsiveGrid cols={{ sm: 1, md: 2, lg: 3, xl: 4 }} gap={6}>
-      {creators.map((creator, index) => (
-        <CreatorCard key={creator.address} creator={creator} rank={index + 1} />
+      {creators.map((creator) => (
+        <CreatorCard key={creator.address} creator={creator} />
       ))}
     </ResponsiveGrid>
   );
