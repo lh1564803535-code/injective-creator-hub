@@ -817,6 +817,14 @@ button {
 .success-particle:nth-child(4n) { --tx: 60px; --ty: -90px; }
 .success-particle:nth-child(5n) { --tx: -20px; --ty: -70px; }
 
+/* === Ripple Effect === */
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
 /* === Performance Optimizations === */
 .content-visibility-auto {
   content-visibility: auto;
