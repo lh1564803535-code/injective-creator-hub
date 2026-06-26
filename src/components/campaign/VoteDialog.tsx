@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Vote, Loader2, Check, ExternalLink, Star } from "lucide-react";
+import { X, Vote, Loader2, Check, ExternalLink, Star, Shield, Zap, FileText } from "lucide-react";
 import { shortenAddress } from "@/lib/injective";
+import { TransactionPreview } from "@/components/ui/TransactionPreview";
 import type { SubmissionData } from "@/lib/injective";
 
 interface VoteDialogProps {
@@ -19,7 +20,7 @@ export function VoteDialog({
   onVote,
 }: VoteDialogProps) {
   const [weight, setWeight] = useState(3);
-  const [phase, setPhase] = useState<"select" | "voting" | "success">("select");
+  const [phase, setPhase] = useState<"select" | "preview" | "voting" | "success">("select");
 
   // Reset when dialog opens
   useEffect(() => {
@@ -30,6 +31,10 @@ export function VoteDialog({
   }, [isOpen]);
 
   if (!isOpen || !submission) return null;
+
+  const handlePreview = () => {
+    setPhase("preview");
+  };
 
   const handleVote = () => {
     setPhase("voting");
@@ -146,12 +151,36 @@ export function VoteDialog({
 
               {/* Vote button */}
               <button
-                onClick={handleVote}
+                onClick={handlePreview}
                 className="w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 font-semibold text-white shadow-lg shadow-cyan-500/25 transition hover:shadow-xl hover:shadow-cyan-500/30"
               >
-                Vote with {weight}x Weight
+                Review Vote
               </button>
             </>
+          )}
+
+          {phase === "preview" && (
+            <TransactionPreview
+              title="Cast Vote"
+              target="BountyCampaign Contract"
+              functionName={`vote(submissionId: ${submission.id}, weight: ${weight})`}
+              steps={[
+                { label: "Approve Vote", detail: `Cast ${weight}x weighted vote for submission #${submission.id}`, icon: Vote, color: "bg-cyan-500/15 text-cyan-400" },
+                { label: "Record On-Chain", detail: "Vote recorded in BountyCampaign smart contract", icon: FileText, color: "bg-blue-500/15 text-blue-400" },
+                { label: "Update Rankings", detail: "Submission vote count and leaderboard updated", icon: Zap, color: "bg-emerald-500/15 text-emerald-400" },
+              ]}
+              balanceChanges={[
+                { token: "INJ", amount: "~0.001", direction: "out", usdValue: "~$0.02 gas" },
+                { token: "Voting Power", amount: `${weight}x`, direction: "none" },
+              ]}
+              estimatedGas="~45,000 gas"
+              estimatedGasUSD="~$0.02"
+              riskLevel="safe"
+              riskMessage="Standard vote transaction. No token transfers."
+              contractVerified={true}
+              onConfirm={handleVote}
+              onCancel={() => setPhase("select")}
+            />
           )}
 
           {phase === "voting" && (

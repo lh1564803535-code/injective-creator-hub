@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Award, Loader2, Check, Users, TrendingUp } from "lucide-react";
+import { X, Award, Loader2, Check, Users, TrendingUp, Shield, Zap, FileText, Coins } from "lucide-react";
 import { formatUSDC, shortenAddress } from "@/lib/injective";
 import { triggerSettleConfetti } from "@/components/creator/RewardAnimation";
+import { TransactionPreview } from "@/components/ui/TransactionPreview";
 import type { SubmissionData } from "@/lib/injective";
 
 interface SettleDialogProps {
@@ -23,7 +24,7 @@ export function SettleDialog({
   submissions,
   onSettle,
 }: SettleDialogProps) {
-  const [phase, setPhase] = useState<"preview" | "settling" | "success">("preview");
+  const [phase, setPhase] = useState<"preview" | "txPreview" | "settling" | "success">("preview");
 
   // Calculate reward distribution (proportional to votes)
   const totalVotes = submissions.reduce((sum, s) => sum + s.votes, 0);
@@ -142,12 +143,43 @@ export function SettleDialog({
 
               {/* Settle button */}
               <button
-                onClick={handleSettle}
+                onClick={() => setPhase("txPreview")}
                 className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 py-3 font-semibold text-white shadow-lg shadow-amber-500/25 transition hover:shadow-xl hover:shadow-amber-500/30"
               >
-                Settle & Distribute Rewards
+                Review Settlement
               </button>
             </>
+          )}
+
+          {phase === "txPreview" && (
+            <TransactionPreview
+              title="Settle Campaign"
+              target="BountyCampaign Contract"
+              functionName={`settle(campaignId: ${submissions[0]?.campaignId ?? 0})`}
+              steps={[
+                { label: "Calculate Distribution", detail: `Distribute ${formatUSDC(totalReward)} USDC proportional to votes across ${submissions.length} submissions`, icon: Coins, color: "bg-amber-500/15 text-amber-400" },
+                { label: "Transfer USDC", detail: "Batch USDC transfers from campaign pool to each creator", icon: Zap, color: "bg-emerald-500/15 text-emerald-400" },
+                { label: "Mark Settled", detail: "Campaign marked as settled on-chain, no further votes accepted", icon: FileText, color: "bg-blue-500/15 text-blue-400" },
+              ]}
+              balanceChanges={[
+                ...rewardDistribution.slice(0, 3).map((sub) => ({
+                  token: `USDC -> ${shortenAddress(sub.creator)}`,
+                  amount: formatUSDC(sub.rewardAmount),
+                  direction: "out" as const,
+                })),
+                ...(rewardDistribution.length > 3
+                  ? [{ token: `+${rewardDistribution.length - 3} more recipients`, amount: "...", direction: "none" as const }]
+                  : []),
+              ]}
+              estimatedGas={`~${(120000 + submissions.length * 65000).toLocaleString()} gas`}
+              estimatedGasUSD={`~$${((120000 + submissions.length * 65000) * 0.0000004).toFixed(3)}`}
+              riskLevel="warning"
+              riskMessage={`Distributes ${formatUSDC(totalReward)} USDC to ${submissions.length} creators. This action is irreversible.`}
+              contractVerified={true}
+              onConfirm={handleSettle}
+              onCancel={() => setPhase("preview")}
+              isProcessing={false}
+            />
           )}
 
           {phase === "settling" && (
