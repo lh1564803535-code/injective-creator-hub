@@ -11,7 +11,7 @@ import {
   Repeat2,
   Unlink,
   Users,
-  Tweet,
+  MessageSquare,
   BarChart3,
 } from "lucide-react";
 import {
@@ -146,7 +146,7 @@ export function TwitterBind() {
           <h4 className="mb-4 text-sm font-medium text-gray-400">本周社交数据</h4>
           <div className="mb-4 grid grid-cols-3 gap-4">
             <StatCard
-              icon={<Tweet className="h-4 w-4" />}
+              icon={<MessageSquare className="h-4 w-4" />}
               label="发推数"
               value={stats.tweetsThisWeek}
               color="text-[#1DA1F2]"
