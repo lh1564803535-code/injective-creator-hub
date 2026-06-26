@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v30 - 循环改进续)
+- [x] StakingCard — 质押卡片组件（池信息/用户质押/操作按钮）
+- [x] APYBadge — APY 徽章组件（颜色分级）
+- [x] 调研 — DeFi Yield Farming 策略
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v29 - 循环改进续)
 - [x] RewardCard — 奖励卡片组件（状态/排名/截止日期）
 - [x] LeaderboardRow — 排行榜行组件（排名/地址/收益/投票）
