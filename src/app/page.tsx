@@ -32,6 +32,7 @@ import { MCPIntegration } from "@/components/ui/MCPIntegration";
 import { HomepageStats } from "@/components/ui/HomepageStats";
 import { FeatureHighlights } from "@/components/ui/FeatureHighlights";
 import { CTASection } from "@/components/ui/CTASection";
+import { SocialLinks } from "@/components/ui/SocialLinks";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -261,6 +262,11 @@ export default function HomePage() {
               >
                 Create Campaign
               </Link>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-6 flex justify-center">
+              <SocialLinks />
             </div>
           </div>
         </div>

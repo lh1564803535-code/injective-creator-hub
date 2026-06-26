@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Injective Creator Hub — Pitch Deck</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; }
+.slide { width: 1280px; height: 720px; margin: 40px auto; padding: 80px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; page-break-after: always; }
+.slide::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 20%, rgba(34,197,94,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(6,182,212,0.06) 0%, transparent 50%); pointer-events: none; }
+h1 { font-size: 56px; font-weight: 800; line-height: 1.2; margin-bottom: 24px; }
+h2 { font-size: 42px; font-weight: 700; margin-bottom: 32px; color: #22c55e; }
+h3 { font-size: 28px; font-weight: 600; margin-bottom: 16px; color: #06b6d4; }
+p { font-size: 22px; line-height: 1.6; color: #a1a1aa; }
+.subtitle { font-size: 26px; color: #71717a; margin-bottom: 40px; }
+.highlight { color: #22c55e; font-weight: 700; }
+.cyan { color: #06b6d4; }
+.amber { color: #fbbf24; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+.card { background: #1a1a1a; border-radius: 16px; padding: 32px; border: 1px solid #27272a; }
+.card h3 { margin-bottom: 12px; }
+.card p { font-size: 18px; }
+.big-number { font-size: 72px; font-weight: 800; color: #22c55e; }
+.tag { display: inline-block; background: #1a1a1a; border: 1px solid #27272a; border-radius: 8px; padding: 8px 16px; font-size: 16px; color: #a1a1aa; margin: 4px; }
+.logo { font-size: 20px; font-weight: 700; color: #22c55e; position: absolute; top: 40px; left: 80px; }
+.page-num { position: absolute; bottom: 40px; right: 80px; font-size: 16px; color: #52525b; }
+.timeline { display: flex; gap: 24px; }
+.timeline-item { flex: 1; background: #1a1a1a; border-radius: 12px; padding: 24px; border-left: 4px solid #22c55e; }
+.timeline-item h3 { font-size: 20px; margin-bottom: 8px; }
+.timeline-item p { font-size: 16px; }
+ul { list-style: none; padding: 0; }
+ul li { font-size: 20px; color: #a1a1aa; margin-bottom: 12px; padding-left: 24px; position: relative; }
+ul li::before { content: '→'; position: absolute; left: 0; color: #22c55e; }
+.step { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.step-num { width: 48px; height: 48px; border-radius: 50%; background: #22c55e; color: #0a0a0a; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; flex-shrink: 0; }
+.step-text { font-size: 20px; color: #d4d4d8; }
+.screenshot-placeholder { background: #1a1a1a; border: 2px dashed #27272a; border-radius: 12px; height: 300px; display: flex; align-items: center; justify-content: center; color: #52525b; font-size: 18px; }
+</style>
+</head>
+<body>
+
+<!-- Slide 1: Cover -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h1>Injective Creator Hub</h1>
+  <p class="subtitle">AI 驱动的创作者实时收益平台</p>
+  <p style="font-size: 20px; color: #52525b;">大龙 | 2026年6月</p>
+  <div class="page-num">1 / 10</div>
+</div>
+
+<!-- Slide 2: Problem -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>❌ 问题</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3>没有工具</h3>
+      <p>创作者在 Injective 生态做内容，但没有工具追踪排名和收益</p>
+    </div>
+    <div class="card">
+      <h3>不懂区块链</h3>
+      <p>什么是 Gas？什么是签名？怎么创建钱包？创作者完全不懂</p>
+    </div>
+    <div class="card">
+      <h3>结算太慢</h3>
+      <p>传统平台月度结算，创作者要等 30 天才能拿到钱</p>
+    </div>
+  </div>
+  <div class="page-num">2 / 10</div>
+</div>
+
+<!-- Slide 3: Solution -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>✅ 解决方案</h2>
+  <h1 style="font-size: 48px; margin-bottom: 32px;">Injective Creator Hub</h1>
+  <p style="font-size: 28px; color: #d4d4d8; margin-bottom: 40px;">让创作者 <span class="highlight">写内容</span> → <span class="cyan">有人看</span> → <span class="amber">钱在涨</span></p>
+  <div class="grid-3">
+    <div class="card">
+      <h3>💰 实时收益</h3>
+      <p>像出租车计价器，每秒跳动</p>
+    </div>
+    <div class="card">
+      <h3>🤖 AI 助手</h3>
+      <p>用中文就能操作区块链</p>
+    </div>
+    <div class="card">
+      <h3>⚡ 即时结算</h3>
+      <p>0.6 秒到账，近零 Gas</p>
+    </div>
+  </div>
+  <div class="page-num">3 / 10</div>
+</div>
+
+<!-- Slide 4: How It Works -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>🔄 怎么运作</h2>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text">创作者提交作品到活动（插画、音乐、链游）</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text">社区投票，选出最佳作品</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text">智能合约按投票比例自动分配 USDC</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-text">创作者 0.6 秒内收到收益，每秒都在增长</div>
+  </div>
+  <div style="margin-top: 40px;">
+    <div class="card" style="display: inline-block;">
+      <p style="font-size: 20px; color: #22c55e;">全程不需要懂区块链，AI 助手用中文引导每一步</p>
+    </div>
+  </div>
+  <div class="page-num">4 / 10</div>
+</div>
+
+<!-- Slide 5: AI Assistant -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>🤖 AI 自然语言助手</h2>
+  <p style="font-size: 22px; margin-bottom: 32px;">目标用户：<span class="highlight">不懂区块链但有创作潜力的人</span></p>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom: 16px;">
+        <p style="color: #06b6d4; font-size: 16px;">用户：</p>
+        <p style="font-size: 18px;">"我想参加活动，但不知道怎么开始"</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <p style="color: #22c55e; font-size: 16px;">AI：</p>
+        <p style="font-size: 18px;">"我帮你。第一步，创建一个钱包。点击这个按钮就行。"</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <p style="color: #06b6d4; font-size: 16px;">用户：</p>
+        <p style="font-size: 18px;">"我的钱怎么转到银行卡？"</p>
+      </div>
+      <div class="card">
+        <p style="color: #22c55e; font-size: 16px;">AI：</p>
+        <p style="font-size: 18px;">"我教你，点这里，选择提现方式..."</p>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>AI 能帮什么</h3>
+        <ul>
+          <li>创建和管理钱包</li>
+          <li>解释 Gas、签名等概念</li>
+          <li>引导参加活动</li>
+          <li>教提现到银行卡</li>
+          <li>推荐适合的活动</li>
+          <li>检查交易风险</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="page-num">5 / 10</div>
+</div>
+
+<!-- Slide 6: Tech Architecture -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>🏗️ 技术架构</h2>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>前端</h3>
+        <p>Next.js 16 + React 19 + TypeScript + Tailwind CSS</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>AI 引擎</h3>
+        <p>MiMo V2.5 Pro（小米大模型）+ Vercel AI SDK</p>
+      </div>
+      <div class="card">
+        <h3>链上</h3>
+        <p>Injective EVM + 智能合约 + 原生 USDC</p>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>Agent 身份</h3>
+        <p>iAgent SDK — 链上注册，可被发现</p>
+      </div>
+      <div class="card" style="margin-bottom: 16px;">
+        <h3>钱包</h3>
+        <p>RainbowKit + wagmi + viem</p>
+      </div>
+      <div class="card">
+        <h3>性能</h3>
+        <p>0.6 秒出块 | 25,000+ TPS | 近零 Gas</p>
+      </div>
+    </div>
+  </div>
+  <div class="page-num">6 / 10</div>
+</div>
+
+<!-- Slide 7: Innovation -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>💡 创新点</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>别人做了什么</h3>
+      <p style="font-size: 18px;">XHunt：追踪 KOL 影响力</p>
+      <p style="font-size: 18px;">Superfluid：流支付协议</p>
+      <p style="font-size: 18px;">传统平台：月度结算</p>
+    </div>
+    <div class="card" style="border-color: #22c55e;">
+      <h3 style="color: #22c55e;">我们做了什么</h3>
+      <p style="font-size: 18px; color: #d4d4d8;">XHunt + 实时钱流</p>
+      <p style="font-size: 18px; color: #d4d4d8;">AI 降低区块链门槛</p>
+      <p style="font-size: 18px; color: #d4d4d8;">每秒收益，不是每月</p>
+    </div>
+  </div>
+  <div style="margin-top: 32px;">
+    <div class="card" style="text-align: center;">
+      <p style="font-size: 24px; color: #fbbf24;">XHunt 做了"谁有影响力"</p>
+      <p style="font-size: 24px; color: #22c55e; font-weight: 700;">我们做"影响力值多少钱"</p>
+    </div>
+  </div>
+  <div class="page-num">7 / 10</div>
+</div>
+
+<!-- Slide 8: Market -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>📈 市场潜力</h2>
+  <div class="grid-3">
+    <div class="card" style="text-align: center;">
+      <div class="big-number">$480B</div>
+      <p style="font-size: 18px;">创作者经济规模（2027年）</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="big-number" style="color: #06b6d4;">100+</div>
+      <p style="font-size: 18px;">Injective 生态项目</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <div class="big-number" style="color: #fbbf24;">500K+</div>
+      <p style="font-size: 18px;">Injective 社区成员</p>
+    </div>
+  </div>
+  <div style="margin-top: 32px;">
+    <div class="card">
+      <p style="font-size: 20px; text-align: center;">Web3 创作者工具 = <span class="highlight">蓝海市场</span>，无直接竞品</p>
+    </div>
+  </div>
+  <div class="page-num">8 / 10</div>
+</div>
+
+<!-- Slide 9: Roadmap -->
+<div class="slide">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h2>🗺️ 路线图</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <h3 class="highlight">Q3 2026</h3>
+      <p>测试网上线</p>
+      <p>收集创作者反馈</p>
+      <p>优化 AI 助手</p>
+    </div>
+    <div class="timeline-item">
+      <h3 class="cyan">Q4 2026</h3>
+      <p>主网上线</p>
+      <p>接入真实活动</p>
+      <p>首批创作者入驻</p>
+    </div>
+    <div class="timeline-item">
+      <h3 class="amber">Q1 2027</h3>
+      <p>Chrome 插件</p>
+      <p>嵌入 X/Twitter</p>
+      <p>KOL 排名系统</p>
+    </div>
+    <div class="timeline-item">
+      <h3 style="color: #a855f7;">Q2 2027</h3>
+      <p>跨链支持</p>
+      <p>多生态扩展</p>
+      <p>移动端 App</p>
+    </div>
+  </div>
+  <div class="page-num">9 / 10</div>
+</div>
+
+<!-- Slide 10: Contact -->
+<div class="slide" style="text-align: center; justify-content: center; align-items: center;">
+  <div class="logo">🥷 Injective Nova Program</div>
+  <h1 style="margin-bottom: 24px;">Thank You</h1>
+  <p class="subtitle" style="margin-bottom: 48px;">Injective Creator Hub</p>
+  <div style="margin-bottom: 48px;">
+    <div class="tag">GitHub</div>
+    <div class="tag" style="color: #22c55e;">github.com/lh1564803535-code/injective-creator-hub</div>
+  </div>
+  <div>
+    <div class="tag">大龙</div>
+    <div class="tag">独立开发者</div>
+  </div>
+  <div style="margin-top: 48px;">
+    <p style="font-size: 18px; color: #52525b;">感谢 Injective × Microsoft × Web3Labs</p>
+  </div>
+  <div class="page-num">10 / 10</div>
+</div>
+
+</body>
+</html>
