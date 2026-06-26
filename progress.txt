@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v136)
+- [x] Coverage API — GET /api/coverage 返回测试覆盖率（语句/分支/函数）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v135)
 - [x] Test API — GET /api/test 返回测试结果（单元/集成/E2E）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
