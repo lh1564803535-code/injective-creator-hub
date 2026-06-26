@@ -27,7 +27,7 @@ interface Step {
   id: number;
   title: string;
   description: string;
-  icon: typeof Wallet;
+  icon: React.ComponentType<{ className?: string }>;
   color: string;
   bg: string;
   detail: string;
