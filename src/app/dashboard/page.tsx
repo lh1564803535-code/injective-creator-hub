@@ -8,6 +8,7 @@ import { CreatorDashboard } from "@/components/creator/CreatorDashboard";
 import { YieldStaking } from "@/components/creator/YieldStaking";
 import { CreatorReputation } from "@/components/creator/CreatorReputation";
 import { CreatorStreak } from "@/components/creator/CreatorStreak";
+import { CreatorAnalytics } from "@/components/creator/CreatorAnalytics";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import type { Address } from "viem";
@@ -169,6 +170,9 @@ export default function DashboardPage() {
 
             {/* Creator Streak & Gamification */}
             <CreatorStreak />
+
+            {/* Creator Analytics */}
+            <CreatorAnalytics address={address as Address} />
 
             {/* On-Chain Reputation */}
             <CreatorReputation address={address as Address} />
