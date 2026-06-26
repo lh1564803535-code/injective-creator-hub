@@ -1,18 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { DollarSign, TrendingUp, Target, ChevronUp, Calendar, Eye, Search } from "lucide-react";
+import { DollarSign, TrendingUp, Target, ChevronUp, Calendar, Eye, Search, ArrowUpRight, ArrowDownRight } from "lucide-react";
 
 interface LiveEarningsProps {
-  /** Simplified mode for homepage (only total + rate) */
   compact?: boolean;
-  /** Initial total earnings in USDC */
   initialTotal?: number;
-  /** Growth rate per second in USDC */
   ratePerSecond?: number;
-  /** Monthly earnings target in USDC */
   monthlyTarget?: number;
-  /** Enable view-only mode (address input) */
   enableViewOnly?: boolean;
 }
 
@@ -27,13 +22,19 @@ function formatCompact(value: number): string {
   return `$${value.toFixed(2)}`;
 }
 
-/** Generate 7-day mock earnings data for sparkline */
 function generateWeeklyData(): number[] {
   const base = [8.2, 11.4, 9.8, 14.2, 12.1, 13.5, 12.45];
   return base.map((v) => v + (Math.random() - 0.5) * 2);
 }
 
-/** SVG sparkline path from data points */
+function generateDataFromAddress(address: string) {
+  const hash = address.toLowerCase().replace(/[^0-9a-f]/g, "");
+  const seed = parseInt(hash.slice(0, 8), 16);
+  const rate = 0.0001 + (seed % 1000) / 1000000;
+  const total = 10 + (seed % 5000) / 100;
+  return { rate, total };
+}
+
 function SparklineChart({ data, color = "#f59e0b" }: { data: number[]; color?: string }) {
   const min = Math.min(...data);
   const max = Math.max(...data);
@@ -51,29 +52,22 @@ function SparklineChart({ data, color = "#f59e0b" }: { data: number[]; color?: s
   const linePath = `M${points.join(" L")}`;
   const areaPath = `${linePath} L${w},${h} L0,${h} Z`;
 
+  const trend = data[data.length - 1] > data[0];
+  const trendColor = trend ? "#22c55e" : "#ef4444";
+
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="overflow-visible">
       <defs>
         <linearGradient id="sparkline-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="0.3" />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
+          <stop offset="0%" stopColor={trendColor} stopOpacity="0.3" />
+          <stop offset="100%" stopColor={trendColor} stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={areaPath} fill="url(#sparkline-grad)" />
-      <path d={linePath} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Current value dot */}
-      <circle cx={w} cy={parseFloat(points[points.length - 1].split(",")[1])} r="2.5" fill={color} />
+      <path d={linePath} fill="none" stroke={trendColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx={w} cy={parseFloat(points[points.length - 1].split(",")[1])} r="2.5" fill={trendColor} />
     </svg>
   );
-}
-
-/** Generate deterministic mock data from address */
-function generateDataFromAddress(address: string) {
-  const hash = address.toLowerCase().replace(/[^0-9a-f]/g, "");
-  const seed = parseInt(hash.slice(0, 8), 16);
-  const rate = 0.0001 + (seed % 1000) / 1000000;
-  const total = 10 + (seed % 5000) / 100;
-  return { rate, total };
 }
 
 export function LiveEarnings({
@@ -119,20 +113,17 @@ export function LiveEarnings({
     setMonthEarnings(1245.67);
   };
 
-  // requestAnimationFrame loop for smooth earnings ticking
   const tick = useCallback(
     (now: number) => {
       if (!lastTimeRef.current) lastTimeRef.current = now;
-      const delta = (now - lastTimeRef.current) / 1000; // seconds
+      const delta = (now - lastTimeRef.current) / 1000;
       lastTimeRef.current = now;
 
-      // Random increment between rate * 0.3 and rate * 3.3
       const randomMultiplier = 0.3 + Math.random() * 3;
       const increment = effectiveRate * delta * randomMultiplier;
 
       accumulatedRef.current += increment;
 
-      // Update display every ~100ms worth of accumulation
       if (accumulatedRef.current > effectiveRate * 0.1) {
         setPrevTotal((prev) => {
           setTotal((t) => {
@@ -141,7 +132,7 @@ export function LiveEarnings({
             accumulatedRef.current = 0;
             return newTotal;
           });
-          return prev; // will be updated separately
+          return prev;
         });
       }
 
@@ -155,7 +146,6 @@ export function LiveEarnings({
     return () => cancelAnimationFrame(rafRef.current);
   }, [tick]);
 
-  // Trigger digit animation on total change
   useEffect(() => {
     if (total !== prevTotal) {
       setAnimating(true);
@@ -184,7 +174,7 @@ export function LiveEarnings({
               ${formatUSDC(total)}
             </span>
             <span className="live-earnings-rate text-sm font-medium text-emerald-400">
-              +${ratePerSecond.toFixed(4)}/s
+              +${effectiveRate.toFixed(4)}/s
             </span>
           </div>
           <p className="mt-1 text-xs text-gray-500">USDC earned in real-time</p>
@@ -195,12 +185,11 @@ export function LiveEarnings({
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-[#1a1a1a]">
-      {/* Subtle glow */}
       <div className="absolute -top-24 left-1/2 h-48 w-[120%] -translate-x-1/2 rounded-full bg-amber-500/8 blur-3xl" />
 
       <div className="relative p-6 lg:p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15">
               <DollarSign className="h-5 w-5 text-amber-400" />
@@ -234,7 +223,7 @@ export function LiveEarnings({
           </div>
         </div>
 
-        {/* View-only Address Input (Superfluid-style) */}
+        {/* View-only Address Input */}
         {enableViewOnly && !viewMode && (
           <div className="mb-6 flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
             <Eye className="h-4 w-4 shrink-0 text-gray-500" />
@@ -309,7 +298,18 @@ export function LiveEarnings({
         {/* 7-Day Trend + 30-Day Forecast */}
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-            <p className="mb-2 text-xs text-gray-500">7-Day Trend</p>
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-xs text-gray-500">7-Day Trend</p>
+              {weeklyData[weeklyData.length - 1] > weeklyData[0] ? (
+                <span className="flex items-center gap-0.5 text-[10px] text-emerald-400">
+                  <ArrowUpRight className="h-3 w-3" /> +12%
+                </span>
+              ) : (
+                <span className="flex items-center gap-0.5 text-[10px] text-red-400">
+                  <ArrowDownRight className="h-3 w-3" /> -5%
+                </span>
+              )}
+            </div>
             <SparklineChart data={weeklyData} />
             <div className="mt-2 flex items-center justify-between">
               <span className="text-[10px] text-gray-600">Mon</span>
@@ -328,9 +328,12 @@ export function LiveEarnings({
               Based on current streaming rate
             </p>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
-              <div className="h-full w-[73%] rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-1000"
+                style={{ width: `${Math.min(monthProgress, 100)}%` }}
+              />
             </div>
-            <p className="mt-1 text-[10px] text-gray-600">73% to annual goal</p>
+            <p className="mt-1 text-[10px] text-gray-600">{monthProgress.toFixed(0)}% to monthly goal</p>
           </div>
         </div>
 
@@ -350,7 +353,6 @@ export function LiveEarnings({
               className="live-earnings-progress absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500"
               style={{ width: `${monthProgress}%` }}
             >
-              {/* Flowing light dot */}
               <span className="live-earnings-flow absolute inset-0 overflow-hidden rounded-full">
                 <span className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
               </span>
