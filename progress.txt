@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v126)
+- [x] Incident API — GET /api/incident 返回事件历史（活跃/已解决事件）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v125)
 - [x] Risk API — GET /api/risk 返回风险评估（类别/分数/缓解措施）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
