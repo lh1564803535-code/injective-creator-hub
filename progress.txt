@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v86)
+- [x] Achievements API — GET /api/achievements 返回成就数据（XP/解锁状态/进度）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v85)
 - [x] Portfolio API — GET /api/portfolio 返回投资组合数据（资产/NFT/活动）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
