@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Injective Nova Program 准备 v2
+## 当前阶段：无限循环改进中
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -633,6 +633,22 @@
 - [x] 首页集成 MCPIntegration（AIAgentSection 下方）
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
+## 本次改进 (2026-06-26 v21 - 循环改进)
+- [x] LiveEarnings — 趋势感知 sparkline（绿/红）、改进移动端布局
+- [x] ScrollEarningsCounter — 速度感应（LIVE/STREAMING/FAST）、视觉反馈
+- [x] GasEstimator — 真实 Injective 数据（$0.00008/tx、0.64s 出块）
+- [x] NetworkStatus — 真实数据（0.64s、10K TPS、1.2B+ txns）
+- [x] MCPIntegration — 真实数据（$30M+ 交易量、69K Agent）
+- [x] TipCreator — 创作者打赏组件（调研驱动）
+- [x] CountdownTimer — 倒计时组件
+- [x] CopyButton — 剪贴板复制
+- [x] StatusBadge — 状态徽章
+- [x] InjectiveStats — 网络实时统计
+- [x] ProgressRing — SVG 环形进度条
+- [x] QRCode — 二维码组件
+- [x] SuccessAnimation — 成功动画 + 彩带
+- [x] 调研日志 — Injective 生态、Web3 创作者工具、AI Agent 自动化
 
 ## 本次改进 (2026-06-26 v20)
 - [x] README.md 全面更新 — 新增 Nova Program 链接、测试网配置、测试币领取、iAgent SDK 说明、研究来源、项目结构更新
