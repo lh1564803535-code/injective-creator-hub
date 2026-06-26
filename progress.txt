@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v31 - 循环改进续)
+- [x] BridgeStatus — 跨桥状态组件（链显示/状态/交易链接）
+- [x] SecurityScore — 安全评分组件（分数/详情/图标）
+- [x] 调研 — Cross-Chain Bridge 安全
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v30 - 循环改进续)
 - [x] StakingCard — 质押卡片组件（池信息/用户质押/操作按钮）
 - [x] APYBadge — APY 徽章组件（颜色分级）
