@@ -21,6 +21,9 @@
 
 ## 本次改进 (2026-06-26 v20)
 - [x] README.md 全面更新 — 新增 Nova Program 链接、测试网配置、测试币领取、iAgent SDK 说明、研究来源、项目结构更新
+- [x] 新增 CSS 动画 — card-shimmer-hover（卡片悬停闪光）、focus-ring-animated（焦点环脉冲）、skeleton（骨架屏加载）、ticker-enter（数字入场）、badge-shine（徽章闪光）
+- [x] Reduced motion 覆盖 — 所有新动画均支持 prefers-reduced-motion
+- [x] TypeScript 零错误修复 — AIAssistant balanceStr 声明顺序、balanceData 类型修正
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 - [x] iAgent SDK 集成层 — src/lib/iagent.ts：registerAgent、executeCommand、getAgentStatus、listAgents 函数
 - [x] AI Chat API 路由 — src/app/api/chat/route.ts：Ollama 集成 + Mock 回退、完整系统提示词、中文支持
