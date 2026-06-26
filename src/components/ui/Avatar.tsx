@@ -5,6 +5,7 @@ interface AvatarProps {
   alt?: string;
   size?: "sm" | "md" | "lg";
   fallback?: string;
+  className?: string;
 }
 
 const sizeClasses = {
@@ -13,7 +14,7 @@ const sizeClasses = {
   lg: "h-12 w-12 text-base",
 };
 
-export function Avatar({ src, alt, size = "md", fallback }: AvatarProps) {
+export function Avatar({ src, alt, size = "md", fallback, className = "" }: AvatarProps) {
   const initials = fallback || alt?.charAt(0)?.toUpperCase() || "?";
 
   if (src) {
@@ -21,14 +22,14 @@ export function Avatar({ src, alt, size = "md", fallback }: AvatarProps) {
       <img
         src={src}
         alt={alt || ""}
-        className={`rounded-full object-cover ${sizeClasses[size]}`}
+        className={`rounded-full object-cover ${sizeClasses[size]} ${className}`}
       />
     );
   }
 
   return (
     <div
-      className={`flex items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 font-medium text-white ${sizeClasses[size]}`}
+      className={`flex items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 font-medium text-white ${sizeClasses[size]} ${className}`}
     >
       {initials}
     </div>
