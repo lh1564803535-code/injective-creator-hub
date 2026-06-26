@@ -785,3 +785,34 @@
 - [x] 我们已有 CreatorAnalytics 组件
 - [ ] 考虑添加 Dune 集成
 - [ ] 考虑添加更多图表类型
+
+## 2026-06-27 — Web3 Reputation & Credentials 调研
+
+### 关键发现
+
+**1. 凭证类型**
+- 凭证、会员资格、工作历史
+- 会议出席、声誉、贡献记录
+- 铸造为 SBT（灵魂绑定代币）
+
+**2. 标准**
+- ERC-5114: 灵魂绑定徽章
+- ERC-5484: 共识灵魂绑定代币
+- DID Core + Verifiable Credentials
+
+**3. 关键工具**
+- InCred: 链上凭证平台
+- Civic: 身份和访问管理
+- CARV: 游戏凭证基础设施
+- Define Protocol: 隐私保护证明
+
+**4. 声誉来源**
+- 行为数据
+- 链上参与
+- 社区活动
+- 同行评价
+
+### 对项目的启示
+- [x] 我们已有 AchievementBadges 组件
+- [ ] 考虑添加 SBT 显示
+- [ ] 考虑添加声誉评分系统
