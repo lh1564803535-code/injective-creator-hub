@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v29)
+- [x] LoadingSpinner 组件 — 加载状态工具（sm/md/lg 尺寸、3 种颜色、全页加载、骨架卡片）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v28)
 - [x] BackToTop 组件 — 滚动 500px 后显示、平滑滚动、固定定位、无障碍标签
 - [x] layout.tsx 集成 BackToTop
