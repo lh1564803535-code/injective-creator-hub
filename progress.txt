@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v115)
+- [x] Refund API — POST/GET /api/refund 请求/获取退款历史
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v114)
 - [x] Payment API — POST/GET /api/payment 处理/获取支付历史
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
