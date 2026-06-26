@@ -634,6 +634,17 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-26 v24 - 循环改进续)
+- [x] AvatarGroup — 堆叠头像组件
+- [x] Indicator — 状态点组件
+- [x] Breadcrumbs — 面包屑导航
+- [x] Card — 复合卡片组件
+- [x] Button — 按钮组件（更新）
+- [x] Avatar — 头像组件（更新）
+- [x] Skeleton — 骨架屏组件（更新）
+- [x] Input — 输入框组件
+- [x] Textarea — 文本域组件
+
 ## 本次改进 (2026-06-26 v23 - 循环改进续)
 - [x] GlassCard — 玻璃态卡片组件
 - [x] GlowEffect — 悬停发光效果
