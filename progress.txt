@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v35 - 循环改进续)
+- [x] NFTCard — NFT 卡片组件（图片/稀有度/价格/截止日期）
+- [x] CollectionGrid — 集合网格组件（网格/列表切换）
+- [x] 调研 — NFT Marketplace UI 设计
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v34 - 循环改进续)
 - [x] PortfolioSummary — 投资组合摘要组件（总资产/资产列表）
 - [x] PriceTicker — 价格行情组件（实时更新/闪烁效果）
