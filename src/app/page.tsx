@@ -33,6 +33,7 @@ import { HomepageStats } from "@/components/ui/HomepageStats";
 import { FeatureHighlights } from "@/components/ui/FeatureHighlights";
 import { CTASection } from "@/components/ui/CTASection";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { RoadmapTimeline } from "@/components/ui/RoadmapTimeline";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -646,6 +647,19 @@ export default function HomePage() {
             sortBy={sortBy}
             onSortChange={setSortBy}
           />
+        </div>
+      </ScrollRevealSection>
+
+      {/* Roadmap */}
+      <ScrollRevealSection className="px-6 pb-16 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
+            <h2 className="text-2xl font-bold text-white">Roadmap</h2>
+            <p className="mt-2 text-sm text-gray-500">
+              Our journey to decentralized creator economy
+            </p>
+          </div>
+          <RoadmapTimeline />
         </div>
       </ScrollRevealSection>
 
