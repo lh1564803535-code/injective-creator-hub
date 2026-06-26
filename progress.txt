@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v141)
+- [x] Environment API — GET /api/environment 返回环境信息（Node 版本/平台/环境变量）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v140)
 - [x] Dependencies API — GET /api/dependencies 返回依赖信息（总数/过时/漏洞）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
