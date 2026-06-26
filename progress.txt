@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v42)
+- [x] Accordion 组件 — 手风琴工具（展开/折叠、单/多模式、箭头图标）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v41)
 - [x] Tabs 组件 — 选项卡工具（切换状态、自定义内容）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
