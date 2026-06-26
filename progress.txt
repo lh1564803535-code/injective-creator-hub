@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v44 - 循环改进续)
+- [x] MetricCard — 指标卡片组件（值/变化/图标）
+- [x] MiniChart — 迷你图表组件（SVG 折线图/趋势色）
+- [x] 调研 — Web3 Analytics Dashboard
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v43 - 循环改进续)
 - [x] TreasuryCard — 金库卡片组件（总资产/资产列表/多签显示）
 - [x] MultiSigBadge — 多签徽章组件（阈值/签名者）
