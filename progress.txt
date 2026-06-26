@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Command Palette & UX Navigation Enhancement
+## 当前阶段：Transaction Simulation & Security UX
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -8,7 +8,6 @@
 - [ ] Add optional USDC tips alongside votes
 - [ ] Integrate iAgent SDK for real campaign matching
 - [ ] Add cross-chain submission flows via IBC
-- [ ] Add transaction preview step to VoteDialog/SettleDialog (Rabby-style simulation)
 - [ ] Add sponsor verification badges on campaigns
 - [ ] Consider MetaMask Snap for in-wallet notifications
 - [ ] Integrate Push Protocol SDK for real on-chain notification delivery
@@ -19,6 +18,13 @@
 - [ ] Add @property CSS Houdini for animating gradient stops and conic-gradient values
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
+
+## 本次改进 (2026-06-26 v15)
+- [x] 研究日志更新：Chrome Extension Crypto Tools 2026 深度调研（Rabby Wallet 交易模拟、MetaMask Smart Transactions MEV 保护、ERC-4337 账户抽象、安全优先 UX 模式、钱包内组合仪表板）
+- [x] 创建 TransactionPreview 组件 — Rabby 风格交易模拟 UI：风险评估徽章（Safe/Warning/Danger）、合约验证指示器、余额变化模拟（方向箭头 + USD 估值）、Gas 成本估算（原生代币 + USD）、可展开交易步骤分解、安全页脚（本地模拟声明）、确认复选框 + 签名前确认、处理中状态动画
+- [x] VoteDialog 集成 TransactionPreview — 新增 "preview" 阶段（权重选择和投票之间）：投票详情、Gas 估算、合约信息、"Review Vote" 按钮替代直接投票
+- [x] SettleDialog 集成 TransactionPreview — 新增 "txPreview" 阶段（奖励分配预览和结算之间）：结算详情含逐接收者分解、Warning 风险级别提示不可逆分配、"Review Settlement" 按钮替代直接结算
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v14)
 - [x] 研究日志更新：React Animation Libraries 2026 深度调研（Motion/motion.dev 新特性、CSS animation-timeline: view() 浏览器支持现状、GSAP 3.12+ React 集成、AutoAnimate 零配置列表动画、React 19 ViewTransitions 实验性 API）
