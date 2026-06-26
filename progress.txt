@@ -1,9 +1,21 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：最终验证 ✅ 全部完成
+## 当前阶段：动画增强 ✅ 完成
 
 ## 待办
 （全部完成）
+
+## 本次改进 (2026-06-25)
+- [x] 为所有 confetti 添加 star 形状粒子（RewardAnimation, SettleDialog, CreateCampaign）
+- [x] 添加 disableForReducedMotion 无障碍标志
+- [x] 添加 side-cannon 彩带模式（左右两侧发射）
+- [x] 创建 FloatingParticles 组件（纯 CSS 动画，无 JS 循环）
+- [x] 创建 useScrollReveal hook（基于 IntersectionObserver）
+- [x] 首页所有区块添加 scroll-reveal 淡入动画
+- [x] 英雄区添加 typewriter 打字机效果
+- [x] 添加 float-drift、scroll-reveal、typewriter-cursor CSS 关键帧
+- [x] 全局 prefers-reduced-motion 媒体查询覆盖所有动画
+- [x] 创建 research-log.md（canvas-confetti 调研记录）
 
 ## 已完成
 - [x] 初始化 git 仓库
