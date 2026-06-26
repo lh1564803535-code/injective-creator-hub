@@ -22,6 +22,9 @@
 ## 本次改进 (2026-06-26 v18)
 - [x] LiveEarnings 增强 — View-only 模式（Superfluid 启发）：地址输入框查看任意地址收益、确定性 mock 数据生成、"Exit View" 退出按钮、View-only 状态指示
 - [x] AIAssistant 增强 — 交易预览功能（Coinbase 启发）：TxPreview 结构化数据、TransactionPreviewCard 组件（风险评估徽章/Gas 估算/金额/确认按钮）、投票/转账/领取奖励触发预览
+- [x] ScrollEarningsCounter 组件 — Superfluid "YOU SCROLL, WE STREAM" 启发：滚动时收益实时增长、sticky 定位、金色渐变 + LIVE 脉冲、glow 动画
+- [x] AIAssistant 钱包感知 — 集成 wagmi useAccount + useBalance：欢迎消息显示地址和余额、钱包状态指示器、动态更新
+- [x] Reduced motion 覆盖 — scroll-earnings-counter 动画禁用
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v17)
