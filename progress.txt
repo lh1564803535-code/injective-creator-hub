@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v43 - 循环改进续)
+- [x] TreasuryCard — 金库卡片组件（总资产/资产列表/多签显示）
+- [x] MultiSigBadge — 多签徽章组件（阈值/签名者）
+- [x] 调研 — DAO Treasury Management
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v42 - 循环改进续)
 - [x] LendingCard — 借贷卡片组件（APY/TVL/抵押品/操作按钮）
 - [x] CollateralBadge — 抵押品徽章组件（健康因子/风险等级）
