@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Twitter, Link2, Check, QrCode, X } from "lucide-react";
+import { Link2, Check, QrCode, X, AtSign } from "lucide-react";
 
 function QRCodeSVG({ url, size = 160 }: { url: string; size?: number }) {
   const modules = generateQRModules(url);
