@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v34)
+- [x] Divider 组件 — 分割线工具（水平/垂直变体、可选居中标签）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v33)
 - [x] Avatar 组件 — 头像工具（3 种尺寸、图片支持、渐变背景首字母）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
