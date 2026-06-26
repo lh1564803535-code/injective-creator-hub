@@ -634,6 +634,20 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-26 v22 - 循环改进续)
+- [x] AnimatedCounter — 计数动画组件（IntersectionObserver 触发）
+- [x] GradientText — 渐变文字组件
+- [x] TypeWriter — 打字机动画
+- [x] ConfettiButton — 彩带按钮
+- [x] FadeIn — 滚动淡入动画
+- [x] ParallaxSection — 视差滚动
+- [x] MagneticButton — 磁性按钮
+- [x] NoiseOverlay — 噪点纹理
+- [x] Sparkle — 星光动画
+- [x] ProgressRing — 环形进度条
+- [x] QRCode — 二维码
+- [x] SuccessAnimation — 成功动画
+
 ## 本次改进 (2026-06-26 v21 - 循环改进)
 - [x] LiveEarnings — 趋势感知 sparkline（绿/红）、改进移动端布局
 - [x] ScrollEarningsCounter — 速度感应（LIVE/STREAMING/FAST）、视觉反馈
