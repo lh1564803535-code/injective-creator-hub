@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v80)
+- [x] Reputation API — GET /api/reputation 返回声誉数据（分数/等级/因素/成就）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v79)
 - [x] Stream API — GET /api/stream 返回流支付数据（速率/预测/进度）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
