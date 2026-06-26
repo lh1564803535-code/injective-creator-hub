@@ -22,6 +22,7 @@ import { VoteDialog } from "@/components/campaign/VoteDialog";
 import { CreatorProfile } from "@/components/creator/CreatorProfile";
 import { CampaignStats } from "@/components/campaign/CampaignStats";
 import { CampaignTimeline } from "@/components/campaign/CampaignTimeline";
+import { CampaignActivityFeed } from "@/components/campaign/CampaignActivityFeed";
 import { useToast } from "@/components/ui/Toast";
 import type { SubmissionData } from "@/lib/injective";
 
@@ -237,72 +238,108 @@ export default function CampaignDetailPage() {
           </div>
         )}
 
-        {/* Submissions */}
-        <div>
-          <h2 className="mb-4 text-lg font-semibold text-white">
-            Submissions ({submissions.length})
-          </h2>
+        {/* Submissions + Activity Feed side by side on large screens */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          {/* Submissions */}
+          <div className="lg:col-span-2">
+            <h2 className="mb-4 text-lg font-semibold text-white">
+              Submissions ({submissions.length})
+            </h2>
 
-          <div className="space-y-4">
-            {submissions
-              .sort((a, b) => b.votes - a.votes)
-              .map((sub, i) => {
-                const creatorStats = getCreatorStats(sub.creator);
-                return (
-                  <div
-                    key={sub.id}
-                    className="group rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition-all hover:border-white/[0.12] hover:bg-white/[0.05] hover:translate-y-[-2px] hover:shadow-lg"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        {/* Creator profile */}
-                        <div className="mb-3">
-                          <CreatorProfile
-                            address={sub.creator}
-                            totalEarnings={creatorStats?.totalEarnings}
-                            totalVotes={creatorStats?.totalVotes}
-                            totalSubmissions={creatorStats?.totalSubmissions}
-                            variant="compact"
-                          />
-                        </div>
+            <div className="space-y-4">
+              {submissions
+                .sort((a, b) => b.votes - a.votes)
+                .map((sub, i) => {
+                  const creatorStats = getCreatorStats(sub.creator);
+                  const isLeading = i === 0 && sub.votes > 0;
+                  return (
+                    <div
+                      key={sub.id}
+                      className={`group rounded-2xl border p-5 transition-all hover:border-white/[0.12] hover:bg-white/[0.05] hover:translate-y-[-2px] hover:shadow-lg ${
+                        isLeading
+                          ? "border-amber-500/20 bg-gradient-to-br from-amber-500/[0.04] to-transparent"
+                          : "border-white/[0.08] bg-white/[0.03]"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          {/* Leading badge */}
+                          {isLeading && (
+                            <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold text-amber-400">
+                              <Award className="h-2.5 w-2.5" />
+                              Leading
+                            </div>
+                          )}
 
-                        <a
-                          href={sub.contentURI}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-lg bg-white/[0.04] px-3 py-1.5 text-xs text-cyan-400 transition hover:bg-cyan-500/10 hover:text-cyan-300"
-                        >
-                          <ExternalLink className="h-3 w-3" />
-                          View Content
-                        </a>
-                      </div>
+                          {/* Creator profile */}
+                          <div className="mb-3">
+                            <CreatorProfile
+                              address={sub.creator}
+                              totalEarnings={creatorStats?.totalEarnings}
+                              totalVotes={creatorStats?.totalVotes}
+                              totalSubmissions={creatorStats?.totalSubmissions}
+                              variant="compact"
+                            />
+                          </div>
 
-                      <div className="flex items-center gap-4">
-                        <div className="text-right">
-                          <p className="text-lg font-bold text-white">{sub.votes}</p>
-                          <p className="text-xs text-gray-500">votes</p>
-                        </div>
-
-                        {isVoting && isConnected && (
-                          <button
-                            onClick={() => handleOpenVote(sub)}
-                            className="flex items-center gap-1.5 rounded-lg bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-400 transition-all hover:bg-cyan-500/20 hover:scale-[1.03] active:scale-[0.97]"
+                          <a
+                            href={sub.contentURI}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-white/[0.04] px-3 py-1.5 text-xs text-cyan-400 transition hover:bg-cyan-500/10 hover:text-cyan-300"
                           >
-                            <Vote className="h-3.5 w-3.5" />
-                            Vote
-                          </button>
-                        )}
+                            <ExternalLink className="h-3 w-3" />
+                            View Content
+                          </a>
+                        </div>
 
-                        {sub.claimed && (
-                          <span className="rounded-lg bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400">
-                            Claimed
-                          </span>
-                        )}
+                        <div className="flex items-center gap-4">
+                          <div className="text-right">
+                            <p className="text-lg font-bold text-white">{sub.votes}</p>
+                            <p className="text-xs text-gray-500">votes</p>
+                            {/* Vote share bar */}
+                            {totalVotes > 0 && (
+                              <div className="mt-1.5 h-1 w-16 overflow-hidden rounded-full bg-white/[0.06]">
+                                <div
+                                  className={`h-full rounded-full transition-all duration-700 ${
+                                    isLeading
+                                      ? "bg-gradient-to-r from-amber-400 to-amber-500"
+                                      : "bg-gradient-to-r from-cyan-400 to-blue-500"
+                                  }`}
+                                  style={{
+                                    width: `${Math.max((sub.votes / totalVotes) * 100, 4)}%`,
+                                  }}
+                                />
+                              </div>
+                            )}
+                          </div>
+
+                          {isVoting && isConnected && (
+                            <button
+                              onClick={() => handleOpenVote(sub)}
+                              className="flex items-center gap-1.5 rounded-lg bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-400 transition-all hover:bg-cyan-500/20 hover:scale-[1.03] active:scale-[0.97]"
+                            >
+                              <Vote className="h-3.5 w-3.5" />
+                              Vote
+                            </button>
+                          )}
+
+                          {sub.claimed && (
+                            <span className="rounded-lg bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400">
+                              Claimed
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
+          </div>
+
+          {/* Activity Feed Sidebar */}
+          <div className="lg:col-span-1">
+            <CampaignActivityFeed campaignId={campaignId} />
           </div>
         </div>
 

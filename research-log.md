@@ -665,3 +665,42 @@ Extensions like Zerion and DeBank Chrome sidebar show real-time portfolio tracki
 - ERC-4337 Overview: https://www.alchemy.com/overviews/account-abstraction
 - Blockaid Security: https://blockaid.io
 - Zerion Wallet: https://zerion.io
+
+## 2026-06-26 — On-Chain Reputation & Soulbound Token (SBT) Creator Scoring 2026
+
+### Topic
+On-chain reputation systems, soulbound tokens (SBTs), and creator scoring mechanisms in Web3 platforms — how decentralized identity and non-transferable tokens are shaping creator credibility and reward distribution.
+
+### Findings
+
+**1. Soulbound Tokens (SBTs) as Reputation Primitives**
+SBTs — non-transferable NFTs first proposed by Weyl, Ohlhaver, and Buterin (2022) — have matured into a core reputation layer by 2026. Protocols like Galxe, Gitcoin Passport, and POAP issue SBTs for verifiable credentials: campaign wins, contribution milestones, community endorsements. For Injective Creator Hub, SBTs could represent: (a) "Campaign Winner" badges for each settled campaign, (b) "Verified Creator" credential after 3+ submissions, (c) "Top Voter" badges for active community participants. These are non-transferable, creating a permanent on-chain resume.
+- Source: https://papers.ssrn.com/sol3/papers.cfm?author_id=4315035 (Weyl et al. SBT paper)
+- Source: https://galxe.com (Galxe credential platform)
+
+**2. Gitcoin Passport — Composable Reputation Scoring**
+Gitcoin Passport aggregates verifiable credentials from 20+ sources (ENS, POAP, Gitcoin grants, BrightID, Iden3) into a composable "Humanity Score" (0-100). The score is weighted by credential diversity — having 5 different credential types scores higher than 5 of the same type. For creator platforms, this model means: (a) reputation = f(credential_diversity, credential_quality, credential_age), (b) Sybil resistance via proof-of-humanity, (c) higher reputation → higher vote weight multiplier. The Passport SDK is open-source and could be integrated directly.
+- Source: https://passport.gitcoin.co
+- Source: https://github.com/gitcoinco/passport
+
+**3. On-Chain Reputation Weighted Voting (Conviction Voting)**
+Traditional 1-token-1-vote is being replaced by reputation-weighted mechanisms. Conviction voting (used by 1Hive, DAOstack) lets voters accumulate "conviction" over time — the longer you hold a vote, the more weight it carries. Combined with reputation scores: vote_weight = token_amount * reputation_score * conviction_time. This prevents last-minute vote manipulation and rewards sustained engagement. For Injective Hub, reputation-weighted voting could replace the current flat 1-5x weight system.
+- Source: https://1hive.org (Conviction voting pioneer)
+- Source: https://medium.com/daostack/an-introduction-to-conviction-voting-408f4a6fd5b
+
+**4. ERC-6551 Token Bound Accounts & NFT-as-Identity**
+ERC-6551 (Token Bound Accounts) allows NFTs to own other assets and have their own on-chain history. A "Creator" SBT could hold: (a) earned USDC, (b) campaign win NFTs, (c) community endorsement tokens, (d) governance voting power. This creates a "creator wallet" that is the SBT itself — portable, composable, and verifiable. Projects like Manifold and Sound.xyz are experimenting with this for creator profiles.
+- Source: https://eips.ethereum.org/EIPS/eip-6551
+- Source: https://erc6551.space
+
+**5. Reputation-DeFi Composability: "Reputation as Collateral"**
+Emerging protocols allow on-chain reputation to be used as DeFi primitives: (a) reputation-gated lending (lower collateral requirements for high-reputation creators), (b) reputation-weighted staking APY (higher reputation = better yield), (c) reputation-based credit lines for campaign funding. MakerDAO and Aave are exploring "reputation scores" as supplementary risk factors. For Injective Creator Hub, this means top creators could access: higher staking APY tiers, campaign pre-funding based on reputation, and gas sponsorship pools.
+- Source: https://www.withtally.com (governance reputation tracking)
+
+### URLs
+- SBT Original Paper: https://papers.ssrn.com/sol3/papers.cfm?author_id=4315035
+- Gitcoin Passport: https://passport.gitcoin.co
+- Galxe: https://galxe.com
+- 1Hive Conviction Voting: https://1hive.org
+- ERC-6551 Spec: https://eips.ethereum.org/EIPS/eip-6551
+- ERC-6551 Space: https://erc6551.space
