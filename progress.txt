@@ -1,9 +1,19 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：UX 增强 — How It Works + Search UX + Engagement Viz ✅ 完成
+## 当前阶段：UX 增强 — Real-Time Payments Visualization + Earnings Dashboard
 
 ## 待办
-（全部完成）
+- [ ] Consider Sablier integration for streaming campaign rewards
+- [ ] Consider fee delegation for gasless submissions (ERC-4337)
+- [ ] Add optional USDC tips alongside votes
+
+## 本次改进 (2026-06-26 v3)
+- [x] 研究日志更新：Web3 Creator Economy Real-Time Payments 调研
+- [x] 创建 EarningsChart 组件 — 动画柱状图、IntersectionObserver 触发、hover 工具提示
+- [x] 创建 PaymentStream 组件 — 实时 USDC 流可视化、支付类型指示器、可展开列表
+- [x] 创建 USDCBenefits 组件 — 首页 "Powered by USDC" 区块（即时结算、稳定价值、无国界支付）
+- [x] 首页集成 USDCBenefits（How It Works 和 Featured Campaign 之间）
+- [x] Dashboard 集成 EarningsChart + PaymentStream（统计卡片和提交列表之间的双栏布局）
 
 ## 本次改进 (2026-06-26 v2)
 - [x] 首页添加 "How It Works" 三步引导（创建活动 -> 提交内容 -> 赚取 USDC）
