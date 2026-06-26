@@ -432,3 +432,37 @@
 - [ ] 考虑添加 Paymaster 支持
 - [ ] 考虑添加社交恢复功能
 - [ ] 考虑 USDC 支付 Gas
+
+## 2026-06-27 — DeFi Portfolio Tracker 调研
+
+### 关键发现
+
+**1. 四大 Dashboard 面板**
+- 投资组合/钱包视图（余额+活动）
+- 市场数据视图（排名+价格历史）
+- 交易视图（订单簿+图表+下单）
+- 协议分析（TVL/交易量/收益）
+
+**2. 头部工具**
+- Zerion: 移动端强，内置 swap
+- Zapper: 最早的 DeFi Dashboard
+- DeBank: 免费，多链支持
+- Nansen Portfolio: 地址即追踪
+- Portals Explorer: 免费
+
+**3. 开源参考**
+- DeFiLlama: 分析
+- Aave: 借贷
+- Uniswap: DEX
+- Hyperliquid: 交易 UX
+
+**4. 关键功能**
+- 多钱包管理
+- 多链支持
+- 实时 PnL
+- CSV 导出
+
+### 对项目的启示
+- [x] 我们已有 Dashboard 页面
+- [ ] 添加更多图表可视化
+- [ ] 考虑添加 CSV 导出
