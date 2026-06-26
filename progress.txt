@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v145)
+- [x] CORS API — GET /api/cors 返回 CORS 配置（来源/方法/头部）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v144)
 - [x] Auth API — GET /api/auth 返回认证配置（提供商/会话/安全）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
