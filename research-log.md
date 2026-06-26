@@ -399,3 +399,36 @@
 - [x] 我们的投票系统已实现权重投票
 - [ ] 考虑添加委托投票功能
 - [ ] 考虑添加声誉加权
+
+## 2026-06-27 — ERC-4337 Account Abstraction 调研
+
+### 关键发现
+
+**1. 核心概念**
+- UserOperation: 用户操作请求
+- Bundler: 打包和提交交易
+- EntryPoint: 入口合约
+- Paymaster: Gas 费用赞助
+- Sender: 智能合约钱包
+- Aggregator: 签名聚合
+
+**2. 关键数据**
+- 40M+ 账户
+- 100M+ 交易
+- 2023 年上线
+
+**3. 主要功能**
+- Gasless 交易：应用赞助 Gas 费
+- 社交恢复：无需助记词
+- 可编程安全策略
+- USDC 支付 Gas
+
+**4. 钱包生态**
+- Safe: DAO 财库管理
+- Argent: 社交恢复移动端
+- Coinbase Smart Wallet: Base 链 Gasless
+
+### 对项目的启示
+- [ ] 考虑添加 Paymaster 支持
+- [ ] 考虑添加社交恢复功能
+- [ ] 考虑 USDC 支付 Gas
