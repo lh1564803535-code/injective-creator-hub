@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v45 - 循环改进续)
+- [x] CredentialBadge — 凭证徽章组件（4 种类型/验证状态）
+- [x] ReputationScore — 声誉评分组件（星级/等级/周变化）
+- [x] 调研 — Web3 Reputation & Credentials
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v44 - 循环改进续)
 - [x] MetricCard — 指标卡片组件（值/变化/图标）
 - [x] MiniChart — 迷你图表组件（SVG 折线图/趋势色）
