@@ -634,6 +634,18 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v25 - 循环改进续)
+- [x] 新 CSS 动画 — page-enter/card-lift/glow-pulse/animated-gradient-text/float-animation
+- [x] FloatingActionButton — 浮动操作按钮（可展开子操作）
+- [x] NotificationToast — 通知 Toast 组件
+- [x] DataTable — 数据表格（排序支持）
+- [x] FilterBar — 多选筛选器
+- [x] SearchInput — 搜索输入框
+- [x] StatCard — 统计卡片
+- [x] Chip — 标签组件
+- [x] AlertBanner — 警告横幅
+- [x] 调研 — Chrome 插件加密工具
+
 ## 本次改进 (2026-06-26 v24 - 循环改进续)
 - [x] AvatarGroup — 堆叠头像组件
 - [x] Indicator — 状态点组件
