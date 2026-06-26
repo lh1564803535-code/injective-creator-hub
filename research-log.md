@@ -500,3 +500,35 @@
 - [x] 我们的活动系统类似 NFT 市场
 - [ ] 考虑添加 NFT 铸造功能
 - [ ] 考虑添加版税机制
+
+## 2026-06-27 — Web3 Decentralized Identity 调研
+
+### 关键发现
+
+**1. 技术成熟度**
+- W3C DID + Verifiable Credentials 已达生产级
+- 2026 年身份+钱包融合进入主流部署
+- 替代密码和中心化登录
+
+**2. 核心组件**
+- Decentralized Identifiers (DIDs)
+- Verifiable Credentials (VCs)
+- DID Documents
+- Verifiable Presentations
+
+**3. 应用领域**
+- 医疗保健
+- 教育
+- 金融服务
+- 政府
+- 游戏
+
+**4. 与传统标准桥接**
+- OAuth 2.0
+- OpenID Connect
+- OpenID for Verifiable Credentials
+
+### 对项目的启示
+- [x] 我们已有钱包连接
+- [ ] 考虑添加 DID 身份验证
+- [ ] 考虑添加可验证凭证
