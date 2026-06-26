@@ -19,6 +19,11 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v22)
+- [x] SecurityTips 组件 — 5 条安全提示（seed phrase/verify address/revoke approvals/test tx/phishing）、严重性分级、可关闭、轮播导航、action 链接
+- [x] RewardsBreakdown 组件 — 奖励来源分解（campaigns/voting/streaks/referrals/tips）、可视化堆叠条、百分比显示、月度趋势
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v21)
 - [x] MCPIntegration 组件 — Injective MCP Server 集成展示：5 个工具（perp_trade/spot_swap/bridge_assets/check_portfolio/query_docs）、交互式 Agent Console 演示、架构流程图、文档链接
 - [x] WalletOnboarding 组件 — 3 步引导（连接钱包/获取测试币/开始创建）、RainbowKit 集成、官方+Google 水龙头链接

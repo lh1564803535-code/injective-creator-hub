@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Zap, ExternalLink } from "lucide-react";
+import { PoweredByInjective } from "@/components/ui/PoweredByInjective";
 
 export function Footer() {
   return (
@@ -92,8 +93,9 @@ export function Footer() {
 
         {/* Bottom line */}
         <div className="mt-6 border-t border-white/[0.04] pt-4 text-center">
-          <p className="text-xs text-gray-600">
-            Powered by Injective Protocol · Decentralized, On-Chain, Permissionless
+          <PoweredByInjective variant="footer" />
+          <p className="mt-2 text-xs text-gray-600">
+            Decentralized · On-Chain · Permissionless
           </p>
         </div>
       </div>
