@@ -19,6 +19,12 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v16)
+- [x] 研究日志更新：On-Chain Reputation & Soulbound Token (SBT) Creator Scoring 2026 调研（Galxe SBT 凭证、Gitcoin Passport 可组合信誉评分、Conviction Voting 信誉加权投票、ERC-6551 Token Bound Accounts、Reputation-DeFi 组合性）
+- [x] 创建 CampaignActivityFeed 组件 — 活动详情页实时活动流：模拟投票/提交/领取事件自动流入、类型计数徽章（submission/vote/claim）、逐条入场动画、展开/折叠控制、实时光点脉冲指示器、12-20 秒随机间隔模拟新事件
+- [x] 活动详情页重构 — submissions 和 activity feed 双栏布局（lg:grid-cols-3）、领先提交 Amber 高亮徽章（"Leading" 标签）、每条提交的投票份额进度条（按总投票比例计算）、投票份额渐变色区分领先者（amber）和普通提交（cyan）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v15)
 - [x] 研究日志更新：Chrome Extension Crypto Tools 2026 深度调研（Rabby Wallet 交易模拟、MetaMask Smart Transactions MEV 保护、ERC-4337 账户抽象、安全优先 UX 模式、钱包内组合仪表板）
 - [x] 创建 TransactionPreview 组件 — Rabby 风格交易模拟 UI：风险评估徽章（Safe/Warning/Danger）、合约验证指示器、余额变化模拟（方向箭头 + USD 估值）、Gas 成本估算（原生代币 + USD）、可展开交易步骤分解、安全页脚（本地模拟声明）、确认复选框 + 签名前确认、处理中状态动画
