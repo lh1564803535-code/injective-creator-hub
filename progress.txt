@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v58)
+- [x] Types 桶导出 — index.ts 集中导出所有类型定义
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v57)
 - [x] Lib 桶导出 — index.ts 集中导出所有库工具
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
