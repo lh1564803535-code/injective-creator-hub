@@ -793,6 +793,30 @@ button {
   animation: badge-shine 3s ease-in-out infinite;
 }
 
+/* === Success Animation === */
+@keyframes success-particle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx, 50px), var(--ty, -100px)) scale(0);
+    opacity: 0;
+  }
+}
+
+.success-particle {
+  --tx: 0px;
+  --ty: 0px;
+  animation: success-particle 1s ease-out forwards;
+}
+
+.success-particle:nth-child(odd) { --tx: -30px; --ty: -80px; }
+.success-particle:nth-child(even) { --tx: 40px; --ty: -60px; }
+.success-particle:nth-child(3n) { --tx: -50px; --ty: -40px; }
+.success-particle:nth-child(4n) { --tx: 60px; --ty: -90px; }
+.success-particle:nth-child(5n) { --tx: -20px; --ty: -70px; }
+
 /* === Performance Optimizations === */
 .content-visibility-auto {
   content-visibility: auto;
