@@ -39,4 +39,3 @@ export { TestnetBanner } from "./TestnetBanner";
 export { Textarea } from "./Textarea";
 export { Tooltip } from "./Tooltip";
 export { WalletOnboarding } from "./WalletOnboarding";
-export { LanguageToggle } from "./LanguageToggle";
