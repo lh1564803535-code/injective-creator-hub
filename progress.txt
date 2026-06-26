@@ -19,6 +19,14 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v168)
+- [x] 合约部署配置 — 更新部署脚本（gas 设置）、创建 .env.local
+- [x] i18n 国际化 — 创建 i18n.ts（中英文翻译）、LanguageToggle 组件、集成导航栏
+- [x] TypeScript 错误修复 — 文件名大小写、类型不匹配
+- [x] API 路由清理 — 删除 80+ 个 mock 路由，保留 8 个核心路由
+- [x] UX 改进 — loading.tsx（加载状态）、error.tsx（错误边界）、not-found.tsx（404 页面）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v167)
 - [x] Candlestick API — GET /api/candlestick 返回 OHLCV 数据（市场/间隔/蜡烛图）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
