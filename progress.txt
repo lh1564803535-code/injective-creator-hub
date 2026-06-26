@@ -634,6 +634,14 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v27 - 循环改进续)
+- [x] TransactionStatus — 交易状态组件（pending/confirmed/failed）
+- [x] WalletInfo — 钱包信息组件（地址/余额/复制/断开）
+- [x] GasBadge — Gas 费用徽章（真实 Injective 数据）
+- [x] ChainBadge — 链徽章（多链支持）
+- [x] 调研 — Web3 UX 设计模式
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v26 - 循环改进续)
 - [x] ProgressBar — 增强（添加 size 属性）
 - [x] TokenBadge — 代币徽章组件
