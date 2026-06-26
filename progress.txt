@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v36 - 循环改进续)
+- [x] DIDBadge — DID 徽章组件（验证状态/Explorer 链接）
+- [x] VerifiedBadge — 认证徽章组件（3 种类型/3 种尺寸）
+- [x] 调研 — Web3 Decentralized Identity
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v35 - 循环改进续)
 - [x] NFTCard — NFT 卡片组件（图片/稀有度/价格/截止日期）
 - [x] CollectionGrid — 集合网格组件（网格/列表切换）
