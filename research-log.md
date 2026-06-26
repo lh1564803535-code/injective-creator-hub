@@ -183,3 +183,34 @@
 - [ ] 添加 Chrome 扩展原型
 - [ ] 集成安全检测功能
 - [ ] 添加交易签名解释
+
+## 2026-06-27 — Next.js 16 性能优化调研
+
+### 关键发现
+
+**1. Turbopack 成为默认打包器**
+- 新项目默认使用 Turbopack
+- 615ms 编译成功
+- 1114ms TypeScript 完成
+
+**2. Cache Components**
+- 替代旧的 PPR 路径
+- 静态 shell + 动态流式行为
+
+**3. 导航优化**
+- 布局去重
+- 增量预取
+- 更精简的 prefetching
+
+**4. next/image 变化**
+- priority 已废弃，改用 preload
+- 影响传输大小、缓存、LCP
+
+**5. headers/cookies 缓存行为**
+- 更可预测
+- 不再自动触发动态渲染
+
+### 对项目的启示
+- [x] 我们已使用 Turbopack
+- [ ] 检查 next/image 使用
+- [ ] 优化预取策略
