@@ -19,6 +19,13 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v24)
+- [x] FeatureHighlights 组件 — 6 个特性展示（AI 助手/实时流/交易预览/跨链/即时终局/社区治理）、响应式网格
+- [x] CTASection 组件 — 号召行动区（渐变背景/发光效果/双按钮/品牌徽章）
+- [x] SocialLinks 组件 — 社交链接（Twitter/Discord/GitHub/Website）、水平/垂直两种变体
+- [x] 首页集成 FeatureHighlights + CTASection + SocialLinks
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v23)
 - [x] TestnetBanner 组件 — 网络标识横幅（Chain ID 1439）、水龙头链接、可关闭
 - [x] HomepageStats 组件 — 首页平台统计（总奖励/创作者数/活动数/出块时间）、动画计数器
