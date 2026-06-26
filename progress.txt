@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v164)
+- [x] Exchange API — GET /api/exchange 返回交易所数据（市场/成交量/用户）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v163)
 - [x] Derivative API — GET /api/derivative 返回衍生品市场数据（永续合约）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
