@@ -1,25 +1,55 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
+import {useTranslations} from 'next-intl';
+import {Link, usePathname, useRouter} from '@/i18n/navigation';
+import {useLocale} from 'next-intl';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Zap, Menu, X } from "lucide-react";
+import { Zap, Menu, X, Globe, ChevronDown } from "lucide-react";
 import { NotificationBell } from "@/components/ui/NotificationCenter";
-import { LanguageToggle } from "@/components/ui/LanguageToggle";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Campaigns", href: "/campaigns" },
-  { label: "Leaderboard", href: "/leaderboard" },
-  { label: "Create", href: "/create" },
-  { label: "Dashboard", href: "/dashboard" },
-];
+const localeLabels: Record<string, {label: string; flag: string}> = {
+  en: {label: "English", flag: "🇺🇸"},
+  zh: {label: "中文", flag: "🇨🇳"},
+};
 
 export function AppNavigation() {
+  const t = useTranslations('nav');
+  const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  const navItems = [
+    { label: t('home'), href: "/" },
+    { label: t('campaigns'), href: "/campaigns" },
+    { label: t('leaderboard'), href: "/leaderboard" },
+    { label: t('create'), href: "/create" },
+    { label: t('dashboard'), href: "/dashboard" },
+  ];
+
+  // Close language dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const switchLocale = (newLocale: string) => {
+    // Save preference
+    if (typeof window !== "undefined") {
+      localStorage.setItem("locale", newLocale);
+    }
+    router.replace(pathname, {locale: newLocale});
+    setLangOpen(false);
+  };
 
   return (
     <>
@@ -68,8 +98,40 @@ export function AppNavigation() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            {/* Language Toggle */}
-            <LanguageToggle />
+            {/* Language Switcher Dropdown */}
+            <div ref={langRef} className="relative">
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className="flex items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-1.5 text-xs text-gray-400 transition hover:bg-white/[0.04] hover:text-white"
+                aria-label="Switch language"
+              >
+                <Globe className="h-3.5 w-3.5" />
+                <span>{localeLabels[locale]?.flag} {localeLabels[locale]?.label}</span>
+                <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {langOpen && (
+                <div className="absolute right-0 top-full mt-2 w-40 overflow-hidden rounded-xl border border-white/[0.08] bg-[#13131b] shadow-xl shadow-black/40">
+                  {Object.entries(localeLabels).map(([code, {label, flag}]) => (
+                    <button
+                      key={code}
+                      onClick={() => switchLocale(code)}
+                      className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition ${
+                        code === locale
+                          ? "bg-cyan-500/10 text-cyan-400"
+                          : "text-gray-400 hover:bg-white/[0.04] hover:text-white"
+                      }`}
+                    >
+                      <span className="text-base">{flag}</span>
+                      <span>{label}</span>
+                      {code === locale && (
+                        <span className="ml-auto h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Notifications */}
             <NotificationBell />
@@ -123,7 +185,32 @@ export function AppNavigation() {
                 );
               })}
             </nav>
-            <div className="mt-6 border-t border-white/[0.06] pt-4">
+
+            {/* Mobile Language Switcher */}
+            <div className="mt-4 border-t border-white/[0.06] pt-4">
+              <p className="mb-2 px-4 text-xs font-medium uppercase tracking-wider text-gray-600">Language</p>
+              <div className="flex flex-col gap-1">
+                {Object.entries(localeLabels).map(([code, {label, flag}]) => (
+                  <button
+                    key={code}
+                    onClick={() => {
+                      switchLocale(code);
+                      setMobileOpen(false);
+                    }}
+                    className={`flex items-center gap-2.5 rounded-lg px-4 py-2 text-sm transition ${
+                      code === locale
+                        ? "bg-cyan-500/10 text-cyan-400"
+                        : "text-gray-400 hover:bg-white/[0.04] hover:text-white"
+                    }`}
+                  >
+                    <span>{flag}</span>
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-4 border-t border-white/[0.06] pt-4">
               <ConnectButton
                 chainStatus="none"
                 showBalance={true}

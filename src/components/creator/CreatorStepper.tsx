@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Wallet, Twitter, UserCircle } from "lucide-react";
+import { Wallet, AtSign, UserCircle } from "lucide-react";
 import { Stepper, type Step } from "@/components/ui/Stepper";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,7 @@ const CREATOR_STEPS: Step[] = [
     key: "twitter",
     label: "绑定 Twitter",
     description: "关联你的 Twitter 账号用于身份验证",
-    icon: <Twitter className="h-4 w-4" />,
+    icon: <AtSign className="h-4 w-4" />,
   },
   {
     key: "profile",
