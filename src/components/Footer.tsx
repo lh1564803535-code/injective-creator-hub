@@ -20,7 +20,7 @@ export function Footer() {
           </div>
 
           {/* Center: Links */}
-          <div className="flex items-center gap-5 text-xs text-gray-500">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500 sm:gap-5">
             <Link
               href="/leaderboard"
               className="transition hover:text-gray-300"
@@ -28,22 +28,28 @@ export function Footer() {
               Leaderboard
             </Link>
             <Link
+              href="/campaigns"
+              className="transition hover:text-gray-300"
+            >
+              Campaigns
+            </Link>
+            <Link
               href="/create"
               className="transition hover:text-gray-300"
             >
-              Create Campaign
+              Create
             </Link>
             <a
-              href="https://injective.com"
+              href="https://docs.injective.network"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 transition hover:text-gray-300"
             >
-              Injective
+              Docs
               <ExternalLink className="h-3 w-3" />
             </a>
             <a
-              href="https://explorer.injective.network"
+              href="https://testnet.blockscout.injective.network"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 transition hover:text-gray-300"
