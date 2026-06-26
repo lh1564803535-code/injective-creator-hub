@@ -685,3 +685,36 @@
 - [x] 我们已有 NFTCard 和 CollectionGrid
 - [ ] 考虑添加 NFT 租赁功能
 - [ ] 考虑添加 GameFi 集成
+
+## 2026-06-27 — DeFi Lending Protocols 调研
+
+### 关键发现
+
+**1. 市场规模**
+- $540 亿存款（2026年4月）
+- 380+ 活跃借贷协议
+- 80+ 条链
+
+**2. 四种架构**
+- 单体池（Aave V3, Compound V2）
+- 隔离市场（Compound V3, Morpho Blue）
+- 模块化金库（Euler V2）
+- 借贷+DEX 混合（Fluid）
+
+**3. 头部协议 TVL**
+- Aave V3: $194 亿
+- Spark: $68 亿
+- Morpho Blue: $49 亿
+- Compound V3: $27 亿
+- JustLend: $24 亿
+
+**4. 关键指标**
+- LTV（贷款价值比）
+- 清算阈值
+- 储备因子
+- 供应/借贷利率
+
+### 对项目的启示
+- [x] 我们已有 YieldStaking 组件
+- [ ] 考虑添加借贷 UI
+- [ ] 考虑添加抵押品管理
