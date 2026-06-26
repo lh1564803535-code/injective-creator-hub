@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v120)
+- [x] Report API — GET /api/report 返回月度报告（摘要/亮点/建议）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v119)
 - [x] KPI API — GET /api/kpi 返回 KPI 数据（用户增长/收入/活动/留存率）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
