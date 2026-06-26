@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v39)
+- [x] Alert 组件 — 警告提示工具（4 种变体、可选标题、图标）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v38)
 - [x] Tag 组件 — 标签工具（5 种变体、可选删除按钮）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
