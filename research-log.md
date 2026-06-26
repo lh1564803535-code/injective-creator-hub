@@ -532,3 +532,35 @@
 - [x] 我们已有钱包连接
 - [ ] 考虑添加 DID 身份验证
 - [ ] 考虑添加可验证凭证
+
+## 2026-06-27 — Real-Time Data Streaming 调研
+
+### 关键发现
+
+**1. WebSocket vs Streams**
+- WebSocket: 双向实时通信，持久连接
+- Streams: 目的解决方案，多目标分发
+- Streams 解决 WebSocket 扩展性和可靠性问题
+
+**2. 头部 API 提供商**
+- CoinGecko WebSocket: 最全面的聚合数据
+- Bitquery: 区块链作为可查询数据库
+- Helius LaserStream: Solana 实时数据，比标准 WebSocket 快 200ms
+- QuickNode Streams: 多目标分发
+
+**3. 关键特性**
+- 亚秒级延迟
+- 聚合价格更新
+- 实时交易流
+- OHLCV 数据
+- 多链支持
+
+**4. 定价模型
+- 按数据量计费（2 credits/0.1MB）
+- 连接费用（1 credit）
+- 数据附加包（5TB-100TB）
+
+### 对项目的启示
+- [x] 我们已有 WebSocket 组件
+- [ ] 考虑添加实时价格流
+- [ ] 考虑添加交易通知流
