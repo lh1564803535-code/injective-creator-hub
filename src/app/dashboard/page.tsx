@@ -11,6 +11,7 @@ import { CreatorStreak } from "@/components/creator/CreatorStreak";
 import { CreatorAnalytics } from "@/components/creator/CreatorAnalytics";
 import { CampaignRecommendations } from "@/components/creator/CampaignRecommendations";
 import { LiveEarnings } from "@/components/creator/LiveEarnings";
+import { TransactionHistory } from "@/components/creator/TransactionHistory";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import { useNotifications } from "@/components/ui/NotificationCenter";
@@ -142,6 +143,9 @@ export default function DashboardPage() {
 
             {/* On-Chain Reputation */}
             <CreatorReputation address={address as Address} />
+
+            {/* Transaction History */}
+            <TransactionHistory />
 
             {/* Notifications */}
             <div>
