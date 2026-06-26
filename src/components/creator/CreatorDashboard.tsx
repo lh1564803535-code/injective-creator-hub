@@ -16,6 +16,8 @@ import {
 import { formatUSDC } from "@/lib/injective";
 import { useToast } from "@/components/ui/Toast";
 import { StatTrend, Sparkline } from "@/components/ui/StatTrend";
+import { EarningsChart } from "@/components/creator/EarningsChart";
+import { PaymentStream, type PaymentStreamEntry } from "@/components/creator/PaymentStream";
 import type { Address } from "viem";
 
 // ---------------------------------------------------------------------------
@@ -123,6 +125,91 @@ const DEFAULT_DATA = {
     },
   ],
 };
+
+// ---------------------------------------------------------------------------
+// Mock Earnings History (for EarningsChart)
+// ---------------------------------------------------------------------------
+
+const MOCK_EARNINGS_HISTORY = [
+  { label: "Jan", value: 120 },
+  { label: "Feb", value: 340 },
+  { label: "Mar", value: 280 },
+  { label: "Apr", value: 520 },
+  { label: "May", value: 450 },
+  { label: "Jun", value: 680 },
+  { label: "Jul", value: 850 },
+];
+
+// ---------------------------------------------------------------------------
+// Mock Payment Stream (for PaymentStream)
+// ---------------------------------------------------------------------------
+
+const MOCK_PAYMENTS: PaymentStreamEntry[] = [
+  {
+    id: 1,
+    from: "XHunt Content Sprint",
+    to: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD3e",
+    amount: BigInt(1200000000),
+    timestamp: Math.floor(Date.now() / 1000) - 1800,
+    type: "reward",
+  },
+  {
+    id: 2,
+    from: "Community Art Drop",
+    to: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    amount: BigInt(900000000),
+    timestamp: Math.floor(Date.now() / 1000) - 3600,
+    type: "claim",
+  },
+  {
+    id: 3,
+    from: "DeFi Tutorial Challenge",
+    to: "0x1234567890abcdef1234567890abcdef12345678",
+    amount: BigInt(500000000),
+    timestamp: Math.floor(Date.now() / 1000) - 7200,
+    type: "reward",
+  },
+  {
+    id: 4,
+    from: "Meme Contest #42",
+    to: "0x9876543210fedcba9876543210fedcba98765432",
+    amount: BigInt(300000000),
+    timestamp: Math.floor(Date.now() / 1000) - 14400,
+    type: "tip",
+  },
+  {
+    id: 5,
+    from: "DEX UI Redesign Sprint",
+    to: "0xdddd4444eeee5555ffff6666aaaa7777bbbb8888",
+    amount: BigInt(3000000000),
+    timestamp: Math.floor(Date.now() / 1000) - 86400,
+    type: "claim",
+  },
+  {
+    id: 6,
+    from: "Build on Injective Hackathon",
+    to: "0x87a85adfb17ee947143d10d69cfed086010d0834",
+    amount: BigInt(750000000),
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 2,
+    type: "reward",
+  },
+  {
+    id: 7,
+    from: "Trading Strategy Showcase",
+    to: "0xeeee5555ffff6666aaaa7777bbbb8888cccc9999",
+    amount: BigInt(200000000),
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 3,
+    type: "tip",
+  },
+  {
+    id: 8,
+    from: "XHunt Content Sprint",
+    to: "0xaaaa1111bbbb2222cccc3333dddd4444eeee5555",
+    amount: BigInt(400000000),
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 4,
+    type: "reward",
+  },
+];
 
 // ---------------------------------------------------------------------------
 // Component
@@ -262,6 +349,12 @@ export function CreatorDashboard({ address }: CreatorDashboardProps) {
           </div>
         </div>
       )}
+
+      {/* Earnings Chart + Payment Stream */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <EarningsChart data={MOCK_EARNINGS_HISTORY} />
+        <PaymentStream payments={MOCK_PAYMENTS} maxVisible={5} />
+      </div>
 
       {/* Submissions list */}
       <div>

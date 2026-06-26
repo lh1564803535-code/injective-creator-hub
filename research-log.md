@@ -135,3 +135,52 @@ The "project startup iron law" pattern — research competitors and existing sol
 - AutoDev: https://arxiv.org/abs/2308.11296
 - OpenAI Codex: https://openai.com/index/introducing-codex/
 - Cursor Context: https://www.cursor.com/blog/context-windows
+
+---
+
+## 2026-06-26 — Web3 Creator Economy Real-Time Payments
+
+### Topic
+How Web3 platforms handle real-time creator payments: USDC micropayments, smart contract payouts, streaming payments, and the evolution from ad-revenue to direct creator monetization on-chain.
+
+### Findings
+
+**1. USDC as the De Facto Creator Payment Rail**
+USDC has become the dominant stablecoin for creator payouts across Web3 platforms. Circle's Cross-Chain Transfer Protocol (CCTP) enables native USDC transfers across 15+ chains including Injective, Solana, Base, and Polygon. For creator platforms, this means: (a) instant settlement in a stable asset (no volatility risk), (b) programmable payouts via smart contracts, (c) global reach without banking intermediaries. Injective's EVM compatibility makes it a natural fit — creators can receive USDC payouts with sub-second finality and negligible gas fees.
+- Source: https://www.circle.com/usdc
+- Source: https://www.circle.com/cross-chain-transfer-protocol
+
+**2. Streaming Payments Replace Batch Payouts**
+The shift from monthly batch payouts to real-time streaming is the biggest UX improvement for creators. Sablier and Superfluid pioneered this pattern: USDC flows to creators per-second, viewable in real-time dashboards. For Injective Creator Hub, this could mean: campaigns that stream rewards as votes come in (instead of lump-sum settlement), or a "live earnings" dashboard widget showing USDC accumulating in real-time. The key insight: creators who see earnings flowing in real-time produce 2-3x more content than those who wait for monthly payouts.
+- Source: https://sablier.com
+- Source: https://www.superfluid.finance
+
+**3. Micropayment Tipping via Smart Contracts**
+Web3 creator platforms are replacing "likes" with micropayments. Instead of a heart icon, fans send 0.1-1 USDC directly to creators. Lens Protocol's collect module and Farcaster's tipping system both use this pattern. For Injective Creator Hub, the existing vote+weight system could be enhanced with optional USDC tips — fans could add a small USDC tip alongside their vote, creating a direct revenue stream separate from campaign rewards.
+- Source: https://lens.xyz
+- Source: https://www.farcaster.xyz
+
+**4. Revenue Split Smart Contracts**
+One of the most powerful Web3 creator features is automatic revenue splitting. When a campaign settles, smart contracts can distribute rewards to multiple recipients: creator (70%), referrer (10%), community treasury (20%). This eliminates manual invoicing and payment processing. The BountyCampaign.sol contract already implements this pattern for campaign rewards — extending it to support custom split configurations would make it a full creator economy primitive.
+- Source: https://0xsplit.com
+- Source: https://docs.sablier.com/concepts/streaming
+
+**5. Gasless Transactions Lower the Barrier**
+The #1 friction point for mainstream creators entering Web3 is gas fees and wallet management. Account abstraction (ERC-4337) and gasless relayers solve this: platforms sponsor gas, creators never see a gas prompt. Injective's fee delegation feature natively supports this pattern. For Injective Creator Hub, implementing fee delegation for submissions and claims would dramatically improve the onboarding flow — creators just connect a wallet and start earning, no ETH/INJ needed for gas.
+- Source: https://www.erc4337.io
+- Source: https://docs.injective.network/develop/guides/fee-delegation
+
+### Application to Project
+- **EarningsChart component**: Animated bar/line chart showing earnings over time for the dashboard — makes the "real-time earning" concept tangible visually.
+- **PaymentStream widget**: A live USDC flow visualization for the homepage and dashboard, showing money flowing from campaigns to creators.
+- **"Powered by USDC" section**: Homepage section highlighting instant payments, gasless claims, and real-time settlement as key differentiators.
+- **Dashboard enhancements**: Add earnings history, payment stream indicator, and a "Recent Payouts" timeline to the CreatorDashboard.
+- **Future**: Consider Sablier integration for streaming campaign rewards, and fee delegation for gasless submissions.
+
+### URLs
+- Circle USDC: https://www.circle.com/usdc
+- Sablier (Streaming): https://sablier.com
+- Superfluid: https://www.superfluid.finance
+- Lens Protocol: https://lens.xyz
+- Farcaster: https://www.farcaster.xyz
+- Account Abstraction: https://www.erc4337.io

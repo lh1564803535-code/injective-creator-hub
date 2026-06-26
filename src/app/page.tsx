@@ -23,6 +23,7 @@ import {
 import { LeaderboardTable } from "@/components/creator/LeaderboardTable";
 import { CampaignList } from "@/components/campaign/CampaignList";
 import { FloatingParticles } from "@/components/ui/FloatingParticles";
+import { USDCBenefits } from "@/components/ui/USDCBenefits";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -345,6 +346,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </ScrollRevealSection>
+
+      {/* USDC Benefits */}
+      <ScrollRevealSection delay={1} className="px-6 pb-16 lg:px-8">
+        <USDCBenefits />
       </ScrollRevealSection>
 
       {/* Featured Campaign */}
