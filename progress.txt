@@ -27,7 +27,8 @@
 - [x] 移动端响应式优化 — LiveEarnings 统计卡片单列布局、趋势图单列布局、AIAssistant 全屏聊天面板
 - [x] TransactionHistory 组件 — 交易历史记录（send/receive/vote/claim/submit）、时间显示、区块浏览器链接、展开/折叠
 - [x] GasEstimator 组件 — Gas 费用估算器（INJ/USD/速度）、Injective 低 Gas 优势展示
-- [x] Dashboard 集成 TransactionHistory + GasEstimator
+- [x] NetworkStatus 组件 — 网络状态指示器（连接状态/区块号/出块时间/节点数）、实时更新
+- [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 - [x] iAgent SDK 集成层 — src/lib/iagent.ts：registerAgent、executeCommand、getAgentStatus、listAgents 函数
 - [x] AI Chat API 路由 — src/app/api/chat/route.ts：Ollama 集成 + Mock 回退、完整系统提示词、中文支持
