@@ -31,6 +31,7 @@ import { AIAgentSection } from "@/components/ui/AIAgentSection";
 import { MCPIntegration } from "@/components/ui/MCPIntegration";
 import { HomepageStats } from "@/components/ui/HomepageStats";
 import { FeatureHighlights } from "@/components/ui/FeatureHighlights";
+import { CTASection } from "@/components/ui/CTASection";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -639,6 +640,13 @@ export default function HomePage() {
             sortBy={sortBy}
             onSortChange={setSortBy}
           />
+        </div>
+      </ScrollRevealSection>
+
+      {/* CTA Section */}
+      <ScrollRevealSection className="px-6 pb-16 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <CTASection />
         </div>
       </ScrollRevealSection>
     </div>
