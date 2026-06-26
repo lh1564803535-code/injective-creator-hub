@@ -16,6 +16,7 @@ import { GasEstimator } from "@/components/ui/GasEstimator";
 import { NetworkStatus } from "@/components/ui/NetworkStatus";
 import { WalletOnboarding } from "@/components/ui/WalletOnboarding";
 import { AchievementBadges } from "@/components/creator/AchievementBadges";
+import { RewardsBreakdown } from "@/components/creator/RewardsBreakdown";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import { useNotifications } from "@/components/ui/NotificationCenter";
@@ -159,6 +160,9 @@ export default function DashboardPage() {
 
             {/* Achievement Badges */}
             <AchievementBadges />
+
+            {/* Rewards Breakdown */}
+            <RewardsBreakdown />
 
             {/* Notifications */}
             <div>
