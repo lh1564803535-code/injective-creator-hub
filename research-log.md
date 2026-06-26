@@ -655,3 +655,33 @@
 - [x] 我们已有安全评分组件
 - [ ] 考虑添加隐私保护功能
 - [ ] 考虑添加 ZK 验证显示
+
+## 2026-06-27 — Gaming NFT Marketplaces 调研
+
+### 关键发现
+
+**1. 市场生态**
+- 26+ Gaming NFT 市场
+- 移动优先设计（DTTD）
+- 社交钱包集成
+
+**2. 核心功能**
+- NFT 交易
+- NFT 租赁
+- NFT 借贷
+- 收集赚取
+
+**3. GameFi 基础设施**
+- LYNC: 2 分钟启动游戏
+- Alpha Quark: NFT + 借贷 + 元宇宙
+- Web3Games: 全链游戏
+
+**4. 平台限制**
+- iOS 限制 NFT 功能
+- Android 允许更广泛的钱包集成
+- Apple 规则限制外部支付
+
+### 对项目的启示
+- [x] 我们已有 NFTCard 和 CollectionGrid
+- [ ] 考虑添加 NFT 租赁功能
+- [ ] 考虑添加 GameFi 集成
