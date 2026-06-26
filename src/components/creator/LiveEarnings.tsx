@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { DollarSign, TrendingUp, Target, ChevronUp, Calendar } from "lucide-react";
+import { DollarSign, TrendingUp, Target, ChevronUp, Calendar, Eye, Search } from "lucide-react";
 
 interface LiveEarningsProps {
   /** Simplified mode for homepage (only total + rate) */
@@ -12,6 +12,8 @@ interface LiveEarningsProps {
   ratePerSecond?: number;
   /** Monthly earnings target in USDC */
   monthlyTarget?: number;
+  /** Enable view-only mode (address input) */
+  enableViewOnly?: boolean;
 }
 
 function formatUSDC(value: number): string {
@@ -65,21 +67,57 @@ function SparklineChart({ data, color = "#f59e0b" }: { data: number[]; color?: s
   );
 }
 
+/** Generate deterministic mock data from address */
+function generateDataFromAddress(address: string) {
+  const hash = address.toLowerCase().replace(/[^0-9a-f]/g, "");
+  const seed = parseInt(hash.slice(0, 8), 16);
+  const rate = 0.0001 + (seed % 1000) / 1000000;
+  const total = 10 + (seed % 5000) / 100;
+  return { rate, total };
+}
+
 export function LiveEarnings({
   compact = false,
   initialTotal = 42.5837,
   ratePerSecond = 0.0003,
   monthlyTarget = 2000,
+  enableViewOnly = false,
 }: LiveEarningsProps) {
-  const [total, setTotal] = useState(initialTotal);
-  const [todayEarnings] = useState(12.45);
-  const [monthEarnings, setMonthEarnings] = useState(1245.67);
-  const [prevTotal, setPrevTotal] = useState(initialTotal);
+  const [viewAddress, setViewAddress] = useState("");
+  const [viewMode, setViewMode] = useState(false);
+  const [viewData, setViewData] = useState({ rate: ratePerSecond, total: initialTotal });
+
+  const effectiveRate = viewMode ? viewData.rate : ratePerSecond;
+  const effectiveInitial = viewMode ? viewData.total : initialTotal;
+
+  const [total, setTotal] = useState(effectiveInitial);
+  const [todayEarnings] = useState(viewMode ? viewData.total * 0.3 : 12.45);
+  const [monthEarnings, setMonthEarnings] = useState(viewMode ? viewData.total * 8.5 : 1245.67);
+  const [prevTotal, setPrevTotal] = useState(effectiveInitial);
   const [animating, setAnimating] = useState(false);
   const [weeklyData] = useState(generateWeeklyData);
   const rafRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const accumulatedRef = useRef(0);
+
+  const handleViewAddress = () => {
+    const addr = viewAddress.trim();
+    if (!addr || addr.length < 10) return;
+    const data = generateDataFromAddress(addr);
+    setViewData(data);
+    setViewMode(true);
+    setTotal(data.total);
+    setPrevTotal(data.total);
+    setMonthEarnings(data.total * 8.5);
+  };
+
+  const exitViewMode = () => {
+    setViewMode(false);
+    setViewAddress("");
+    setTotal(initialTotal);
+    setPrevTotal(initialTotal);
+    setMonthEarnings(1245.67);
+  };
 
   // requestAnimationFrame loop for smooth earnings ticking
   const tick = useCallback(
@@ -88,14 +126,14 @@ export function LiveEarnings({
       const delta = (now - lastTimeRef.current) / 1000; // seconds
       lastTimeRef.current = now;
 
-      // Random increment between ratePerSecond * 0.3 and ratePerSecond * 3.3
+      // Random increment between rate * 0.3 and rate * 3.3
       const randomMultiplier = 0.3 + Math.random() * 3;
-      const increment = ratePerSecond * delta * randomMultiplier;
+      const increment = effectiveRate * delta * randomMultiplier;
 
       accumulatedRef.current += increment;
 
       // Update display every ~100ms worth of accumulation
-      if (accumulatedRef.current > ratePerSecond * 0.1) {
+      if (accumulatedRef.current > effectiveRate * 0.1) {
         setPrevTotal((prev) => {
           setTotal((t) => {
             const newTotal = t + accumulatedRef.current;
@@ -109,7 +147,7 @@ export function LiveEarnings({
 
       rafRef.current = requestAnimationFrame(tick);
     },
-    [ratePerSecond]
+    [effectiveRate]
   );
 
   useEffect(() => {
@@ -168,15 +206,55 @@ export function LiveEarnings({
               <DollarSign className="h-5 w-5 text-amber-400" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-white">Live Earnings</h2>
-              <p className="text-xs text-gray-500">Real-time USDC streaming</p>
+              <h2 className="text-lg font-semibold text-white">
+                {viewMode ? "Viewing Address" : "Live Earnings"}
+              </h2>
+              <p className="text-xs text-gray-500">
+                {viewMode
+                  ? `${viewAddress.slice(0, 6)}...${viewAddress.slice(-4)}`
+                  : "Real-time USDC streaming"}
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1">
-            <span className="live-earnings-pulse h-2 w-2 rounded-full bg-emerald-400" />
-            <span className="text-xs font-medium text-emerald-400">Streaming</span>
+          <div className="flex items-center gap-2">
+            {viewMode && (
+              <button
+                onClick={exitViewMode}
+                className="rounded-lg bg-white/[0.06] px-3 py-1.5 text-xs text-gray-400 transition hover:bg-white/[0.1] hover:text-white"
+              >
+                Exit View
+              </button>
+            )}
+            <div className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1">
+              <span className="live-earnings-pulse h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="text-xs font-medium text-emerald-400">
+                {viewMode ? "View-only" : "Streaming"}
+              </span>
+            </div>
           </div>
         </div>
+
+        {/* View-only Address Input (Superfluid-style) */}
+        {enableViewOnly && !viewMode && (
+          <div className="mb-6 flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
+            <Eye className="h-4 w-4 shrink-0 text-gray-500" />
+            <input
+              type="text"
+              value={viewAddress}
+              onChange={(e) => setViewAddress(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleViewAddress()}
+              placeholder="View any address (0x...)"
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
+            />
+            <button
+              onClick={handleViewAddress}
+              disabled={!viewAddress.trim() || viewAddress.trim().length < 10}
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-amber-400 transition hover:bg-amber-500/25 disabled:opacity-30"
+            >
+              <Search className="h-4 w-4" />
+            </button>
+          </div>
+        )}
 
         {/* Main Number */}
         <div className="mb-8 text-center">
@@ -192,7 +270,7 @@ export function LiveEarnings({
           <div className="mt-2 flex items-center justify-center gap-2">
             <TrendingUp className="h-4 w-4 text-emerald-400" />
             <span className="live-earnings-rate text-sm font-medium text-emerald-400">
-              +${ratePerSecond.toFixed(4)}/s
+              +${effectiveRate.toFixed(4)}/s
             </span>
             <span className="text-xs text-gray-600">USDC</span>
           </div>
@@ -244,7 +322,7 @@ export function LiveEarnings({
               30-Day Forecast
             </p>
             <p className="text-2xl font-bold text-white">
-              {formatCompact(ratePerSecond * 86400 * 30)}
+              {formatCompact(effectiveRate * 86400 * 30)}
             </p>
             <p className="mt-1 text-[10px] text-gray-600">
               Based on current streaming rate

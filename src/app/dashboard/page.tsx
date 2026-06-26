@@ -123,7 +123,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Live Earnings — Real-time streaming display */}
-            <LiveEarnings />
+            <LiveEarnings enableViewOnly />
 
             {/* AI Campaign Recommendations */}
             <CampaignRecommendations />

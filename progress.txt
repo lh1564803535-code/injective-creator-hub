@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Real-Time Earnings & AI Assistant
+## 当前阶段：Real-Time Earnings & AI Assistant v2
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -18,6 +18,11 @@
 - [ ] Add @property CSS Houdini for animating gradient stops and conic-gradient values
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
+
+## 本次改进 (2026-06-26 v18)
+- [x] LiveEarnings 增强 — View-only 模式（Superfluid 启发）：地址输入框查看任意地址收益、确定性 mock 数据生成、"Exit View" 退出按钮、View-only 状态指示
+- [x] AIAssistant 增强 — 交易预览功能（Coinbase 启发）：TxPreview 结构化数据、TransactionPreviewCard 组件（风险评估徽章/Gas 估算/金额/确认按钮）、投票/转账/领取奖励触发预览
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v17)
 - [x] 创建 LiveEarnings 组件 — 实时收益计价器：requestAnimationFrame 驱动的 USDC 增长动画、数字滚动效果（translateY + opacity）、3 个统计卡片（今日/本月/年化）、月度目标进度条（流动光点动画）、金色渐变主数字、深色卡片 + 发光效果、compact 变体（首页简化版）
