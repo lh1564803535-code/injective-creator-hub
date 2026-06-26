@@ -1,30 +1,34 @@
 "use client";
 
-import { Component, type ReactNode } from "react";
-import { AlertTriangle } from "lucide-react";
+import { Component, ErrorInfo, ReactNode } from "react";
+import { AlertTriangle, RefreshCw } from "lucide-react";
 
-interface ErrorBoundaryProps {
+interface Props {
   children: ReactNode;
   fallback?: ReactNode;
 }
 
-interface ErrorBoundaryState {
+interface State {
   hasError: boolean;
-  error: Error | null;
+  error?: Error;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+export class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  handleRetry = () => {
-    this.setState({ hasError: false, error: null });
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("ErrorBoundary caught:", error, errorInfo);
+  }
+
+  handleReset = () => {
+    this.setState({ hasError: false, error: undefined });
   };
 
   render() {
@@ -34,22 +38,21 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       return (
-        <div className="flex min-h-[40vh] items-center justify-center">
-          <div className="flex flex-col items-center rounded-2xl border border-white/[0.06] bg-white/[0.02] px-8 py-12 text-center">
-            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-red-500/10">
-              <AlertTriangle className="h-8 w-8 text-red-400" />
-            </div>
-            <h3 className="mb-2 text-lg font-semibold text-white">Something went wrong</h3>
-            <p className="mb-6 max-w-sm text-sm text-gray-500">
-              {this.state.error?.message || "An unexpected error occurred. Please try again."}
-            </p>
-            <button
-              onClick={this.handleRetry}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
-            >
-              Try again
-            </button>
-          </div>
+        <div className="flex min-h-[200px] flex-col items-center justify-center rounded-2xl border border-red-500/20 bg-red-500/5 p-8 text-center">
+          <AlertTriangle className="mb-4 h-12 w-12 text-red-400" />
+          <h3 className="mb-2 text-lg font-semibold text-white">
+            Something went wrong
+          </h3>
+          <p className="mb-4 max-w-md text-sm text-gray-400">
+            {this.state.error?.message || "An unexpected error occurred"}
+          </p>
+          <button
+            onClick={this.handleReset}
+            className="flex items-center gap-2 rounded-lg bg-red-500/20 px-4 py-2 text-sm text-red-400 transition hover:bg-red-500/30"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Try again
+          </button>
         </div>
       );
     }
