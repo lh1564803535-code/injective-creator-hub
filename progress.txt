@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v30)
+- [x] EmptyState 组件 — 空状态展示（4 种图标变体、虚线边框、可选操作按钮）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v29)
 - [x] LoadingSpinner 组件 — 加载状态工具（sm/md/lg 尺寸、3 种颜色、全页加载、骨架卡片）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
