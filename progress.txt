@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v41 - 循环改进续)
+- [x] QuestCard — 任务卡片组件（进度/奖励/难度/状态）
+- [x] LevelBadge — 等级徽章组件（XP 进度条/颜色分级）
+- [x] 调研 — Gaming NFT Marketplaces
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v40 - 循环改进续)
 - [x] ZKProofBadge — ZK 证明徽章组件（SNARK/STARK/PLONK）
 - [x] PrivacyBadge — 隐私徽章组件（公开/私有/加密）
