@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v148)
+- [x] IPFS API — GET /api/ipfs 返回 IPFS 数据（网关/固定服务）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v147)
 - [x] Indexing API — GET /api/indexing 返回索引数据（The Graph 子图状态）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
