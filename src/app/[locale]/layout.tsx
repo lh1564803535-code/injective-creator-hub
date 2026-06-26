@@ -8,6 +8,7 @@ import {QuickActionsToolbar} from '@/components/ui/QuickActionsToolbar';
 import {AIAssistant} from '@/components/creator/AIAssistant';
 import {TestnetBanner} from '@/components/ui/TestnetBanner';
 import {BackToTop} from '@/components/ui/BackToTop';
+import {SkipLink} from '@/components/ui/SkipLink';
 import {NotificationProvider} from '@/components/ui/NotificationCenter';
 import {CommandPaletteProvider} from '@/components/ui/CommandPalette';
 import '../globals.css';
@@ -47,13 +48,14 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed]">
+        <SkipLink />
         <NextIntlClientProvider messages={messages}>
           <WalletProvider>
             <NotificationProvider>
               <CommandPaletteProvider>
                 <TestnetBanner />
                 <AppNavigation />
-                <main className="flex-1">{children}</main>
+                <main id="main-content" className="flex-1">{children}</main>
                 <Footer />
                 <QuickActionsToolbar />
                 <BackToTop />

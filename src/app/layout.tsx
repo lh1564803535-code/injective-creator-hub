@@ -1,26 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { WalletProvider } from "@/components/wallet-provider";
-import { AppNavigation } from "@/components/app-navigation";
-import { Footer } from "@/components/Footer";
-import { QuickActionsToolbar } from "@/components/ui/QuickActionsToolbar";
-import { AIAssistant } from "@/components/creator/AIAssistant";
-import { TestnetBanner } from "@/components/ui/TestnetBanner";
-import { BackToTop } from "@/components/ui/BackToTop";
-import { SkipLink } from "@/components/ui/SkipLink";
-import { NotificationProvider } from "@/components/ui/NotificationCenter";
-import { CommandPaletteProvider } from "@/components/ui/CommandPalette";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Injective Creator Hub",
@@ -32,27 +11,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed]">
-        <SkipLink />
-        <WalletProvider>
-          <NotificationProvider>
-            <CommandPaletteProvider>
-              <TestnetBanner />
-              <AppNavigation />
-              <main id="main-content" className="flex-1">{children}</main>
-              <Footer />
-              <QuickActionsToolbar />
-              <BackToTop />
-              <AIAssistant />
-            </CommandPaletteProvider>
-          </NotificationProvider>
-        </WalletProvider>
-      </body>
-    </html>
-  );
+  return children;
 }
