@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v68)
+- [x] Gas API — GET /api/gas 返回 Gas 估算（5 种交易类型、与其他链对比）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v67)
 - [x] Network API — GET /api/network 返回网络信息和状态
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
