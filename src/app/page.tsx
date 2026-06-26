@@ -28,6 +28,7 @@ import { NetworkStats } from "@/components/ui/NetworkStats";
 import { LiveEarnings } from "@/components/creator/LiveEarnings";
 import { ScrollEarningsCounter } from "@/components/ui/ScrollEarningsCounter";
 import { AIAgentSection } from "@/components/ui/AIAgentSection";
+import { MCPIntegration } from "@/components/ui/MCPIntegration";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
