@@ -38,8 +38,12 @@ export function RewardAnimation({
     requestAnimationFrame(update);
   }, [onComplete]);
 
-  // Dramatic multi-burst confetti
+  // Dramatic multi-burst confetti with star shapes
   const triggerConfetti = useCallback(() => {
+    const reducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const burst = (originX: number, originY: number, opts: Record<string, unknown>) => {
       confetti({
         particleCount: 80,
@@ -47,30 +51,41 @@ export function RewardAnimation({
         origin: { x: originX, y: originY },
         zIndex: 9999,
         colors: ["#fbbf24", "#f59e0b", "#22c55e", "#06b6d4", "#8b5cf6", "#ec4899"],
+        shapes: ["star", "circle"],
+        disableForReducedMotion: true,
         ...opts,
       });
     };
 
-    // Burst 1: center
-    burst(0.5, 0.6, { startVelocity: 45, spread: 90 });
-    // Burst 2: left
-    setTimeout(() => burst(0.2, 0.7, { startVelocity: 35, spread: 60, scalar: 0.8 }), 200);
-    // Burst 3: right
-    setTimeout(() => burst(0.8, 0.7, { startVelocity: 35, spread: 60, scalar: 0.8 }), 400);
+    if (reducedMotion) {
+      // Single gentle burst for reduced-motion users
+      burst(0.5, 0.5, { particleCount: 30, spread: 50, startVelocity: 15 });
+      return;
+    }
+
+    // Burst 1: center stars
+    burst(0.5, 0.6, { startVelocity: 45, spread: 90, scalar: 1.1 });
+    // Burst 2: left cannon
+    setTimeout(() => burst(0, 0.7, { startVelocity: 55, spread: 50, angle: 60, scalar: 0.9 }), 200);
+    // Burst 3: right cannon
+    setTimeout(() => burst(1, 0.7, { startVelocity: 55, spread: 50, angle: 120, scalar: 0.9 }), 200);
     // Burst 4: top center
-    setTimeout(() => burst(0.5, 0.3, { startVelocity: 50, spread: 120, decay: 0.9, scalar: 1.2 }), 600);
-    // Burst 5: delayed dramatic center
+    setTimeout(() => burst(0.5, 0.3, { startVelocity: 50, spread: 120, decay: 0.9, scalar: 1.3, shapes: ["star"] }), 600);
+    // Burst 5: delayed dramatic center — large slow-falling stars
     setTimeout(() => {
       confetti({
-        particleCount: 150,
+        particleCount: 100,
         spread: 140,
-        startVelocity: 30,
+        startVelocity: 25,
         origin: { x: 0.5, y: 0.5 },
         zIndex: 9999,
         colors: ["#fbbf24", "#f59e0b", "#d97706", "#fcd34d"],
-        gravity: 0.6,
-        scalar: 1.1,
+        shapes: ["star"],
+        gravity: 0.5,
+        scalar: 1.4,
         drift: 0,
+        ticks: 250,
+        disableForReducedMotion: true,
       });
     }, 1000);
   }, []);
@@ -173,12 +188,14 @@ export function triggerSettleConfetti() {
       origin: { x: originX, y: originY },
       zIndex: 9999,
       colors: ["#fbbf24", "#f59e0b", "#22c55e", "#06b6d4"],
+      shapes: ["star", "circle"],
+      disableForReducedMotion: true,
       ...opts,
     });
   };
 
-  burst(0.5, 0.6, { startVelocity: 45, spread: 90 });
-  setTimeout(() => burst(0.2, 0.7, { startVelocity: 35, spread: 60 }), 200);
-  setTimeout(() => burst(0.8, 0.7, { startVelocity: 35, spread: 60 }), 400);
-  setTimeout(() => burst(0.5, 0.3, { startVelocity: 50, spread: 120 }), 600);
+  burst(0.5, 0.6, { startVelocity: 45, spread: 90, scalar: 1.1 });
+  setTimeout(() => burst(0, 0.7, { startVelocity: 55, spread: 50, angle: 60 }), 200);
+  setTimeout(() => burst(1, 0.7, { startVelocity: 55, spread: 50, angle: 120 }), 200);
+  setTimeout(() => burst(0.5, 0.3, { startVelocity: 50, spread: 120, shapes: ["star"], scalar: 1.3 }), 600);
 }

@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import { LeaderboardTable } from "@/components/creator/LeaderboardTable";
 import { CampaignList } from "@/components/campaign/CampaignList";
+import { FloatingParticles } from "@/components/ui/FloatingParticles";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
   MOCK_CAMPAIGNS,
@@ -90,6 +92,47 @@ const activityColors: Record<string, string> = {
   settle: "text-amber-400 bg-amber-500/10",
   claim: "text-purple-400 bg-purple-500/10",
 };
+
+function ScrollRevealSection({ children, className = "", delay = 0 }: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const { ref, isVisible } = useScrollReveal();
+  return (
+    <div
+      ref={ref}
+      className={`scroll-reveal ${isVisible ? "is-visible" : ""} ${delay > 0 ? `scroll-reveal-delay-${delay}` : ""} ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+function TypewriterText({ text, speed = 40 }: { text: string; speed?: number }) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < text.length) {
+        setDisplayed(text.slice(0, i + 1));
+        i++;
+      } else {
+        setDone(true);
+        clearInterval(interval);
+      }
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
+
+  return (
+    <span className={done ? "" : "typewriter-cursor"}>
+      {displayed}
+    </span>
+  );
+}
 
 export default function HomePage() {
   const [sortBy, setSortBy] = useState<LeaderboardSortBy>("earnings");
@@ -172,6 +215,7 @@ export default function HomePage() {
           <div className="absolute bottom-0 left-0">
             <div className="h-[300px] w-[300px] rounded-full bg-purple-600/3 blur-3xl" />
           </div>
+          <FloatingParticles count={25} />
         </div>
 
         <div className="relative mx-auto max-w-7xl">
@@ -187,8 +231,10 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-400">
-              Decentralized content creation platform. Create campaigns, submit
-              content, earn USDC rewards — all on-chain.
+              <TypewriterText
+                text="Decentralized content creation platform. Create campaigns, submit content, earn USDC rewards — all on-chain."
+                speed={25}
+              />
             </p>
             <div className="flex items-center justify-center gap-4">
               <Link
@@ -210,7 +256,7 @@ export default function HomePage() {
       </section>
 
       {/* Animated Stats */}
-      <section className="px-6 pb-12 lg:px-8">
+      <ScrollRevealSection className="px-6 pb-12 lg:px-8">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
           {stats.map((stat) => (
             <div
@@ -229,11 +275,11 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </ScrollRevealSection>
 
       {/* Featured Campaign */}
       {featuredCampaign && (
-        <section className="px-6 pb-12 lg:px-8">
+        <ScrollRevealSection delay={1} className="px-6 pb-12 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-6 flex items-center gap-2">
               <Star className="h-5 w-5 text-amber-400" />
@@ -325,11 +371,11 @@ export default function HomePage() {
               </div>
             </Link>
           </div>
-        </section>
+        </ScrollRevealSection>
       )}
 
       {/* Top Creators Cards */}
-      <section className="px-6 pb-12 lg:px-8">
+      <ScrollRevealSection delay={2} className="px-6 pb-12 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6 flex items-center justify-between">
             <div>
@@ -392,10 +438,10 @@ export default function HomePage() {
             })}
           </div>
         </div>
-      </section>
+      </ScrollRevealSection>
 
       {/* Recent Activity Feed */}
-      <section className="px-6 pb-12 lg:px-8">
+      <ScrollRevealSection delay={1} className="px-6 pb-12 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-white">Recent Activity</h2>
@@ -443,10 +489,10 @@ export default function HomePage() {
             })}
           </div>
         </div>
-      </section>
+      </ScrollRevealSection>
 
       {/* Campaigns */}
-      <section className="px-6 pb-12 lg:px-8">
+      <ScrollRevealSection delay={2} className="px-6 pb-12 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-white">All Campaigns</h2>
@@ -454,10 +500,10 @@ export default function HomePage() {
           </div>
           <CampaignList campaigns={campaigns} />
         </div>
-      </section>
+      </ScrollRevealSection>
 
       {/* Leaderboard Preview */}
-      <section className="px-6 pb-16 lg:px-8">
+      <ScrollRevealSection delay={3} className="px-6 pb-16 lg:px-8">
         <div className="mx-auto max-w-4xl">
           <div className="mb-6 flex items-center justify-between">
             <div>
@@ -480,7 +526,7 @@ export default function HomePage() {
             onSortChange={setSortBy}
           />
         </div>
-      </section>
+      </ScrollRevealSection>
     </div>
   );
 }

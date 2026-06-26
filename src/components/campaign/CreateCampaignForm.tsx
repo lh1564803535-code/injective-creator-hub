@@ -151,23 +151,30 @@ export function CreateCampaignForm({
       setNewCampaignId(mockId);
       setStep("done");
 
-      // Fire confetti
-      const end = Date.now() + 2000;
+      // Fire confetti with star shapes — side cannons
+      const reducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const end = Date.now() + (reducedMotion ? 500 : 2000);
       const colors = ["#22c55e", "#06b6d4", "#3b82f6", "#a855f7"];
       (function frame() {
         confetti({
-          particleCount: 4,
+          particleCount: reducedMotion ? 2 : 4,
           angle: 60,
           spread: 55,
           origin: { x: 0 },
           colors,
+          shapes: ["star", "circle"],
+          disableForReducedMotion: true,
         });
         confetti({
-          particleCount: 4,
+          particleCount: reducedMotion ? 2 : 4,
           angle: 120,
           spread: 55,
           origin: { x: 1 },
           colors,
+          shapes: ["star", "circle"],
+          disableForReducedMotion: true,
         });
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
