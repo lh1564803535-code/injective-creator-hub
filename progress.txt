@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v28 - 循环改进续)
+- [x] VoteButton — 投票按钮组件（upvote/downvote）
+- [x] ShareButton — 分享按钮组件（Web Share API + clipboard）
+- [x] 调研 — React 19 新 Hooks（useOptimistic/useActionState）
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v27 - 循环改进续)
 - [x] TransactionStatus — 交易状态组件（pending/confirmed/failed）
 - [x] WalletInfo — 钱包信息组件（地址/余额/复制/断开）
