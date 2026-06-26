@@ -511,3 +511,37 @@ Push Protocol V2 supports delegated notifications — smart contracts can auto-s
 - Push SDK (REST): https://push.org/docs/developer-tooling/sdk/packages/rest-api
 - Push SDK (Socket): https://push.org/docs/developer-tooling/sdk/packages/socket
 - NNGroup Push Notifications UX: https://www.nngroup.com/articles/push-notification/
+
+## 2026-06-26 — CSS Scroll-Driven Animations & View Transitions API 2026
+
+### Topic
+Native CSS animation capabilities replacing JavaScript-based scroll libraries: Scroll-Driven Animations API, View Transitions API, and their React integration patterns for Web3 dashboards.
+
+### Findings
+
+**1. CSS Scroll-Driven Animations Replace IntersectionObserver Patterns**
+The `animation-timeline: view()` CSS property now natively ties animations to element visibility in the viewport — replacing the `useScrollReveal` hook pattern entirely. Supported in Chrome 115+, Edge 115+, and gaining cross-browser traction in 2026. Two timeline types: `scroll()` (ties to scroll container progress) and `view()` (ties to element's visibility in scrollport). Key advantage: zero JavaScript, zero layout thrashing, runs on compositor thread.
+- Source: https://developer.chrome.com/blog/css-scroll-driven-animations
+
+**2. View Transitions API Enables Native Page Transitions**
+The View Transitions API (`document.startViewTransition()`) captures DOM snapshots and animates between them. In React 19+, the experimental `<ViewTransition>` component integrates this at the component level — not just route transitions. Key properties: `view-transition-name` for element matching, CSS pseudo-elements `::view-transition-old()` and `::view-transition-new()` for customizing crossfade. Single-page transitions have solid support; multi-page (cross-document) transitions are still evolving.
+- Source: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+
+**3. `@property` CSS Houdini Enables Typed Custom Properties for Animations**
+The `@property` at-rule registers CSS custom properties with explicit types (e.g., `<number>`, `<percentage>`, `<color>`), enabling them to be interpolated in animations. This is critical for animating values that CSS can't normally transition — like gradient stops, conic-gradient angles, or counter values. Combined with `animation-timeline`, this creates powerful scroll-linked effects without JS. Browser support: Chrome 85+, Safari 16.4+, Firefox 128+.
+- Source: https://developer.mozilla.org/en-US/docs/Web/CSS/@property
+
+**4. Scroll-Linked Parallax Effects Purely in CSS**
+Using `animation-timeline: scroll()` with transform animations creates performant parallax effects. The `animation-range` property controls when the animation starts/ends relative to scroll progress (e.g., `animation-range: entry 0% entry 100%`). Unlike JS parallax libraries (e.g., AOS, ScrollMagic), this runs entirely on the compositor thread — no jank, no layout recalculation. Pattern: define a `@keyframes` with transforms, apply `animation-timeline: scroll()` and `animation-range: entry`.
+- Source: https://scroll-driven-animations.style/
+
+**5. React 19 Concurrent Features + View Transitions = Seamless UX**
+React 19's concurrent rendering pairs with View Transitions to enable: (a) interrupted transitions that gracefully morph to new targets, (b) staggered child animations via `view-transition-name` on list items, (c) shared layout animations (e.g., a campaign card expanding to a detail view). The `<ViewTransition>` component wraps any element and automatically captures/morphs on state change. This is the successor to Framer Motion's `layoutId` for layout animations — native, zero-dependency.
+- Source: https://react.dev/blog/2024/12/05/react-19
+
+### URLs
+- Chrome Scroll-Driven Animations: https://developer.chrome.com/blog/css-scroll-driven-animations
+- MDN View Transitions API: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+- MDN @property: https://developer.mozilla.org/en-US/docs/Web/CSS/@property
+- Scroll-Driven Animations Gallery: https://scroll-driven-animations.style/
+- React 19 Release Blog: https://react.dev/blog/2024/12/05/react-19

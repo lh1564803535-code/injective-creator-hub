@@ -38,8 +38,8 @@ const QUICK_ACTIONS: QuickAction[] = [
   },
   {
     icon: Search,
-    label: "Search",
-    href: "/",
+    label: "Explore",
+    href: "/campaigns",
     color: "text-purple-400",
     bgColor: "bg-purple-500/10",
     borderColor: "border-purple-500/20",

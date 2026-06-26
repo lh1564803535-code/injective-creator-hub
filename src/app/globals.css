@@ -500,6 +500,73 @@ button {
   animation: notif-badge-pulse 2s ease-in-out infinite;
 }
 
+/* === Scroll-Driven Animations (CSS native, no JS) === */
+/* These use animation-timeline: view() to tie animation to element visibility */
+@supports (animation-timeline: view()) {
+  .sda-fade-up {
+    animation: fade-in-up 0.6s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .sda-scale-in {
+    animation: counter-scale 0.5s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 90%;
+  }
+  .sda-slide-left {
+    animation: slide-from-left 0.5s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+  .sda-slide-right {
+    animation: slide-from-right 0.5s ease-out both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+}
+
+@keyframes slide-from-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-from-right {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* === Card Grid Stagger (CSS-native) === */
+.card-grid-stagger > * {
+  opacity: 0;
+  animation: card-enter 0.4s ease-out forwards;
+}
+.card-grid-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.card-grid-stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.card-grid-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.card-grid-stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.card-grid-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.card-grid-stagger > *:nth-child(6) { animation-delay: 0.30s; }
+.card-grid-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.card-grid-stagger > *:nth-child(8) { animation-delay: 0.40s; }
+.card-grid-stagger > *:nth-child(9) { animation-delay: 0.45s; }
+.card-grid-stagger > *:nth-child(n+10) { animation-delay: 0.50s; }
+
+/* === Tag/Chip Glow on Hover === */
+.chip-glow {
+  transition: box-shadow 0.2s ease;
+}
+.chip-glow:hover {
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.12);
+}
+
+/* === Input Focus Ring Animation === */
+@keyframes input-focus-ring {
+  0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.3); }
+  100% { box-shadow: 0 0 0 3px rgba(34, 211, 238, 0); }
+}
+.input-focus-anim:focus {
+  animation: input-focus-ring 0.6s ease-out;
+}
+
 /* === Reduced motion === */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {
@@ -526,5 +593,17 @@ button {
   }
   .shimmer-border::before {
     animation: none !important;
+  }
+  .card-grid-stagger > * {
+    opacity: 1;
+    animation: none !important;
+  }
+  .sda-fade-up,
+  .sda-scale-in,
+  .sda-slide-left,
+  .sda-slide-right {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }

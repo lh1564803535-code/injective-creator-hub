@@ -107,7 +107,7 @@ export default function DashboardPage() {
                   </div>
                 </Link>
                 <Link
-                  href="/"
+                  href="/campaigns"
                   className="group flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4 transition hover:border-emerald-500/40 hover:bg-emerald-500/10"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-400 transition group-hover:bg-emerald-500/25">

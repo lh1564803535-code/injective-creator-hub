@@ -9,6 +9,7 @@ import { NotificationBell } from "@/components/ui/NotificationCenter";
 
 const navItems = [
   { label: "Home", href: "/" },
+  { label: "Campaigns", href: "/campaigns" },
   { label: "Leaderboard", href: "/leaderboard" },
   { label: "Create", href: "/create" },
   { label: "Dashboard", href: "/dashboard" },
