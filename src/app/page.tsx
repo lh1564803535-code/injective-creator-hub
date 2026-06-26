@@ -29,6 +29,7 @@ import { LiveEarnings } from "@/components/creator/LiveEarnings";
 import { ScrollEarningsCounter } from "@/components/ui/ScrollEarningsCounter";
 import { AIAgentSection } from "@/components/ui/AIAgentSection";
 import { MCPIntegration } from "@/components/ui/MCPIntegration";
+import { HomepageStats } from "@/components/ui/HomepageStats";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -282,25 +283,10 @@ export default function HomePage() {
         </div>
       </ScrollRevealSection>
 
-      {/* Animated Stats */}
+      {/* Platform Stats */}
       <ScrollRevealSection className="px-6 pb-12 lg:px-8">
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className={`animate-stat-pulse card-hover-glow rounded-2xl border border-white/[0.06] bg-white/[0.02] p-5 text-center transition-all ${stat.glow} ${stat.border}`}
-            >
-              <stat.icon className={`mx-auto mb-2 h-6 w-6 ${stat.color}`} />
-              <p className="text-2xl font-bold text-white">
-                <AnimatedCounter
-                  target={stat.value}
-                  prefix={stat.prefix}
-                  suffix={stat.suffix}
-                />
-              </p>
-              <p className="text-sm text-gray-500">{stat.label}</p>
-            </div>
-          ))}
+        <div className="mx-auto max-w-5xl">
+          <HomepageStats />
         </div>
       </ScrollRevealSection>
 
