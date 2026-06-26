@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import {useTranslations} from 'next-intl';
+import {Link} from '@/i18n/navigation';
 import { useParams } from "next/navigation";
 import {
   ArrowLeft,
@@ -12,7 +14,6 @@ import {
   Send,
   ExternalLink,
 } from "lucide-react";
-import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { formatUSDC, shortenAddress } from "@/lib/injective";
@@ -27,6 +28,7 @@ import { useToast } from "@/components/ui/Toast";
 import type { SubmissionData } from "@/lib/injective";
 
 export default function CampaignDetailPage() {
+  const t = useTranslations('campaign');
   const params = useParams();
   const campaignId = Number(params.id);
   const { isConnected } = useAccount();
@@ -75,8 +77,8 @@ export default function CampaignDetailPage() {
     setStep("submitting");
     toast({
       variant: "pending",
-      title: "Submitting content...",
-      description: "Your submission is being processed",
+      title: t('submitting'),
+      description: t('submittingDesc'),
       duration: 0,
     });
     setTimeout(() => {
@@ -84,8 +86,8 @@ export default function CampaignDetailPage() {
       setContentURI("");
       toast({
         variant: "success",
-        title: "Content submitted!",
-        description: "Your submission is now live for voting",
+        title: t('submitted'),
+        description: t('submittedDesc'),
       });
     }, 2000);
   };
@@ -107,9 +109,9 @@ export default function CampaignDetailPage() {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#08080f]">
         <div className="text-center">
-          <p className="mb-4 text-xl text-white">Campaign not found</p>
+          <p className="mb-4 text-xl text-white">{t('campaignNotFound')}</p>
           <Link href="/" className="text-cyan-400 hover:text-cyan-300">
-            Back to Hub
+            {t('backToHubLink')}
           </Link>
         </div>
       </div>
@@ -124,7 +126,7 @@ export default function CampaignDetailPage() {
           href="/"
           className="mb-6 inline-flex items-center gap-2 text-sm text-gray-400 transition hover:text-white"
         >
-          <ArrowLeft className="h-4 w-4" /> Back to Hub
+          <ArrowLeft className="h-4 w-4" /> {t('backToHub')}
         </Link>
 
         {/* Campaign header */}
@@ -148,7 +150,7 @@ export default function CampaignDetailPage() {
                       : "bg-gray-500"
                 }`}
               />
-              {isActive ? "Live" : isVoting ? "Voting" : "Ended"}
+              {isActive ? t('live') : isVoting ? t('voting') : t('ended')}
             </span>
             <span className="flex items-center gap-1 text-sm text-gray-500">
               <Clock className="h-3.5 w-3.5" />
@@ -161,7 +163,7 @@ export default function CampaignDetailPage() {
 
           {/* Sponsor */}
           <div className="mb-4">
-            <p className="mb-1 text-xs text-gray-600 uppercase tracking-wider">Sponsored by</p>
+            <p className="mb-1 text-xs text-gray-600 uppercase tracking-wider">{t('sponsoredBy')}</p>
             <CreatorProfile
               address={campaign.sponsor}
               variant="compact"
@@ -175,14 +177,14 @@ export default function CampaignDetailPage() {
                 setSettleOpen(true);
                 toast({
                   variant: "info",
-                  title: "Settle campaign",
-                  description: "Review reward distribution before confirming",
+                  title: t('settleTitle'),
+                  description: t('settleDesc'),
                 });
               }}
               className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 px-6 py-3 font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/30 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Award className="h-4 w-4" />
-              Settle & Distribute Rewards
+              {t('settleDistribute')}
             </button>
           )}
         </div>
@@ -210,14 +212,14 @@ export default function CampaignDetailPage() {
         {isActive && isConnected && (
           <div className="mb-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all hover:border-white/[0.1]">
             <h2 className="mb-4 text-lg font-semibold text-white">
-              Submit Your Content
+              {t('submitYourContent')}
             </h2>
             <form onSubmit={handleSubmit} className="flex gap-4">
               <input
                 type="url"
                 value={contentURI}
                 onChange={(e) => setContentURI(e.target.value)}
-                placeholder="Enter content URL (e.g., https://x.com/...)"
+                placeholder={t('contentUrlPlaceholder')}
                 disabled={step === "submitting"}
                 className="flex-1 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-white placeholder:text-gray-600 focus:border-cyan-500/30 focus:outline-none disabled:opacity-50"
                 required
@@ -232,7 +234,7 @@ export default function CampaignDetailPage() {
                 ) : (
                   <Send className="h-4 w-4" />
                 )}
-                Submit
+                {t('submit')}
               </button>
             </form>
           </div>
@@ -243,7 +245,7 @@ export default function CampaignDetailPage() {
           {/* Submissions */}
           <div className="lg:col-span-2">
             <h2 className="mb-4 text-lg font-semibold text-white">
-              Submissions ({submissions.length})
+              {t('submissionsCount')} ({submissions.length})
             </h2>
 
             <div className="space-y-4">
@@ -267,7 +269,7 @@ export default function CampaignDetailPage() {
                           {isLeading && (
                             <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold text-amber-400">
                               <Award className="h-2.5 w-2.5" />
-                              Leading
+                              {t('leading')}
                             </div>
                           )}
 
@@ -289,14 +291,14 @@ export default function CampaignDetailPage() {
                             className="inline-flex items-center gap-1.5 rounded-lg bg-white/[0.04] px-3 py-1.5 text-xs text-cyan-400 transition hover:bg-cyan-500/10 hover:text-cyan-300"
                           >
                             <ExternalLink className="h-3 w-3" />
-                            View Content
+                            {t('viewContent')}
                           </a>
                         </div>
 
                         <div className="flex items-center gap-4">
                           <div className="text-right">
                             <p className="text-lg font-bold text-white">{sub.votes}</p>
-                            <p className="text-xs text-gray-500">votes</p>
+                            <p className="text-xs text-gray-500">{t('votes')}</p>
                             {/* Vote share bar */}
                             {totalVotes > 0 && (
                               <div className="mt-1.5 h-1 w-16 overflow-hidden rounded-full bg-white/[0.06]">
@@ -320,13 +322,13 @@ export default function CampaignDetailPage() {
                               className="flex items-center gap-1.5 rounded-lg bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-400 transition-all hover:bg-cyan-500/20 hover:scale-[1.03] active:scale-[0.97]"
                             >
                               <Vote className="h-3.5 w-3.5" />
-                              Vote
+                              {t('vote')}
                             </button>
                           )}
 
                           {sub.claimed && (
                             <span className="rounded-lg bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400">
-                              Claimed
+                              {t('claimed')}
                             </span>
                           )}
                         </div>
@@ -347,7 +349,7 @@ export default function CampaignDetailPage() {
         {!isConnected && (
           <div className="mt-8 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-8 text-center">
             <p className="mb-4 text-gray-400">
-              Connect your wallet to vote or submit content
+              {t('connectToVote')}
             </p>
             <ConnectButton />
           </div>
