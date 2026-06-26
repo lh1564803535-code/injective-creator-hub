@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 interface SkeletonBaseProps {
   className?: string;
   animate?: boolean;
+  style?: React.CSSProperties;
 }
 
 function SkeletonPulse({ className, animate = true }: SkeletonBaseProps) {
