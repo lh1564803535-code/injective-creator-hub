@@ -4,6 +4,7 @@ import { WalletProvider } from "@/components/wallet-provider";
 import { AppNavigation } from "@/components/app-navigation";
 import { Footer } from "@/components/Footer";
 import { QuickActionsToolbar } from "@/components/ui/QuickActionsToolbar";
+import { AIAssistant } from "@/components/creator/AIAssistant";
 import { NotificationProvider } from "@/components/ui/NotificationCenter";
 import { CommandPaletteProvider } from "@/components/ui/CommandPalette";
 import "./globals.css";
@@ -41,6 +42,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
               <QuickActionsToolbar />
+              <AIAssistant />
             </CommandPaletteProvider>
           </NotificationProvider>
         </WalletProvider>

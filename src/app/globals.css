@@ -638,6 +638,74 @@ button {
   animation: cmd-palette-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* === Live Earnings === */
+@keyframes earnings-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.live-earnings-pulse {
+  animation: earnings-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes digit-scroll {
+  0% { transform: translateY(0); opacity: 1; }
+  40% { transform: translateY(-60%); opacity: 0; }
+  60% { transform: translateY(40%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.digit-scroll {
+  animation: digit-scroll 0.3s ease-in-out;
+}
+
+@keyframes flow-light {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+.live-earnings-flow > span {
+  animation: flow-light 2s ease-in-out infinite;
+}
+
+/* === AI Assistant === */
+@keyframes ai-btn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(34, 211, 238, 0); }
+}
+.ai-assistant-btn {
+  animation: ai-btn-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes ai-panel-open {
+  from { opacity: 0; transform: translateY(16px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes ai-panel-close {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(16px) scale(0.95); }
+}
+.ai-assistant-panel.open {
+  animation: ai-panel-open 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.ai-assistant-panel.closed {
+  pointer-events: none;
+  animation: ai-panel-close 0.2s ease-in forwards;
+}
+
+@keyframes chat-bubble-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.ai-chat-bubble {
+  animation: chat-bubble-in 0.2s ease-out;
+}
+
+@keyframes typing-dot-bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+}
+.typing-dot {
+  animation: typing-dot-bounce 1.2s ease-in-out infinite;
+}
+
 /* === Reduced motion === */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {
@@ -688,5 +756,28 @@ button {
     animation: none !important;
     opacity: 1;
     transform: translateX(-50%);
+  }
+  .live-earnings-pulse,
+  .live-earnings-flow > span {
+    animation: none !important;
+  }
+  .digit-scroll {
+    animation: none !important;
+  }
+  .ai-assistant-btn {
+    animation: none !important;
+    box-shadow: 0 4px 24px rgba(34, 211, 238, 0.25);
+  }
+  .ai-assistant-panel.open,
+  .ai-assistant-panel.closed {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  .ai-chat-bubble,
+  .typing-dot {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
 }

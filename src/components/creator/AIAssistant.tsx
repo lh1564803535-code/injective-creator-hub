@@ -1,0 +1,231 @@
+"use client";
+
+import { useState, useRef, useEffect, useCallback } from "react";
+import { MessageCircle, X, Send, Sparkles } from "lucide-react";
+
+interface Message {
+  id: string;
+  role: "user" | "assistant";
+  text: string;
+  timestamp: number;
+}
+
+const WELCOME_MSG: Message = {
+  id: "welcome",
+  role: "assistant",
+  text: "👋 你好！我是你的创作助手。\n\n我可以帮你：\n- 创建和管理钱包\n- 参加创作活动\n- 把收益提现到银行卡\n- 了解区块链知识\n\n有什么问题尽管问我！",
+  timestamp: Date.now(),
+};
+
+const QUICK_BUTTONS = [
+  { label: "怎么创建钱包", query: "创建钱包" },
+  { label: "怎么提现", query: "提现" },
+  { label: "什么是Gas", query: "Gas" },
+];
+
+function getAIResponse(input: string): string {
+  const lower = input.toLowerCase();
+
+  if (/创建钱包|钱包|注册/.test(lower)) {
+    return "我帮你创建钱包！只需要3步：\n1. 点击右上角的「连接钱包」\n2. 选择 MetaMask 或 WalletConnect\n3. 按照提示完成连接\n\n没有钱包？没关系，选择「创建新钱包」，我会一步步教你。";
+  }
+  if (/提现|转到银行卡|换钱|法币/.test(lower)) {
+    return "把 USDC 变成人民币有几种方式：\n1. 通过交易所：把 USDC 转到 Binance/OKX，然后卖出\n2. 通过 P2P：在交易所找买家，直接转账给你\n3. 通过 OTC：找信任的人直接交易\n\n你想用哪种方式？我可以详细教你。";
+  }
+  if (/gas|手续费|费用/.test(lower)) {
+    return "Gas 就是区块链上的「手续费」。好消息是 Injective 链的 Gas 非常便宜，几乎为零！\n你发送 100 USDC，实际只需要 0.001 USDC 的 Gas。\n不用担心，系统会自动帮你计算。";
+  }
+  if (/投票|怎么投票/.test(lower)) {
+    return "投票很简单：\n1. 找到你喜欢的作品\n2. 点击「投票」按钮\n3. 选择投票权重（1-5星）\n4. 确认交易\n\n投票是免费的，不需要花任何钱。";
+  }
+  if (/活动|怎么参加|参与/.test(lower)) {
+    return "参加活动的步骤：\n1. 浏览「活动」页面，找到感兴趣的\n2. 点击「提交作品」\n3. 上传你的作品（图片/视频/链接）\n4. 等待社区投票\n5. 活动结束后，奖金自动打到你的钱包\n\n就这么简单！";
+  }
+  if (/什么是usdc|稳定币|usdc/.test(lower)) {
+    return "USDC 是一种数字货币，1 USDC = 1 美元。\n它的价值不会像比特币那样大幅波动。\n你可以把它理解为「区块链上的美元」。\n你赚到的 USDC 可以随时换成人民币。";
+  }
+  if (/安全|被骗|风险/.test(lower)) {
+    return "安全提示：\n1. 永远不要分享你的私钥或助记词\n2. 只连接你信任的钱包\n3. 交易前仔细确认金额和地址\n4. 如果不确定，先问我\n\n我会帮你检查每笔交易的风险。";
+  }
+
+  return "我不太确定你的问题，但我可以帮你：\n- 创建钱包\n- 参加活动\n- 提现到银行卡\n- 了解 Gas 费\n- 投票\n\n试试问我这些问题！";
+}
+
+export function AIAssistant() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([WELCOME_MSG]);
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Auto-scroll to bottom on new messages
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
+  // Focus input when panel opens
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      setTimeout(() => inputRef.current?.focus(), 300);
+    }
+  }, [isOpen]);
+
+  const sendMessage = useCallback(
+    (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed) return;
+
+      const userMsg: Message = {
+        id: `u-${Date.now()}`,
+        role: "user",
+        text: trimmed,
+        timestamp: Date.now(),
+      };
+      setMessages((prev) => [...prev, userMsg]);
+      setInput("");
+      setIsTyping(true);
+
+      // Simulate AI thinking delay (500-1200ms)
+      const delay = 500 + Math.random() * 700;
+      setTimeout(() => {
+        const aiMsg: Message = {
+          id: `a-${Date.now()}`,
+          role: "assistant",
+          text: getAIResponse(trimmed),
+          timestamp: Date.now(),
+        };
+        setMessages((prev) => [...prev, aiMsg]);
+        setIsTyping(false);
+      }, delay);
+    },
+    []
+  );
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(input);
+    }
+  };
+
+  return (
+    <>
+      {/* Floating Button */}
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="ai-assistant-btn fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 transition-transform hover:scale-110"
+          aria-label="Open AI Assistant"
+        >
+          <Sparkles className="h-6 w-6" />
+        </button>
+      )}
+
+      {/* Chat Panel */}
+      <div
+        className={`ai-assistant-panel fixed bottom-6 right-6 z-50 flex w-[360px] flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#1a1a1a] shadow-2xl shadow-black/50 ${
+          isOpen ? "open" : "closed"
+        }`}
+        style={{ height: isOpen ? 500 : 0 }}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-white/[0.06] bg-[#1a1a1a] px-4 py-3">
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600">
+              <Sparkles className="h-4 w-4 text-white" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">AI 助手</p>
+              <p className="text-[10px] text-gray-500">随时帮你解答</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-white/[0.06] hover:text-white"
+            aria-label="Close"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Messages */}
+        <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+          {messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+            >
+              {msg.role === "assistant" && (
+                <div className="mr-2 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600">
+                  <Sparkles className="h-3 w-3 text-white" />
+                </div>
+              )}
+              <div
+                className={`ai-chat-bubble max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${
+                  msg.role === "user"
+                    ? "rounded-br-md bg-blue-600 text-white"
+                    : "rounded-bl-md bg-white/[0.06] text-gray-200"
+                }`}
+              >
+                {msg.text}
+              </div>
+            </div>
+          ))}
+
+          {/* Typing indicator */}
+          {isTyping && (
+            <div className="flex justify-start">
+              <div className="mr-2 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600">
+                <Sparkles className="h-3 w-3 text-white" />
+              </div>
+              <div className="flex items-center gap-1 rounded-2xl rounded-bl-md bg-white/[0.06] px-4 py-3">
+                <span className="typing-dot h-2 w-2 rounded-full bg-gray-400" />
+                <span className="typing-dot h-2 w-2 rounded-full bg-gray-400" style={{ animationDelay: "0.15s" }} />
+                <span className="typing-dot h-2 w-2 rounded-full bg-gray-400" style={{ animationDelay: "0.3s" }} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Quick Buttons */}
+        <div className="flex gap-2 border-t border-white/[0.04] px-4 py-2">
+          {QUICK_BUTTONS.map((btn) => (
+            <button
+              key={btn.query}
+              onClick={() => sendMessage(btn.query)}
+              className="flex-1 rounded-lg bg-white/[0.04] px-2 py-1.5 text-[11px] text-gray-400 transition hover:bg-white/[0.08] hover:text-white"
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Input */}
+        <div className="border-t border-white/[0.06] px-4 py-3">
+          <div className="flex items-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2 focus-within:ring-1 focus-within:ring-cyan-500/30">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="输入你的问题..."
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
+            />
+            <button
+              onClick={() => sendMessage(input)}
+              disabled={!input.trim()}
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600 text-white transition hover:bg-cyan-500 disabled:opacity-30 disabled:hover:bg-cyan-600"
+              aria-label="Send"
+            >
+              <Send className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

@@ -25,6 +25,7 @@ import { CampaignList } from "@/components/campaign/CampaignList";
 import { FloatingParticles } from "@/components/ui/FloatingParticles";
 import { USDCBenefits } from "@/components/ui/USDCBenefits";
 import { NetworkStats } from "@/components/ui/NetworkStats";
+import { LiveEarnings } from "@/components/creator/LiveEarnings";
 import { AIAgentSection } from "@/components/ui/AIAgentSection";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
@@ -264,6 +265,13 @@ export default function HomePage() {
       <ScrollRevealSection className="px-6 pb-8 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <NetworkStats />
+        </div>
+      </ScrollRevealSection>
+
+      {/* Live Earnings Preview */}
+      <ScrollRevealSection className="px-6 pb-12 lg:px-8">
+        <div className="mx-auto max-w-md">
+          <LiveEarnings compact />
         </div>
       </ScrollRevealSection>
 
