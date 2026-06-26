@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：DeFi Integration — Yield Staking for Creators
+## 当前阶段：Web3 Social — On-Chain Reputation & Creator Identity
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -8,6 +8,12 @@
 - [ ] Add optional USDC tips alongside votes
 - [ ] Integrate iAgent SDK for real campaign matching
 - [ ] Add cross-chain submission flows via IBC
+
+## 本次改进 (2026-06-26 v6)
+- [x] 研究日志更新：Web3 Social Media Platforms & On-Chain Reputation 调研（Lens Protocol、Farcaster、SBTs、radar charts、tiered reputation、streak mechanics）
+- [x] 创建 CreatorReputation 组件 — 动画分数环（0-100）、SVG 雷达图（Earnings/Consistency/Engagement/Quality/Longevity）、5 级信誉系统（Bronze→Diamond）、8 个成就徽章（已解锁+进度条）、社交证明统计（连续天数/活动数/胜率）
+- [x] Dashboard 集成 CreatorReputation（YieldStaking 和 Notifications 之间）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v5)
 - [x] 研究日志更新：DeFi Yield Farming Creator Rewards 调研（USDC staking, time-locked pools, reputation-weighted APY）

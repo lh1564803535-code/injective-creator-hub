@@ -280,3 +280,50 @@ While USDC staking is the simplest model, advanced creator platforms issue platf
 - Curve: https://curve.fi
 - Sablier: https://sablier.com
 - Yearn: https://yearn.finance
+
+## 2026-06-26 — Web3 Social Media Platforms & On-Chain Reputation
+
+### Topic
+Web3 social media platforms 2026: decentralized creator identity, on-chain reputation systems, achievement-based social proof, and how these trends apply to creator economy platforms.
+
+### Findings
+
+**1. On-Chain Reputation as Social Capital**
+Platforms like Lens Protocol and Farcaster have moved beyond simple follower counts to on-chain reputation scores. Lens Profiles carry "social proof" metrics built from on-chain activity: publications, collects, mirrors, and follower quality. This shift from vanity metrics to verifiable reputation is the defining trend of Web3 social in 2026. For Injective Creator Hub, a reputation score derived from earnings, vote count, submission consistency, and quality ratings provides creators with a portable, verifiable credential that follows them across the ecosystem.
+- Source: https://lens.xyz
+- Source: https://farcaster.xyz
+
+**2. Achievement Badges & Soulbound Tokens (SBTs)**
+Ethereum's ERC-5489 (Soulbound NFTs) and similar standards enable non-transferable achievement badges that serve as permanent on-chain credentials. Gitcoin Passport, POAP, and Galxe have popularized the "proof of contribution" model. For creator platforms, achievement badges ("First Submission", "10-Day Streak", "Top Earner") serve dual purposes: gamification for retention and social proof for trust-building. Creators with more unlocked achievements signal reliability to campaign sponsors.
+- Source: https://gitcoin.co/passport
+- Source: https://poap.xyz
+- Source: https://galxe.com
+
+**3. Radar/Spider Charts for Multi-Dimensional Reputation**
+Single reputation scores are being replaced by multi-dimensional profiles. Lens Protocol's "Social Explorer" shows engagement, reach, and influence as separate axes. For Injective Creator Hub, a 5-axis radar chart (Earnings, Consistency, Engagement, Quality, Longevity) gives a richer picture than a single number. This helps sponsors identify the right creators: one might score high on quality but low on consistency, while another is prolific but lower-rated.
+- Source: https://lens.xyz/docs/concepts/social-graph
+- Source: https://orb.ac
+
+**4. Tiered Reputation Systems (Bronze to Diamond)**
+DeFi platforms (Lido, Aave) use tiered loyalty systems that unlock progressively better rates. Creator platforms are adopting the same pattern: Bronze/Silver/Gold/Platinum/Diamond tiers tied to reputation scores. Each tier unlocks perks: priority campaign access, lower platform fees, featured placement on the leaderboard, and higher yield staking rates (connecting to the YieldStaking component). The tier system creates aspirational motivation — creators can see their next tier and the specific actions needed to reach it.
+- Source: https://lido.fi
+- Source: https://aave.com
+
+**5. Streak Mechanics for Creator Retention**
+Duolingo-style streak mechanics have entered Web3 creator platforms. Farcaster's "streak" feature rewards daily posting, and Lens Protocol's engagement metrics track consecutive activity. For Injective Creator Hub, a submission streak counter (consecutive campaigns participated in) combined with streak-based achievements creates powerful retention psychology. The "On Fire" badge (7-day streak) and "Unstoppable" badge (30-day streak) with visible progress bars give creators a clear daily goal.
+- Source: https://farcaster.xyz
+- Source: https://duolingo.com
+
+### Application to Project
+- **CreatorReputation component**: Created a full reputation UI with animated score ring (0-100), 5-axis SVG radar chart (Earnings/Consistency/Engagement/Quality/Longevity), tiered system (Bronze through Diamond), 8 achievement badges (unlocked + in-progress with progress bars), and social proof stats (streak, campaigns, win rate).
+- **Dashboard integration**: Added CreatorReputation between YieldStaking and Notifications for a natural "earn -> stake -> build reputation" flow.
+- **Future**: Connect reputation score to yield staking APY (higher reputation = bonus APY).
+- **Future**: Use reputation tier for campaign priority access and fee discounts.
+- **Future**: Make achievements soulbound tokens (SBTs) on Injective EVM.
+
+### URLs
+- Lens Protocol: https://lens.xyz
+- Farcaster: https://farcaster.xyz
+- Gitcoin Passport: https://gitcoin.co/passport
+- POAP: https://poap.xyz
+- Galxe: https://galxe.com
