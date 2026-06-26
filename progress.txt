@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v44)
+- [x] Dropdown 组件 — 下拉选择工具（选项列表、点击外部关闭、高亮状态）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v43)
 - [x] Modal 组件 — 模态框工具（3 种尺寸、模糊背景、Escape 关闭、滚动锁定）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
