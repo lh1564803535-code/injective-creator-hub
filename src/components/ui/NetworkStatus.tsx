@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Wifi, WifiOff, Clock, Zap, CheckCircle } from "lucide-react";
+import { Wifi, WifiOff, Clock, Zap, CheckCircle, Globe } from "lucide-react";
 
 interface NetworkInfo {
   connected: boolean;
@@ -9,7 +9,8 @@ interface NetworkInfo {
   networkName: string;
   blockNumber: number;
   blockTime: number;
-  peers: number;
+  tps: number;
+  totalTransactions: string;
 }
 
 export function NetworkStatus() {
@@ -18,18 +19,19 @@ export function NetworkStatus() {
     chainId: 1439,
     networkName: "Injective EVM Testnet",
     blockNumber: 8234567,
-    blockTime: 1.2,
-    peers: 156,
+    blockTime: 0.64,
+    tps: 10000,
+    totalTransactions: "1.2B+",
   });
 
-  // Simulate block number updates
+  // Simulate block number updates (0.64s block time)
   useEffect(() => {
     const interval = setInterval(() => {
       setNetwork((prev) => ({
         ...prev,
         blockNumber: prev.blockNumber + 1,
       }));
-    }, 1200); // ~1.2s block time
+    }, 640);
 
     return () => clearInterval(interval);
   }, []);
@@ -71,26 +73,26 @@ export function NetworkStatus() {
           </p>
           <div className="flex items-center gap-1">
             <Clock className="h-3 w-3 text-gray-500" />
-            <p className="text-xs text-gray-500">{network.blockTime}s</p>
+            <p className="text-xs text-gray-500">{network.blockTime}s block time</p>
           </div>
         </div>
 
         <div className="rounded-lg bg-white/[0.02] p-3">
-          <p className="text-[10px] uppercase tracking-wider text-gray-500">Speed</p>
+          <p className="text-[10px] uppercase tracking-wider text-gray-500">Throughput</p>
           <div className="mt-1 flex items-center gap-1">
             <Zap className="h-4 w-4 text-amber-400" />
-            <p className="text-sm font-medium text-amber-400">Instant</p>
+            <p className="text-sm font-medium text-amber-400">{network.tps.toLocaleString()} TPS</p>
           </div>
-          <p className="text-xs text-gray-500">&lt; 1s finality</p>
+          <p className="text-xs text-gray-500">{network.totalTransactions} total</p>
         </div>
 
         <div className="rounded-lg bg-white/[0.02] p-3">
-          <p className="text-[10px] uppercase tracking-wider text-gray-500">Peers</p>
-          <p className="mt-1 text-sm font-medium text-white">{network.peers}</p>
-          <div className="flex items-center gap-1">
-            <CheckCircle className="h-3 w-3 text-emerald-400" />
-            <p className="text-xs text-emerald-400">Healthy</p>
+          <p className="text-[10px] uppercase tracking-wider text-gray-500">Status</p>
+          <div className="mt-1 flex items-center gap-1">
+            <CheckCircle className="h-4 w-4 text-emerald-400" />
+            <p className="text-sm font-medium text-emerald-400">Healthy</p>
           </div>
+          <p className="text-xs text-gray-500">All systems operational</p>
         </div>
       </div>
     </div>
