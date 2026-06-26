@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v46 - 循环改进续)
+- [x] SocialProfileCard — 社交资料卡片组件（地址/ENS/平台链接）
+- [x] FollowButton — 关注按钮组件（关注/取消关注/加载状态）
+- [x] 调研 — Web3 Social Graph（Farcaster vs Lens）
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v45 - 循环改进续)
 - [x] CredentialBadge — 凭证徽章组件（4 种类型/验证状态）
 - [x] ReputationScore — 声誉评分组件（星级/等级/周变化）
