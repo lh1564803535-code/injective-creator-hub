@@ -589,3 +589,48 @@ Creators in 2026 maintain portable identities across: ENS domains, Farcaster pro
 - Add "trending" indicator based on engagement velocity
 - Consider Farcaster Frame integration for campaign voting in-feed
 - Consider Lens Open Action pattern for on-chain submissions
+
+## 2026-06-26 — React Animation Libraries 2026: Beyond Framer Motion
+
+### Topic
+State of React animation libraries in 2026 — what's new, what's improved, and emerging CSS-native alternatives that reduce JS bundle size.
+
+### Findings
+
+**1. Motion (formerly Framer Motion) — The Incumbent**
+Motion (motion.dev) continues to dominate React animation with its declarative API. Key 2025-2026 additions: `useScroll` and `useInView` hooks for scroll-linked animations, `layoutId` for shared layout transitions, and `AnimatePresence` with `mode="wait"` for orchestrated exit animations. The library has shifted toward CSS-first output — Motion now generates `@keyframes` CSS when possible, falling back to JS only for complex spring physics. This means 60fps animations even on low-end devices.
+- Source: https://motion.dev
+- Relevance: Our project uses IntersectionObserver-based scroll reveals and canvas-confetti. Motion's `useInView` could replace our custom `useScrollReveal` hook, and `AnimatePresence` would give us proper exit animations for dialogs/toasts.
+
+**2. CSS `animation-timeline: view()` — The Native Revolution**
+Chrome 115+ (July 2023) shipped native scroll-driven animations. By 2026, this has ~85% global browser support (Safari added partial support in 18.2). The key insight: `animation-timeline: view()` ties animation progress to element visibility, replacing IntersectionObserver-based reveals entirely. Our project already uses this in the `sda-*` CSS classes, but we haven't migrated the JS-based `useScrollReveal` hook. The CSS approach is zero-JS, zero-observer, and runs on the compositor thread.
+- Source: https://developer.chrome.com/docs/css-ui/css-scroll-driven-animations
+- Relevance: We should progressively enhance: use CSS `animation-timeline: view()` where supported, fall back to IntersectionObserver elsewhere. This eliminates ~40 lines of JS.
+
+**3. GSAP 3.12+ with React — Professional Timeline Control**
+GSAP (GreenSock) remains the go-to for complex, sequenced animations. The `@gsap/react` package provides `useGSAP` hook with automatic cleanup. GSAP 3.12 added `ScrollSmoother` (smooth scroll + parallax), `Flip` plugin for layout animations (similar to Motion's `layoutId` but framework-agnostic), and `Observer` for gesture detection. The free tier covers most use cases; paid "Club" plugins include MorphSVG and DrawSVG.
+- Source: https://gsap.com
+- Relevance: Overkill for our current needs, but if we add complex hero animations or scroll-triggered sequences (e.g., a "how it works" walkthrough with pinned sections), GSAP's timeline control would be valuable.
+
+**4. AutoAnimate — Zero-Config for Lists and CRUD**
+AutoAnimate by FormKit is the simplest option: one `useAutoAnimate()` ref and your list gets enter/leave/reorder animations automatically. It uses the FLIP technique (First, Last, Invert, Play) under the hood. No configuration needed for basic use, but supports custom keyframes for advanced cases. Weight: ~1.5KB gzipped.
+- Source: https://auto-animate.formkit.com
+- Relevance: Perfect for our submission lists, activity feeds, and leaderboard rankings. Currently these have no enter/exit animations when data changes. Adding `useAutoAnimate` would be a 2-line change per list.
+
+**5. React 19 View Transitions — The Future (Partial)**
+React 19 introduced `<ViewTransition>` as an experimental API for page-to-page transitions. It wraps the native View Transitions API (`document.startViewTransition`) in a React component model. Currently works best with React Server Components + Suspense boundaries. The API: `<ViewTransition name="hero">` on elements that should animate between routes. This is still experimental and not recommended for production, but signals the direction.
+- Source: https://react.dev/reference/react/ViewTransition
+- Relevance: Our Next.js 16 app could experiment with this for campaign card → campaign detail transitions. But given the experimental status, CSS `@view-transition` with manual `view-transition-name` is more stable for now.
+
+### URLs
+- Motion: https://motion.dev
+- GSAP: https://gsap.com
+- AutoAnimate: https://auto-animate.formkit.com
+- CSS Scroll-Driven Animations: https://developer.chrome.com/docs/css-ui/css-scroll-driven-animations
+- React ViewTransitions: https://react.dev/reference/react/ViewTransition
+
+### Action Items
+- Replace `useScrollReveal` with CSS `animation-timeline: view()` + `@supports` fallback
+- Consider AutoAnimate for list components (submissions, activity feed, leaderboard)
+- Experiment with `@view-transition` CSS for campaign card → detail page transitions
+- Add Motion's `AnimatePresence` for proper dialog/toast exit animations

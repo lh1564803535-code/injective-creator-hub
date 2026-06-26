@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Social Proof & Web3 Social Commerce Integration
+## 当前阶段：Command Palette & UX Navigation Enhancement
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -19,6 +19,15 @@
 - [ ] Add @property CSS Houdini for animating gradient stops and conic-gradient values
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
+
+## 本次改进 (2026-06-26 v14)
+- [x] 研究日志更新：React Animation Libraries 2026 深度调研（Motion/motion.dev 新特性、CSS animation-timeline: view() 浏览器支持现状、GSAP 3.12+ React 集成、AutoAnimate 零配置列表动画、React 19 ViewTransitions 实验性 API）
+- [x] 创建 CommandPalette 组件 — Cmd+K/Ctrl+K 驱动的全局命令面板：搜索活动（标题/描述/元数据模糊匹配）、页面导航（Home/Campaigns/Leaderboard/Create/Dashboard）、快捷操作（Create Campaign/View Dashboard/View Rankings）、分类分组显示（Navigation/Campaigns/Quick Actions）、全键盘导航（Arrow Up/Down/Enter/Escape）、活动状态指示（Live/Voting/Ended + 奖励金额 + 剩余时间）、CommandPaletteProvider 全局状态管理、backdrop 模糊遮罩 + 缩放入场动画
+- [x] 更新 QuickActionsToolbar — Ctrl+K 改为打开 CommandPalette（替代原来的展开面板）、新增 Command+Search 图标按钮、扩展面板快捷键提示更新
+- [x] layout.tsx 集成 CommandPaletteProvider（NotificationProvider 内层、CommandPalette 内部渲染）
+- [x] CSS 动画添加 — cmd-backdrop-in（遮罩淡入）、cmd-palette-in（面板缩放入场）
+- [x] Reduced motion 媒体查询覆盖命令面板动画
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v13)
 - [x] 研究日志更新：Web3 Social Commerce & Creator Monetization Deep Dive 调研（Farcaster Frames V2、Lens Protocol Open Actions、token-gated content、on-chain social proof、cross-platform social identity via ENS/Farcaster/Lens）

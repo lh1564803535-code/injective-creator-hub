@@ -5,6 +5,7 @@ import { AppNavigation } from "@/components/app-navigation";
 import { Footer } from "@/components/Footer";
 import { QuickActionsToolbar } from "@/components/ui/QuickActionsToolbar";
 import { NotificationProvider } from "@/components/ui/NotificationCenter";
+import { CommandPaletteProvider } from "@/components/ui/CommandPalette";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -35,10 +36,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed]">
         <WalletProvider>
           <NotificationProvider>
-            <AppNavigation />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <QuickActionsToolbar />
+            <CommandPaletteProvider>
+              <AppNavigation />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <QuickActionsToolbar />
+            </CommandPaletteProvider>
           </NotificationProvider>
         </WalletProvider>
       </body>

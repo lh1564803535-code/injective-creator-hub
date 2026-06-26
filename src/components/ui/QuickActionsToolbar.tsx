@@ -14,8 +14,10 @@ import {
   ChevronUp,
   ChevronDown,
   Zap,
+  Command,
 } from "lucide-react";
 import { shortenAddress } from "@/lib/injective";
+import { useCommandPalette } from "@/components/ui/CommandPalette";
 
 interface QuickAction {
   icon: typeof Plus;
@@ -66,6 +68,7 @@ const QUICK_ACTIONS: QuickAction[] = [
 export function QuickActionsToolbar() {
   const pathname = usePathname();
   const { isConnected, address } = useAccount();
+  const { toggle: toggleCommandPalette } = useCommandPalette();
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -83,19 +86,6 @@ export function QuickActionsToolbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Keyboard shortcut: "/" to focus search (handled by CampaignSearch, but we show hint)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Toggle toolbar with Ctrl+K
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setIsExpanded((prev) => !prev);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   const scrollToTop = useCallback(() => {
@@ -180,6 +170,22 @@ export function QuickActionsToolbar() {
           {/* Divider */}
           <div className="mx-1 h-8 w-px bg-white/[0.06]" />
 
+          {/* Command Palette button */}
+          <button
+            onClick={toggleCommandPalette}
+            className="group flex flex-col items-center gap-0.5 rounded-xl px-3 py-2 transition-all hover:bg-white/[0.04]"
+            aria-label="Open command palette"
+            title="Search & Navigate (Ctrl+K)"
+          >
+            <div className="flex items-center gap-1">
+              <Command className="h-3.5 w-3.5 text-gray-500 group-hover:text-cyan-400 transition-colors" />
+              <Search className="h-3.5 w-3.5 text-gray-500 group-hover:text-cyan-400 transition-colors" />
+            </div>
+            <span className="text-[10px] text-gray-600 group-hover:text-cyan-400 transition-colors">
+              Search
+            </span>
+          </button>
+
           {/* Expand toggle (shows more info on desktop) */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
@@ -250,10 +256,13 @@ export function QuickActionsToolbar() {
                     <span className="text-xs text-gray-500">Search campaigns</span>
                     <kbd className="rounded bg-white/[0.06] px-1.5 py-0.5 text-[10px] text-gray-400">/</kbd>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">Toggle toolbar</span>
+                  <button
+                    onClick={toggleCommandPalette}
+                    className="flex w-full items-center justify-between"
+                  >
+                    <span className="text-xs text-gray-500">Command palette</span>
                     <kbd className="rounded bg-white/[0.06] px-1.5 py-0.5 text-[10px] text-gray-400">Ctrl+K</kbd>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
