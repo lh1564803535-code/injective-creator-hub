@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v167)
+- [x] Candlestick API — GET /api/candlestick 返回 OHLCV 数据（市场/间隔/蜡烛图）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v166)
 - [x] Trade API — GET /api/trade 返回最近交易（市场/方向/价格/数量）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
