@@ -26,7 +26,8 @@
 - [x] TypeScript 零错误修复 — AIAssistant balanceStr 声明顺序、balanceData 类型修正
 - [x] 移动端响应式优化 — LiveEarnings 统计卡片单列布局、趋势图单列布局、AIAssistant 全屏聊天面板
 - [x] TransactionHistory 组件 — 交易历史记录（send/receive/vote/claim/submit）、时间显示、区块浏览器链接、展开/折叠
-- [x] Dashboard 集成 TransactionHistory（CreatorReputation 和 Notifications 之间）
+- [x] GasEstimator 组件 — Gas 费用估算器（INJ/USD/速度）、Injective 低 Gas 优势展示
+- [x] Dashboard 集成 TransactionHistory + GasEstimator
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 - [x] iAgent SDK 集成层 — src/lib/iagent.ts：registerAgent、executeCommand、getAgentStatus、listAgents 函数
 - [x] AI Chat API 路由 — src/app/api/chat/route.ts：Ollama 集成 + Mock 回退、完整系统提示词、中文支持
