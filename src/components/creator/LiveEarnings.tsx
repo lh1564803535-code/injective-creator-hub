@@ -277,7 +277,7 @@ export function LiveEarnings({
         </div>
 
         {/* Stat Cards */}
-        <div className="mb-8 grid grid-cols-3 gap-3">
+        <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
             <p className="mb-1 text-xs text-gray-500">Today</p>
             <p className="text-lg font-bold text-emerald-400">
@@ -307,7 +307,7 @@ export function LiveEarnings({
         </div>
 
         {/* 7-Day Trend + 30-Day Forecast */}
-        <div className="mb-6 grid grid-cols-2 gap-3">
+        <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
             <p className="mb-2 text-xs text-gray-500">7-Day Trend</p>
             <SparklineChart data={weeklyData} />

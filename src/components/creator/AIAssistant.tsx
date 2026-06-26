@@ -338,10 +338,10 @@ export function AIAssistant() {
 
       {/* Chat Panel */}
       <div
-        className={`ai-assistant-panel fixed bottom-6 right-6 z-50 flex w-[360px] flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#1a1a1a] shadow-2xl shadow-black/50 ${
+        className={`ai-assistant-panel fixed bottom-0 right-0 z-50 flex h-[100dvh] w-full flex-col overflow-hidden border-t border-white/[0.08] bg-[#1a1a1a] shadow-2xl shadow-black/50 sm:bottom-6 sm:right-6 sm:h-[500px] sm:w-[360px] sm:rounded-2xl sm:border ${
           isOpen ? "open" : "closed"
         }`}
-        style={{ height: isOpen ? 500 : 0 }}
+        style={{ maxHeight: isOpen ? "100dvh" : 0 }}
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/[0.06] bg-[#1a1a1a] px-4 py-3">
