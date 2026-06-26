@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v72)
+- [x] Vote API — POST /api/vote 返回投票响应（交易哈希/Gas 信息）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v71)
 - [x] MCP API — GET /api/mcp 返回 MCP 服务器信息（5 个可用工具）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
