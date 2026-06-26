@@ -19,6 +19,10 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v59)
+- [x] Chat API 路由更新 — 改进的 Mock 响应（SocialFi/AI Agent/流支付）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v58)
 - [x] Types 桶导出 — index.ts 集中导出所有类型定义
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
