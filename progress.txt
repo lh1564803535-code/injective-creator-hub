@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Injective Nova Program 准备
+## 当前阶段：Injective Nova Program 准备 v2
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -18,6 +18,17 @@
 - [ ] Add @property CSS Houdini for animating gradient stops and conic-gradient values
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
+
+## 本次改进 (2026-06-26 v21)
+- [x] MCPIntegration 组件 — Injective MCP Server 集成展示：5 个工具（perp_trade/spot_swap/bridge_assets/check_portfolio/query_docs）、交互式 Agent Console 演示、架构流程图、文档链接
+- [x] WalletOnboarding 组件 — 3 步引导（连接钱包/获取测试币/开始创建）、RainbowKit 集成、官方+Google 水龙头链接
+- [x] GasEstimator 组件 — Gas 费用估算（INJ/USD/速度）、5 种交易类型、Injective 低 Gas 优势
+- [x] NetworkStatus 组件 — 实时网络状态（连接/区块号/出块时间/节点数）、模拟更新
+- [x] TransactionHistory 组件 — 交易历史记录（5 种类型）、区块浏览器链接、展开/折叠
+- [x] tsconfig.json 修复 — 排除 .next 目录避免构建产物类型错误
+- [x] 首页集成 MCPIntegration（AIAgentSection 下方）
+- [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v20)
 - [x] README.md 全面更新 — 新增 Nova Program 链接、测试网配置、测试币领取、iAgent SDK 说明、研究来源、项目结构更新

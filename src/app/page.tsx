@@ -598,6 +598,13 @@ export default function HomePage() {
         </div>
       </ScrollRevealSection>
 
+      {/* MCP Server Integration */}
+      <ScrollRevealSection className="px-6 pb-12 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <MCPIntegration />
+        </div>
+      </ScrollRevealSection>
+
       {/* Campaigns */}
       <ScrollRevealSection delay={2} className="px-6 pb-12 lg:px-8">
         <div className="mx-auto max-w-7xl">
