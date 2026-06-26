@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { MessageCircle, X, Send, Sparkles, AlertTriangle, CheckCircle, ArrowRight, Shield } from "lucide-react";
+import { useAccount, useBalance } from "wagmi";
+import { MessageCircle, X, Send, Sparkles, AlertTriangle, CheckCircle, ArrowRight, Shield, Wallet } from "lucide-react";
 
 interface TxPreview {
   type: "vote" | "submit" | "claim" | "transfer";
@@ -22,12 +23,27 @@ interface Message {
   preview?: TxPreview;
 }
 
-const WELCOME_MSG: Message = {
-  id: "welcome",
-  role: "assistant",
-  text: "👋 你好！我是你的创作助手。\n\n我可以帮你：\n- 创建和管理钱包\n- 参加创作活动\n- 把收益提现到银行卡\n- 了解实时流支付\n- 了解 SocialFi 和 AI Agent\n\n有什么问题尽管问我！",
-  timestamp: Date.now(),
-};
+function getWelcomeMsg(walletAddr?: string, balance?: string): Message {
+  const walletInfo = walletAddr
+    ? `\n\n🔗 钱包已连接：${shortenAddr(walletAddr)}\n💰 余额：${balance || "查询中..."}`
+    : "\n\n💡 提示：连接钱包后我可以提供更个性化的帮助";
+
+  return {
+    id: "welcome",
+    role: "assistant",
+    text: `👋 你好！我是你的创作助手。
+
+我可以帮你：
+- 创建和管理钱包
+- 参加创作活动
+- 把收益提现到银行卡
+- 了解实时流支付
+- 了解 SocialFi 和 AI Agent${walletInfo}
+
+有什么问题尽管问我！`,
+    timestamp: Date.now(),
+  };
+}
 
 const QUICK_BUTTONS = [
   { label: "创建钱包", query: "创建钱包" },
@@ -38,10 +54,21 @@ const QUICK_BUTTONS = [
   { label: "AI Agent", query: "agent" },
 ];
 
-function getAIResponse(input: string): { text: string; preview?: TxPreview } {
+function shortenAddr(addr: string) {
+  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+}
+
+function getAIResponse(
+  input: string,
+  walletAddr?: string,
+  balance?: string
+): { text: string; preview?: TxPreview } {
   const lower = input.toLowerCase();
 
   if (/创建钱包|钱包|注册/.test(lower)) {
+    if (walletAddr) {
+      return { text: `你的钱包已连接！\n\n地址：${shortenAddr(walletAddr)}\n余额：${balance || "查询中..."}\n\n你可以在 Dashboard 查看详细收益和活动参与情况。` };
+    }
     return { text: "我帮你创建钱包！只需要3步：\n1. 点击右上角的「连接钱包」\n2. 选择 MetaMask 或 WalletConnect\n3. 按照提示完成连接\n\n没有钱包？没关系，选择「创建新钱包」，我会一步步教你。" };
   }
   if (/提现|转到银行卡|换钱|法币/.test(lower)) {
@@ -182,11 +209,29 @@ function TransactionPreviewCard({ preview }: { preview: TxPreview }) {
 }
 
 export function AIAssistant() {
+  const { address, isConnected } = useAccount();
+  const { data: balanceData } = useBalance({ address });
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([WELCOME_MSG]);
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMsg(address, balanceStr)]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+
+  const balanceStr = balanceData
+    ? `${parseFloat(balanceData.formatted).toFixed(4)} ${balanceData.symbol}`
+    : undefined;
+
+  // Update welcome message when wallet connects
+  useEffect(() => {
+    if (isConnected && address) {
+      setMessages((prev) => {
+        if (prev[0]?.id === "welcome") {
+          return [getWelcomeMsg(address, balanceStr), ...prev.slice(1)];
+        }
+        return prev;
+      });
+    }
+  }, [isConnected, address, balanceStr]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-scroll to bottom on new messages
@@ -221,7 +266,7 @@ export function AIAssistant() {
       // Simulate AI thinking delay (500-1200ms)
       const delay = 500 + Math.random() * 700;
       setTimeout(() => {
-        const response = getAIResponse(trimmed);
+        const response = getAIResponse(trimmed, address, balanceStr);
         const aiMsg: Message = {
           id: `a-${Date.now()}`,
           role: "assistant",
@@ -271,7 +316,9 @@ export function AIAssistant() {
             </div>
             <div>
               <p className="text-sm font-semibold text-white">AI 助手</p>
-              <p className="text-[10px] text-gray-500">随时帮你解答</p>
+              <p className="text-[10px] text-gray-500">
+                {isConnected ? `Connected: ${shortenAddr(address!)}` : "随时帮你解答"}
+              </p>
             </div>
           </div>
           <button
