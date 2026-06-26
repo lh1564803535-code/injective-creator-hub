@@ -19,6 +19,12 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v20)
+- [x] iAgent SDK 集成层 — src/lib/iagent.ts：registerAgent、executeCommand、getAgentStatus、listAgents 函数
+- [x] AI Chat API 路由 — src/app/api/chat/route.ts：Ollama 集成 + Mock 回退、完整系统提示词、中文支持
+- [x] AIAssistant 真实 API 集成 — 优先调用 /api/chat，失败时回退到本地响应
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v19)
 - [x] 合约配置更新 — hardhat.config.ts 添加测试网配置（Chain ID 1439、RPC URL、Etherscan 验证）
 - [x] 合约依赖安装 — 安装 hardhat-toolbox 全套依赖（325 个包）

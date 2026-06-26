@@ -58,7 +58,25 @@ function shortenAddr(addr: string) {
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 }
 
-function getAIResponse(
+async function fetchAIResponse(messages: { role: string; content: string }[]): Promise<string> {
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.message;
+    }
+  } catch {
+    // Fall through to local response
+  }
+  return "";
+}
+
+function getLocalAIResponse(
   input: string,
   walletAddr?: string,
   balance?: string
@@ -264,21 +282,37 @@ export function AIAssistant() {
       setIsTyping(true);
 
       // Simulate AI thinking delay (500-1200ms)
-      const delay = 500 + Math.random() * 700;
-      setTimeout(() => {
-        const response = getAIResponse(trimmed, address, balanceStr);
+      // Try API first, fall back to local
+      const apiMessages = messages
+        .filter((m) => m.role === "user" || m.role === "assistant")
+        .map((m) => ({ role: m.role, content: m.text }));
+
+      apiMessages.push({ role: "user", content: trimmed });
+
+      // Use setTimeout for non-blocking UX
+      setTimeout(async () => {
+        let responseText = await fetchAIResponse(apiMessages);
+        let preview: TxPreview | undefined;
+
+        if (!responseText) {
+          // Fall back to local response
+          const localResponse = getLocalAIResponse(trimmed, address, balanceStr);
+          responseText = localResponse.text;
+          preview = localResponse.preview;
+        }
+
         const aiMsg: Message = {
           id: `a-${Date.now()}`,
           role: "assistant",
-          text: response.text,
+          text: responseText,
           timestamp: Date.now(),
-          preview: response.preview,
+          preview,
         };
         setMessages((prev) => [...prev, aiMsg]);
         setIsTyping(false);
-      }, delay);
+      }, 300 + Math.random() * 500);
     },
-    []
+    [address, balanceStr, messages]
   );
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
