@@ -6,7 +6,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const campaign = MOCK_CAMPAIGNS.find((c) => c.id === id);
+  const campaign = MOCK_CAMPAIGNS.find((c) => String(c.id) === id);
 
   if (!campaign) {
     return NextResponse.json(

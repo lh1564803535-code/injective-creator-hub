@@ -1,11 +1,11 @@
 "use client";
 
-import { Twitter, Github, MessageCircle, Globe } from "lucide-react";
+import { AtSign, GitFork, MessageCircle, Globe } from "lucide-react";
 
 const SOCIALS = [
   {
     name: "Twitter",
-    icon: Twitter,
+    icon: AtSign,
     href: "https://twitter.com/Injective_",
     color: "hover:text-cyan-400",
   },
@@ -17,7 +17,7 @@ const SOCIALS = [
   },
   {
     name: "GitHub",
-    icon: Github,
+    icon: GitFork,
     href: "https://github.com/InjectiveLabs",
     color: "hover:text-gray-300",
   },

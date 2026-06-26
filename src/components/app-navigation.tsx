@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Zap, Menu, X } from "lucide-react";
 import { NotificationBell } from "@/components/ui/NotificationCenter";
+import { LanguageToggle } from "@/components/ui/LanguageToggle";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -67,6 +68,9 @@ export function AppNavigation() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            {/* Language Toggle */}
+            <LanguageToggle />
+
             {/* Notifications */}
             <NotificationBell />
 
