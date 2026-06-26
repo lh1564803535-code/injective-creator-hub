@@ -110,7 +110,7 @@ export function CampaignShare({
           rel="noopener noreferrer"
           className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-4 py-3 text-gray-400 hover:text-cyan-400 hover:bg-white/[0.06] transition"
         >
-          <Twitter className="h-4 w-4" />
+          <AtSign className="h-4 w-4" />
           <span className="text-sm">Share on Twitter</span>
         </a>
 
