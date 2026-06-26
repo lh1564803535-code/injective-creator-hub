@@ -115,3 +115,40 @@
 - [ ] 添加交易策略模板
 - [ ] 实现权限控制系统
 - [ ] 添加 Agent 监控面板
+
+## 2026-06-26 — React 动画库调研
+
+### 关键发现
+
+**1. Motion (Framer Motion) — 行业标准**
+- 30.7K stars，3.6M 周下载
+- 声明式 API，手势支持，滚动动画
+- LazyMotion 减少包大小
+- 支持 exit 动画（AnimatePresence）
+
+**2. React Spring — 物理动画**
+- 29K stars，788K 周下载
+- 基于弹簧物理的动画
+- 独特的运动方式
+
+**3. GSAP — 专业级**
+- ScrollTrigger 插件
+- SVG/Canvas 大师级支持
+- 时间线和交错动画
+- 包较大，企业级使用
+
+**4. 原生 CSS 进展**
+- CSS `linear()` 缓动函数支持弹簧物理
+- 浏览器支持成熟
+- 无需运行时库
+
+**5. 最佳实践**
+- 避免忽略 reduced-motion 无障碍设置
+- 不要混合多个动画库
+- 基本 UI 动画用 CSS 即可
+- 复杂交互用 Motion
+
+### 对项目的启示
+- [x] 我们已使用 CSS 动画 — 正确选择
+- [ ] 考虑添加 Motion 用于复杂交互
+- [ ] 确保所有动画有 reduced-motion 覆盖
