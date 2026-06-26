@@ -7,7 +7,9 @@
     "test": "npx hardhat test",
     "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost",
     "deploy:testnet": "npx hardhat run scripts/deploy.ts --network injective-testnet",
-    "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network injective"
+    "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network injective",
+    "verify:testnet": "npx hardhat verify --network injective-testnet",
+    "verify:mainnet": "npx hardhat verify --network injective"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.2",

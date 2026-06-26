@@ -22,7 +22,8 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      injective: "empty",
+      injective: "nil",
+      "injective-testnet": "nil",
     },
     customChains: [
       {
@@ -33,7 +34,18 @@ const config: HardhatUserConfig = {
           browserURL: "https://explorer.injective.network",
         },
       },
+      {
+        network: "injective-testnet",
+        chainId: 1439,
+        urls: {
+          apiURL: "https://testnet.blockscout-api.injective.network/api/",
+          browserURL: "https://testnet.blockscout.injective.network/",
+        },
+      },
     ],
+  },
+  sourcify: {
+    enabled: false,
   },
 };
 
