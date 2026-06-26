@@ -43,7 +43,7 @@ export function CampaignTooltip({
   position = "top",
 }: CampaignTooltipProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const deadlineDate = new Date(campaign.deadline * 1000);
   const isExpired = deadlineDate < new Date();
