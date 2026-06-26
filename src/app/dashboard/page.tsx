@@ -7,6 +7,7 @@ import { useAccount } from "wagmi";
 import { CreatorDashboard } from "@/components/creator/CreatorDashboard";
 import { YieldStaking } from "@/components/creator/YieldStaking";
 import { CreatorReputation } from "@/components/creator/CreatorReputation";
+import { CreatorStreak } from "@/components/creator/CreatorStreak";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import type { Address } from "viem";
@@ -165,6 +166,9 @@ export default function DashboardPage() {
 
             {/* Yield Staking */}
             <YieldStaking />
+
+            {/* Creator Streak & Gamification */}
+            <CreatorStreak />
 
             {/* On-Chain Reputation */}
             <CreatorReputation address={address as Address} />
