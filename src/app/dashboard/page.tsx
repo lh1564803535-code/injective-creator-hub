@@ -18,6 +18,7 @@ import { WalletOnboarding } from "@/components/ui/WalletOnboarding";
 import { AchievementBadges } from "@/components/creator/AchievementBadges";
 import { RewardsBreakdown } from "@/components/creator/RewardsBreakdown";
 import { SecurityTips } from "@/components/ui/SecurityTips";
+import { QuickStats } from "@/components/ui/QuickStats";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import { useNotifications } from "@/components/ui/NotificationCenter";
@@ -86,6 +87,9 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="space-y-8">
+            {/* Quick Stats */}
+            <QuickStats />
+
             {/* Quick Actions */}
             <div>
               <h2 className="mb-4 text-lg font-semibold text-white">Quick Actions</h2>
