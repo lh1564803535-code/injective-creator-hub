@@ -88,7 +88,7 @@ function NotificationCard({
   const Icon = config.icon;
   const duration = item.duration ?? 4000;
   const [exiting, setExiting] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const dismiss = useCallback(() => {
     setExiting(true);
