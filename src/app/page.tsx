@@ -26,6 +26,7 @@ import { FloatingParticles } from "@/components/ui/FloatingParticles";
 import { USDCBenefits } from "@/components/ui/USDCBenefits";
 import { NetworkStats } from "@/components/ui/NetworkStats";
 import { LiveEarnings } from "@/components/creator/LiveEarnings";
+import { ScrollEarningsCounter } from "@/components/ui/ScrollEarningsCounter";
 import { AIAgentSection } from "@/components/ui/AIAgentSection";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
@@ -260,6 +261,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Scroll-to-Earn Counter (Superfluid-inspired) */}
+      <div className="sticky top-20 z-40 flex justify-center px-6 py-3">
+        <ScrollEarningsCounter />
+      </div>
 
       {/* Network Stats */}
       <ScrollRevealSection className="px-6 pb-8 lg:px-8">
