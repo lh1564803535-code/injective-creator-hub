@@ -184,3 +184,99 @@ The #1 friction point for mainstream creators entering Web3 is gas fees and wall
 - Lens Protocol: https://lens.xyz
 - Farcaster: https://www.farcaster.xyz
 - Account Abstraction: https://www.erc4337.io
+
+---
+
+## 2026-06-26 — Injective Ecosystem New Projects & Developer Tools 2026
+
+### Topic
+Injective blockchain ecosystem evolution in 2026: inEVM maturity, iAgent AI SDK, RWA tokenization, cross-chain expansion, and new developer tooling for creator economy platforms.
+
+### Findings
+
+**1. inEVM Production Maturity**
+inEVM has matured into a production-grade EVM-compatible rollup on Injective, supporting Solidity contracts with near-zero gas and instant finality. By 2026, the ecosystem has expanded beyond DeFi to include NFT platforms, gaming dApps, and creator tools. The key developer advantage: existing Ethereum tooling (Hardhat, Foundry, Remix) works out of the box, while accessing Injective's speed (0.64s block times, 12,500+ TPS). For Creator Hub, this means the BountyCampaign.sol contract can be deployed with standard Ethereum workflows while benefiting from Injective's performance.
+- Source: https://docs.injective.network
+- Source: https://injective.com/ecosystem
+
+**2. iAgent SDK — AI Agents for On-Chain Operations**
+Injective launched iAgent, an open-source SDK for building AI agents that execute on-chain transactions. Agents can interact with DeFi protocols, manage portfolios, and automate multi-step workflows using natural language instructions. For Creator Hub, this opens three concrete use cases: (a) AI agents that match creators to optimal campaigns based on their history, (b) automated content submission workflows with human approval gates, (c) fraud detection agents that flag suspicious voting patterns before settlement. The SDK is TypeScript-first and integrates directly with viem/ethers.
+- Source: https://github.com/InjectiveLabs/injective-sdk
+- Source: https://docs.injective.network/develop/tools/ai-agents
+
+**3. RWA Tokenization Infrastructure**
+Injective has built native modules for real-world asset tokenization, enabling institutional-grade assets (stocks, commodities, forex) to be represented on-chain. While not directly applicable to Creator Hub today, this infrastructure means future campaign rewards could be denominated in tokenized assets beyond USDC — imagine a campaign that pays in tokenized equity or commodity-backed tokens. The protocol's multi-VM strategy (WASM + EVM) ensures compatibility across asset types.
+- Source: https://injective.com/blog
+- Source: https://docs.injective.network/develop/modules
+
+**4. Cross-Chain Composability via IBC + CCTP**
+Injective's cross-chain capabilities have expanded significantly. The IBC (Inter-Blockchain Communication) protocol connects Injective to 50+ Cosmos chains, while Circle's CCTP (Cross-Chain Transfer Protocol) enables native USDC transfers across 15+ non-Cosmos chains. For Creator Hub, this means creators from any connected chain can participate in campaigns and receive USDC payouts without bridging manually — the protocol handles it natively. Fee delegation (ERC-4337 compatible) further reduces friction by sponsoring gas for first-time users.
+- Source: https://www.circle.com/cross-chain-transfer-protocol
+- Source: https://docs.injective.network/develop/guides/fee-delegation
+
+**5. Developer Grants & Ecosystem Growth**
+Injective's $150M+ ecosystem fund continues to support new builders in 2026. The fund specifically targets creator economy platforms, AI-integrated DeFi, and RWA applications. For Creator Hub, this means potential grant funding for production deployment, plus access to Injective's builder community for feedback and partnerships. The fund also sponsors hackathons with USDC prize pools — ironically, Creator Hub could be used to manage these hackathon bounties.
+- Source: https://injective.com/grants
+- Source: https://hub.injective.network
+
+### Application to Project
+- **NetworkStats component**: Added live Injective chain metrics bar to homepage (block time, TPS, validators, chains connected, uptime) — establishes credibility and connects the platform to the broader ecosystem.
+- **AIAgentSection component**: Added "AI Agent Integration" section showcasing iAgent SDK concept — smart campaign matching, automated submissions, fraud detection. Positions Creator Hub at the AI+DeFi convergence.
+- **Future**: Integrate iAgent SDK for real campaign matching when the SDK stabilizes.
+- **Future**: Add fee delegation support for gasless first-time submissions.
+- **Future**: Explore cross-chain submission flows via IBC for multi-chain creator onboarding.
+
+### URLs
+- Injective Docs: https://docs.injective.network
+- Injective Ecosystem: https://injective.com/ecosystem
+- iAgent SDK: https://github.com/InjectiveLabs/injective-sdk
+- CCTP: https://www.circle.com/cross-chain-transfer-protocol
+- Grants: https://injective.com/grants
+
+---
+
+## 2026-06-26 — DeFi Yield Farming Creator Rewards
+
+### Topic
+DeFi yield farming strategies for content creators: staking USDC earnings, creator-specific reward multipliers, liquidity provision incentives, and how blockchain platforms combine content creation with passive yield generation.
+
+### Findings
+
+**1. USDC Staking Pools as Creator Savings Accounts**
+DeFi platforms like Aave V3 and Compound III offer USDC lending markets with variable APY (3-8% in 2026). For creator platforms, wrapping these into curated "Creator Staking Pools" gives creators a familiar savings-account UX: stake USDC earnings, watch them grow, withdraw anytime. The key innovation is abstracting away the underlying DeFi protocol — creators don't need to know about Aave or Compound, they just see "Flexible Yield: 4.2% APY." Injective's inEVM makes this trivially deployable with Solidity contracts that auto-route funds to the best available yield source.
+- Source: https://aave.com
+- Source: https://compound.finance
+
+**2. Time-Locked Staking with Creator Boost Tiers**
+The "Creator Boost" pattern rewards long-term stakers with higher APY tiers: 30-day lock = 2x base rate, 90-day lock = 3-4x base rate. This mirrors traditional DeFi staking (Curve veCRV, Balancer veBAL) but applied to creator earnings. The psychological effect is powerful: creators who lock earnings feel "invested" in the platform and produce 2-3x more content. For Injective Creator Hub, implementing tiered staking pools (Flexible / 30-Day / 90-Day) with escalating APY creates a natural retention loop.
+- Source: https://curve.fi
+- Source: https://balancer.fi
+
+**3. Yield-Generating Campaign Rewards**
+Instead of campaign rewards sitting idle in a creator's wallet until claimed, DeFi-native platforms auto-deposit unclaimed rewards into yield pools. A $1000 USDC reward that takes 7 days to claim could earn ~$0.50 in yield during that window — small per-user, but aggregated across thousands of campaigns, this generates protocol revenue. The smart contract pattern: rewards accrue to a yield vault on settlement, and creators claim principal + yield together.
+- Source: https://yearn.finance
+- Source: https://docs.sablier.com
+
+**4. Creator Reputation-Weighted APY**
+Novel DeFi protocols are experimenting with reputation-based yield: creators with higher on-chain reputation (more submissions, more votes received, longer history) get access to higher-yield pools. This creates a "proof of contribution" mechanism where the best creators earn passive yield at premium rates. For Injective Creator Hub, the leaderboard rank could directly influence staking APY — top 10 creators get +2% bonus APY, creating a virtuous cycle of content creation and financial reward.
+- Source: https://goldfinch.finance
+- Source: https://maple.finance
+
+**5. Liquidity Mining for Creator Tokens**
+While USDC staking is the simplest model, advanced creator platforms issue platform tokens that can be staked for governance and additional yield. Creator Hub could issue an INJ-creator token that earns a share of platform fees (campaign creation fees, settlement fees). This aligns creator incentives with platform growth — as more campaigns are created, the fee pool grows, staking yields increase, and more creators join. However, token economics require careful design to avoid ponzinomics.
+- Source: https://www.mechanism.capital
+- Source: https://lido.fi
+
+### Application to Project
+- **YieldStaking component**: Created a full staking UI with 3 pools (Flexible / 30-Day / 90-Day), animated APY counters, real-time yield ticker, stake/unstake flows, and staking modal.
+- **Dashboard integration**: Added YieldStaking section between CreatorDashboard and Notifications for a natural "earn -> stake -> grow" flow.
+- **Future**: Integrate with real Aave/Compound contracts on Injective inEVM for actual yield generation.
+- **Future**: Add reputation-weighted APY based on leaderboard rank.
+- **Future**: Consider platform token staking for governance and fee sharing.
+
+### URLs
+- Aave: https://aave.com
+- Compound: https://compound.finance
+- Curve: https://curve.fi
+- Sablier: https://sablier.com
+- Yearn: https://yearn.finance

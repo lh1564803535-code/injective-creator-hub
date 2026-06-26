@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import { CreatorDashboard } from "@/components/creator/CreatorDashboard";
+import { YieldStaking } from "@/components/creator/YieldStaking";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import type { Address } from "viem";
@@ -160,6 +161,9 @@ export default function DashboardPage() {
 
             {/* Main Dashboard */}
             <CreatorDashboard address={address as Address} />
+
+            {/* Yield Staking */}
+            <YieldStaking />
 
             {/* Notifications */}
             <div>

@@ -24,6 +24,8 @@ import { LeaderboardTable } from "@/components/creator/LeaderboardTable";
 import { CampaignList } from "@/components/campaign/CampaignList";
 import { FloatingParticles } from "@/components/ui/FloatingParticles";
 import { USDCBenefits } from "@/components/ui/USDCBenefits";
+import { NetworkStats } from "@/components/ui/NetworkStats";
+import { AIAgentSection } from "@/components/ui/AIAgentSection";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -257,6 +259,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Network Stats */}
+      <ScrollRevealSection className="px-6 pb-8 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <NetworkStats />
+        </div>
+      </ScrollRevealSection>
 
       {/* Animated Stats */}
       <ScrollRevealSection className="px-6 pb-12 lg:px-8">
@@ -564,6 +573,13 @@ export default function HomePage() {
               );
             })}
           </div>
+        </div>
+      </ScrollRevealSection>
+
+      {/* AI Agent Integration */}
+      <ScrollRevealSection delay={1} className="px-6 pb-12 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <AIAgentSection />
         </div>
       </ScrollRevealSection>
 

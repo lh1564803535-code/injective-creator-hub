@@ -1,11 +1,27 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：UX 增强 — Real-Time Payments Visualization + Earnings Dashboard
+## 当前阶段：DeFi Integration — Yield Staking for Creators
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
 - [ ] Consider fee delegation for gasless submissions (ERC-4337)
 - [ ] Add optional USDC tips alongside votes
+- [ ] Integrate iAgent SDK for real campaign matching
+- [ ] Add cross-chain submission flows via IBC
+
+## 本次改进 (2026-06-26 v5)
+- [x] 研究日志更新：DeFi Yield Farming Creator Rewards 调研（USDC staking, time-locked pools, reputation-weighted APY）
+- [x] 创建 YieldStaking 组件 — 3 个质押池（Flexible 4.2% / 30-Day 8.5% / 90-Day 15%）、动画 APY 计数器、实时收益 Ticker、质押/解质押流程、质押模态框
+- [x] Dashboard 集成 YieldStaking（CreatorDashboard 和 Notifications 之间）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
+## 本次改进 (2026-06-26 v4)
+- [x] 研究日志更新：Injective Ecosystem New Projects & Developer Tools 2026 调研
+- [x] 创建 NetworkStats 组件 — Injective 链实时指标（区块时间、TPS、验证者、跨链连接数、在线率）、动画数值、脉冲在线指示器
+- [x] 创建 AIAgentSection 组件 — AI Agent 集成概念展示（智能活动匹配、自动提交、欺诈检测）、Agent Console 打字机动画、iAgent SDK 说明
+- [x] 首页集成 NetworkStats（英雄区下方、统计卡片上方）
+- [x] 首页集成 AIAgentSection（Recent Activity 和 All Campaigns 之间）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v3)
 - [x] 研究日志更新：Web3 Creator Economy Real-Time Payments 调研
