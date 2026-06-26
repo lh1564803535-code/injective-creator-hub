@@ -19,9 +19,17 @@
 - [ ] Integrate real Farcaster/Lens social data via API
 - [ ] Add Farcaster Frame for in-feed campaign voting
 
+## 本次改进 (2026-06-26 v23)
+- [x] TestnetBanner 组件 — 网络标识横幅（Chain ID 1439）、水龙头链接、可关闭
+- [x] HomepageStats 组件 — 首页平台统计（总奖励/创作者数/活动数/出块时间）、动画计数器
+- [x] QuickStats 组件 — Dashboard 快速统计（收入/活动/成员/出块时间）
+- [x] PoweredByInjective 组件 — 品牌徽章（badge/footer/inline 三种变体）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
 ## 本次改进 (2026-06-26 v22)
 - [x] SecurityTips 组件 — 5 条安全提示（seed phrase/verify address/revoke approvals/test tx/phishing）、严重性分级、可关闭、轮播导航、action 链接
 - [x] RewardsBreakdown 组件 — 奖励来源分解（campaigns/voting/streaks/referrals/tips）、可视化堆叠条、百分比显示、月度趋势
+- [x] AchievementBadges 组件 — 成就徽章系统（8 个成就、4 种稀有度、XP 系统）
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v21)
