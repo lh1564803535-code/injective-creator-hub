@@ -22,6 +22,7 @@ import { VoteDialog } from "@/components/campaign/VoteDialog";
 import { CreatorProfile } from "@/components/creator/CreatorProfile";
 import { CampaignStats } from "@/components/campaign/CampaignStats";
 import { CampaignTimeline } from "@/components/campaign/CampaignTimeline";
+import { useToast } from "@/components/ui/Toast";
 import type { SubmissionData } from "@/lib/injective";
 
 export default function CampaignDetailPage() {
@@ -31,6 +32,8 @@ export default function CampaignDetailPage() {
 
   const [contentURI, setContentURI] = useState("");
   const [step, setStep] = useState<"idle" | "submitting">("idle");
+
+  const { toast } = useToast();
 
   // Dialog state
   const [settleOpen, setSettleOpen] = useState(false);
@@ -69,9 +72,20 @@ export default function CampaignDetailPage() {
     e.preventDefault();
     if (!contentURI.trim()) return;
     setStep("submitting");
+    toast({
+      variant: "pending",
+      title: "Submitting content...",
+      description: "Your submission is being processed",
+      duration: 0,
+    });
     setTimeout(() => {
       setStep("idle");
       setContentURI("");
+      toast({
+        variant: "success",
+        title: "Content submitted!",
+        description: "Your submission is now live for voting",
+      });
     }, 2000);
   };
 
@@ -80,8 +94,12 @@ export default function CampaignDetailPage() {
     setVoteOpen(true);
   };
 
-  const handleVoteComplete = (_submissionId: number, _weight: number) => {
-    // In a real app this would call the contract
+  const handleVoteComplete = (submissionId: number, weight: number) => {
+    toast({
+      variant: "success",
+      title: "Vote recorded!",
+      description: `You voted with ${weight}x weight`,
+    });
   };
 
   if (!campaign) {
@@ -152,7 +170,14 @@ export default function CampaignDetailPage() {
           {/* Settle button */}
           {isVoting && (
             <button
-              onClick={() => setSettleOpen(true)}
+              onClick={() => {
+                setSettleOpen(true);
+                toast({
+                  variant: "info",
+                  title: "Settle campaign",
+                  description: "Review reward distribution before confirming",
+                });
+              }}
               className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 px-6 py-3 font-semibold text-white shadow-lg shadow-amber-500/25 transition-all hover:shadow-xl hover:shadow-amber-500/30 hover:scale-[1.02] active:scale-[0.98]"
             >
               <Award className="h-4 w-4" />

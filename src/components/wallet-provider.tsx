@@ -5,6 +5,7 @@ import { WagmiProvider } from "wagmi";
 import { wagmiConfig } from "@/lib/wagmi";
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { useState } from "react";
+import { ToastProvider } from "@/components/ui/Toast";
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -18,7 +19,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
             accentColorForeground: "white",
           })}
         >
-          {children}
+          <ToastProvider>{children}</ToastProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

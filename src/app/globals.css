@@ -338,6 +338,27 @@ button {
   margin-left: 2px;
 }
 
+/* === Toast Enter === */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.animate-toast-in {
+  animation: toast-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* === Content Visibility (off-screen rendering skip) === */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
 /* === Reduced motion === */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {

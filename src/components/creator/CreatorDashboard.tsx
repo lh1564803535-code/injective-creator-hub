@@ -13,7 +13,9 @@ import {
   Clock,
   Award,
 } from "lucide-react";
-import { formatUSDC, shortenAddress } from "@/lib/injective";
+import { formatUSDC } from "@/lib/injective";
+import { useToast } from "@/components/ui/Toast";
+import { StatTrend, Sparkline } from "@/components/ui/StatTrend";
 import type { Address } from "viem";
 
 // ---------------------------------------------------------------------------
@@ -132,15 +134,27 @@ interface CreatorDashboardProps {
 
 export function CreatorDashboard({ address }: CreatorDashboardProps) {
   const data = MOCK_DASHBOARD_DATA[address] || DEFAULT_DATA;
+  const { toast } = useToast();
   const [claimingId, setClaimingId] = useState<number | null>(null);
   const [claimedIds, setClaimedIds] = useState<Set<number>>(new Set());
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const handleClaim = (submissionId: number) => {
+  const handleClaim = (submissionId: number, reward: bigint) => {
     setClaimingId(submissionId);
+    toast({
+      variant: "pending",
+      title: "Claiming reward...",
+      description: `${formatUSDC(reward)} USDC is being transferred`,
+      duration: 0,
+    });
     setTimeout(() => {
       setClaimedIds((prev) => new Set([...prev, submissionId]));
       setClaimingId(null);
+      toast({
+        variant: "success",
+        title: "Reward claimed!",
+        description: `${formatUSDC(reward)} USDC has been sent to your wallet`,
+      });
     }, 2000);
   };
 
@@ -167,9 +181,20 @@ export function CreatorDashboard({ address }: CreatorDashboardProps) {
               Total Earnings
             </p>
           </div>
-          <p className="text-2xl font-bold text-emerald-400">
-            {formatUSDC(data.totalEarnings)} USDC
-          </p>
+          <div className="flex items-end justify-between">
+            <p className="text-2xl font-bold text-emerald-400">
+              {formatUSDC(data.totalEarnings)} USDC
+            </p>
+            <Sparkline
+              data={[30, 45, 25, 60, 55, 70, 85]}
+              color="#22c55e"
+              width={56}
+              height={20}
+            />
+          </div>
+          <div className="mt-2">
+            <StatTrend value={18.2} />
+          </div>
         </div>
 
         <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition-all hover:border-cyan-500/20">
@@ -179,9 +204,20 @@ export function CreatorDashboard({ address }: CreatorDashboardProps) {
               Total Votes
             </p>
           </div>
-          <p className="text-2xl font-bold text-cyan-400">
-            {data.totalVotes.toLocaleString()}
-          </p>
+          <div className="flex items-end justify-between">
+            <p className="text-2xl font-bold text-cyan-400">
+              {data.totalVotes.toLocaleString()}
+            </p>
+            <Sparkline
+              data={[10, 22, 18, 35, 28, 42, 38]}
+              color="#06b6d4"
+              width={56}
+              height={20}
+            />
+          </div>
+          <div className="mt-2">
+            <StatTrend value={12.5} />
+          </div>
         </div>
 
         <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition-all hover:border-purple-500/20">
@@ -191,9 +227,20 @@ export function CreatorDashboard({ address }: CreatorDashboardProps) {
               Submissions
             </p>
           </div>
-          <p className="text-2xl font-bold text-purple-400">
-            {data.submissions.length}
-          </p>
+          <div className="flex items-end justify-between">
+            <p className="text-2xl font-bold text-purple-400">
+              {data.submissions.length}
+            </p>
+            <Sparkline
+              data={[1, 2, 1, 3, 2, 4, 3]}
+              color="#8b5cf6"
+              width={56}
+              height={20}
+            />
+          </div>
+          <div className="mt-2">
+            <StatTrend value={5.3} />
+          </div>
         </div>
       </div>
 
@@ -320,7 +367,7 @@ export function CreatorDashboard({ address }: CreatorDashboardProps) {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleClaim(sub.id);
+                                handleClaim(sub.id, sub.reward);
                               }}
                               disabled={claimingId === sub.id}
                               className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-500 to-green-600 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-emerald-500/25 transition hover:shadow-xl disabled:opacity-50"

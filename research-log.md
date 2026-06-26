@@ -45,3 +45,49 @@ This could be used for a "celebration" mode with USDC/symbol emoji.
 - Add `disableForReducedMotion: true` to all confetti calls for accessibility
 - Enhance side-cannon pattern in RewardAnimation.tsx
 - Add floating particle background effect to hero section using CSS (not confetti library, to avoid performance overhead)
+
+---
+
+## 2026-06-26 — React Animation Libraries & CSS Performance 2026
+
+### Topic
+React animation library ecosystem evolution (Motion/Framer Motion, CSS View Transitions API, Scroll-Driven Animations) and GPU-accelerated animation best practices for Web3 creator platforms.
+
+### Findings
+
+**1. Motion (formerly Framer Motion) — Rebranded & Leaner**
+The library rebranded from "framer-motion" to "motion" on npm. Now focused on being lightweight with hardware-accelerated CSS animations. Key new APIs: `animate()`, `scroll()`, `inView()` for vanilla JS usage alongside React components. The `motion` package is the successor — `framer-motion` still works but `motion` is the recommended import.
+- Source: https://motion.dev
+- Source: https://github.com/motiondivision/motion
+
+**2. React 19 View Transitions API Integration**
+React 19 introduced experimental `<ViewTransition>` component for declarative view transitions. Enables smooth page/element transitions using the browser-native View Transitions API (`document.startViewTransition()`). Supports `onEnter`/`onExit` lifecycle callbacks and shared element transitions across route changes. This is a game-changer for SPAs — no library needed for basic page transitions.
+- Source: https://react.dev/blog
+- Source: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+
+**3. CSS Scroll-Driven Animations (animation-timeline)**
+Native CSS `animation-timeline: scroll()` enables scroll-linked animations without JavaScript scroll listeners. Supported in Chrome 115+, Firefox 110+. This eliminates the need for IntersectionObserver-based scroll animations for simple reveal effects. The project's `useScrollReveal` hook could be partially replaced by pure CSS `@scroll-timeline` for better performance.
+- Source: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
+
+**4. GPU Animation Performance — Compositor-Only Properties**
+Only `transform` and `opacity` are truly compositor-friendly (no layout/paint). The project correctly uses `transform: translateY()` for hover effects but some animations use `box-shadow` transitions which trigger paint. Best practice: animate `transform` + `opacity` only; use `will-change` sparingly (creates compositor layers); avoid animating `box-shadow`, `border-color`, `width/height`. For the golden-glow effect, consider using `filter: drop-shadow()` instead of `text-shadow` for GPU acceleration.
+- Source: https://web.dev/performance
+- Source: https://developer.mozilla.org/en-US/docs/Web/CSS/will-change
+
+**5. content-visibility: auto — Off-Screen Rendering Skip**
+CSS `content-visibility: auto` tells the browser to skip rendering off-screen elements entirely. For a page with many campaign cards or leaderboard rows, this can dramatically reduce initial paint time. The browser only renders elements as they scroll into view — similar to virtualization but at the CSS level with zero JavaScript.
+- Source: https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility
+
+### Application to Project
+- **Toast system**: Web3 apps need instant feedback for tx states (pending/confirm/fail). Current UX relies on modal overlays — a lightweight toast is better for non-blocking feedback.
+- **useReducedMotion hook**: Current `prefers-reduced-motion` handling is CSS-only. A React hook enables programmatic control (e.g., skip confetti entirely, reduce particle count).
+- **Stat trend indicators**: Add micro-interaction sparklines to dashboard stat cards to show growth trends visually.
+- **content-visibility**: Apply to campaign list and leaderboard for off-screen rendering optimization.
+- **will-change discipline**: Audit existing animations — remove `will-change` from static elements, only apply during active transitions.
+
+### URLs
+- Motion: https://motion.dev
+- View Transitions API: https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
+- Scroll-Driven Animations: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline
+- content-visibility: https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility
+- Web Performance: https://web.dev/performance
