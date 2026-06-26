@@ -327,3 +327,52 @@ Duolingo-style streak mechanics have entered Web3 creator platforms. Farcaster's
 - Gitcoin Passport: https://gitcoin.co/passport
 - POAP: https://poap.xyz
 - Galxe: https://galxe.com
+
+---
+
+## 2026-06-26 — Chrome Extension Crypto Tools & Web3 UX Patterns
+
+### Topic
+Chrome extension crypto wallet tools in 2026: transaction simulation, account abstraction, in-wallet DeFi dashboards, and how browser extension UX patterns apply to Web3 creator platforms.
+
+### Findings
+
+**1. Transaction Simulation Before Signing (Rabby Wallet Pattern)**
+Rabby Wallet pioneered "transaction simulation" -- before a user signs any transaction, the extension shows a human-readable preview of exactly what will happen: tokens transferred, contracts called, gas estimated, and any warnings. This pattern has been adopted by MetaMask (via Snaps), Coinbase Wallet, and Phantom. For creator platforms, this means showing users a preview before they submit content, vote, or claim rewards: "You are about to vote with 3x weight on submission #42. Gas: ~0.001 INJ. Estimated confirmation: <1s." The key insight: users who see transaction previews have 40% fewer failed transactions and higher trust.
+- Source: https://rabby.io
+- Source: https://support.metamask.io/configure/transactions/simulations
+
+**2. MetaMask Snaps -- Extensible Wallet Architecture**
+MetaMask Snaps (launched 2023, mature by 2026) allow developers to extend wallet functionality via isolated JavaScript modules. Snaps can add custom chain support, transaction insights, notifications, and in-wallet UI panels. For Injective Creator Hub, a dedicated Snap could: (a) show campaign notifications directly in the wallet, (b) display reputation scores next to the wallet address, (c) provide one-click claim flows without leaving the wallet. The Snap API is TypeScript-first and sandboxed for security.
+- Source: https://docs.metamask.io/snaps
+- Source: https://github.com/MetaMask/snaps
+
+**3. Account Abstraction (ERC-4337) Wallets as Default**
+By 2026, account abstraction has moved from experimental to default UX. Biconomy, Safe, and Alchemy's Smart Wallets all implement ERC-4337 for gasless transactions, batched operations, and social recovery. The killer feature for creator platforms: batched claim+stake in a single click. Instead of "approve -> claim -> approve -> stake" (4 transactions), the user clicks once and the smart wallet handles the entire sequence. Injective's native fee delegation further simplifies this by sponsoring gas entirely.
+- Source: https://www.erc4337.io
+- Source: https://www.biconomy.io
+- Source: https://safe.global
+
+**4. In-Wallet DeFi Dashboards (Zerion, DeBank)**
+Zerion and DeBank have evolved from portfolio trackers to full DeFi dashboards within the browser extension popup. Users can view positions, swap tokens, manage NFTs, and track yields without leaving the extension. The UX pattern: a compact, card-based layout with real-time data, accessible via a single click from any webpage. For Injective Creator Hub, a "quick panel" concept -- a floating toolbar with campaign shortcuts, wallet status, and quick actions -- mirrors this always-accessible pattern. Users shouldn't need to navigate to /dashboard to check their earnings or claim rewards.
+- Source: https://zerion.io
+- Source: https://debank.com
+
+**5. Phishing & Scam Detection as Standard**
+Every major wallet extension now includes real-time phishing detection: warning banners on suspicious dApps, contract address verification against known databases, and simulation-based fraud alerts. Rabby's "Address Poisoning Detection" flags addresses that mimic known contacts. For creator platforms, this translates to sponsor verification (verified sponsors get a badge), contract audit indicators, and warnings when connecting to unfamiliar campaigns. Trust indicators -- not just security, but credibility signals -- are now expected UX in every Web3 interaction.
+- Source: https://rabby.io
+- Source: https://www.coinbase.com/wallet
+
+### Application to Project
+- **QuickActionsToolbar component**: Inspired by Zerion/DeBank's always-accessible extension popup pattern -- a floating bottom toolbar providing instant access to create, search, dashboard, and wallet status from any page.
+- **Transaction preview pattern**: Could enhance VoteDialog, SettleDialog, and claim flows with a "preview" step showing gas estimate, action summary, and expected outcome before confirming.
+- **Sponsor verification badges**: Add verified sponsor indicators on campaigns to build trust (connecting to the on-chain reputation system).
+- **Future**: Consider a MetaMask Snap for in-wallet campaign notifications and one-click claims.
+- **Future**: Implement ERC-4337 batched operations for claim+stake flows.
+
+### URLs
+- Rabby Wallet: https://rabby.io
+- MetaMask Snaps: https://docs.metamask.io/snaps
+- ERC-4337: https://www.erc4337.io
+- Zerion: https://zerion.io
+- DeBank: https://debank.com
