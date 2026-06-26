@@ -20,6 +20,7 @@ import { AchievementBadges } from "@/components/creator/AchievementBadges";
 import { RewardsBreakdown } from "@/components/creator/RewardsBreakdown";
 import { SecurityTips } from "@/components/ui/SecurityTips";
 import { QuickStats } from "@/components/ui/QuickStats";
+import { TipCreator } from "@/components/creator/TipCreator";
 import { shortenAddress } from "@/lib/injective";
 import { MOCK_ACTIVITY, MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import { useNotifications } from "@/components/ui/NotificationCenter";
