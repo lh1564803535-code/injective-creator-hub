@@ -7,7 +7,20 @@ import {
   getTimeRemaining,
   getCampaignStatus,
 } from "@/lib/injective";
+import { SocialProof, type SocialMetrics } from "@/components/ui/SocialProof";
 import type { Campaign } from "@/types/creator-settlement";
+
+// Mock social metrics per campaign (seeded by campaign ID)
+const SOCIAL_METRICS: Record<number, SocialMetrics> = {
+  1: { views: 12400, shares: 890, reactions: 3200, trendingScore: 92, farcasterFid: 12345, lensHandle: "creator-hub" },
+  2: { views: 8700, shares: 540, reactions: 2100, trendingScore: 78, ensName: "injective-hub.eth" },
+  3: { views: 23100, shares: 1200, reactions: 5600, trendingScore: 95, farcasterFid: 67890, lensHandle: "meme-queen" },
+  4: { views: 4500, shares: 320, reactions: 980, trendingScore: 45 },
+  5: { views: 15800, shares: 720, reactions: 4100, trendingScore: 85, lensHandle: "art-collector" },
+  6: { views: 6200, shares: 410, reactions: 1500, trendingScore: 62 },
+  7: { views: 9800, shares: 560, reactions: 2800, trendingScore: 71, farcasterFid: 11111 },
+  8: { views: 18500, shares: 950, reactions: 4800, trendingScore: 88, ensName: "defi-creator.eth" },
+};
 
 interface CampaignCardProps {
   campaign: Campaign;
@@ -91,6 +104,16 @@ export function CampaignCard({ campaign }: CampaignCardProps) {
           <span className="text-gray-400">{campaign.submissionCount}</span>
         </div>
       </div>
+
+      {/* Social proof */}
+      {SOCIAL_METRICS[campaign.id] && (
+        <div className="relative mt-3 border-t border-white/[0.04] pt-3">
+          <SocialProof
+            metrics={SOCIAL_METRICS[campaign.id]}
+            variant="compact"
+          />
+        </div>
+      )}
 
       {/* Bottom accent bar */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-500/0 to-transparent transition-all group-hover:via-cyan-500/30" />

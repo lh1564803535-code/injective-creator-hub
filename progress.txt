@@ -1,6 +1,6 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：Web3 Notification Center — Decentralized Event Streaming & Real-Time Alerts
+## 当前阶段：Social Proof & Web3 Social Commerce Integration
 
 ## 待办
 - [ ] Consider Sablier integration for streaming campaign rewards
@@ -13,6 +13,32 @@
 - [ ] Consider MetaMask Snap for in-wallet notifications
 - [ ] Integrate Push Protocol SDK for real on-chain notification delivery
 - [ ] Add notification sound effects for new alerts (optional toggle)
+- [ ] Add campaign category field to Campaign type and wire up real category data
+- [ ] Replace useScrollReveal with CSS scroll-driven animations (animation-timeline: view())
+- [ ] Experiment with React 19 <ViewTransition> for page-to-page transitions
+- [ ] Add @property CSS Houdini for animating gradient stops and conic-gradient values
+- [ ] Integrate real Farcaster/Lens social data via API
+- [ ] Add Farcaster Frame for in-feed campaign voting
+
+## 本次改进 (2026-06-26 v13)
+- [x] 研究日志更新：Web3 Social Commerce & Creator Monetization Deep Dive 调研（Farcaster Frames V2、Lens Protocol Open Actions、token-gated content、on-chain social proof、cross-platform social identity via ENS/Farcaster/Lens）
+- [x] 创建 SocialProof 组件 — 社交参与度指标（views/reactions/shares 计数动画）、趋势徽章系统（Hot/Rising/Warm 三级，基于 engagement score 0-100）、趋势进度条（渐变色+闪光动画）、社交验证徽章（Farcaster FID / Lens Handle / ENS Name，可点击跳转）、compact/full 双变体、IntersectionObserver 入场动画
+- [x] 创建 CreatorSocialBadges 导出 — 独立社交徽章组件（用于创作者资料卡）
+- [x] CampaignCard 集成 SocialProof — 每张活动卡片显示社交指标和趋势徽章
+- [x] CSS 动画添加 — social-proof-in（入场）、trending-pulse（徽章脉冲）、trending-shimmer（进度条闪光）、social-badge hover
+- [x] Reduced motion 媒体查询覆盖新动画
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
+
+## 本次改进 (2026-06-26 v12)
+- [x] 研究日志更新：CSS Scroll-Driven Animations & View Transitions API 2026 调研（animation-timeline: view()/scroll()、View Transitions API、@property Houdini、React 19 concurrent + view transitions、scroll-driven-animations.style）
+- [x] 创建 CampaignExplorer 组件 — 分类标签筛选（Content/Development/Design/Community）、状态筛选（All/Active/Voting/Ended）、排序选项（Trending/Reward/Deadline/Submissions）、搜索框（/ 快捷键）、网格/列表视图切换、奖励等级徽章（Mega/Premium/Standard/Starter）、动画卡片入场
+- [x] 创建 /campaigns 页面路由，集成 CampaignExplorer
+- [x] 导航栏添加 Campaigns 链接（桌面端+移动端）
+- [x] QuickActionsToolbar "Search" 改为 "Explore" 链接到 /campaigns
+- [x] Dashboard "Browse Campaigns" 快捷操作链接更新为 /campaigns
+- [x] CSS 滚动驱动动画工具类 — sda-fade-up、sda-scale-in、sda-slide-left、sda-slide-right（使用原生 animation-timeline: view()，无需 JS）
+- [x] CSS 微交互 — card-grid-stagger（网格交错入场）、chip-glow（标签悬浮发光）、input-focus-anim（输入框焦点环动画）
+- [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v11)
 - [x] 研究日志更新：Web3 Notification Systems & On-Chain Event Streaming 调研（Push Protocol 架构、Socket 实时推送、通知 UX 模式、delegated notifications、on-chain event pipeline）
@@ -156,8 +182,8 @@
 - [x] 最终验证 — npx tsc --noEmit 无错误
 - [x] 最终验证 — 无 injectivelabs SDK 导入
 - [x] 最终验证 — 无 any 类型
-- [x] 最终验证 — 所有页面可访问（/, /leaderboard, /campaign/[id], /create, /dashboard）
-- [x] 最终验证 — 所有组件完整（Navbar, LeaderboardTable, CampaignCard, RewardAnimation, SettleDialog, VoteDialog, CreatorDashboard, CampaignTimeline, Footer, Toast, StatTrend, Sparkline, FloatingParticles, CreatorProfile, CampaignStats）
+- [x] 最终验证 — 所有页面可访问（/, /campaigns, /leaderboard, /campaign/[id], /create, /dashboard）
+- [x] 最终验证 — 所有组件完整（Navbar, LeaderboardTable, CampaignCard, CampaignExplorer, RewardAnimation, SettleDialog, VoteDialog, CreatorDashboard, CampaignTimeline, Footer, Toast, StatTrend, Sparkline, FloatingParticles, CreatorProfile, CampaignStats, NotificationCenter, CampaignRecommendations, CreatorStreak, CreatorAnalytics, CreatorReputation, YieldStaking, QuickActionsToolbar, NetworkStats, AIAgentSection, USDCBenefits, EarningsChart, PaymentStream, SocialProof）
 - [x] 最终验证 — npm run build 成功（7/7 静态页面生成）
 - [x] 最终验证 — 生产构建零错误（Next.js 16.2.9 Turbopack, 7/7 页面生成）
 - [x] 文档 — README.md 完整（功能列表、技术栈、本地运行、部署指南、项目结构）
