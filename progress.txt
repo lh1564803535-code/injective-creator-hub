@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v38 - 循环改进续)
+- [x] ChainSwitcher — 链切换组件（多链下拉选择）
+- [x] AssetRow — 资产行组件（代币信息/余额/涨跌）
+- [x] 调研 — Multi-Chain Portfolio Management
+- [x] 自动唤醒机制持续运行
+
 ## 本次改进 (2026-06-27 v37 - 循环改进续)
 - [x] LiveIndicator — 实时状态指示器（连接/离线/脉冲动画）
 - [x] StreamStatus — 流状态组件（速率/运行时间）
