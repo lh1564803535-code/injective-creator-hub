@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { DollarSign, TrendingUp, Target, ChevronUp } from "lucide-react";
+import { DollarSign, TrendingUp, Target, ChevronUp, Calendar } from "lucide-react";
 
 interface LiveEarningsProps {
   /** Simplified mode for homepage (only total + rate) */
@@ -25,6 +25,46 @@ function formatCompact(value: number): string {
   return `$${value.toFixed(2)}`;
 }
 
+/** Generate 7-day mock earnings data for sparkline */
+function generateWeeklyData(): number[] {
+  const base = [8.2, 11.4, 9.8, 14.2, 12.1, 13.5, 12.45];
+  return base.map((v) => v + (Math.random() - 0.5) * 2);
+}
+
+/** SVG sparkline path from data points */
+function SparklineChart({ data, color = "#f59e0b" }: { data: number[]; color?: string }) {
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = max - min || 1;
+  const w = 120;
+  const h = 32;
+  const step = w / (data.length - 1);
+
+  const points = data.map((v, i) => {
+    const x = i * step;
+    const y = h - ((v - min) / range) * (h - 4) - 2;
+    return `${x},${y}`;
+  });
+
+  const linePath = `M${points.join(" L")}`;
+  const areaPath = `${linePath} L${w},${h} L0,${h} Z`;
+
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="overflow-visible">
+      <defs>
+        <linearGradient id="sparkline-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.3" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={areaPath} fill="url(#sparkline-grad)" />
+      <path d={linePath} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Current value dot */}
+      <circle cx={w} cy={parseFloat(points[points.length - 1].split(",")[1])} r="2.5" fill={color} />
+    </svg>
+  );
+}
+
 export function LiveEarnings({
   compact = false,
   initialTotal = 42.5837,
@@ -36,6 +76,7 @@ export function LiveEarnings({
   const [monthEarnings, setMonthEarnings] = useState(1245.67);
   const [prevTotal, setPrevTotal] = useState(initialTotal);
   const [animating, setAnimating] = useState(false);
+  const [weeklyData] = useState(generateWeeklyData);
   const rafRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const accumulatedRef = useRef(0);
@@ -184,6 +225,34 @@ export function LiveEarnings({
               {formatCompact(annualProjection)}
             </p>
             <p className="mt-1 text-[10px] text-gray-600">projected</p>
+          </div>
+        </div>
+
+        {/* 7-Day Trend + 30-Day Forecast */}
+        <div className="mb-6 grid grid-cols-2 gap-3">
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+            <p className="mb-2 text-xs text-gray-500">7-Day Trend</p>
+            <SparklineChart data={weeklyData} />
+            <div className="mt-2 flex items-center justify-between">
+              <span className="text-[10px] text-gray-600">Mon</span>
+              <span className="text-[10px] text-gray-600">Today</span>
+            </div>
+          </div>
+          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+            <p className="mb-2 flex items-center gap-1 text-xs text-gray-500">
+              <Calendar className="h-3 w-3" />
+              30-Day Forecast
+            </p>
+            <p className="text-2xl font-bold text-white">
+              {formatCompact(ratePerSecond * 86400 * 30)}
+            </p>
+            <p className="mt-1 text-[10px] text-gray-600">
+              Based on current streaming rate
+            </p>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+              <div className="h-full w-[73%] rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
+            </div>
+            <p className="mt-1 text-[10px] text-gray-600">73% to annual goal</p>
           </div>
         </div>
 

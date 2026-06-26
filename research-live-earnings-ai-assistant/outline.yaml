@@ -1,0 +1,107 @@
+# 实时收益计价器 & AI 自然语言助手 — 调研大纲
+# Generated: 2026-06-26
+
+topic: "Web3 创作者平台实时收益显示 & AI 自然语言助手 UX 最佳实践"
+
+items:
+  # === 实时收益显示类 ===
+  - name: Superfluid
+    category: streaming-payment
+    url: https://superfluid.org
+    why: 实时流支付仪表板，数字每秒跳动的标杆
+
+  - name: Sablier
+    category: streaming-payment
+    url: https://sablier.com
+    why: 链上流支付协议，可视化收益曲线
+
+  - name: Lido stETH
+    category: defi-yield
+    url: https://lido.fi
+    why: 质押收益实时显示，DeFi 收益 UX 标杆
+
+  - name: Aave aUSDC
+    category: defi-yield
+    url: https://aave.com
+    why: 借贷收益实时计价，余额自动增长
+
+  - name: RealT
+    category: rwa-yield
+    url: https://realt.co
+    why: RWA 房产代币化，实时租金收益可视化
+
+  - name: RWA.xyz
+    category: rwa-analytics
+    url: https://rwa.xyz
+    why: 代币化资产分析仪表板，$22B 市场聚合
+
+  - name: Farcaster / Lens Protocol
+    category: socialfi-earnings
+    url: https://farcaster.xyz / https://lens.xyz
+    why: SocialFi 创作者收益新范式，直接竞品参考
+
+  # === AI 自然语言助手类 ===
+  - name: TxGPT Bot
+    category: ai-assistant
+    url: https://ethglobal.com/showcase/ai-web3-assistant-hpmi5
+    why: ETHGlobal 赛道，自然语言管理区块链交易
+
+  - name: Crypto.com AI Agent SDK
+    category: ai-sdk
+    url: https://ai-agent-sdk-docs.crypto.com
+    why: 自然语言钱包交互 SDK
+
+  - name: Coinbase Agentic Wallets + Base MCP
+    category: ai-wallet
+    url: https://www.coinbase.com/developer-platform/discover/launches/agentic-wallets
+    why: 2026 最重要 AI 钱包基建，x402 已处理 1.07 亿笔机器交易
+
+  - name: Binance Web3 Wallet
+    category: ai-wallet
+    url: https://www.binance.com
+    why: 内置 AI 助手的主流钱包
+
+  - name: Rabby Wallet
+    category: wallet-security
+    url: https://rabby.io
+    why: 交易模拟 + 风险提示，安全 UX 标杆
+
+  - name: OKX Web3 Wallet
+    category: ai-wallet
+    url: https://www.okx.com/web3
+    why: AI 交易助手
+
+  - name: ChainGPT
+    category: ai-platform
+    url: https://www.chaingpt.org
+    why: 区块链 AI 全栈平台，智能合约审计 + NFT 生成
+
+  - name: Nansen AI
+    category: ai-analytics
+    url: https://www.nansen.ai
+    why: 链上分析 AI 助手，数据 + 社交情报
+
+  - name: AGNT
+    category: ai-intent
+    url: https://agnt.com
+    why: 意图驱动 Web3 AI Agent 框架
+
+  - name: Brian AI
+    category: ai-assistant
+    url: https://www.brian.ai
+    why: 自然语言区块链助手，TxGPT 同类竞品
+
+  - name: Virtuals Protocol
+    category: ai-tokenization
+    url: https://www.virtualsprotocol.com
+    why: AI Agent 代币化，Agent 成为收益资产
+
+  - name: x402 Protocol
+    category: ai-payment
+    url: https://www.coinbase.com/developer-platform/discover/launches/x402
+    why: 机器对机器支付标准，AI Agent 支付基建
+
+execution:
+  batch_size: 3
+  items_per_agent: 2
+  output_dir: ./results

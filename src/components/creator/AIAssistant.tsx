@@ -13,14 +13,17 @@ interface Message {
 const WELCOME_MSG: Message = {
   id: "welcome",
   role: "assistant",
-  text: "👋 你好！我是你的创作助手。\n\n我可以帮你：\n- 创建和管理钱包\n- 参加创作活动\n- 把收益提现到银行卡\n- 了解区块链知识\n\n有什么问题尽管问我！",
+  text: "👋 你好！我是你的创作助手。\n\n我可以帮你：\n- 创建和管理钱包\n- 参加创作活动\n- 把收益提现到银行卡\n- 了解实时流支付\n- 了解 SocialFi 和 AI Agent\n\n有什么问题尽管问我！",
   timestamp: Date.now(),
 };
 
 const QUICK_BUTTONS = [
-  { label: "怎么创建钱包", query: "创建钱包" },
+  { label: "创建钱包", query: "创建钱包" },
   { label: "怎么提现", query: "提现" },
   { label: "什么是Gas", query: "Gas" },
+  { label: "实时流支付", query: "stream" },
+  { label: "SocialFi", query: "socialfi" },
+  { label: "AI Agent", query: "agent" },
 ];
 
 function getAIResponse(input: string): string {
@@ -47,8 +50,23 @@ function getAIResponse(input: string): string {
   if (/安全|被骗|风险/.test(lower)) {
     return "安全提示：\n1. 永远不要分享你的私钥或助记词\n2. 只连接你信任的钱包\n3. 交易前仔细确认金额和地址\n4. 如果不确定，先问我\n\n我会帮你检查每笔交易的风险。";
   }
+  if (/socialfi|社交|farcaster|lens|粉丝/.test(lower)) {
+    return "SocialFi 是「社交+金融」的新模式：\n- Farcaster：类似去中心化 Twitter，创作者每周可赚 $25,000 USDC\n- Lens Protocol：你的社交关系是 NFT，可以卖帖子、收粉丝费\n\n在这个平台，你可以：\n1. 通过创作活动赚取 USDC\n2. 积累链上声誉\n3. 粉丝可以直接打赏你\n\n不需要懂技术，正常创作就行！";
+  }
+  if (/agent|智能助手|自动|机器人/.test(lower)) {
+    return "AI Agent 是你的「智能钱包助手」：\n- 可以帮你自动执行交易\n- 监控收益变化\n- 推荐最赚钱的活动\n\n安全特性：\n1. 每笔交易都需要你确认\n2. 有每日支出上限\n3. 所有操作都有审计日志\n\n你可以把它理解为一个「会用区块链的私人秘书」。";
+  }
+  if (/stream|流支付|实时|每秒/.test(lower)) {
+    return "实时流支付是 Superfluid 协议的核心技术：\n- 你的收益每秒都在增长\n- 不是一次性到账，而是像水龙头一样持续流入\n- 你可以实时看到钱在增加\n\n这就是为什么你的 Dashboard 上数字一直在跳动——那是真金白银在流入你的钱包！";
+  }
+  if (/collect|收藏|nft|铸造/.test(lower)) {
+    return "在 Web3 社交平台，你的作品可以变成 NFT：\n1. 发布作品时设置「收藏价格」\n2. 粉丝付费收藏，作品自动铸造为 NFT\n3. 收入直接进入你的钱包\n\n你还可以：\n- 设置限量版（比如只有 100 份）\n- 给早期收藏者打折\n- 二次销售时获得版税\n\n这是创作者新的收入来源！";
+  }
+  if (/声誉|reputation|评分|等级/.test(lower)) {
+    return "你的链上声誉由以下因素决定：\n1. 活动参与度（提交作品数量）\n2. 获得的投票数\n3. 赚取的 USDC 总额\n4. 连续签到天数\n\n声誉越高：\n- 能参加更高级的活动\n- 获得更高的投票权重\n- 解锁专属成就徽章\n\n所有数据都在链上，真实可信！";
+  }
 
-  return "我不太确定你的问题，但我可以帮你：\n- 创建钱包\n- 参加活动\n- 提现到银行卡\n- 了解 Gas 费\n- 投票\n\n试试问我这些问题！";
+  return "我不太确定你的问题，但我可以帮你：\n- 创建钱包\n- 参加活动\n- 提现到银行卡\n- 了解 Gas 费\n- 投票\n- 了解 SocialFi\n- 了解 AI Agent\n- 了解实时流支付\n\n试试问我这些问题！";
 }
 
 export function AIAssistant() {
@@ -191,12 +209,12 @@ export function AIAssistant() {
         </div>
 
         {/* Quick Buttons */}
-        <div className="flex gap-2 border-t border-white/[0.04] px-4 py-2">
+        <div className="grid grid-cols-3 gap-1.5 border-t border-white/[0.04] px-4 py-2">
           {QUICK_BUTTONS.map((btn) => (
             <button
               key={btn.query}
               onClick={() => sendMessage(btn.query)}
-              className="flex-1 rounded-lg bg-white/[0.04] px-2 py-1.5 text-[11px] text-gray-400 transition hover:bg-white/[0.08] hover:text-white"
+              className="rounded-lg bg-white/[0.04] px-2 py-1.5 text-[10px] text-gray-400 transition hover:bg-white/[0.08] hover:text-white"
             >
               {btn.label}
             </button>

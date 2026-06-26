@@ -1,0 +1,150 @@
+# 实时收益计价器 & AI 自然语言助手 — 字段定义
+# Generated: 2026-06-26
+
+field_categories:
+
+  # === 基本信息 ===
+  - category: basic
+    fields:
+      - name: name
+        description: 产品/项目名称
+        detail_level: 极简
+      - name: url
+        description: 官网或主要链接
+        detail_level: 极简
+      - name: type
+        description: 产品类型（streaming-payment / defi-yield / ai-assistant / ai-wallet / socialfi-earnings 等）
+        detail_level: 极简
+      - name: launch_date
+        description: 发布/上线时间
+        detail_level: 简要
+      - name: company
+        description: 背后的开发团队/公司
+        detail_level: 简要
+
+  # === 实时收益显示维度 ===
+  - category: realtime-display
+    fields:
+      - name: refresh_mechanism
+        description: 数据刷新机制（WebSocket / polling / requestAnimationFrame / on-chain event）
+        detail_level: 详细
+      - name: update_frequency
+        description: UI 更新频率（毫秒级 / 秒级 / 分钟级）
+        detail_level: 详细
+      - name: number_animation
+        description: 数字动画方式（滚动 / 计数器 / 弹跳 / 渐变 / 无动画）
+        detail_level: 详细
+      - name: progress_style
+        description: 进度可视化样式（进度条 / 环形图 / 面积图 / 热力图）
+        detail_level: 详细
+      - name: color_scheme
+        description: 配色方案（主色调、强调色、背景色）
+        detail_level: 简要
+      - name: data_source_type
+        description: 数据来源类型（on-chain / off-chain / hybrid）
+        detail_level: 详细
+      - name: latency_ms
+        description: 数据延迟级别（毫秒 / 秒 / 分钟 / 小时）
+        detail_level: 详细
+      - name: multi_asset_aggregation
+        description: 是否支持多资产/多协议收益聚合展示
+        detail_level: 简要
+      - name: historical_trend_display
+        description: 历史趋势可视化方式（折线图 / 面积图 / 柱状图 / 热力图）
+        detail_level: 详细
+
+  # === AI 助手维度 ===
+  - category: ai-assistant
+    fields:
+      - name: input_method
+        description: 用户输入方式（文本 / 语音 / 快捷按钮 / 混合）
+        detail_level: 简要
+      - name: response_type
+        description: AI 回复类型（文本 / 交易预览 / 操作确认 / 自动执行）
+        detail_level: 详细
+      - name: scope
+        description: 功能覆盖范围（钱包管理 / DeFi 操作 / 链上分析 / 跨链 / 全栈）
+        detail_level: 详细
+      - name: intent_abstraction_level
+        description: 意图抽象层级（单步命令 / 多步编排 / 目标驱动）
+        detail_level: 详细
+      - name: execution_model
+        description: 执行模型（建议型 / 确认执行型 / 全自主型）
+        detail_level: 详细
+      - name: agent_wallet_support
+        description: 是否支持 Agent 自有钱包
+        detail_level: 简要
+      - name: cross_chain_capability
+        description: 跨链能力（单链 / 多链手动 / 多链自动路由）
+        detail_level: 详细
+      - name: permission_granularity
+        description: 权限粒度（无限制 / 金额上限 / 协议白名单 / 时间锁）
+        detail_level: 详细
+      - name: safety_features
+        description: 安全特性（交易模拟 / 风险评估 / 钓鱼检测 / 限额）
+        detail_level: 详细
+
+  # === 创作者收益维度 ===
+  - category: creator-earnings
+    fields:
+      - name: revenue_stream_diversity
+        description: 支持的收益流类型（打赏 / 订阅 / NFT 销售 / 广告分成 / 代币激励 / 治理奖励）
+        detail_level: 详细
+      - name: payout_frequency
+        description: 结算频率（实时流支付 / 日结 / 周结 / 月结）
+        detail_level: 详细
+      - name: platform_fee_rate
+        description: 平台费率
+        detail_level: 简要
+      - name: fiat_offramp_integration
+        description: 法币出金集成（是否支持、支持渠道）
+        detail_level: 详细
+      - name: min_payout_threshold
+        description: 最低提现门槛
+        detail_level: 简要
+
+  # === UX 亮点 ===
+  - category: ux
+    fields:
+      - name: wow_factor
+        description: 最让人印象深刻的 UX 特性
+        detail_level: 详细
+      - name: onboarding_flow
+        description: 新用户引导流程（几步完成、是否需要钱包、学习曲线）
+        detail_level: 详细
+      - name: accessibility
+        description: 无障碍支持（reduced-motion / 屏幕阅读器 / 键盘导航）
+        detail_level: 简要
+
+  # === 技术栈 ===
+  - category: tech
+    fields:
+      - name: framework
+        description: 前端框架（React / Next.js / Vue / 原生）
+        detail_level: 简要
+      - name: api_source
+        description: 数据 API 来源（The Graph / 自建索引 / 第三方 API）
+        detail_level: 详细
+      - name: smart_contract
+        description: 相关智能合约（协议地址、是否开源）
+        detail_level: 简要
+
+  # === 不确定字段（deep 阶段自动填充） ===
+  - category: uncertain
+    fields:
+      - name: market_position
+        description: 市场定位和竞争格局
+        detail_level: 详细
+        uncertain: true
+      - name: user_scale
+        description: 用户规模（DAU / MAU / 总用户数）
+        detail_level: 简要
+        uncertain: true
+      - name: funding_status
+        description: 融资情况
+        detail_level: 简要
+        uncertain: true
+      - name: roadmap_2026
+        description: 2026 年路线图和即将到来的更新
+        detail_level: 详细
+        uncertain: true

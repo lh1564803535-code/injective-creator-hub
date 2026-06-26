@@ -21,12 +21,18 @@
 
 ## 本次改进 (2026-06-26 v17)
 - [x] 创建 LiveEarnings 组件 — 实时收益计价器：requestAnimationFrame 驱动的 USDC 增长动画、数字滚动效果（translateY + opacity）、3 个统计卡片（今日/本月/年化）、月度目标进度条（流动光点动画）、金色渐变主数字、深色卡片 + 发光效果、compact 变体（首页简化版）
-- [x] 创建 AIAssistant 组件 — 自然语言区块链助手：悬浮按钮（脉冲动画）、展开聊天面板（360×500px，滑入动画）、8 组预设问答（钱包/提现/Gas/投票/活动/USDC/安全/默认）、欢迎消息、3 个快捷按钮、AI 打字指示器、聊天气泡入场动画
+- [x] 创建 AIAssistant 组件 — 自然语言区块链助手：悬浮按钮（脉冲动画）、展开聊天面板（360×500px，滑入动画）、13 组预设问答（钱包/提现/Gas/投票/活动/USDC/安全/SocialFi/Agent/流支付/Collect/声誉/默认）、欢迎消息、6 个快捷按钮、AI 打字指示器、聊天气泡入场动画
 - [x] Dashboard 集成 LiveEarnings（顶部最显眼位置）
 - [x] 首页集成 LiveEarnings compact（NetworkStats 下方）
 - [x] layout.tsx 集成 AIAssistant（全局悬浮右下角）
 - [x] CSS 动画 — earnings-pulse/digit-scroll/flow-light/ai-btn-pulse/ai-panel-open/chat-bubble-in/typing-dot-bounce
 - [x] Reduced motion 媒体查询覆盖所有新动画
+- [x] 深度调研 — Superfluid 实时流支付 UX（本地插值/历史预测/多资产聚合）
+- [x] 深度调研 — Coinbase Agentic Wallets + Base MCP（x402/Session Keys/4层权限）
+- [x] 深度调研 — Farcaster/Lens SocialFi 收益（Collect模型/即时到账/零平台费）
+- [x] LiveEarnings 增强 — 7 天迷你趋势图（SVG sparkline）+ 30 天收益预测
+- [x] AIAssistant 增强 — 扩展 Q&A（SocialFi/Agent Wallet/流支付/Collect/声誉）
+- [x] 调研结果保存 — research-live-earnings-ai-assistant/results.md
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
 ## 本次改进 (2026-06-26 v16)
