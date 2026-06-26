@@ -30,6 +30,7 @@ import { ScrollEarningsCounter } from "@/components/ui/ScrollEarningsCounter";
 import { AIAgentSection } from "@/components/ui/AIAgentSection";
 import { MCPIntegration } from "@/components/ui/MCPIntegration";
 import { HomepageStats } from "@/components/ui/HomepageStats";
+import { FeatureHighlights } from "@/components/ui/FeatureHighlights";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -355,6 +356,19 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </ScrollRevealSection>
+
+      {/* Feature Highlights */}
+      <ScrollRevealSection className="px-6 pb-16 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-10 text-center">
+            <h2 className="text-2xl font-bold text-white">Why Choose Creator Hub</h2>
+            <p className="mt-2 text-sm text-gray-500">
+              Built for the next generation of decentralized creators
+            </p>
+          </div>
+          <FeatureHighlights />
         </div>
       </ScrollRevealSection>
 
