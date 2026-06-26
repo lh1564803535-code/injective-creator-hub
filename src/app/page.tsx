@@ -34,6 +34,7 @@ import { FeatureHighlights } from "@/components/ui/FeatureHighlights";
 import { CTASection } from "@/components/ui/CTASection";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { RoadmapTimeline } from "@/components/ui/RoadmapTimeline";
+import { FAQ } from "@/components/ui/FAQ";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -660,6 +661,19 @@ export default function HomePage() {
             </p>
           </div>
           <RoadmapTimeline />
+        </div>
+      </ScrollRevealSection>
+
+      {/* FAQ */}
+      <ScrollRevealSection className="px-6 pb-16 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
+            <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
+            <p className="mt-2 text-sm text-gray-500">
+              Everything you need to know about Creator Hub
+            </p>
+          </div>
+          <FAQ />
         </div>
       </ScrollRevealSection>
 
