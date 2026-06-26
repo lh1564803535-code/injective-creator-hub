@@ -634,6 +634,12 @@
 - [x] Dashboard 集成 TransactionHistory + GasEstimator + NetworkStatus
 - [x] TypeScript 验证通过（npx tsc --noEmit 零错误）
 
+## 本次改进 (2026-06-27 v26 - 循环改进续)
+- [x] ProgressBar — 增强（添加 size 属性）
+- [x] TokenBadge — 代币徽章组件
+- [x] 自动唤醒机制 — 每 2 分钟唤醒继续循环
+- [x] 调研 — Chrome 插件安全工具
+
 ## 本次改进 (2026-06-27 v25 - 循环改进续)
 - [x] 新 CSS 动画 — page-enter/card-lift/glow-pulse/animated-gradient-text/float-animation
 - [x] FloatingActionButton — 浮动操作按钮（可展开子操作）
