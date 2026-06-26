@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect, useCallback } from "react";
 import { Search, SlidersHorizontal, ArrowUpDown } from "lucide-react";
 
 export type CampaignStatusFilter = "all" | "active" | "voting" | "settled";
@@ -44,18 +45,41 @@ export function CampaignSearch({
   campaignOptions,
   showCampaignFilter = false,
 }: CampaignSearchProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (
+      e.key === "/" &&
+      !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement)
+    ) {
+      e.preventDefault();
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   return (
     <div className="space-y-3">
       {/* Search bar */}
       <div className="relative">
         <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
         <input
+          ref={inputRef}
           type="text"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search by title or address..."
-          className="w-full rounded-xl border border-white/[0.06] bg-[#13131b] py-3 pl-12 pr-4 text-white placeholder-gray-500 transition focus:border-cyan-500/50 focus:outline-none"
+          className="w-full rounded-xl border border-white/[0.06] bg-[#13131b] py-3 pl-12 pr-16 text-white placeholder-gray-500 transition focus:border-cyan-500/50 focus:outline-none"
         />
+        {!search && (
+          <kbd className="absolute right-4 top-1/2 -translate-y-1/2 rounded border border-white/[0.1] bg-white/[0.04] px-1.5 py-0.5 text-[10px] font-medium text-gray-500">
+            /
+          </kbd>
+        )}
       </div>
 
       {/* Filters row */}

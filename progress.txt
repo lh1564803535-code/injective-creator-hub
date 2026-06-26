@@ -1,9 +1,19 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：动画增强 ✅ 完成
+## 当前阶段：UX 增强 — Toast + Stats + A11y ✅ 完成
 
 ## 待办
 （全部完成）
+
+## 本次改进 (2026-06-26)
+- [x] 创建 Toast 通知系统（Toast.tsx）— 5 种变体、自动消失、portal 渲染、aria-live 无障碍
+- [x] 创建 StatTrend + Sparkline 组件 — 百分比趋势指示器 + SVG 迷你图表
+- [x] 创建 useReducedMotion hook — 编程式访问 prefers-reduced-motion，实时监听 OS 变更
+- [x] 集成 Toast 到活动提交、投票、奖励领取流程
+- [x] Dashboard 统计卡片添加趋势指示器和 sparkline 图表
+- [x] 添加 toast-in 动画和 content-visibility CSS 工具类
+- [x] ToastProvider 集成到 wallet-provider 全局可用
+- [x] 研究日志更新：React 动画库 2026 调研（Motion、View Transitions、Scroll-Driven Animations）
 
 ## 本次改进 (2026-06-25)
 - [x] 为所有 confetti 添加 star 形状粒子（RewardAnimation, SettleDialog, CreateCampaign）
@@ -70,7 +80,7 @@
 - [x] 最终验证 — 无 injectivelabs SDK 导入
 - [x] 最终验证 — 无 any 类型
 - [x] 最终验证 — 所有页面可访问（/, /leaderboard, /campaign/[id], /create, /dashboard）
-- [x] 最终验证 — 所有组件完整（Navbar, LeaderboardTable, CampaignCard, RewardAnimation, SettleDialog, VoteDialog, CreatorDashboard, CampaignTimeline, Footer）
+- [x] 最终验证 — 所有组件完整（Navbar, LeaderboardTable, CampaignCard, RewardAnimation, SettleDialog, VoteDialog, CreatorDashboard, CampaignTimeline, Footer, Toast, StatTrend, Sparkline, FloatingParticles, CreatorProfile, CampaignStats）
 - [x] 最终验证 — npm run build 成功（7/7 静态页面生成）
 - [x] 最终验证 — 生产构建零错误（Next.js 16.2.9 Turbopack, 7/7 页面生成）
 - [x] 文档 — README.md 完整（功能列表、技术栈、本地运行、部署指南、项目结构）

@@ -17,6 +17,8 @@ import {
   Award,
   Gift,
   ChevronRight,
+  PenLine,
+  Banknote,
 } from "lucide-react";
 import { LeaderboardTable } from "@/components/creator/LeaderboardTable";
 import { CampaignList } from "@/components/campaign/CampaignList";
@@ -274,6 +276,74 @@ export default function HomePage() {
               <p className="text-sm text-gray-500">{stat.label}</p>
             </div>
           ))}
+        </div>
+      </ScrollRevealSection>
+
+      {/* How It Works */}
+      <ScrollRevealSection delay={1} className="px-6 pb-16 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-10 text-center">
+            <h2 className="text-2xl font-bold text-white">How It Works</h2>
+            <p className="mt-2 text-sm text-gray-500">
+              Three steps to earn on-chain rewards
+            </p>
+          </div>
+          <div className="relative grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {/* Connecting line (desktop) */}
+            <div className="pointer-events-none absolute left-[16.67%] right-[16.67%] top-10 hidden h-0.5 bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30 sm:block" />
+
+            {[
+              {
+                icon: PenLine,
+                step: "01",
+                title: "Create a Campaign",
+                desc: "Set a USDC reward pool, define content rules, and launch your bounty to the Injective community.",
+                color: "cyan",
+                gradient: "from-cyan-500 to-blue-600",
+                glow: "shadow-cyan-500/20",
+              },
+              {
+                icon: Send,
+                step: "02",
+                title: "Submit Content",
+                desc: "Creators submit original content — tweets, threads, videos, memes, art — linked on-chain.",
+                color: "blue",
+                gradient: "from-blue-500 to-indigo-600",
+                glow: "shadow-blue-500/20",
+              },
+              {
+                icon: Banknote,
+                step: "03",
+                title: "Vote & Earn USDC",
+                desc: "Community votes decide winners. Rewards are distributed automatically via smart contract.",
+                color: "purple",
+                gradient: "from-purple-500 to-pink-600",
+                glow: "shadow-purple-500/20",
+              },
+            ].map((item, i) => (
+              <div
+                key={item.step}
+                className="group relative rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 text-center transition-all hover:border-white/[0.12] hover:bg-white/[0.04]"
+              >
+                {/* Step badge */}
+                <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center">
+                  <div
+                    className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.gradient} opacity-10 transition-opacity group-hover:opacity-20`}
+                  />
+                  <item.icon className={`relative h-7 w-7 text-${item.color}-400`} />
+                </div>
+                <span className="mb-2 inline-block text-xs font-bold uppercase tracking-widest text-gray-600">
+                  Step {item.step}
+                </span>
+                <h3 className="mb-2 text-lg font-semibold text-white">
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-500">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </ScrollRevealSection>
 

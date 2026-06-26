@@ -97,7 +97,7 @@ export function CampaignStats({
       </div>
 
       {/* Time progress bar */}
-      <div>
+      <div className="mb-4">
         <div className="mb-1.5 flex items-center justify-between text-xs">
           <span className="text-gray-500">Campaign Progress</span>
           <span className={settled ? "text-emerald-400" : "text-gray-400"}>
@@ -113,6 +113,37 @@ export function CampaignStats({
             }`}
             style={{ width: `${progressPercent}%` }}
           />
+        </div>
+      </div>
+
+      {/* Engagement metrics bar */}
+      <div className="flex items-center gap-4 rounded-xl bg-white/[0.02] px-4 py-3">
+        <div className="flex-1">
+          <div className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-wider text-gray-600">
+            <span>Vote Engagement</span>
+            <span className="text-gray-400">
+              {submissionCount > 0 ? (totalVotes / submissionCount).toFixed(1) : "0"} votes/sub
+            </span>
+          </div>
+          <div className="flex h-1.5 gap-0.5 overflow-hidden rounded-full bg-white/[0.04]">
+            {Array.from({ length: Math.min(submissionCount, 20) }).map((_, i) => {
+              const intensity = Math.min(1, totalVotes / Math.max(1, submissionCount * 10));
+              return (
+                <div
+                  key={i}
+                  className="flex-1 rounded-full transition-all duration-500"
+                  style={{
+                    backgroundColor: `rgba(34, 211, 238, ${0.15 + intensity * 0.6})`,
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className="h-8 w-px bg-white/[0.06]" />
+        <div className="text-right">
+          <p className="text-xs font-semibold text-cyan-400">{totalVotes}</p>
+          <p className="text-[10px] text-gray-600">total</p>
         </div>
       </div>
     </div>
