@@ -99,7 +99,8 @@ export function addClickOutside(
     }
   };
 
-  return addEventListener(document, "mousedown", wrappedHandler as EventListener);
+  document.addEventListener("mousedown", wrappedHandler as EventListener);
+  return () => document.removeEventListener("mousedown", wrappedHandler as EventListener);
 }
 
 export function addResizeObserver(

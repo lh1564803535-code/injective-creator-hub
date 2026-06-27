@@ -5,12 +5,12 @@
 // Curry
 export function curry<T extends unknown[], R>(
   fn: (...args: T) => R
-): (...args: Partial<T>) => unknown {
-  return function curried(...args: Partial<T>) {
+): (...args: unknown[]) => unknown {
+  return function curried(...args: unknown[]) {
     if (args.length >= fn.length) {
       return fn(...(args as T));
     }
-    return (...nextArgs: Partial<T>) => curried(...args, ...nextArgs);
+    return (...nextArgs: unknown[]) => curried(...args, ...nextArgs);
   };
 }
 

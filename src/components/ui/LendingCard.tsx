@@ -3,7 +3,7 @@
 import { TrendingUp, TrendingDown, Shield, ArrowUpRight } from "lucide-react";
 
 interface LendingPool {
-  asset: symbol;
+  asset: string;
   supplyApy: number;
   borrowApy: number;
   totalSupply: string;

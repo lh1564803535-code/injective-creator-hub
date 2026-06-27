@@ -100,7 +100,7 @@ export function byBoolean(direction: "asc" | "desc" = "asc"): Comparator<boolean
 
 export function stable<T>(comparator: Comparator<T>): Comparator<T> {
   let counter = 0;
-  const indices = new WeakMap<T, number>();
+  const indices = new Map<T, number>();
 
   return (a, b) => {
     if (!indices.has(a)) indices.set(a, counter++);

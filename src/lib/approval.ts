@@ -29,7 +29,7 @@ class ApprovalManager {
     if (!current) {
       return {
         approved: false,
-        allowance: 0n,
+        allowance: BigInt(0),
         needsApproval: true,
       };
     }
@@ -44,7 +44,7 @@ class ApprovalManager {
   setApproval(token: string, owner: string, spender: string, amount: bigint): void {
     const key = this.getKey(token, owner, spender);
     this.approvals.set(key, {
-      approved: amount > 0n,
+      approved: amount > BigInt(0),
       allowance: amount,
       needsApproval: false,
     });
@@ -54,7 +54,7 @@ class ApprovalManager {
     const key = this.getKey(token, owner, spender);
     this.approvals.set(key, {
       approved: false,
-      allowance: 0n,
+      allowance: BigInt(0),
       needsApproval: true,
     });
   }
@@ -91,7 +91,7 @@ export function encodeMaxApproval(spender: string): string {
 
 // Parse approval amount from return data
 export function parseApprovalAmount(data: string): bigint {
-  if (!data || data === "0x") return 0n;
+  if (!data || data === "0x") return BigInt(0);
   return BigInt(data);
 }
 

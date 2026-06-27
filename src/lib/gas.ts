@@ -103,7 +103,7 @@ export function calculateGasSavings(
   optimizedGas: bigint
 ): { saved: bigint; percentage: number } {
   const saved = originalGas - optimizedGas;
-  const percentage = Number((saved * 100n) / originalGas);
+  const percentage = Number((saved * BigInt(100)) / originalGas);
   return { saved, percentage };
 }
 
@@ -121,14 +121,14 @@ export function estimateInjectiveGas(
   operation: "vote" | "submit" | "claim" | "transfer" | "deploy"
 ): GasEstimate {
   const gasLimits: Record<string, bigint> = {
-    vote: 100000n,
-    submit: 200000n,
-    claim: 150000n,
-    transfer: 50000n,
-    deploy: 5000000n,
+    vote: BigInt(100000),
+    submit: BigInt(200000),
+    claim: BigInt(150000),
+    transfer: BigInt(50000),
+    deploy: BigInt(5000000),
   };
 
-  const gasLimit = gasLimits[operation] || 100000n;
+  const gasLimit = gasLimits[operation] || BigInt(100000);
   const gasPrice = INJECTIVE_GAS.TYPICAL_GAS_PRICE;
 
   return {

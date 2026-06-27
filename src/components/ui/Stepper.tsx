@@ -2,14 +2,18 @@
 
 import { CheckCircle } from "lucide-react";
 
-interface Step {
-  title: string;
+export interface Step {
+  title?: string;
+  label?: string;
   description?: string;
+  key?: string;
+  icon?: React.ReactNode;
 }
 
 interface StepperProps {
   steps: Step[];
   currentStep: number;
+  accentColor?: string;
   className?: string;
 }
 

@@ -36,19 +36,19 @@ class AllowanceManager {
 
   increaseAllowance(token: string, owner: string, spender: string, amount: bigint): void {
     const current = this.getAllowance(token, owner, spender);
-    const newAllowance = (current?.allowance ?? 0n) + amount;
+    const newAllowance = (current?.allowance ?? BigInt(0)) + amount;
     this.setAllowance(token, owner, spender, newAllowance);
   }
 
   decreaseAllowance(token: string, owner: string, spender: string, amount: bigint): void {
     const current = this.getAllowance(token, owner, spender);
     if (!current) return;
-    const newAllowance = current.allowance > amount ? current.allowance - amount : 0n;
+    const newAllowance = current.allowance > amount ? current.allowance - amount : BigInt(0);
     this.setAllowance(token, owner, spender, newAllowance);
   }
 
   revokeAllowance(token: string, owner: string, spender: string): void {
-    this.setAllowance(token, owner, spender, 0n);
+    this.setAllowance(token, owner, spender, BigInt(0));
   }
 
   getMaxAllowance(): bigint {
@@ -62,7 +62,7 @@ class AllowanceManager {
 
   hasSufficientAllowance(token: string, owner: string, spender: string, amount: bigint): boolean {
     const info = this.getAllowance(token, owner, spender);
-    return (info?.allowance ?? 0n) >= amount;
+    return (info?.allowance ?? BigInt(0)) >= amount;
   }
 
   subscribe(listener: (info: AllowanceInfo) => void): () => void {

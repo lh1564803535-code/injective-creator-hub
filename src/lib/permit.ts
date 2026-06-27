@@ -21,12 +21,12 @@ class PermitManager {
 
   getNonce(owner: string, token: string): bigint {
     const key = `${token}:${owner}`;
-    return this.nonces.get(key) ?? 0n;
+    return this.nonces.get(key) ?? BigInt(0);
   }
 
   incrementNonce(owner: string, token: string): void {
     const key = `${token}:${owner}`;
-    const current = this.nonces.get(key) ?? 0n;
+    const current = this.nonces.get(key) ?? BigInt(0);
     this.nonces.set(key, current + 1n);
   }
 

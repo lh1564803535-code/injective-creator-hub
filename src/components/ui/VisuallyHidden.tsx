@@ -2,15 +2,11 @@
 
 interface VisuallyHiddenProps {
   children: React.ReactNode;
-  as?: keyof JSX.IntrinsicElements;
 }
 
-export function VisuallyHidden({
-  children,
-  as: Component = "span",
-}: VisuallyHiddenProps) {
+export function VisuallyHidden({ children }: VisuallyHiddenProps) {
   return (
-    <Component
+    <span
       style={{
         position: "absolute",
         border: 0,
@@ -25,6 +21,6 @@ export function VisuallyHidden({
       }}
     >
       {children}
-    </Component>
+    </span>
   );
 }
