@@ -2,7 +2,21 @@
 
 ## 当前阶段：准备提交（截止 2026-06-30）
 
-## 本次修复 (2026-06-28)
+## 本次修复 (2026-06-28 v3)
+- [x] 根布局修复 — 保持 return children（[locale] 布局有 html/body）
+- [x] 工作目录修复 — 必须在项目目录下运行 npm run build/dev
+- [x] 所有路由验证 — /en, /zh, /en/campaigns, /en/create 均返回 200
+
+## 本次修复 (2026-06-28 v2)
+- [x] i18n 路由修复 — 添加 generateStaticParams，/en 和 /zh 正常工作
+- [x] RainbowKit 弹窗修复 — 添加 modalSize="compact"
+- [x] 合约 ABI 文件 — src/lib/contract-abi.ts
+- [x] 合约 Hooks — src/hooks/useBounty.ts（createCampaign, submit, vote, settle, claimReward）
+- [x] Create 页面接入真实合约 — CreateCampaignForm 使用 useCreateCampaign
+- [x] Campaign 详情页接入真实合约 — 从链上读取活动和提交数据
+- [x] 构建验证通过 — npm run build 成功
+
+## 本次修复 (2026-06-28 v1)
 - [x] i18n 路由 404 修复 — request.ts 不再在 locale 为 undefined 时调用 notFound()
 - [x] BountyCampaign 合约部署 — 地址: 0xAc84d5A83DAfaC2eBfcEfE26773Da16229066f61
 - [x] .env.local 更新 — 合约地址已配置

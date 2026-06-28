@@ -84,10 +84,26 @@ export default function DashboardPage() {
         {!isConnected ? (
           <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-12 text-center backdrop-blur-sm">
             <BarChart3 className="mx-auto mb-4 h-12 w-12 text-gray-600" />
-            <p className="mb-4 text-gray-400">
-              {t('connectAccess')}
+            <h2 className="mb-2 text-xl font-bold text-white">Connect Your Wallet to Start Earning</h2>
+            <p className="mb-6 text-gray-400">
+              Connect your wallet to create campaigns, submit content, and earn USDC rewards.
             </p>
-            <ConnectButton />
+            <div className="mb-8 flex justify-center">
+              <ConnectButton />
+            </div>
+            <div className="mx-auto grid max-w-md grid-cols-3 gap-4 text-center">
+              {[
+                { step: "1", label: "Connect Wallet", desc: "MetaMask or WalletConnect" },
+                { step: "2", label: "Join Campaign", desc: "Browse active bounties" },
+                { step: "3", label: "Earn USDC", desc: "Get paid instantly" },
+              ].map((s) => (
+                <div key={s.step}>
+                  <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-500/15 text-sm font-bold text-cyan-400">{s.step}</div>
+                  <p className="text-sm font-medium text-white">{s.label}</p>
+                  <p className="text-xs text-gray-500">{s.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <div className="space-y-8">

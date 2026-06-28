@@ -46,12 +46,12 @@ function getWelcomeMsg(walletAddr?: string, balance?: string): Message {
 }
 
 const QUICK_BUTTONS = [
-  { label: "创建钱包", query: "创建钱包" },
-  { label: "怎么提现", query: "提现" },
-  { label: "什么是Gas", query: "Gas" },
-  { label: "实时流支付", query: "stream" },
-  { label: "SocialFi", query: "socialfi" },
-  { label: "AI Agent", query: "agent" },
+  { label: "查看收益", query: "我赚了多少USDC？" },
+  { label: "如何提现", query: "怎么把USDC提现？" },
+  { label: "什么是x402", query: "解释x402微支付协议" },
+  { label: "创建钱包", query: "怎么创建钱包？" },
+  { label: "什么是Gas", query: "Gas费是什么？" },
+  { label: "AI Agent", query: "AI Agent怎么自动付款？" },
 ];
 
 function shortenAddr(addr: string) {

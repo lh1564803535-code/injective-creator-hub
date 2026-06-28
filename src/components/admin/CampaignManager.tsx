@@ -33,7 +33,7 @@ const MOCK_CAMPAIGNS: CampaignWithStatus[] = [
     sponsor: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD3e",
     title: "XHunt Content Sprint",
     description: "Create viral content about Injective's XHunt ecosystem.",
-    totalReward: BigInt(5000000000),
+    totalReward: 5000,
     deadline: Math.floor(Date.now() / 1000) + 86400 * 5,
     submissionCount: 23,
     settled: false,
@@ -45,7 +45,7 @@ const MOCK_CAMPAIGNS: CampaignWithStatus[] = [
     sponsor: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD3e",
     title: "DeFi Explainer Series",
     description: "Educational content about DeFi on Injective.",
-    totalReward: BigInt(3000000000),
+    totalReward: 3000,
     deadline: Math.floor(Date.now() / 1000) + 86400 * 2,
     submissionCount: 45,
     settled: false,
@@ -57,7 +57,7 @@ const MOCK_CAMPAIGNS: CampaignWithStatus[] = [
     sponsor: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD3e",
     title: "NFT Art Challenge",
     description: "Create NFT artwork themed around Injective blockchain.",
-    totalReward: BigInt(8000000000),
+    totalReward: 8000,
     deadline: Math.floor(Date.now() / 1000) - 86400 * 3,
     submissionCount: 67,
     settled: true,
@@ -73,7 +73,7 @@ const MOCK_SUBMISSIONS: Submission[] = [
     creator: "0xAbC1234567890aBcDeF1234567890aBcDeF1234",
     contentURI: "ipfs://Qm123...",
     votes: 128,
-    reward: BigInt(1000000000),
+    reward: 1000,
     claimed: true,
   },
   {
@@ -82,7 +82,7 @@ const MOCK_SUBMISSIONS: Submission[] = [
     creator: "0xDeF4567890123dEfAbC4567890123dEfAbC4567",
     contentURI: "ipfs://Qm456...",
     votes: 96,
-    reward: BigInt(500000000),
+    reward: 500,
     claimed: false,
   },
   {
@@ -91,7 +91,7 @@ const MOCK_SUBMISSIONS: Submission[] = [
     creator: "0x789aBcDeF0123456789aBcDeF0123456789aBcDe",
     contentURI: "ipfs://Qm789...",
     votes: 210,
-    reward: BigInt(0),
+    reward: 0,
     claimed: false,
   },
 ];
@@ -100,8 +100,8 @@ const MOCK_SUBMISSIONS: Submission[] = [
 // Helpers
 // ---------------------------------------------------------------------------
 
-function formatReward(wei: bigint): string {
-  return (Number(wei) / 1e9).toLocaleString(undefined, {
+function formatReward(usdc: number): string {
+  return usdc.toLocaleString(undefined, {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
@@ -127,8 +127,8 @@ export function CampaignManager() {
   const [form, setForm] = useState<CreateCampaignForm>({
     title: "",
     description: "",
-    totalReward: "",
-    duration: 7 * 86400,
+    reward: "",
+    duration: "7",
   });
 
   const filtered =
@@ -144,7 +144,7 @@ export function CampaignManager() {
   // ---- Handlers ----
 
   const handleCreate = async () => {
-    if (!form.title || !form.totalReward) return;
+    if (!form.title || !form.reward) return;
     setIsSubmitting(true);
     await new Promise((r) => setTimeout(r, 1000));
 
@@ -154,16 +154,16 @@ export function CampaignManager() {
       sponsor: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD3e",
       title: form.title,
       description: form.description,
-      totalReward: BigInt(Number(form.totalReward) * 1e9),
-      deadline: now + form.duration,
+      totalReward: Number(form.reward),
+      deadline: now + Number(form.duration) * 86400,
       submissionCount: 0,
       settled: false,
       status: "active",
-      timeRemaining: `${Math.floor(form.duration / 86400)}d`,
+      timeRemaining: `${form.duration}d`,
     };
 
     setCampaigns((prev) => [newCampaign, ...prev]);
-    setForm({ title: "", description: "", totalReward: "", duration: 7 * 86400 });
+    setForm({ title: "", description: "", reward: "", duration: "7" });
     setShowCreateForm(false);
     setIsSubmitting(false);
   };
@@ -181,7 +181,7 @@ export function CampaignManager() {
       )
     );
     setEditingCampaign(null);
-    setForm({ title: "", description: "", totalReward: "", duration: 7 * 86400 });
+    setForm({ title: "", description: "", reward: "", duration: "7" });
     setIsSubmitting(false);
   };
 
@@ -191,11 +191,12 @@ export function CampaignManager() {
 
   const startEdit = (campaign: CampaignWithStatus) => {
     setEditingCampaign(campaign);
+    const remainingDays = Math.max(1, Math.ceil((campaign.deadline - Math.floor(Date.now() / 1000)) / 86400));
     setForm({
       title: campaign.title,
       description: campaign.description,
-      totalReward: formatReward(campaign.totalReward),
-      duration: campaign.deadline - Math.floor(Date.now() / 1000),
+      reward: String(campaign.totalReward),
+      duration: String(remainingDays),
     });
   };
 
@@ -234,7 +235,7 @@ export function CampaignManager() {
           onClick={() => {
             setShowCreateForm(true);
             setEditingCampaign(null);
-            setForm({ title: "", description: "", totalReward: "", duration: 7 * 86400 });
+            setForm({ title: "", description: "", reward: "", duration: "7" });
           }}
           className="flex items-center gap-2 rounded-xl bg-cyan-500/15 px-4 py-2.5 text-sm font-medium text-cyan-300 transition-colors hover:bg-cyan-500/25"
         >
@@ -307,7 +308,7 @@ export function CampaignManager() {
                 <label className="mb-1.5 block text-xs text-gray-400">Total Reward (USDC)</label>
                 <input
                   type="number"
-                  value={form.totalReward}
+                  value={form.reward}
                   onChange={(e) => setForm((f) => ({ ...f, totalReward: e.target.value }))}
                   placeholder="5000"
                   className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 text-sm text-white placeholder-gray-600 outline-none transition-colors focus:border-cyan-500/40"
@@ -316,8 +317,8 @@ export function CampaignManager() {
               <div>
                 <label className="mb-1.5 block text-xs text-gray-400">Duration (days)</label>
                 <select
-                  value={Math.floor(form.duration / 86400)}
-                  onChange={(e) => setForm((f) => ({ ...f, duration: Number(e.target.value) * 86400 }))}
+                  value={Math.floor(Number(form.duration) / 86400)}
+                  onChange={(e) => setForm((f) => ({ ...f, duration: e.target.value }))}
                   className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 text-sm text-white outline-none transition-colors focus:border-cyan-500/40"
                 >
                   <option value={3}>3 days</option>

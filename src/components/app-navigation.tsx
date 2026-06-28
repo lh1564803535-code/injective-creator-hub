@@ -7,6 +7,7 @@ import {useLocale} from 'next-intl';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Zap, Menu, X, Globe, ChevronDown } from "lucide-react";
 import { NotificationBell } from "@/components/ui/NotificationCenter";
+import { ChainStatus } from "@/components/ui/ChainStatus";
 
 const localeLabels: Record<string, {label: string; flag: string}> = {
   en: {label: "English", flag: "🇺🇸"},
@@ -54,10 +55,10 @@ export function AppNavigation() {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 transition-all ${
+        className={`fixed left-0 right-0 top-9 z-50 transition-all ${
           isHome
             ? "bg-transparent"
-            : "border-b border-white/[0.06] bg-[#08080f]/80 backdrop-blur-xl"
+            : "border-b border-white/[0.06] bg-[#08080f]/95"
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
@@ -98,6 +99,11 @@ export function AppNavigation() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            {/* Chain Status — desktop only */}
+            <div className="hidden md:block">
+              <ChainStatus />
+            </div>
+
             {/* Language Switcher Dropdown */}
             <div ref={langRef} className="relative">
               <button

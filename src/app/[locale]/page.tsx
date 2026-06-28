@@ -7,7 +7,6 @@ import {
   Trophy,
   TrendingUp,
   FileText,
-  Rocket,
   ArrowRight,
   Star,
   Clock,
@@ -23,20 +22,15 @@ import {
 } from "lucide-react";
 import { LeaderboardTable } from "@/components/creator/LeaderboardTable";
 import { CampaignList } from "@/components/campaign/CampaignList";
-import { FloatingParticles } from "@/components/ui/FloatingParticles";
-import { USDCBenefits } from "@/components/ui/USDCBenefits";
-import { NetworkStats } from "@/components/ui/NetworkStats";
 import { LiveEarnings } from "@/components/creator/LiveEarnings";
-import { ScrollEarningsCounter } from "@/components/ui/ScrollEarningsCounter";
-import { AIAgentSection } from "@/components/ui/AIAgentSection";
-import { MCPIntegration } from "@/components/ui/MCPIntegration";
-import { HomepageStats } from "@/components/ui/HomepageStats";
+import { USDCBenefits } from "@/components/ui/USDCBenefits";
 import { FeatureHighlights } from "@/components/ui/FeatureHighlights";
 import { CTASection } from "@/components/ui/CTASection";
-import { SocialLinks } from "@/components/ui/SocialLinks";
 import { RoadmapTimeline } from "@/components/ui/RoadmapTimeline";
 import { FAQ } from "@/components/ui/FAQ";
 import { NewsletterSignup } from "@/components/ui/NewsletterSignup";
+import { AIAgentSection } from "@/components/ui/AIAgentSection";
+import { MCPIntegration } from "@/components/ui/MCPIntegration";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import {
   MOCK_CREATORS,
@@ -220,88 +214,64 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden px-6 pt-24 pb-12 lg:px-8 lg:pt-32 lg:pb-16">
-        {/* Background gradient layers */}
+      <section className="relative overflow-hidden px-6 pt-24 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2">
             <div className="h-[600px] w-[600px] rounded-full bg-cyan-500/5 blur-3xl" />
           </div>
-          <div className="absolute right-0 top-1/3">
-            <div className="h-[400px] w-[400px] rounded-full bg-blue-600/5 blur-3xl" />
-          </div>
-          <div className="absolute bottom-0 left-0">
-            <div className="h-[300px] w-[300px] rounded-full bg-purple-600/3 blur-3xl" />
-          </div>
-          <FloatingParticles count={25} />
         </div>
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-1.5 text-sm text-cyan-400">
-              <Rocket className="h-4 w-4" />
-              {t('hero.badge')}
-            </div>
-            <h1 className="mb-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-              {t('hero.title').split(' ').slice(0, -2).join(' ')}{" "}
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
-                {t('hero.title').split(' ').slice(-2).join(' ')}
-              </span>
-            </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-400">
-              <TypewriterText
-                text={t('hero.subtitle')}
-                speed={25}
-              />
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <Link
-                href="/leaderboard"
-                className="btn-glow flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/25"
-              >
-                {t('hero.ctaLeaderboard')}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/create"
-                className="btn-glow rounded-xl border border-white/[0.08] bg-white/[0.03] px-6 py-3 font-semibold text-white hover:bg-white/[0.06]"
-              >
-                {t('hero.ctaCreate')}
-              </Link>
-            </div>
+        <div className="relative mx-auto max-w-4xl text-center">
+          <h1 className="mb-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
+            AI Agent Pays Creators{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+              on Injective
+            </span>
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-400">
+            x402 micropayments. Zero human intervention. Instant USDC.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <Link
+              href="/campaigns"
+              className="btn-glow flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/25"
+            >
+              Start Earning
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href="https://docs.injective.network/developers-ai/x402"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-glow rounded-xl border border-white/[0.08] bg-white/[0.03] px-6 py-3 font-semibold text-white hover:bg-white/[0.06]"
+            >
+              Read Docs
+            </a>
+          </div>
 
-            {/* Social Links */}
-            <div className="mt-6 flex justify-center">
-              <SocialLinks />
-            </div>
+          {/* Trust metrics */}
+          <div className="mx-auto mt-12 grid max-w-lg grid-cols-3 gap-6">
+            {[
+              { label: "Total Rewards", value: "$12,400", suffix: "" },
+              { label: "Creators", value: "156", suffix: "" },
+              { label: "Campaigns", value: "24", suffix: "" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-2xl font-bold text-white">{stat.value}{stat.suffix}</p>
+                <p className="text-xs text-gray-500">{stat.label}</p>
+                <span className="mt-1 inline-flex items-center rounded-full bg-gray-700/50 px-2 py-0.5 text-[10px] font-medium text-gray-400 uppercase tracking-wider">Demo</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Scroll-to-Earn Counter (Superfluid-inspired) */}
-      <div className="sticky top-20 z-40 flex justify-center px-6 py-3">
-        <ScrollEarningsCounter />
-      </div>
-
-      {/* Network Stats */}
-      <ScrollRevealSection className="px-6 pb-8 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <NetworkStats />
-        </div>
-      </ScrollRevealSection>
-
       {/* Live Earnings Preview */}
-      <ScrollRevealSection className="px-6 pb-12 lg:px-8">
+      <section className="px-6 pb-12 lg:px-8">
         <div className="mx-auto max-w-md">
           <LiveEarnings compact />
         </div>
-      </ScrollRevealSection>
-
-      {/* Platform Stats */}
-      <ScrollRevealSection className="px-6 pb-12 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <HomepageStats />
-        </div>
-      </ScrollRevealSection>
+      </section>
 
       {/* How It Works */}
       <ScrollRevealSection delay={1} className="px-6 pb-16 lg:px-8">
@@ -451,7 +421,7 @@ export default function HomePage() {
                         {t('topSubmissions')}
                       </p>
                       <div className="space-y-2">
-                        {featuredSubmissions.slice(0, 3).map((sub, i) => (
+                        {featuredSubmissions.slice(0, 3).map((sub: any, i: number) => (
                           <div
                             key={sub.id}
                             className="flex items-center gap-3 rounded-lg bg-white/[0.03] px-3 py-2"
@@ -624,7 +594,7 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-white">{t('allCampaigns')}</h2>
             <p className="text-sm text-gray-500">{t('allCampaignsDesc')}</p>
           </div>
-          <CampaignList campaigns={campaigns} />
+          <CampaignList />
         </div>
       </ScrollRevealSection>
 
@@ -646,11 +616,7 @@ export default function HomePage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <LeaderboardTable
-            creators={topCreators}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-          />
+          <LeaderboardTable />
         </div>
       </ScrollRevealSection>
 

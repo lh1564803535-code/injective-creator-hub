@@ -197,6 +197,7 @@ export function LiveEarnings({
             <div>
               <h2 className="text-lg font-semibold text-white">
                 {viewMode ? "Viewing Address" : "Live Earnings"}
+                <span className="ml-2 inline-flex items-center rounded-full bg-gray-700/50 px-2 py-0.5 text-[10px] font-medium text-gray-400 uppercase tracking-wider">Demo</span>
               </h2>
               <p className="text-xs text-gray-500">
                 {viewMode

@@ -24,72 +24,64 @@ import type { Creator, LeaderboardSortBy } from "@/types/creator-settlement";
 const MOCK_CREATORS: (Creator & { twitter?: string; joinedAt: string })[] = [
   {
     address: "0xAbC1234567890aBcDeF1234567890aBcDeF1234",
-    totalSubmissions: 45,
-    totalVotes: 1280,
-    totalEarnings: BigInt(12500000000),
+    submissions: 45,
+    earnings: 12500,
     rank: 1,
     twitter: "@creator_alpha",
     joinedAt: "2026-01-15",
   },
   {
     address: "0xDeF4567890123dEfAbC4567890123dEfAbC4567",
-    totalSubmissions: 38,
-    totalVotes: 960,
-    totalEarnings: BigInt(8700000000),
+    submissions: 38,
+    earnings: 8700,
     rank: 2,
     twitter: "@creator_beta",
     joinedAt: "2026-02-03",
   },
   {
     address: "0x789aBcDeF0123456789aBcDeF0123456789aBcDe",
-    totalSubmissions: 29,
-    totalVotes: 720,
-    totalEarnings: BigInt(5400000000),
+    submissions: 29,
+    earnings: 5400,
     rank: 3,
     twitter: "@creator_gamma",
     joinedAt: "2026-02-20",
   },
   {
     address: "0x012AbCdEf3456789012AbCdEf3456789012AbCdE",
-    totalSubmissions: 21,
-    totalVotes: 510,
-    totalEarnings: BigInt(3200000000),
+    submissions: 21,
+    earnings: 3200,
     rank: 4,
     twitter: undefined,
     joinedAt: "2026-03-10",
   },
   {
     address: "0xFfFfFfFfFfFfFfFfFfFfFfFfFfFfFfFfFfFfFfFf",
-    totalSubmissions: 15,
-    totalVotes: 340,
-    totalEarnings: BigInt(1800000000),
+    submissions: 15,
+    earnings: 1800,
     rank: 5,
     twitter: "@creator_delta",
     joinedAt: "2026-04-01",
   },
   {
     address: "0x1234567890aBcDeF1234567890aBcDeF12345678",
-    totalSubmissions: 12,
-    totalVotes: 280,
-    totalEarnings: BigInt(1200000000),
+    submissions: 12,
+    earnings: 1200,
     rank: 6,
     twitter: undefined,
     joinedAt: "2026-04-15",
   },
   {
     address: "0xAbCdEfAbCdEfAbCdEfAbCdEfAbCdEfAbCdEfAb",
-    totalSubmissions: 9,
-    totalVotes: 190,
-    totalEarnings: BigInt(900000000),
+    submissions: 9,
+    earnings: 900,
     rank: 7,
     twitter: "@creator_epsilon",
     joinedAt: "2026-05-02",
   },
   {
     address: "0x9876543210FeDcBa9876543210FeDcBa98765432",
-    totalSubmissions: 6,
-    totalVotes: 120,
-    totalEarnings: BigInt(500000000),
+    submissions: 6,
+    earnings: 500,
     rank: 8,
     twitter: "@creator_zeta",
     joinedAt: "2026-05-18",
@@ -128,11 +120,9 @@ export function CreatorList() {
     result.sort((a, b) => {
       switch (sortBy) {
         case "earnings":
-          return Number(b.totalEarnings - a.totalEarnings);
-        case "votes":
-          return b.totalVotes - a.totalVotes;
+          return b.earnings - a.earnings;
         case "submissions":
-          return b.totalSubmissions - a.totalSubmissions;
+          return b.submissions - a.submissions;
         default:
           return 0;
       }
@@ -149,7 +139,7 @@ export function CreatorList() {
     const rows = creators
       .map(
         (c) =>
-          `${c.rank},${c.address},${c.twitter ?? ""},${c.totalVotes},${c.totalSubmissions},${formatUSDC(c.totalEarnings)},${c.joinedAt}`
+          `${c.rank},${c.address},${c.twitter ?? ""},${c.submissions},${c.earnings},${c.joinedAt}`
       )
       .join("\n");
     const blob = new Blob([header + rows], { type: "text/csv" });
@@ -333,20 +323,15 @@ export function CreatorList() {
                         )}
                       </td>
 
-                      {/* Votes */}
-                      <td className="px-5 py-4 text-gray-300">
-                        {creator.totalVotes.toLocaleString()}
-                      </td>
-
                       {/* Submissions */}
                       <td className="hidden px-5 py-4 md:table-cell text-gray-300">
-                        {creator.totalSubmissions}
+                        {creator.submissions}
                       </td>
 
                       {/* Earnings */}
                       <td className="px-5 py-4">
                         <span className="font-medium text-emerald-400">
-                          {formatUSDC(creator.totalEarnings)}
+                          ${creator.earnings.toLocaleString()}
                         </span>
                       </td>
 

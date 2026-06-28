@@ -1,17 +1,13 @@
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, getTranslations} from 'next-intl/server';
 import {Geist, Geist_Mono} from 'next/font/google';
+import {routing} from '@/i18n/routing';
 import {WalletProvider} from '@/components/wallet-provider';
 import {AppNavigation} from '@/components/app-navigation';
 import {Footer} from '@/components/Footer';
-import {QuickActionsToolbar} from '@/components/ui/QuickActionsToolbar';
-import {AIAssistant} from '@/components/creator/AIAssistant';
 import {TestnetBanner} from '@/components/ui/TestnetBanner';
-import {BackToTop} from '@/components/ui/BackToTop';
-import {SkipLink} from '@/components/ui/SkipLink';
 import {NotificationProvider} from '@/components/ui/NotificationCenter';
 import {CommandPaletteProvider} from '@/components/ui/CommandPalette';
-import '../globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,6 +18,10 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 });
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({locale}));
+}
 
 export async function generateMetadata({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;
@@ -43,28 +43,17 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-[#ededed]">
-        <SkipLink />
-        <NextIntlClientProvider messages={messages}>
-          <WalletProvider>
-            <NotificationProvider>
-              <CommandPaletteProvider>
-                <TestnetBanner />
-                <AppNavigation />
-                <main id="main-content" className="flex-1">{children}</main>
-                <Footer />
-                <QuickActionsToolbar />
-                <BackToTop />
-                <AIAssistant />
-              </CommandPaletteProvider>
-            </NotificationProvider>
-          </WalletProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <WalletProvider>
+        <NotificationProvider>
+          <CommandPaletteProvider>
+            <TestnetBanner />
+            <AppNavigation />
+            <main id="main-content" className="flex-1">{children}</main>
+            <Footer />
+          </CommandPaletteProvider>
+        </NotificationProvider>
+      </WalletProvider>
+    </NextIntlClientProvider>
   );
 }

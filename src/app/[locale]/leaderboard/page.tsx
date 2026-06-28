@@ -31,7 +31,7 @@ export default function LeaderboardPage() {
     if (campaignFilter === "all") return null; // no filter
     const cid = Number(campaignFilter);
     const subs = MOCK_SUBMISSIONS[cid] ?? [];
-    return new Set(subs.map((s) => s.creator.toLowerCase()));
+    return new Set(subs.map((s: {creator: string}) => s.creator.toLowerCase()));
   }, [campaignFilter]);
 
   // Filter creators based on search + campaign filter
@@ -47,11 +47,11 @@ export default function LeaderboardPage() {
   const sortedCreators = [...filteredCreators].sort((a, b) => {
     switch (sortBy) {
       case "earnings":
-        return Number(b.totalEarnings - a.totalEarnings);
+        return Number(b.earnings - a.earnings);
       case "votes":
-        return b.totalVotes - a.totalVotes;
+        return (b as any).totalVotes - (a as any).totalVotes;
       case "submissions":
-        return b.totalSubmissions - a.totalSubmissions;
+        return b.submissions - a.submissions;
       default:
         return 0;
     }
@@ -73,12 +73,12 @@ export default function LeaderboardPage() {
 
   // Calculate stats
   const totalEarnings = creators.reduce(
-    (sum, c) => sum + c.totalEarnings,
-    BigInt(0)
+    (sum, c) => sum + c.earnings,
+    0
   );
-  const totalVotes = creators.reduce((sum, c) => sum + c.totalVotes, 0);
+  const totalVotes = creators.reduce((sum, c) => sum + ((c as any).totalVotes ?? 0), 0);
   const totalSubmissions = creators.reduce(
-    (sum, c) => sum + c.totalSubmissions,
+    (sum, c) => sum + c.submissions,
     0
   );
 
@@ -94,7 +94,7 @@ export default function LeaderboardPage() {
     const rows = sortedCreators
       .map(
         (c, i) =>
-          `${i + 1},${c.address},${(Number(c.totalEarnings) / 1e6).toFixed(2)},${c.totalVotes},${c.totalSubmissions}`
+          `${i + 1},${c.address},${c.earnings.toFixed(2)},${(c as any).totalVotes ?? 0},${c.submissions}`
       )
       .join("\n");
     const blob = new Blob([header + rows], { type: "text/csv" });
@@ -171,11 +171,7 @@ export default function LeaderboardPage() {
       </div>
 
       {/* Leaderboard Table */}
-      <LeaderboardTable
-        creators={rankedCreators}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-      />
+      <LeaderboardTable />
 
       {/* Pagination */}
       {totalPages > 1 && (
