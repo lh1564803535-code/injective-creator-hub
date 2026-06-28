@@ -1,12 +1,13 @@
 import {getRequestConfig} from 'next-intl/server';
-import {notFound} from 'next/navigation';
 
 const locales = ['en', 'zh'];
 
 export default getRequestConfig(async ({locale}) => {
-  if (!locales.includes(locale as string)) notFound();
+  // Handle undefined locale during middleware redirects
+  const resolvedLocale = locales.includes(locale as string) ? locale : 'en';
+
   return {
-    locale: locale as string,
-    messages: (await import(`./${locale}.json`)).default
+    locale: resolvedLocale as string,
+    messages: (await import(`./${resolvedLocale}.json`)).default
   };
 });

@@ -34,6 +34,7 @@ export function TwitterBind() {
     setState("loading");
     try {
       const p = await connectTwitter();
+      if (!p) { setState("idle"); return; }
       setProfile(p);
       const s = await getTwitterStats(p.id);
       setStats(s);
@@ -147,19 +148,19 @@ export function TwitterBind() {
             <StatCard
               icon={<MessageSquare className="h-4 w-4" />}
               label="发推数"
-              value={stats.tweetsThisWeek}
+              value={stats.tweetsThisWeek ?? 0}
               color="text-[#1DA1F2]"
             />
             <StatCard
               icon={<MessageCircle className="h-4 w-4" />}
               label="被提及"
-              value={stats.mentionsThisWeek}
+              value={stats.mentionsThisWeek ?? 0}
               color="text-purple-400"
             />
             <StatCard
               icon={<TrendingUp className="h-4 w-4" />}
               label="互动率"
-              value={`${stats.engagementRate}%`}
+              value={`${stats.engagementRate ?? 0}%`}
               color="text-emerald-400"
             />
           </div>
@@ -195,7 +196,7 @@ export function TwitterBind() {
                     <Repeat2 className="h-3 w-3 text-emerald-400" />
                     {t.retweets}
                   </span>
-                  <span className="ml-auto">{t.date}</span>
+                  <span className="ml-auto">{new Date(t.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
             ))}

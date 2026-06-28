@@ -14,7 +14,7 @@ const config: HardhatUserConfig = {
       chainId: 2525,
       accounts: [PRIVATE_KEY],
     },
-    "injective-testnet": {
+    inj_testnet: {
       url: "https://k8s.testnet.json-rpc.injective.network/",
       chainId: 1439,
       accounts: [PRIVATE_KEY],

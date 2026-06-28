@@ -1,8 +1,18 @@
 # Injective Creator Hub — 进度
 
-## 当前阶段：无限循环改进中
+## 当前阶段：准备提交（截止 2026-06-30）
+
+## 本次修复 (2026-06-28)
+- [x] i18n 路由 404 修复 — request.ts 不再在 locale 为 undefined 时调用 notFound()
+- [x] BountyCampaign 合约部署 — 地址: 0xAc84d5A83DAfaC2eBfcEfE26773Da16229066f61
+- [x] .env.local 更新 — 合约地址已配置
+- [x] 构建验证通过 — npm run build 成功
 
 ## 待办
+- [ ] 录制 Demo 视频
+- [ ] 提交参赛报名
+
+## 已完成
 - [ ] Consider Sablier integration for streaming campaign rewards
 - [ ] Consider fee delegation for gasless submissions (ERC-4337)
 - [ ] Add optional USDC tips alongside votes

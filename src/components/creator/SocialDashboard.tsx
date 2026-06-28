@@ -69,12 +69,16 @@ export function SocialDashboard() {
     setState("loading");
     try {
       const p = await connectTwitter();
-      setProfile(p);
-      const s = await getTwitterStats(p.id);
-      setStats(s);
-      const t = await getRecentTweets(p.id);
-      setTweets(t);
-      setState("bound");
+      if (p) {
+        setProfile(p);
+        const s = await getTwitterStats(p.id);
+        setStats(s);
+        const t = await getRecentTweets(p.id);
+        setTweets(t);
+        setState("bound");
+      } else {
+        setState("idle");
+      }
     } catch {
       setState("idle");
     }
@@ -171,31 +175,31 @@ export function SocialDashboard() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           <StatCard
             label="Posts This Week"
-            value={stats.tweetsThisWeek}
+            value={stats.tweetsThisWeek ?? 0}
             icon={<MessageCircle className="h-4 w-4" />}
             color="text-[#1DA1F2]"
             trend={null}
           />
           <StatCard
             label="Engagement Rate"
-            value={`${stats.engagementRate}%`}
+            value={`${stats.engagementRate ?? 0}%`}
             icon={<Heart className="h-4 w-4" />}
             color="text-rose-400"
             trend={{ value: 1.2, up: true }}
           />
           <StatCard
             label="Mentions"
-            value={stats.mentionsThisWeek}
+            value={stats.mentionsThisWeek ?? 0}
             icon={<Repeat2 className="h-4 w-4" />}
             color="text-emerald-400"
             trend={null}
           />
           <StatCard
             label="Follower Growth"
-            value={`+${stats.growthRate}%`}
+            value={`+${stats.growthRate ?? 0}%`}
             icon={<TrendingUp className="h-4 w-4" />}
             color="text-purple-400"
-            trend={{ value: stats.growthRate, up: true }}
+            trend={{ value: stats.growthRate ?? 0, up: true }}
           />
         </div>
       )}
@@ -220,7 +224,7 @@ export function SocialDashboard() {
                     <Repeat2 className="h-3 w-3 text-emerald-400" />
                     {t.retweets}
                   </span>
-                  <span className="ml-auto">{t.date}</span>
+                  <span className="ml-auto">{new Date(t.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
             ))}

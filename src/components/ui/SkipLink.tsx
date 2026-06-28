@@ -4,7 +4,7 @@ export function SkipLink() {
   return (
     <a
       href="#main-content"
-      className="fixed left-4 top-4 z-[100] -translate-y-full rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition-transform focus:translate-y-0"
+      className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-cyan-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
     >
       Skip to main content
     </a>

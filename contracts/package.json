@@ -6,9 +6,9 @@
     "compile": "npx hardhat compile",
     "test": "npx hardhat test",
     "deploy:local": "npx hardhat run scripts/deploy.ts --network localhost",
-    "deploy:testnet": "npx hardhat run scripts/deploy.ts --network injective-testnet",
+    "deploy:testnet": "npx hardhat run scripts/deploy.ts --network inj_testnet",
     "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network injective",
-    "verify:testnet": "npx hardhat verify --network injective-testnet",
+    "verify:testnet": "npx hardhat verify --network inj_testnet",
     "verify:mainnet": "npx hardhat verify --network injective"
   },
   "devDependencies": {
