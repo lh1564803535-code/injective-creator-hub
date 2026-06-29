@@ -6,10 +6,31 @@ import { MOCK_CAMPAIGNS } from "@/lib/mock-data";
 import { BountyCard } from "@/components/bounty/BountyCard";
 import { useCampaignCount, useCampaign } from "@/hooks/useBounty";
 
+// Skeleton loader for campaign cards
+function CampaignSkeleton() {
+  return (
+    <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-5 animate-pulse">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="h-5 w-16 rounded-full bg-[#2B3139]" />
+        <div className="h-4 w-10 rounded bg-[#2B3139]" />
+      </div>
+      <div className="mb-2 h-5 w-3/4 rounded bg-[#2B3139]" />
+      <div className="mb-4 h-4 w-full rounded bg-[#2B3139]" />
+      <div className="flex gap-4">
+        <div className="h-4 w-20 rounded bg-[#2B3139]" />
+        <div className="h-4 w-16 rounded bg-[#2B3139]" />
+        <div className="h-4 w-14 rounded bg-[#2B3139]" />
+      </div>
+    </div>
+  );
+}
+
 // Component to render a single campaign from contract
 function ContractCampaign({ id }: { id: number }) {
-  const { data, isLoading } = useCampaign(id);
-  if (isLoading || !data) return null;
+  const { data, isLoading, error } = useCampaign(id);
+
+  if (isLoading) return <CampaignSkeleton />;
+  if (error || !data) return null;
 
   const c = data as any;
   return (
@@ -55,8 +76,10 @@ export default function HomePage() {
       </div>
 
       {countLoading ? (
-        <div className="flex items-center justify-center py-12">
-          <Loader2 className="h-6 w-6 animate-spin text-[#00D4AA]" />
+        <div className="space-y-3">
+          {Array.from({ length: 3 }, (_, i) => (
+            <CampaignSkeleton key={i} />
+          ))}
         </div>
       ) : useContract ? (
         <div className="space-y-3">

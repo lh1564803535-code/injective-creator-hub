@@ -61,7 +61,7 @@ export default function CampaignDetailPage() {
   const [voteTarget, setVoteTarget] = useState<SubmissionData | null>(null);
 
   // Real contract data
-  const { data: campaignData, isLoading: campaignLoading, refetch: refetchCampaign } = useCampaign(campaignId);
+  const { data: campaignData, isLoading: campaignLoading, error: campaignError, refetch: refetchCampaign } = useCampaign(campaignId);
   const { data: submissionIds, refetch: refetchSubmissions } = useCampaignSubmissionIds(campaignId);
 
   // Contract write hooks
@@ -184,6 +184,20 @@ export default function CampaignDetailPage() {
     return (
       <div className="flex items-center justify-center py-20">
         <Loader2 className="h-8 w-8 animate-spin text-[#00D4AA]" />
+      </div>
+    );
+  }
+
+  if (campaignError) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="text-center">
+          <p className="mb-2 text-xl text-[#F6465D]">加载失败</p>
+          <p className="mb-4 text-sm text-[#848E9C]">{campaignError.message || "合约调用出错"}</p>
+          <Link href="/" className="text-[#00D4AA] hover:text-[#00D4AA]/80">
+            {t('backToHubLink')}
+          </Link>
+        </div>
       </div>
     );
   }
