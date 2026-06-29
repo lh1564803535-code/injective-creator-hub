@@ -26,12 +26,14 @@ export function MobileBottomNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-1 rounded-lg px-3 py-1.5 transition ${
-                active ? "text-[#00D4AA]" : "text-[#848E9C]"
+              className={`flex flex-col items-center gap-1 rounded-lg px-3 py-1.5 text-[10px] transition ${
+                active
+                  ? "text-[#00D4AA]"
+                  : "text-[#848E9C]"
               }`}
             >
               <item.icon className="h-5 w-5" />
-              <span className="text-[10px] font-medium">{item.label}</span>
+              <span>{item.label}</span>
             </Link>
           );
         })}

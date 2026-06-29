@@ -50,9 +50,13 @@
 ## 下一步
 
 ### 高优先级
-1. **合约数据完整集成** — 首页应循环读取每个 campaign，而不是只读 count
-2. **SubmissionCard loading 状态** — 加 skeleton
-3. **error handling** — 合约调用失败时显示错误信息
+1. ~~**合约数据完整集成**~~ ✅ — 首页 ContractCampaign + useCampaignCount
+2. ~~**SubmissionCard loading 状态**~~ ✅ — CampaignSkeleton 骨架屏
+3. ~~**error handling**~~ ✅ — 合约调用失败显示错误信息
+
+### 中优先级
+4. **移动端适配** — LeftNav 变底部 Tab
+5. **动效打磨** — 卡片 hover、页面切换动画
 
 ### 中优先级
 4. **移动端适配** — LeftNav 变底部 Tab
