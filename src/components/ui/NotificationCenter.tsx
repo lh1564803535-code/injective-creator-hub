@@ -208,26 +208,26 @@ const typeConfig: Record<
   reward: {
     icon: Trophy,
     label: "Rewards",
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
+    color: "text-[#F0B90B]",
+    bg: "bg-[#F0B90B]/10",
   },
   vote: {
     icon: Send,
     label: "Votes",
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
+    color: "text-[#00D4AA]",
+    bg: "bg-[#00D4AA]/10",
   },
   deadline: {
     icon: Clock,
     label: "Deadlines",
-    color: "text-orange-400",
-    bg: "bg-orange-500/10",
+    color: "text-[#F0B90B]",
+    bg: "bg-[#F0B90B]/10",
   },
   settle: {
     icon: Zap,
     label: "Settlements",
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/10",
+    color: "text-[#00D4AA]",
+    bg: "bg-[#00D4AA]/10",
   },
 };
 
@@ -274,12 +274,12 @@ export function NotificationBell() {
       <button
         ref={buttonRef}
         onClick={() => setOpen((v) => !v)}
-        className="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-400 transition hover:bg-white/[0.06] hover:text-white"
+        className="relative flex h-9 w-9 items-center justify-center rounded-lg text-[#848E9C] transition hover:bg-[#2B3139] hover:text-[#EAECEF]"
         aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} unread)` : ""}`}
       >
         <Bell className="h-[18px] w-[18px]" />
         {unreadCount > 0 && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white animate-notif-badge-pulse">
+          <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#F6465D] px-1 text-[10px] font-bold text-[#EAECEF] animate-notif-badge-pulse">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -334,15 +334,15 @@ const NotificationPanel = ({
       {/* Panel */}
       <div
         ref={ref}
-        className="animate-notif-panel-in fixed right-4 top-16 z-[9999] flex max-h-[min(520px,calc(100vh-80px))] w-[min(400px,calc(100vw-32px))] flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#111118]/95 shadow-2xl shadow-black/40 backdrop-blur-xl"
+        className="animate-notif-panel-in fixed right-4 top-16 z-[9999] flex max-h-[min(520px,calc(100vh-80px))] w-[min(400px,calc(100vw-32px))] flex-col overflow-hidden rounded-xl border border-[#2B3139] bg-[#111118]/95 shadow-2xl shadow-black/40 backdrop-blur-xl"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
+        <div className="flex items-center justify-between border-b border-[#2B3139] px-4 py-3">
           <div className="flex items-center gap-2">
-            <Bell className="h-4 w-4 text-cyan-400" />
-            <h3 className="text-sm font-semibold text-white">Notifications</h3>
+            <Bell className="h-4 w-4 text-[#00D4AA]" />
+            <h3 className="text-sm font-semibold text-[#EAECEF]">Notifications</h3>
             {unreadCount > 0 && (
-              <span className="rounded-full bg-cyan-500/15 px-1.5 py-0.5 text-[10px] font-bold text-cyan-400">
+              <span className="rounded-full bg-[#00D4AA]/15 px-1.5 py-0.5 text-[10px] font-bold text-[#00D4AA]">
                 {unreadCount} new
               </span>
             )}
@@ -352,8 +352,8 @@ const NotificationPanel = ({
               onClick={() => setShowFilters((v) => !v)}
               className={`flex h-7 w-7 items-center justify-center rounded-lg transition ${
                 showFilters
-                  ? "bg-cyan-500/15 text-cyan-400"
-                  : "text-gray-500 hover:bg-white/[0.06] hover:text-gray-300"
+                  ? "bg-[#00D4AA]/15 text-[#00D4AA]"
+                  : "text-[#848E9C] hover:bg-[#2B3139] hover:text-[#EAECEF]"
               }`}
               aria-label="Toggle filters"
             >
@@ -362,7 +362,7 @@ const NotificationPanel = ({
             {unreadCount > 0 && (
               <button
                 onClick={markAllRead}
-                className="flex h-7 items-center gap-1 rounded-lg px-2 text-[11px] text-gray-500 transition hover:bg-white/[0.06] hover:text-gray-300"
+                className="flex h-7 items-center gap-1 rounded-lg px-2 text-[11px] text-[#848E9C] transition hover:bg-[#2B3139] hover:text-[#EAECEF]"
               >
                 <CheckCheck className="h-3 w-3" />
                 Read all
@@ -370,7 +370,7 @@ const NotificationPanel = ({
             )}
             <button
               onClick={onClose}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-500 transition hover:bg-white/[0.06] hover:text-gray-300"
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-[#848E9C] transition hover:bg-[#2B3139] hover:text-[#EAECEF]"
               aria-label="Close"
             >
               <X className="h-3.5 w-3.5" />
@@ -380,15 +380,15 @@ const NotificationPanel = ({
 
         {/* Filters */}
         {showFilters && (
-          <div className="flex gap-1.5 border-b border-white/[0.06] px-4 py-2 animate-notif-filter-in">
+          <div className="flex gap-1.5 border-b border-[#2B3139] px-4 py-2 animate-notif-filter-in">
             {filterOptions.map((opt) => (
               <button
                 key={opt.value}
                 onClick={() => setFilter(opt.value)}
                 className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition ${
                   filter === opt.value
-                    ? "bg-cyan-500/15 text-cyan-400"
-                    : "text-gray-500 hover:bg-white/[0.06] hover:text-gray-300"
+                    ? "bg-[#00D4AA]/15 text-[#00D4AA]"
+                    : "text-[#848E9C] hover:bg-[#2B3139] hover:text-[#EAECEF]"
                 }`}
               >
                 {opt.label}
@@ -400,8 +400,8 @@ const NotificationPanel = ({
         {/* Notification List */}
         <div className="flex-1 overflow-y-auto overscroll-contain">
           {filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-gray-500">
-              <Bell className="mb-2 h-8 w-8 text-gray-600" />
+            <div className="flex flex-col items-center justify-center py-12 text-[#848E9C]">
+              <Bell className="mb-2 h-8 w-8 text-[#848E9C]" />
               <p className="text-sm">No notifications</p>
             </div>
           ) : (
@@ -414,8 +414,8 @@ const NotificationPanel = ({
                     className={`animate-notif-item-in flex items-start gap-3 px-4 py-3 transition ${
                       notif.read
                         ? "bg-transparent"
-                        : "bg-cyan-500/[0.03] hover:bg-cyan-500/[0.06]"
-                    } hover:bg-white/[0.03]`}
+                        : "bg-[#00D4AA]/[0.03] hover:bg-[#00D4AA]/[0.06]"
+                    } hover:bg-[#1E2329]`}
                     style={{ animationDelay: `${i * 40}ms` }}
                   >
                     {/* Icon */}
@@ -431,8 +431,8 @@ const NotificationPanel = ({
                         <p
                           className={`truncate text-sm ${
                             notif.read
-                              ? "font-normal text-gray-400"
-                              : "font-medium text-gray-200"
+                              ? "font-normal text-[#848E9C]"
+                              : "font-medium text-[#EAECEF]"
                           }`}
                         >
                           {notif.title}
@@ -441,11 +441,11 @@ const NotificationPanel = ({
                           <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
                         )}
                       </div>
-                      <p className="mt-0.5 text-xs leading-relaxed text-gray-500">
+                      <p className="mt-0.5 text-xs leading-relaxed text-[#848E9C]">
                         {notif.detail}
                       </p>
                       <div className="mt-1 flex items-center gap-2">
-                        <span className="text-[10px] text-gray-600">
+                        <span className="text-[10px] text-[#848E9C]">
                           {timeAgo(notif.timestamp)}
                         </span>
                         <span
@@ -463,7 +463,7 @@ const NotificationPanel = ({
                           e.stopPropagation();
                           markRead(notif.id);
                         }}
-                        className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-gray-600 transition hover:bg-emerald-500/10 hover:text-emerald-400"
+                        className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[#848E9C] transition hover:bg-[#00D4AA]/10 hover:text-[#00D4AA]"
                         aria-label="Mark as read"
                       >
                         <Check className="h-3 w-3" />
@@ -498,11 +498,11 @@ const NotificationPanel = ({
         </div>
 
         {/* Footer */}
-        <div className="border-t border-white/[0.06] px-4 py-2.5">
+        <div className="border-t border-[#2B3139] px-4 py-2.5">
           <Link
             href="/dashboard"
             onClick={onClose}
-            className="flex items-center justify-center gap-1.5 text-xs text-cyan-400 transition hover:text-cyan-300"
+            className="flex items-center justify-center gap-1.5 text-xs text-[#00D4AA] transition hover:text-[#00D4AA]"
           >
             View all in Dashboard
             <span className="text-[10px]">&rarr;</span>

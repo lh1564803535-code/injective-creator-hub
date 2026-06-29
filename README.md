@@ -199,6 +199,10 @@ injective-creator-hub/
 ## 📋 Submission Checklist
 
 - [x] GitHub open-source repo with README
+- [x] Smart contract deployed on Injective EVM Testnet
+- [x] Frontend with wallet connection (RainbowKit + wagmi)
+- [x] i18n support (English + Chinese)
+- [x] AI Assistant with OpenAI-compatible API
 - [ ] Demo video (≤ 3 minutes)
 - [ ] Pitch Deck
 - [ ] TypeForm submission

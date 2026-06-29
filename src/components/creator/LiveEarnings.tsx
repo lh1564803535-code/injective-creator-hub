@@ -162,29 +162,29 @@ export function LiveEarnings({
 
   if (compact) {
     return (
-      <div className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-[#1a1a1a] p-6">
+      <div className="relative overflow-hidden rounded-xl border border-amber-500/20 bg-[#1a1a1a] p-6">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent" />
         <div className="relative">
-          <div className="mb-1 flex items-center gap-2 text-sm text-gray-400">
-            <DollarSign className="h-4 w-4 text-amber-400" />
+          <div className="mb-1 flex items-center gap-2 text-sm text-[#848E9C]">
+            <DollarSign className="h-4 w-4 text-[#F0B90B]" />
             Live Earnings
           </div>
           <div className="flex items-baseline gap-3">
             <span className="live-earnings-digit font-mono text-3xl font-bold bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent">
               ${formatUSDC(total)}
             </span>
-            <span className="live-earnings-rate text-sm font-medium text-emerald-400">
+            <span className="live-earnings-rate text-sm font-medium text-[#00D4AA]">
               +${effectiveRate.toFixed(4)}/s
             </span>
           </div>
-          <p className="mt-1 text-xs text-gray-500">USDC earned in real-time</p>
+          <p className="mt-1 text-xs text-[#848E9C]">USDC earned in real-time</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-[#1a1a1a]">
+    <div className="relative overflow-hidden rounded-xl border border-amber-500/20 bg-[#1a1a1a]">
       <div className="absolute -top-24 left-1/2 h-48 w-[120%] -translate-x-1/2 rounded-full bg-amber-500/8 blur-3xl" />
 
       <div className="relative p-6 lg:p-8">
@@ -192,14 +192,14 @@ export function LiveEarnings({
         <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15">
-              <DollarSign className="h-5 w-5 text-amber-400" />
+              <DollarSign className="h-5 w-5 text-[#F0B90B]" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-white">
+              <h2 className="text-lg font-semibold text-[#EAECEF]">
                 {viewMode ? "Viewing Address" : "Live Earnings"}
-                <span className="ml-2 inline-flex items-center rounded-full bg-gray-700/50 px-2 py-0.5 text-[10px] font-medium text-gray-400 uppercase tracking-wider">Demo</span>
+                <span className="ml-2 inline-flex items-center rounded-full bg-gray-700/50 px-2 py-0.5 text-[10px] font-medium text-[#848E9C] uppercase tracking-wider">Demo</span>
               </h2>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-[#848E9C]">
                 {viewMode
                   ? `${viewAddress.slice(0, 6)}...${viewAddress.slice(-4)}`
                   : "Real-time USDC streaming"}
@@ -210,14 +210,14 @@ export function LiveEarnings({
             {viewMode && (
               <button
                 onClick={exitViewMode}
-                className="rounded-lg bg-white/[0.06] px-3 py-1.5 text-xs text-gray-400 transition hover:bg-white/[0.1] hover:text-white"
+                className="rounded-lg bg-[#2B3139] px-3 py-1.5 text-xs text-[#848E9C] transition hover:bg-white/[0.1] hover:text-[#EAECEF]"
               >
                 Exit View
               </button>
             )}
-            <div className="flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1">
+            <div className="flex items-center gap-1 rounded-full bg-[#00D4AA]/10 px-3 py-1">
               <span className="live-earnings-pulse h-2 w-2 rounded-full bg-emerald-400" />
-              <span className="text-xs font-medium text-emerald-400">
+              <span className="text-xs font-medium text-[#00D4AA]">
                 {viewMode ? "View-only" : "Streaming"}
               </span>
             </div>
@@ -226,20 +226,20 @@ export function LiveEarnings({
 
         {/* View-only Address Input */}
         {enableViewOnly && !viewMode && (
-          <div className="mb-6 flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-3">
-            <Eye className="h-4 w-4 shrink-0 text-gray-500" />
+          <div className="mb-6 flex items-center gap-2 rounded-xl border border-[#2B3139] bg-[#1E2329] p-3">
+            <Eye className="h-4 w-4 shrink-0 text-[#848E9C]" />
             <input
               type="text"
               value={viewAddress}
               onChange={(e) => setViewAddress(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleViewAddress()}
               placeholder="View any address (0x...)"
-              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
+              className="flex-1 bg-transparent text-sm text-[#EAECEF] outline-none placeholder:text-[#848E9C]"
             />
             <button
               onClick={handleViewAddress}
               disabled={!viewAddress.trim() || viewAddress.trim().length < 10}
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-amber-400 transition hover:bg-amber-500/25 disabled:opacity-30"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-[#F0B90B] transition hover:bg-amber-500/25 disabled:opacity-30"
             >
               <Search className="h-4 w-4" />
             </button>
@@ -258,19 +258,19 @@ export function LiveEarnings({
             </span>
           </div>
           <div className="mt-2 flex items-center justify-center gap-2">
-            <TrendingUp className="h-4 w-4 text-emerald-400" />
-            <span className="live-earnings-rate text-sm font-medium text-emerald-400">
+            <TrendingUp className="h-4 w-4 text-[#00D4AA]" />
+            <span className="live-earnings-rate text-sm font-medium text-[#00D4AA]">
               +${effectiveRate.toFixed(4)}/s
             </span>
-            <span className="text-xs text-gray-600">USDC</span>
+            <span className="text-xs text-[#848E9C]">USDC</span>
           </div>
         </div>
 
         {/* Stat Cards */}
         <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-            <p className="mb-1 text-xs text-gray-500">Today</p>
-            <p className="text-lg font-bold text-emerald-400">
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-4 text-center">
+            <p className="mb-1 text-xs text-[#848E9C]">Today</p>
+            <p className="text-lg font-bold text-[#00D4AA]">
               +${todayEarnings.toFixed(2)}
             </p>
             <div className="mt-1 flex items-center justify-center gap-1 text-[10px] text-emerald-500">
@@ -278,78 +278,78 @@ export function LiveEarnings({
               <span>+8.3%</span>
             </div>
           </div>
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-            <p className="mb-1 text-xs text-gray-500">This Month</p>
-            <p className="text-lg font-bold text-white">
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-4 text-center">
+            <p className="mb-1 text-xs text-[#848E9C]">This Month</p>
+            <p className="text-lg font-bold text-[#EAECEF]">
               ${formatCompact(monthEarnings)}
             </p>
-            <p className="mt-1 text-[10px] text-gray-600">
+            <p className="mt-1 text-[10px] text-[#848E9C]">
               {monthProgress.toFixed(0)}% of goal
             </p>
           </div>
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 text-center">
-            <p className="mb-1 text-xs text-gray-500">Annual (est.)</p>
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-4 text-center">
+            <p className="mb-1 text-xs text-[#848E9C]">Annual (est.)</p>
             <p className="text-lg font-bold bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent">
               {formatCompact(annualProjection)}
             </p>
-            <p className="mt-1 text-[10px] text-gray-600">projected</p>
+            <p className="mt-1 text-[10px] text-[#848E9C]">projected</p>
           </div>
         </div>
 
         {/* 7-Day Trend + 30-Day Forecast */}
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-4">
             <div className="mb-2 flex items-center justify-between">
-              <p className="text-xs text-gray-500">7-Day Trend</p>
+              <p className="text-xs text-[#848E9C]">7-Day Trend</p>
               {weeklyData[weeklyData.length - 1] > weeklyData[0] ? (
-                <span className="flex items-center gap-0.5 text-[10px] text-emerald-400">
+                <span className="flex items-center gap-0.5 text-[10px] text-[#00D4AA]">
                   <ArrowUpRight className="h-3 w-3" /> +12%
                 </span>
               ) : (
-                <span className="flex items-center gap-0.5 text-[10px] text-red-400">
+                <span className="flex items-center gap-0.5 text-[10px] text-[#F6465D]">
                   <ArrowDownRight className="h-3 w-3" /> -5%
                 </span>
               )}
             </div>
             <SparklineChart data={weeklyData} />
             <div className="mt-2 flex items-center justify-between">
-              <span className="text-[10px] text-gray-600">Mon</span>
-              <span className="text-[10px] text-gray-600">Today</span>
+              <span className="text-[10px] text-[#848E9C]">Mon</span>
+              <span className="text-[10px] text-[#848E9C]">Today</span>
             </div>
           </div>
-          <div className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
-            <p className="mb-2 flex items-center gap-1 text-xs text-gray-500">
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-4">
+            <p className="mb-2 flex items-center gap-1 text-xs text-[#848E9C]">
               <Calendar className="h-3 w-3" />
               30-Day Forecast
             </p>
-            <p className="text-2xl font-bold text-white">
+            <p className="text-2xl font-bold text-[#EAECEF]">
               {formatCompact(effectiveRate * 86400 * 30)}
             </p>
-            <p className="mt-1 text-[10px] text-gray-600">
+            <p className="mt-1 text-[10px] text-[#848E9C]">
               Based on current streaming rate
             </p>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[#2B3139]">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-1000"
                 style={{ width: `${Math.min(monthProgress, 100)}%` }}
               />
             </div>
-            <p className="mt-1 text-[10px] text-gray-600">{monthProgress.toFixed(0)}% to monthly goal</p>
+            <p className="mt-1 text-[10px] text-[#848E9C]">{monthProgress.toFixed(0)}% to monthly goal</p>
           </div>
         </div>
 
         {/* Progress Bar with Flowing Light */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-gray-500 flex items-center gap-1">
+            <span className="text-[#848E9C] flex items-center gap-1">
               <Target className="h-3 w-3" />
               Monthly Goal
             </span>
-            <span className="text-gray-400">
+            <span className="text-[#848E9C]">
               ${formatCompact(monthEarnings)} / ${formatCompact(monthlyTarget)}
             </span>
           </div>
-          <div className="relative h-3 overflow-hidden rounded-full bg-white/[0.06]">
+          <div className="relative h-3 overflow-hidden rounded-full bg-[#2B3139]">
             <div
               className="live-earnings-progress absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500"
               style={{ width: `${monthProgress}%` }}

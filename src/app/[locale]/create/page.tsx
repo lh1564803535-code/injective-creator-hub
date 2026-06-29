@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {useTranslations} from 'next-intl';
 import {Link, useRouter} from '@/i18n/navigation';
 import { ArrowLeft, Rocket, Loader2, CheckCircle, AlertCircle } from "lucide-react";
@@ -9,10 +9,10 @@ import { useAccount, useChainId, useSwitchChain, useWriteContract, useWaitForTra
 import { parseUnits } from "viem";
 import { CreateCampaignForm } from "@/components/campaign/CreateCampaignForm";
 import { BOUNTY_CAMPAIGN_ADDRESS, BOUNTY_CAMPAIGN_ABI } from "@/lib/contract-abi";
+import { INJECTIVE_CHAIN_ID } from "@/lib/wagmi";
 
 // Testnet USDC address
 const USDC_ADDRESS = "0xF22bede237A07E121B56d91A491EB7bCDfD1F590" as const;
-const INJECTIVE_TESTNET_CHAIN_ID = 1439;
 
 // Minimal ERC20 ABI for approve
 const ERC20_ABI = [
@@ -48,33 +48,44 @@ export default function CreateCampaignPage() {
   const { writeContract: writeCreate, data: createHash, isPending: isCreatePending } = useWriteContract();
   const { isLoading: isCreateConfirming, isSuccess: isCreateSuccess } = useWaitForTransactionReceipt({ hash: createHash });
 
-  // Track approve confirmation → trigger createCampaign
-  const [approveConfirmed, setApproveConfirmed] = useState(false);
+  // Ref to prevent double-trigger
+  const createTriggered = useRef(false);
 
-  // When approve tx confirms, call createCampaign
-  if (isApproveSuccess && !approveConfirmed && step === "confirming-approve") {
-    setApproveConfirmed(true);
-    setStep("creating");
-    writeCreate({
-      address: BOUNTY_CAMPAIGN_ADDRESS,
-      abi: BOUNTY_CAMPAIGN_ABI,
-      functionName: "createCampaign",
-      args: [
-        "Welcome to Creator Hub",
-        "Your first campaign — submit content and earn USDC",
-        parseUnits("10", 6),  // 10 USDC
-        BigInt(604800),        // 7 days
-      ],
-    });
-  }
+  // When approve tx confirms → call createCampaign (once)
+  useEffect(() => {
+    if (isApproveSuccess && step === "confirming-approve" && !createTriggered.current) {
+      createTriggered.current = true;
+      setStep("creating");
+      writeCreate({
+        address: BOUNTY_CAMPAIGN_ADDRESS,
+        abi: BOUNTY_CAMPAIGN_ABI,
+        functionName: "createCampaign",
+        args: [
+          "Welcome to Creator Hub",
+          "Your first campaign — submit content and earn USDC",
+          parseUnits("10", 6),
+          BigInt(604800),
+        ],
+      });
+    }
+  }, [isApproveSuccess, step]);
 
-  // When create tx confirms, redirect
-  if (isCreateSuccess && step === "confirming-create") {
-    setStep("done");
-    // Read campaignCount to get the new ID, then redirect
-    // For now, redirect to campaign list
-    setTimeout(() => router.push("/"), 2000);
-  }
+  // When create tx is submitted → move to confirming
+  useEffect(() => {
+    if (step === "creating" && isCreateConfirming) {
+      setStep("confirming-create");
+    }
+  }, [step, isCreateConfirming]);
+
+  // When create tx confirms → redirect (once)
+  const redirectTriggered = useRef(false);
+  useEffect(() => {
+    if (isCreateSuccess && !redirectTriggered.current) {
+      redirectTriggered.current = true;
+      setStep("done");
+      setTimeout(() => router.push("/"), 2000);
+    }
+  }, [isCreateSuccess]);
 
   const handleDemo = async () => {
     setErrorMsg("");
@@ -86,11 +97,11 @@ export default function CreateCampaignPage() {
     }
 
     // Step 1: Switch to Injective Testnet if needed
-    if (chainId !== INJECTIVE_TESTNET_CHAIN_ID) {
+    if (chainId !== INJECTIVE_CHAIN_ID) {
       try {
-        await switchChain({ chainId: INJECTIVE_TESTNET_CHAIN_ID });
+        await switchChain({ chainId: INJECTIVE_CHAIN_ID });
       } catch {
-        setErrorMsg("Please switch to Injective Testnet (Chain ID 1439) in your wallet.");
+        setErrorMsg("请在钱包中切换到 Injective 测试网（Chain ID 1439）");
         setStep("error");
         return;
       }
@@ -107,76 +118,68 @@ export default function CreateCampaignPage() {
       });
       setStep("confirming-approve");
     } catch (e: any) {
-      setErrorMsg(e?.message || "USDC approval failed. Please try again.");
+      setErrorMsg(e?.message || "USDC 授权失败，请重试");
       setStep("error");
     }
   };
 
   const getStepLabel = () => {
     switch (step) {
-      case "approving": return "Approving USDC...";
-      case "confirming-approve": return "Confirming approval...";
-      case "creating": return "Creating campaign...";
-      case "confirming-create": return "Confirming creation...";
-      case "done": return "Done! Redirecting...";
-      case "error": return "Error";
-      default: return "🎯 Create Demo Campaign";
+      case "approving": return "授权 USDC 中...";
+      case "confirming-approve": return "确认授权中...";
+      case "creating": return "创建活动中...";
+      case "confirming-create": return "确认创建中...";
+      case "done": return "完成！跳转中...";
+      case "error": return "出错了";
+      default: return "🎯 一键创建 Demo 活动";
     }
   };
 
   const isLoading = ["approving", "confirming-approve", "creating", "confirming-create"].includes(step);
 
   return (
-    <div className="min-h-screen bg-[#08080f] p-6 pt-22 lg:p-8 lg:pt-24">
-      <div className="mx-auto max-w-2xl">
-        <Link
-          href="/"
-          className="mb-6 inline-flex items-center gap-2 text-sm text-gray-400 transition hover:text-white"
-        >
-          <ArrowLeft className="h-4 w-4" /> {t('backToHub')}
-        </Link>
-
+    <div className="page-enter">
         <div className="mb-8">
-          <h1 className="mb-2 text-2xl font-bold text-white">
+          <h1 className="mb-2 text-xl font-bold text-[#EAECEF]">
             {t('createCampaign')}
           </h1>
-          <p className="text-gray-400">
+          <p className="text-sm text-[#848E9C]">
             {t('launchBounty')}
           </p>
         </div>
 
         {/* Demo Campaign Button */}
-        <div className="mb-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6">
-          <h2 className="mb-2 text-lg font-semibold text-white">Quick Demo</h2>
-          <p className="mb-4 text-sm text-gray-400">
-            One click to create a demo campaign on Injective Testnet. Requires 10 testnet USDC.
+        <div className="mb-6 rounded-xl border border-[#00D4AA]/20 bg-[#00D4AA]/5 p-6">
+          <h2 className="mb-2 text-lg font-semibold text-[#EAECEF]">快速体验</h2>
+          <p className="mb-4 text-sm text-[#848E9C]">
+            一键创建测试网赏金活动，需要 10 USDC 测试币
           </p>
 
           {!isConnected ? (
             <ConnectButton />
           ) : step === "error" ? (
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-lg bg-red-500/10 px-4 py-2 text-sm text-red-400">
+              <div className="flex items-center gap-2 rounded-lg bg-[#F6465D]/10 px-4 py-2 text-sm text-[#F6465D]">
                 <AlertCircle className="h-4 w-4" />
                 {errorMsg}
               </div>
               <button
                 onClick={() => { setStep("idle"); setErrorMsg(""); }}
-                className="rounded-lg bg-white/[0.06] px-4 py-2 text-sm text-gray-300 hover:bg-white/[0.1]"
+                className="rounded-lg bg-[#2B3139] px-4 py-2 text-sm text-[#EAECEF] hover:bg-[#2B3139]/80"
               >
-                Retry
+                重试
               </button>
             </div>
           ) : step === "done" ? (
-            <div className="flex items-center gap-2 rounded-lg bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400">
+            <div className="flex items-center gap-2 rounded-lg bg-[#00D4AA]/10 px-4 py-3 text-sm text-[#00D4AA]">
               <CheckCircle className="h-4 w-4" />
-              Campaign created successfully! Redirecting...
+              活动创建成功！跳转中...
             </div>
           ) : (
             <button
               onClick={handleDemo}
               disabled={isLoading}
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#00D4AA] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#00D4AA]/90 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
               {getStepLabel()}
@@ -187,28 +190,27 @@ export default function CreateCampaignPage() {
         {/* Divider */}
         <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-white/[0.06]" />
+            <div className="w-full border-t border-[#2B3139]" />
           </div>
           <div className="relative flex justify-center text-xs">
-            <span className="bg-[#08080f] px-3 text-gray-500">or create custom</span>
+            <span className="bg-[#0B0E11] px-3 text-[#848E9C]">或自定义创建</span>
           </div>
         </div>
 
         {/* Existing Form */}
         {!isConnected ? (
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-12 text-center backdrop-blur-sm">
-            <Rocket className="mx-auto mb-4 h-12 w-12 text-gray-600" />
-            <p className="mb-4 text-gray-400">
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-12 text-center">
+            <Rocket className="mx-auto mb-4 h-12 w-12 text-[#848E9C]" />
+            <p className="mb-4 text-[#848E9C]">
               {t('connectToCreate')}
             </p>
             <ConnectButton />
           </div>
         ) : (
-          <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur-sm">
+          <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-6">
             <CreateCampaignForm sponsorAddress={address} />
           </div>
         )}
-      </div>
     </div>
   );
 }

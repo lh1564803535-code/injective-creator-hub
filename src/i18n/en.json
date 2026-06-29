@@ -8,6 +8,15 @@
     "connect": "Connect Wallet"
   },
   "home": {
+    "heroTitle": "Creator Bounty",
+    "heroTitleHighlight": "Platform",
+    "heroSubtitle": "Brands post bounties → Creators submit content → Community votes → AI settles USDC automatically",
+    "browseBounties": "Browse Bounties",
+    "postBounty": "Post a Bounty",
+    "active": "Active",
+    "voting": "Voting",
+    "ended": "Ended",
+    "noCampaigns": "No campaigns yet. Be the first to post a bounty!",
     "hero": {
       "title": "Injective Creator Hub",
       "subtitle": "AI-powered real-time earnings platform for creators",
@@ -50,6 +59,11 @@
     "whyChooseDesc": "Built for the next generation of decentralized creators",
     "allCampaigns": "All Campaigns",
     "allCampaignsDesc": "Earn USDC by creating content",
+    "hotCampaigns": "Hot Campaigns",
+    "platformStats": "Platform Stats",
+    "totalCampaigns": "Total Campaigns",
+    "totalRewards": "Total Rewards",
+    "trending": "Trending",
     "leaderboard": "Leaderboard",
     "leaderboardDesc": "Leading the Injective Creator Hub",
     "roadmap": "Roadmap",

@@ -46,9 +46,9 @@ const SECURITY_TIPS: SecurityTip[] = [
 ];
 
 const severityConfig = {
-  info: { bg: "bg-cyan-500/10", text: "text-cyan-400", border: "border-cyan-500/20", icon: Shield },
-  warning: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/20", icon: AlertTriangle },
-  critical: { bg: "bg-red-500/10", text: "text-red-400", border: "border-red-500/20", icon: AlertTriangle },
+  info: { bg: "bg-[#00D4AA]/10", text: "text-[#00D4AA]", border: "border-cyan-500/20", icon: Shield },
+  warning: { bg: "bg-[#F0B90B]/10", text: "text-[#F0B90B]", border: "border-amber-500/20", icon: AlertTriangle },
+  critical: { bg: "bg-[#F6465D]/10", text: "text-[#F6465D]", border: "border-red-500/20", icon: AlertTriangle },
 };
 
 export function SecurityTips() {
@@ -75,8 +75,8 @@ export function SecurityTips() {
         <div className="flex items-start gap-2">
           <Icon className={`mt-0.5 h-4 w-4 shrink-0 ${config.text}`} />
           <div>
-            <p className="text-sm font-medium text-white">{tip.title}</p>
-            <p className="mt-0.5 text-xs text-gray-400">{tip.description}</p>
+            <p className="text-sm font-medium text-[#EAECEF]">{tip.title}</p>
+            <p className="mt-0.5 text-xs text-[#848E9C]">{tip.description}</p>
             {tip.action && (
               <a
                 href={tip.action.href}
@@ -92,7 +92,7 @@ export function SecurityTips() {
         </div>
         <button
           onClick={() => setDismissed((prev) => new Set([...prev, tip.id]))}
-          className="shrink-0 text-gray-500 hover:text-white"
+          className="shrink-0 text-[#848E9C] hover:text-[#EAECEF]"
         >
           <X className="h-4 w-4" />
         </button>
@@ -102,7 +102,7 @@ export function SecurityTips() {
         <div className="mt-3 flex items-center justify-between">
           <button
             onClick={() => setCurrent((c) => (c - 1 + visibleTips.length) % visibleTips.length)}
-            className="text-gray-500 hover:text-white"
+            className="text-[#848E9C] hover:text-[#EAECEF]"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -112,14 +112,14 @@ export function SecurityTips() {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-1.5 w-1.5 rounded-full transition ${
-                  i === current ? config.text.replace("text-", "bg-") : "bg-white/20"
+                  i === current ? config.text.replace("text-", "bg-") : "bg-[#EAECEF]/20"
                 }`}
               />
             ))}
           </div>
           <button
             onClick={() => setCurrent((c) => (c + 1) % visibleTips.length)}
-            className="text-gray-500 hover:text-white"
+            className="text-[#848E9C] hover:text-[#EAECEF]"
           >
             <ChevronRight className="h-4 w-4" />
           </button>

@@ -1,7 +1,11 @@
 // BountyCampaign.sol ABI - deployed on Injective EVM Testnet
 // Contract address: 0xAc84d5A83DAfaC2eBfcEfE26773Da16229066f61
 
-export const BOUNTY_CAMPAIGN_ADDRESS = process.env.NEXT_PUBLIC_BOUNTY_CONTRACT_ADDRESS as `0x${string}`;
+const _addr = process.env.NEXT_PUBLIC_BOUNTY_CONTRACT_ADDRESS;
+if (!_addr || !_addr.startsWith("0x")) {
+  console.warn("[Creator Hub] NEXT_PUBLIC_BOUNTY_CONTRACT_ADDRESS is missing or invalid. Contract calls will fail.");
+}
+export const BOUNTY_CAMPAIGN_ADDRESS = (_addr ?? "0x0000000000000000000000000000000000000000") as `0x${string}`;
 
 export const BOUNTY_CAMPAIGN_ABI = [
   // Read functions

@@ -129,23 +129,23 @@ export function RewardAnimation({
       <div className="relative flex flex-col items-center gap-6">
         {/* Sparkle Icon */}
         <div className="animate-bounce">
-          <Sparkles className="h-12 w-12 text-amber-400" />
+          <Sparkles className="h-12 w-12 text-[#F0B90B]" />
         </div>
 
         {/* Amount Display with Golden Glow */}
         <div className="text-center">
-          <p className="mb-2 text-lg text-gray-400">Reward Settled</p>
+          <p className="mb-2 text-lg text-[#848E9C]">Reward Settled</p>
           <div className="animate-golden-glow flex items-baseline justify-center gap-2">
             <span className="text-6xl font-bold tabular-nums text-amber-300">
               {currentAmount.toFixed(2)}
             </span>
-            <span className="text-2xl font-semibold text-amber-400">USDC</span>
+            <span className="text-2xl font-semibold text-[#F0B90B]">USDC</span>
           </div>
         </div>
 
         {/* Creator Address */}
-        <div className="rounded-full bg-white/[0.06] px-4 py-2">
-          <p className="font-mono text-sm text-gray-300">
+        <div className="rounded-full bg-[#2B3139] px-4 py-2">
+          <p className="font-mono text-sm text-[#EAECEF]">
             {creatorAddress.slice(0, 6)}...{creatorAddress.slice(-4)}
           </p>
         </div>
@@ -153,7 +153,7 @@ export function RewardAnimation({
         {/* Completion Status */}
         {isComplete && (
           <div className="flex flex-col items-center gap-4">
-            <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 px-6 py-3 text-emerald-400">
+            <div className="flex items-center gap-2 rounded-full bg-[#00D4AA]/10 px-6 py-3 text-[#00D4AA]">
               <Check className="h-5 w-5" />
               <span className="font-medium">Settlement Complete</span>
             </div>

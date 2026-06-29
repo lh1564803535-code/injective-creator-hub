@@ -2,4 +2,3 @@
 export * from "./injective";
 export * from "./mock-data";
 export * from "./utils";
-export * from "./useScrollReveal";

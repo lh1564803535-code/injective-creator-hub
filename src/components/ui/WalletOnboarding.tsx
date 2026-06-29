@@ -19,24 +19,24 @@ const steps = [
     title: "Connect Wallet",
     description: "Link your MetaMask or WalletConnect wallet",
     icon: Wallet,
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/15",
+    color: "text-[#00D4AA]",
+    bg: "bg-[#00D4AA]/15",
   },
   {
     id: 2,
     title: "Get Testnet Tokens",
     description: "Claim free INJ and USDC from the faucet",
     icon: Coins,
-    color: "text-amber-400",
-    bg: "bg-amber-500/15",
+    color: "text-[#F0B90B]",
+    bg: "bg-[#F0B90B]/15",
   },
   {
     id: 3,
     title: "Start Creating",
     description: "Join campaigns and earn USDC rewards",
     icon: Zap,
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/15",
+    color: "text-[#00D4AA]",
+    bg: "bg-[#00D4AA]/15",
   },
 ];
 
@@ -45,10 +45,10 @@ export function WalletOnboarding() {
   const [currentStep, setCurrentStep] = useState(isConnected ? 2 : 1);
 
   return (
-    <div className="rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-transparent to-transparent p-6">
+    <div className="rounded-xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-transparent to-transparent p-6">
       <div className="mb-4 flex items-center gap-2">
-        <Shield className="h-5 w-5 text-cyan-400" />
-        <h3 className="text-lg font-semibold text-white">Getting Started</h3>
+        <Shield className="h-5 w-5 text-[#00D4AA]" />
+        <h3 className="text-lg font-semibold text-[#EAECEF]">Getting Started</h3>
       </div>
 
       <div className="space-y-4">
@@ -64,24 +64,24 @@ export function WalletOnboarding() {
                 <div
                   className={`flex h-10 w-10 items-center justify-center rounded-full ${
                     isCompleted
-                      ? "bg-emerald-500/15"
+                      ? "bg-[#00D4AA]/15"
                       : isCurrent
                       ? step.bg
-                      : "bg-white/[0.04]"
+                      : "bg-[#2B3139]"
                   }`}
                 >
                   {isCompleted ? (
-                    <CheckCircle className="h-5 w-5 text-emerald-400" />
+                    <CheckCircle className="h-5 w-5 text-[#00D4AA]" />
                   ) : (
                     <Icon
                       className={`h-5 w-5 ${
-                        isCurrent ? step.color : "text-gray-500"
+                        isCurrent ? step.color : "text-[#848E9C]"
                       }`}
                     />
                   )}
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="mt-2 h-8 w-0.5 bg-white/[0.06]" />
+                  <div className="mt-2 h-8 w-0.5 bg-[#2B3139]" />
                 )}
               </div>
 
@@ -89,15 +89,15 @@ export function WalletOnboarding() {
                 <p
                   className={`text-sm font-medium ${
                     isCompleted
-                      ? "text-emerald-400"
+                      ? "text-[#00D4AA]"
                       : isCurrent
-                      ? "text-white"
-                      : "text-gray-500"
+                      ? "text-[#EAECEF]"
+                      : "text-[#848E9C]"
                   }`}
                 >
                   {step.title}
                 </p>
-                <p className="mt-0.5 text-xs text-gray-500">
+                <p className="mt-0.5 text-xs text-[#848E9C]">
                   {step.description}
                 </p>
 
@@ -113,7 +113,7 @@ export function WalletOnboarding() {
                       href="https://testnet.faucet.injective.network/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 rounded-lg bg-amber-500/15 px-3 py-1.5 text-xs font-medium text-amber-400 transition hover:bg-amber-500/25"
+                      className="flex items-center gap-1 rounded-lg bg-[#F0B90B]/15 px-3 py-1.5 text-xs font-medium text-[#F0B90B] transition hover:bg-[#F0B90B]/25"
                     >
                       Official Faucet
                       <ExternalLink className="h-3 w-3" />
@@ -122,7 +122,7 @@ export function WalletOnboarding() {
                       href="https://cloud.google.com/application/web3/faucet/injective/testnet"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 rounded-lg bg-white/[0.04] px-3 py-1.5 text-xs text-gray-400 transition hover:bg-white/[0.06]"
+                      className="flex items-center gap-1 rounded-lg bg-[#2B3139] px-3 py-1.5 text-xs text-[#848E9C] transition hover:bg-[#2B3139]"
                     >
                       Google Faucet
                       <ExternalLink className="h-3 w-3" />
@@ -134,7 +134,7 @@ export function WalletOnboarding() {
                   <div className="mt-3">
                     <a
                       href="/campaigns"
-                      className="inline-flex items-center gap-1 rounded-lg bg-emerald-500/15 px-3 py-1.5 text-xs font-medium text-emerald-400 transition hover:bg-emerald-500/25"
+                      className="inline-flex items-center gap-1 rounded-lg bg-[#00D4AA]/15 px-3 py-1.5 text-xs font-medium text-[#00D4AA] transition hover:bg-[#00D4AA]/25"
                     >
                       Browse Campaigns
                       <ChevronRight className="h-3 w-3" />

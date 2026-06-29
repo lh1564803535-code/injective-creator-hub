@@ -103,10 +103,10 @@ function CommandPaletteInner() {
     };
 
     const navItems: CommandItem[] = [
-      { id: "nav-home", label: "Home", icon: Home, color: "text-cyan-400", action: () => navigate("/"), category: "Navigation" },
+      { id: "nav-home", label: "Home", icon: Home, color: "text-[#00D4AA]", action: () => navigate("/"), category: "Navigation" },
       { id: "nav-campaigns", label: "Explore Campaigns", icon: Compass, color: "text-purple-400", action: () => navigate("/campaigns"), category: "Navigation", shortcut: "G C" },
-      { id: "nav-leaderboard", label: "Leaderboard", icon: Trophy, color: "text-amber-400", action: () => navigate("/leaderboard"), category: "Navigation", shortcut: "G L" },
-      { id: "nav-create", label: "Create Campaign", icon: Plus, color: "text-emerald-400", action: () => navigate("/create"), category: "Navigation", shortcut: "G N" },
+      { id: "nav-leaderboard", label: "Leaderboard", icon: Trophy, color: "text-[#F0B90B]", action: () => navigate("/leaderboard"), category: "Navigation", shortcut: "G L" },
+      { id: "nav-create", label: "Create Campaign", icon: Plus, color: "text-[#00D4AA]", action: () => navigate("/create"), category: "Navigation", shortcut: "G N" },
       { id: "nav-dashboard", label: "Dashboard", icon: LayoutDashboard, color: "text-blue-400", action: () => navigate("/dashboard"), category: "Navigation", shortcut: "G D" },
     ];
 
@@ -118,7 +118,7 @@ function CommandPaletteInner() {
         label: c.title,
         description: c.description.slice(0, 80) + "...",
         icon: FileText,
-        color: status === "active" ? "text-emerald-400" : status === "voting" ? "text-amber-400" : "text-gray-400",
+        color: status === "active" ? "text-[#00D4AA]" : status === "voting" ? "text-[#F0B90B]" : "text-[#848E9C]",
         action: () => navigate(`/campaign/${c.id}`),
         category: "Campaigns",
         meta: `${formatUSDC(c.totalReward)} USDC  ·  ${statusLabel}  ·  ${getTimeRemaining(c.deadline)}`,
@@ -126,9 +126,9 @@ function CommandPaletteInner() {
     });
 
     const actionItems: CommandItem[] = [
-      { id: "action-create", label: "Create New Campaign", description: "Launch a new bounty campaign", icon: Plus, color: "text-emerald-400", action: () => navigate("/create"), category: "Quick Actions" },
+      { id: "action-create", label: "Create New Campaign", description: "Launch a new bounty campaign", icon: Plus, color: "text-[#00D4AA]", action: () => navigate("/create"), category: "Quick Actions" },
       { id: "action-dashboard", label: "View My Dashboard", description: "Check earnings, submissions, and stats", icon: LayoutDashboard, color: "text-blue-400", action: () => navigate("/dashboard"), category: "Quick Actions" },
-      { id: "action-ranks", label: "View Creator Rankings", description: "See top earning creators", icon: Users, color: "text-amber-400", action: () => navigate("/leaderboard"), category: "Quick Actions" },
+      { id: "action-ranks", label: "View Creator Rankings", description: "See top earning creators", icon: Users, color: "text-[#F0B90B]", action: () => navigate("/leaderboard"), category: "Quick Actions" },
     ];
 
     return [...navItems, ...campaignItems, ...actionItems];
@@ -218,10 +218,10 @@ function CommandPaletteInner() {
 
       {/* Palette */}
       <div className="fixed left-1/2 top-[15%] z-[101] w-full max-w-xl -translate-x-1/2 animate-cmd-palette-in">
-        <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#141418]/95 shadow-2xl shadow-black/60 backdrop-blur-xl">
+        <div className="overflow-hidden rounded-xl border border-[#2B3139] bg-[#141418]/95 shadow-2xl shadow-black/60 backdrop-blur-xl">
           {/* Search input */}
-          <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
-            <Search className="h-5 w-5 shrink-0 text-gray-500" />
+          <div className="flex items-center gap-3 border-b border-[#2B3139] px-4 py-3">
+            <Search className="h-5 w-5 shrink-0 text-[#848E9C]" />
             <input
               ref={inputRef}
               type="text"
@@ -229,13 +229,13 @@ function CommandPaletteInner() {
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Search campaigns, navigate, or take action..."
-              className="flex-1 bg-transparent text-sm text-white placeholder-gray-500 outline-none"
+              className="flex-1 bg-transparent text-sm text-[#EAECEF] placeholder-[#848E9C] outline-none"
               aria-label="Command palette search"
               role="combobox"
               aria-expanded="true"
               aria-autocomplete="list"
             />
-            <kbd className="hidden shrink-0 rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-gray-500 sm:inline">
+            <kbd className="hidden shrink-0 rounded border border-[#2B3139] bg-[#2B3139] px-1.5 py-0.5 text-[10px] text-[#848E9C] sm:inline">
               ESC
             </kbd>
           </div>
@@ -248,15 +248,15 @@ function CommandPaletteInner() {
           >
             {flatItems.length === 0 ? (
               <div className="flex flex-col items-center gap-2 py-12 text-center">
-                <Search className="h-8 w-8 text-gray-600" />
-                <p className="text-sm text-gray-500">No results for &ldquo;{query}&rdquo;</p>
-                <p className="text-xs text-gray-600">Try searching for campaigns, pages, or actions</p>
+                <Search className="h-8 w-8 text-[#848E9C]" />
+                <p className="text-sm text-[#848E9C]">No results for &ldquo;{query}&rdquo;</p>
+                <p className="text-xs text-[#848E9C]">Try searching for campaigns, pages, or actions</p>
               </div>
             ) : (
               Object.entries(grouped).map(([category, items]) => (
                 <div key={category} className="mb-2">
                   <div className="px-3 py-1.5">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-600">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#848E9C]">
                       {category}
                     </span>
                   </div>
@@ -272,34 +272,34 @@ function CommandPaletteInner() {
                         onMouseEnter={() => setActiveIndex(globalIndex)}
                         className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all ${
                           isActive
-                            ? "bg-white/[0.06] text-white"
-                            : "text-gray-400 hover:bg-white/[0.03]"
+                            ? "bg-[#2B3139] text-[#EAECEF]"
+                            : "text-[#848E9C] hover:bg-[#1E2329]"
                         }`}
                         role="option"
                         aria-selected={isActive}
                       >
                         <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-                          isActive ? "bg-white/[0.06]" : "bg-white/[0.03]"
+                          isActive ? "bg-[#2B3139]" : "bg-[#1E2329]"
                         }`}>
-                          <Icon className={`h-4 w-4 ${isActive ? item.color : "text-gray-500"}`} />
+                          <Icon className={`h-4 w-4 ${isActive ? item.color : "text-[#848E9C]"}`} />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className={`truncate text-sm font-medium ${isActive ? "text-white" : "text-gray-300"}`}>
+                          <p className={`truncate text-sm font-medium ${isActive ? "text-[#EAECEF]" : "text-[#EAECEF]"}`}>
                             {item.label}
                           </p>
                           {(item.description || item.meta) && (
-                            <p className="truncate text-xs text-gray-600">
+                            <p className="truncate text-xs text-[#848E9C]">
                               {item.meta || item.description}
                             </p>
                           )}
                         </div>
                         {item.shortcut && (
-                          <kbd className="hidden shrink-0 rounded border border-white/[0.06] bg-white/[0.03] px-1.5 py-0.5 text-[10px] text-gray-500 sm:inline">
+                          <kbd className="hidden shrink-0 rounded border border-[#2B3139] bg-[#1E2329] px-1.5 py-0.5 text-[10px] text-[#848E9C] sm:inline">
                             {item.shortcut}
                           </kbd>
                         )}
                         {isActive && (
-                          <ArrowRight className="h-3.5 w-3.5 shrink-0 text-gray-500" />
+                          <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[#848E9C]" />
                         )}
                       </button>
                     );
@@ -310,31 +310,31 @@ function CommandPaletteInner() {
           </div>
 
           {/* Footer hints */}
-          <div className="flex items-center gap-4 border-t border-white/[0.06] px-4 py-2.5">
+          <div className="flex items-center gap-4 border-t border-[#2B3139] px-4 py-2.5">
             <div className="flex items-center gap-1.5">
-              <kbd className="flex h-5 w-5 items-center justify-center rounded border border-white/[0.08] bg-white/[0.04]">
-                <ArrowUp className="h-3 w-3 text-gray-500" />
+              <kbd className="flex h-5 w-5 items-center justify-center rounded border border-[#2B3139] bg-[#2B3139]">
+                <ArrowUp className="h-3 w-3 text-[#848E9C]" />
               </kbd>
-              <kbd className="flex h-5 w-5 items-center justify-center rounded border border-white/[0.08] bg-white/[0.04]">
-                <ArrowDown className="h-3 w-3 text-gray-500" />
+              <kbd className="flex h-5 w-5 items-center justify-center rounded border border-[#2B3139] bg-[#2B3139]">
+                <ArrowDown className="h-3 w-3 text-[#848E9C]" />
               </kbd>
-              <span className="text-[10px] text-gray-600">Navigate</span>
+              <span className="text-[10px] text-[#848E9C]">Navigate</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <kbd className="flex h-5 w-5 items-center justify-center rounded border border-white/[0.08] bg-white/[0.04]">
-                <CornerDownLeft className="h-3 w-3 text-gray-500" />
+              <kbd className="flex h-5 w-5 items-center justify-center rounded border border-[#2B3139] bg-[#2B3139]">
+                <CornerDownLeft className="h-3 w-3 text-[#848E9C]" />
               </kbd>
-              <span className="text-[10px] text-gray-600">Select</span>
+              <span className="text-[10px] text-[#848E9C]">Select</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <kbd className="rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-gray-500">
+              <kbd className="rounded border border-[#2B3139] bg-[#2B3139] px-1.5 py-0.5 text-[10px] text-[#848E9C]">
                 ESC
               </kbd>
-              <span className="text-[10px] text-gray-600">Close</span>
+              <span className="text-[10px] text-[#848E9C]">Close</span>
             </div>
             <div className="ml-auto flex items-center gap-1.5">
-              <Zap className="h-3 w-3 text-cyan-500/50" />
-              <span className="text-[10px] text-gray-600">Creator Hub</span>
+              <Zap className="h-3 w-3 text-[#00D4AA]/50" />
+              <span className="text-[10px] text-[#848E9C]">Creator Hub</span>
             </div>
           </div>
         </div>

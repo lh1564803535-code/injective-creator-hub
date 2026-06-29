@@ -14,9 +14,9 @@ interface Stat {
 }
 
 const STATS: Stat[] = [
-  { label: "Total Earnings", value: 1245.67, prefix: "$", icon: DollarSign, color: "text-emerald-400", trend: "+23%" },
-  { label: "Active Campaigns", value: 8, icon: Trophy, color: "text-amber-400", trend: "+2" },
-  { label: "Community Members", value: 156, icon: Users, color: "text-cyan-400", trend: "+12" },
+  { label: "Total Earnings", value: 1245.67, prefix: "$", icon: DollarSign, color: "text-[#00D4AA]", trend: "+23%" },
+  { label: "Active Campaigns", value: 8, icon: Trophy, color: "text-[#F0B90B]", trend: "+2" },
+  { label: "Community Members", value: 156, icon: Users, color: "text-[#00D4AA]", trend: "+12" },
   { label: "Avg. Block Time", value: 1.2, suffix: "s", icon: Clock, color: "text-purple-400" },
 ];
 
@@ -68,21 +68,21 @@ export function QuickStats() {
         return (
           <div
             key={stat.label}
-            className="group rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 transition hover:bg-white/[0.04]"
+            className="group rounded-xl border border-[#2B3139] bg-[#1E2329] p-4 transition hover:bg-[#2B3139]"
           >
             <div className="mb-2 flex items-center justify-between">
               <Icon className={`h-5 w-5 ${stat.color}`} />
               {stat.trend && (
-                <span className="flex items-center gap-0.5 text-[10px] text-emerald-400">
+                <span className="flex items-center gap-0.5 text-[10px] text-[#00D4AA]">
                   <TrendingUp className="h-3 w-3" />
                   {stat.trend}
                 </span>
               )}
             </div>
-            <p className="text-2xl font-bold text-white">
+            <p className="text-2xl font-bold text-[#EAECEF]">
               <AnimatedNumber value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
             </p>
-            <p className="mt-1 text-xs text-gray-500">{stat.label}</p>
+            <p className="mt-1 text-xs text-[#848E9C]">{stat.label}</p>
           </div>
         );
       })}

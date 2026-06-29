@@ -1,17 +1,6 @@
 "use client";
 
-import {
-  Rocket,
-  Send,
-  Vote,
-  Award,
-  Check,
-  Clock,
-} from "lucide-react";
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
+import { Rocket, Send, Vote, Award, Check, Clock } from "lucide-react";
 
 export type CampaignPhase =
   | "creation"
@@ -54,14 +43,7 @@ const PHASES: PhaseInfo[] = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-function getCurrentPhase(
-  deadline: number,
-  settled: boolean
-): CampaignPhase {
+function getCurrentPhase(deadline: number, settled: boolean): CampaignPhase {
   const now = Math.floor(Date.now() / 1000);
   if (settled) return "completed";
   if (now >= deadline) return "voting";
@@ -73,14 +55,10 @@ function getPhaseIndex(phase: CampaignPhase): number {
   return PHASES.findIndex((p) => p.id === phase);
 }
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
-
 interface CampaignTimelineProps {
   deadline: number;
   settled: boolean;
-  createdAt?: number; // optional, defaults to deadline - 7 days
+  createdAt?: number;
 }
 
 export function CampaignTimeline({
@@ -99,10 +77,12 @@ export function CampaignTimeline({
     : Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
 
   return (
-    <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
+    <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-white">Campaign Timeline</h3>
-        <span className="flex items-center gap-1 text-xs text-gray-500">
+        <h3 className="text-sm font-semibold text-[#EAECEF]">
+          Campaign Timeline
+        </h3>
+        <span className="flex items-center gap-1 text-xs text-[#848E9C]">
           <Clock className="h-3 w-3" />
           {settled
             ? "Completed"
@@ -112,58 +92,46 @@ export function CampaignTimeline({
         </span>
       </div>
 
-      {/* Progress bar */}
       <div className="relative mb-8">
-        <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+        <div className="h-1.5 overflow-hidden rounded-full bg-[#0B0E11]">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-1000"
+            className="h-full rounded-full bg-gradient-to-r from-[#00D4AA] to-[#00B894] transition-all duration-1000"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>
 
-      {/* Phase steps */}
       <div className="grid grid-cols-4 gap-2">
         {PHASES.map((phase, i) => {
           const isCompleted = i < currentIndex || settled;
           const isCurrent = i === currentIndex && !settled;
-          const isPending = i > currentIndex && !settled;
 
           return (
             <div key={phase.id} className="text-center">
-              {/* Icon */}
               <div
                 className={`mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full transition-all ${
                   isCompleted
-                    ? "bg-emerald-500/20 text-emerald-400"
+                    ? "bg-[#00D4AA]/20 text-[#00D4AA]"
                     : isCurrent
-                      ? "bg-cyan-500/20 text-cyan-400 ring-2 ring-cyan-500/30"
-                      : "bg-white/[0.04] text-gray-600"
+                      ? "bg-[#00D4AA]/20 text-[#00D4AA] ring-2 ring-[#00D4AA]/30"
+                      : "bg-[#2B3139] text-[#848E9C]"
                 }`}
               >
-                {isCompleted ? (
-                  <Check className="h-4 w-4" />
-                ) : (
-                  phase.icon
-                )}
+                {isCompleted ? <Check className="h-4 w-4" /> : phase.icon}
               </div>
-
-              {/* Label */}
               <p
                 className={`text-xs font-medium ${
                   isCompleted
-                    ? "text-emerald-400"
+                    ? "text-[#00D4AA]"
                     : isCurrent
-                      ? "text-cyan-400"
-                      : "text-gray-600"
+                      ? "text-[#00D4AA]"
+                      : "text-[#848E9C]"
                 }`}
               >
                 {phase.label}
               </p>
-
-              {/* Description - only for current */}
               {isCurrent && (
-                <p className="mt-1 text-[10px] text-gray-500">
+                <p className="mt-1 text-[10px] text-[#848E9C]">
                   {phase.description}
                 </p>
               )}
@@ -172,11 +140,10 @@ export function CampaignTimeline({
         })}
       </div>
 
-      {/* Completed overlay */}
       {settled && (
-        <div className="mt-4 rounded-lg bg-emerald-500/5 px-3 py-2 text-center">
-          <p className="text-xs text-emerald-400">
-            Campaign completed -- rewards have been distributed
+        <div className="mt-4 rounded-lg bg-[#00D4AA]/5 px-3 py-2 text-center">
+          <p className="text-xs text-[#00D4AA]">
+            Campaign completed — rewards have been distributed
           </p>
         </div>
       )}

@@ -78,58 +78,58 @@ export function GasEstimator({ type = "transfer", className = "" }: GasEstimator
   return (
     <div
       ref={containerRef}
-      className={`rounded-xl border border-emerald-500/20 bg-[#1a1a1a] p-4 transition-all duration-500 ${
+      className={`rounded-xl border border-emerald-500/20 bg-[#1E2329] p-4 transition-all duration-500 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
       } ${className}`}
     >
       {/* Header */}
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/15">
-            <Fuel className="h-4 w-4 text-emerald-400" />
+          <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-[#00D4AA]/15">
+            <Fuel className="h-4 w-4 text-[#00D4AA]" />
             <span className="absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00D4AA] opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#00D4AA]" />
             </span>
           </div>
           <div>
-            <p className="text-sm font-medium text-white">Gas Estimate</p>
-            <p className="text-[10px] text-gray-500">Injective EVM • 0.64s blocks</p>
+            <p className="text-sm font-medium text-[#EAECEF]">Gas Estimate</p>
+            <p className="text-[10px] text-[#848E9C]">Injective EVM • 0.64s blocks</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 rounded-lg bg-emerald-500/10 px-2 py-1">
-          <Activity className="h-3 w-3 text-emerald-400" />
-          <span className="text-[10px] font-medium text-emerald-400">Live</span>
+        <div className="flex items-center gap-1.5 rounded-lg bg-[#00D4AA]/10 px-2 py-1">
+          <Activity className="h-3 w-3 text-[#00D4AA]" />
+          <span className="text-[10px] font-medium text-[#00D4AA]">Live</span>
         </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="rounded-lg bg-white/[0.02] p-2.5 text-center">
-          <p className="mb-1 text-[10px] uppercase tracking-wider text-gray-500">Gas</p>
-          <p className="font-mono text-sm font-bold text-emerald-400">
+        <div className="rounded-lg bg-[#1E2329] p-2.5 text-center">
+          <p className="mb-1 text-[10px] uppercase tracking-wider text-[#848E9C]">Gas</p>
+          <p className="font-mono text-sm font-bold text-[#00D4AA]">
             <AnimatedNumber value={estimate.gasInj} suffix=" INJ" />
           </p>
         </div>
-        <div className="rounded-lg bg-white/[0.02] p-2.5 text-center">
-          <p className="mb-1 text-[10px] uppercase tracking-wider text-gray-500">Cost</p>
-          <p className="font-mono text-sm font-bold text-white">
+        <div className="rounded-lg bg-[#1E2329] p-2.5 text-center">
+          <p className="mb-1 text-[10px] uppercase tracking-wider text-[#848E9C]">Cost</p>
+          <p className="font-mono text-sm font-bold text-[#EAECEF]">
             <AnimatedNumber value={estimate.usd} prefix="$" />
           </p>
         </div>
-        <div className="rounded-lg bg-white/[0.02] p-2.5 text-center">
-          <p className="mb-1 text-[10px] uppercase tracking-wider text-gray-500">Finality</p>
+        <div className="rounded-lg bg-[#1E2329] p-2.5 text-center">
+          <p className="mb-1 text-[10px] uppercase tracking-wider text-[#848E9C]">Finality</p>
           <div className="flex items-center justify-center gap-1">
-            <Clock className="h-3 w-3 text-amber-400" />
-            <p className="text-sm font-medium text-amber-400">{estimate.speed}</p>
+            <Clock className="h-3 w-3 text-[#F0B90B]" />
+            <p className="text-sm font-medium text-[#F0B90B]">{estimate.speed}</p>
           </div>
         </div>
       </div>
 
       {/* Comparison */}
-      <div className="mt-3 flex items-center gap-2 rounded-lg bg-emerald-500/10 px-3 py-2">
-        <TrendingDown className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
-        <p className="text-[11px] leading-tight text-emerald-400">
+      <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#00D4AA]/10 px-3 py-2">
+        <TrendingDown className="h-3.5 w-3.5 shrink-0 text-[#00D4AA]" />
+        <p className="text-[11px] leading-tight text-[#00D4AA]">
           {estimate.comparison}
         </p>
       </div>

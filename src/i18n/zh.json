@@ -8,6 +8,15 @@
     "connect": "连接钱包"
   },
   "home": {
+    "heroTitle": "创作者赏金",
+    "heroTitleHighlight": "平台",
+    "heroSubtitle": "品牌发布任务 → 创作者提交内容 → 社区投票 → AI 自动结算 USDC",
+    "browseBounties": "浏览赏金",
+    "postBounty": "发布赏金",
+    "active": "进行中",
+    "voting": "投票中",
+    "ended": "已结束",
+    "noCampaigns": "暂无活动，成为第一个发布者",
     "hero": {
       "title": "Injective 创作者中心",
       "subtitle": "AI 驱动的创作者实时收益平台",
@@ -50,6 +59,11 @@
     "whyChooseDesc": "为下一代去中心化创作者而生",
     "allCampaigns": "所有活动",
     "allCampaignsDesc": "通过创作内容赚取 USDC",
+    "hotCampaigns": "热门活动",
+    "platformStats": "平台统计",
+    "totalCampaigns": "活动总数",
+    "totalRewards": "奖励总额",
+    "trending": "热门话题",
     "leaderboard": "排行榜",
     "leaderboardDesc": "Injective Creator Hub 排行榜",
     "roadmap": "路线图",

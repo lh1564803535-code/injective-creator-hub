@@ -49,7 +49,7 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-2xl border border-white/[0.08] bg-[#1a1a1a] p-6 shadow-2xl">
+          <div className="w-full max-w-sm rounded-xl border border-[#2B3139] bg-[#1a1a1a] p-6 shadow-2xl">
             {/* Header */}
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -57,13 +57,13 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
                   <Heart className="h-4 w-4 text-pink-400" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Tip Creator</p>
-                  <p className="text-[10px] text-gray-500">{creatorName}</p>
+                  <p className="text-sm font-semibold text-[#EAECEF]">Tip Creator</p>
+                  <p className="text-[10px] text-[#848E9C]">{creatorName}</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-500 hover:text-white"
+                className="text-[#848E9C] hover:text-[#EAECEF]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -72,10 +72,10 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
             {sent ? (
               <div className="flex flex-col items-center py-8">
                 <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/15">
-                  <Check className="h-6 w-6 text-emerald-400" />
+                  <Check className="h-6 w-6 text-[#00D4AA]" />
                 </div>
-                <p className="text-lg font-semibold text-white">Tip Sent!</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-lg font-semibold text-[#EAECEF]">Tip Sent!</p>
+                <p className="text-sm text-[#848E9C]">
                   ${finalAmount} USDC sent to {creatorName}
                 </p>
               </div>
@@ -92,8 +92,8 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
                       }}
                       className={`rounded-lg py-2 text-sm font-medium transition ${
                         selectedAmount === amount
-                          ? "bg-pink-500 text-white"
-                          : "bg-white/[0.04] text-gray-400 hover:bg-white/[0.08]"
+                          ? "bg-pink-500 text-[#EAECEF]"
+                          : "bg-[#2B3139] text-[#848E9C] hover:bg-white/[0.08]"
                       }`}
                     >
                       ${amount}
@@ -102,8 +102,8 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
                 </div>
 
                 {/* Custom amount */}
-                <div className="mb-4 flex items-center gap-2 rounded-lg bg-white/[0.04] px-3 py-2">
-                  <DollarSign className="h-4 w-4 text-gray-500" />
+                <div className="mb-4 flex items-center gap-2 rounded-lg bg-[#2B3139] px-3 py-2">
+                  <DollarSign className="h-4 w-4 text-[#848E9C]" />
                   <input
                     type="number"
                     value={customAmount}
@@ -112,16 +112,16 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
                       setSelectedAmount(null);
                     }}
                     placeholder="Custom amount"
-                    className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"
+                    className="flex-1 bg-transparent text-sm text-[#EAECEF] outline-none placeholder:text-[#848E9C]"
                   />
-                  <span className="text-xs text-gray-500">USDC</span>
+                  <span className="text-xs text-[#848E9C]">USDC</span>
                 </div>
 
                 {/* Send button */}
                 <button
                   onClick={handleSend}
                   disabled={!finalAmount || finalAmount <= 0 || isSending}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 py-3 text-sm font-semibold text-[#EAECEF] transition hover:opacity-90 disabled:opacity-50"
                 >
                   {isSending ? (
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -133,7 +133,7 @@ export function TipCreator({ creatorAddress, creatorName }: TipCreatorProps) {
                   )}
                 </button>
 
-                <p className="mt-2 text-center text-[10px] text-gray-600">
+                <p className="mt-2 text-center text-[10px] text-[#848E9C]">
                   Gas fee: ~0.00008 USD on Injective
                 </p>
               </>

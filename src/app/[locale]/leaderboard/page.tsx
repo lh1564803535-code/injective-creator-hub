@@ -107,18 +107,18 @@ export default function LeaderboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0f0f14] p-6 pt-22 lg:p-8 lg:pt-24">
+    <div className="page-enter">
       {/* Header */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="mb-2 text-3xl font-bold text-white">{t('title')}</h1>
-          <p className="text-gray-400">
+          <h1 className="mb-2 text-xl font-bold text-[#EAECEF]">{t('title')}</h1>
+          <p className="text-sm text-[#848E9C]">
             {t('subtitle')}
           </p>
         </div>
         <button
           onClick={handleExportCSV}
-          className="inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-white/[0.06] hover:text-white"
+          className="inline-flex items-center gap-2 rounded-lg border border-[#2B3139] bg-[#1E2329] px-4 py-2.5 text-sm font-medium text-[#EAECEF] transition hover:bg-[#2B3139]"
         >
           <Download className="h-4 w-4" />
           {t('exportCSV')}
@@ -126,31 +126,31 @@ export default function LeaderboardPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-white/[0.06] bg-[#13131b] p-5">
+      <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-5">
           <div className="mb-2 flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-amber-400" />
-            <span className="text-sm text-gray-400">{t('totalEarnings')}</span>
+            <Trophy className="h-5 w-5 text-[#F0B90B]" />
+            <span className="text-sm text-[#848E9C]">{t('totalEarnings')}</span>
           </div>
-          <p className="text-2xl font-bold text-white">
+          <p className="font-mono text-2xl font-bold text-[#EAECEF]">
             {(Number(totalEarnings) / 1e6).toLocaleString()} USDC
           </p>
         </div>
-        <div className="rounded-2xl border border-white/[0.06] bg-[#13131b] p-5">
+        <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-5">
           <div className="mb-2 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-emerald-400" />
-            <span className="text-sm text-gray-400">{t('totalVotes')}</span>
+            <TrendingUp className="h-5 w-5 text-[#00D4AA]" />
+            <span className="text-sm text-[#848E9C]">{t('totalVotes')}</span>
           </div>
-          <p className="text-2xl font-bold text-white">
+          <p className="font-mono text-2xl font-bold text-[#EAECEF]">
             {totalVotes.toLocaleString()}
           </p>
         </div>
-        <div className="rounded-2xl border border-white/[0.06] bg-[#13131b] p-5">
+        <div className="rounded-xl border border-[#2B3139] bg-[#1E2329] p-5">
           <div className="mb-2 flex items-center gap-2">
-            <FileText className="h-5 w-5 text-cyan-400" />
-            <span className="text-sm text-gray-400">{t('totalWorks')}</span>
+            <FileText className="h-5 w-5 text-[#848E9C]" />
+            <span className="text-sm text-[#848E9C]">{t('totalWorks')}</span>
           </div>
-          <p className="text-2xl font-bold text-white">{totalSubmissions}</p>
+          <p className="font-mono text-2xl font-bold text-[#EAECEF]">{totalSubmissions}</p>
         </div>
       </div>
 
@@ -175,8 +175,8 @@ export default function LeaderboardPage() {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="mt-6 flex items-center justify-between rounded-xl border border-white/[0.06] bg-[#13131b] px-4 py-3">
-          <p className="text-sm text-gray-500">
+        <div className="mt-6 flex items-center justify-between rounded-xl border border-[#2B3139] bg-[#1E2329] px-4 py-3">
+          <p className="text-sm text-[#848E9C]">
             {t('showing')} {(currentPage - 1) * PAGE_SIZE + 1}-
             {Math.min(currentPage * PAGE_SIZE, sortedCreators.length)} {t('of')}{" "}
             {sortedCreators.length} {t('creators')}
@@ -185,7 +185,7 @@ export default function LeaderboardPage() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.03] text-gray-400 transition hover:bg-white/[0.06] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2B3139] bg-[#0B0E11] text-[#848E9C] transition hover:bg-[#2B3139] hover:text-[#EAECEF] disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -195,8 +195,8 @@ export default function LeaderboardPage() {
                 onClick={() => setPage(p)}
                 className={`flex h-8 w-8 items-center justify-center rounded-lg text-sm font-medium transition ${
                   p === currentPage
-                    ? "bg-cyan-500/15 text-cyan-400 border border-cyan-500/30"
-                    : "border border-white/[0.06] bg-white/[0.03] text-gray-400 hover:bg-white/[0.06] hover:text-white"
+                    ? "bg-[#00D4AA]/15 text-[#00D4AA] border border-[#00D4AA]/30"
+                    : "border border-[#2B3139] bg-[#0B0E11] text-[#848E9C] hover:bg-[#2B3139] hover:text-[#EAECEF]"
                 }`}
               >
                 {p}
@@ -205,7 +205,7 @@ export default function LeaderboardPage() {
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.03] text-gray-400 transition hover:bg-white/[0.06] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#2B3139] bg-[#0B0E11] text-[#848E9C] transition hover:bg-[#2B3139] hover:text-[#EAECEF] disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

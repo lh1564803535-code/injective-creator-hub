@@ -12,13 +12,13 @@ export default function Error({
   const t = useTranslations('common');
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#08080f]">
+    <div className="flex items-center justify-center py-20">
       <div className="text-center">
-        <h2 className="mb-4 text-2xl font-bold text-white">{t('error')}</h2>
-        <p className="mb-6 text-sm text-gray-500">{error.message}</p>
+        <h2 className="mb-4 text-2xl font-bold text-[#EAECEF]">{t('error')}</h2>
+        <p className="mb-6 text-sm text-[#848E9C]">{error.message}</p>
         <button
           onClick={reset}
-          className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white"
+          className="rounded-xl bg-[#00D4AA] px-6 py-3 font-semibold text-white"
         >
           {t('retry')}
         </button>

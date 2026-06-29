@@ -25,6 +25,8 @@ const injectiveEvm = {
   },
 } as const;
 
+export const INJECTIVE_CHAIN_ID = injectiveEvm.id;
+
 export const wagmiConfig = getDefaultConfig({
   appName: "Injective Creator Hub",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "2f5a2f12b7b95e71e9a2a5c5e0b1e3c4",

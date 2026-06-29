@@ -80,26 +80,26 @@ const MOCK_TRANSACTIONS: Transaction[] = [
 const typeConfig = {
   send: {
     icon: ArrowUpRight,
-    color: "text-red-400",
-    bg: "bg-red-500/10",
+    color: "text-[#F6465D]",
+    bg: "bg-[#F6465D]/10",
     label: "Sent",
   },
   receive: {
     icon: ArrowDownLeft,
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
+    color: "text-[#00D4AA]",
+    bg: "bg-[#00D4AA]/10",
     label: "Received",
   },
   vote: {
     icon: Vote,
-    color: "text-cyan-400",
-    bg: "bg-cyan-500/10",
+    color: "text-[#00D4AA]",
+    bg: "bg-[#00D4AA]/10",
     label: "Voted",
   },
   claim: {
     icon: Trophy,
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
+    color: "text-[#F0B90B]",
+    bg: "bg-[#F0B90B]/10",
     label: "Claimed",
   },
   submit: {
@@ -125,13 +125,13 @@ export function TransactionHistory() {
     : MOCK_TRANSACTIONS.slice(0, 3);
 
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-[#1a1a1a] p-6">
+    <div className="rounded-xl border border-[#2B3139] bg-[#1a1a1a] p-6">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
-          <Clock className="h-5 w-5 text-gray-400" />
+        <h3 className="flex items-center gap-2 text-lg font-semibold text-[#EAECEF]">
+          <Clock className="h-5 w-5 text-[#848E9C]" />
           Transaction History
         </h3>
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-[#848E9C]">
           {MOCK_TRANSACTIONS.length} transactions
         </span>
       </div>
@@ -144,7 +144,7 @@ export function TransactionHistory() {
           return (
             <div
               key={tx.id}
-              className="flex items-center gap-3 rounded-xl border border-white/[0.04] bg-white/[0.02] p-3 transition hover:bg-white/[0.04]"
+              className="flex items-center gap-3 rounded-xl border border-[#2B3139] bg-[#1E2329] p-3 transition hover:bg-[#2B3139]"
             >
               <div
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${config.bg}`}
@@ -154,13 +154,13 @@ export function TransactionHistory() {
 
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-white">
+                  <p className="text-sm font-medium text-[#EAECEF]">
                     {config.label}
                   </p>
                   {tx.amount !== "0" && (
                     <p
                       className={`font-mono text-sm font-medium ${
-                        tx.type === "send" ? "text-red-400" : "text-emerald-400"
+                        tx.type === "send" ? "text-[#F6465D]" : "text-[#00D4AA]"
                       }`}
                     >
                       {tx.type === "send" ? "-" : "+"}
@@ -169,10 +169,10 @@ export function TransactionHistory() {
                   )}
                 </div>
                 <div className="mt-1 flex items-center justify-between">
-                  <p className="truncate text-xs text-gray-500">
+                  <p className="truncate text-xs text-[#848E9C]">
                     {tx.from || tx.to}
                   </p>
-                  <span className="text-xs text-gray-600">
+                  <span className="text-xs text-[#848E9C]">
                     {timeAgo(tx.timestamp)}
                   </span>
                 </div>
@@ -182,7 +182,7 @@ export function TransactionHistory() {
                 href={`https://testnet.blockscout.injective.network/tx/${tx.hash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 text-gray-600 transition hover:text-cyan-400"
+                className="shrink-0 text-[#848E9C] transition hover:text-[#00D4AA]"
               >
                 <ExternalLink className="h-4 w-4" />
               </a>
@@ -194,7 +194,7 @@ export function TransactionHistory() {
       {MOCK_TRANSACTIONS.length > 3 && (
         <button
           onClick={() => setExpanded(!expanded)}
-          className="mt-3 flex w-full items-center justify-center gap-1 rounded-lg bg-white/[0.04] py-2 text-xs text-gray-400 transition hover:bg-white/[0.06] hover:text-white"
+          className="mt-3 flex w-full items-center justify-center gap-1 rounded-lg bg-[#2B3139] py-2 text-xs text-[#848E9C] transition hover:bg-[#2B3139] hover:text-[#EAECEF]"
         >
           {expanded ? (
             <>

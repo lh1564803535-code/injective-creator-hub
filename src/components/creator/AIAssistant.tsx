@@ -25,33 +25,32 @@ interface Message {
 
 function getWelcomeMsg(walletAddr?: string, balance?: string): Message {
   const walletInfo = walletAddr
-    ? `\n\n🔗 钱包已连接：${shortenAddr(walletAddr)}\n💰 余额：${balance || "查询中..."}`
-    : "\n\n💡 提示：连接钱包后我可以提供更个性化的帮助";
+    ? `\n\n🔗 钱包：${shortenAddr(walletAddr)}\n💰 余额：${balance || "查询中..."}`
+    : "\n\n💡 连接钱包后可以查看收益和领取奖励";
 
   return {
     id: "welcome",
     role: "assistant",
-    text: `👋 你好！我是你的创作助手。
+    text: `👋 你好！我是 Creator Hub 助手。
 
 我可以帮你：
-- 创建和管理钱包
-- 参加创作活动
-- 把收益提现到银行卡
-- 了解实时流支付
-- 了解 SocialFi 和 AI Agent${walletInfo}
+• 浏览赏金活动，找到适合你的任务
+• 了解如何提交内容赚取 USDC
+• 解释 x402 微支付协议和 AI 自动结算
+• 查看 Gas 费和链上状态${walletInfo}
 
-有什么问题尽管问我！`,
+点击下方快捷按钮开始！`,
     timestamp: Date.now(),
   };
 }
 
 const QUICK_BUTTONS = [
-  { label: "查看收益", query: "我赚了多少USDC？" },
-  { label: "如何提现", query: "怎么把USDC提现？" },
+  { label: "怎么接单", query: "如何浏览和提交赏金？" },
+  { label: "怎么发单", query: "如何创建赏金活动？" },
+  { label: "什么是Gas", query: "Injective的Gas费是多少？" },
+  { label: "什么是USDC", query: "USDC是什么稳定币？" },
   { label: "什么是x402", query: "解释x402微支付协议" },
-  { label: "创建钱包", query: "怎么创建钱包？" },
-  { label: "什么是Gas", query: "Gas费是什么？" },
-  { label: "AI Agent", query: "AI Agent怎么自动付款？" },
+  { label: "查看收益", query: "我赚了多少USDC？" },
 ];
 
 function shortenAddr(addr: string) {

@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -59,26 +60,26 @@ const variantConfig: Record<
   success: {
     icon: Check,
     border: "border-emerald-500/30",
-    bg: "bg-emerald-500/10",
-    iconColor: "text-emerald-400",
+    bg: "bg-[#00D4AA]/10",
+    iconColor: "text-[#00D4AA]",
   },
   error: {
     icon: X,
     border: "border-red-500/30",
-    bg: "bg-red-500/10",
-    iconColor: "text-red-400",
+    bg: "bg-[#F6465D]/10",
+    iconColor: "text-[#F6465D]",
   },
   warning: {
     icon: AlertTriangle,
     border: "border-amber-500/30",
-    bg: "bg-amber-500/10",
-    iconColor: "text-amber-400",
+    bg: "bg-[#F0B90B]/10",
+    iconColor: "text-[#F0B90B]",
   },
   info: {
     icon: Info,
     border: "border-cyan-500/30",
-    bg: "bg-cyan-500/10",
-    iconColor: "text-cyan-400",
+    bg: "bg-[#00D4AA]/10",
+    iconColor: "text-[#00D4AA]",
   },
   pending: {
     icon: Loader2,
@@ -113,15 +114,15 @@ function ToastItem({
         />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium text-white">{t.title}</p>
+        <p className="text-sm font-medium text-[#EAECEF]">{t.title}</p>
         {t.description && (
-          <p className="mt-0.5 text-xs text-gray-400">{t.description}</p>
+          <p className="mt-0.5 text-xs text-[#848E9C]">{t.description}</p>
         )}
       </div>
       {t.variant !== "pending" && (
         <button
           onClick={() => onDismiss(t.id)}
-          className="shrink-0 text-gray-500 transition hover:text-gray-300"
+          className="shrink-0 text-[#848E9C] transition hover:text-[#EAECEF]"
           aria-label="Dismiss"
         >
           <X className="h-3.5 w-3.5" />
@@ -139,7 +140,12 @@ let toastCounter = 0;
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const [mounted, setMounted] = useState(false);
   const timers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const dismiss = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -172,8 +178,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={ctx}>
       {children}
-      {typeof document !== "undefined" &&
-        createPortal(
+      {mounted && createPortal(
           <div
             aria-live="polite"
             className="pointer-events-none fixed bottom-6 right-6 z-[9999] flex flex-col-reverse gap-2"
