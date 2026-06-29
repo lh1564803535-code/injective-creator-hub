@@ -32,7 +32,6 @@ import {
   useVote,
   useSettle,
   useClaimReward,
-  formatUSDC as formatUSDCContract,
 } from "@/hooks/useBounty";
 import type { SubmissionData } from "@/hooks/useBounty";
 
@@ -257,7 +256,7 @@ export default function CampaignDetailPage() {
           <div className="mb-4 flex items-center gap-4">
             <div className="rounded-lg bg-[#00D4AA]/10 px-4 py-2">
               <p className="text-xs text-[#00D4AA]">总奖金</p>
-              <p className="font-mono text-lg font-bold text-[#00D4AA]">{formatUSDCContract(campaign.totalReward)} USDC</p>
+              <p className="font-mono text-lg font-bold text-[#00D4AA]">{formatUSDC(campaign.totalReward)} USDC</p>
             </div>
             <div className="rounded-lg bg-[#2B3139] px-4 py-2">
               <p className="text-xs text-[#848E9C]">提交数</p>

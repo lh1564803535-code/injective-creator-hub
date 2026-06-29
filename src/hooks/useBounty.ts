@@ -171,11 +171,6 @@ export function useClaimReward() {
   return { claimReward, hash, isPending, isConfirming, isSuccess, error };
 }
 
-// Helper to format USDC amounts
-export function formatUSDC(value: bigint): string {
-  return formatUnits(value, 6);
-}
-
 export function parseUSDC(value: string): bigint {
   return parseUnits(value, 6);
 }
