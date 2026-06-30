@@ -1,221 +1,173 @@
 # 🥷 Injective Creator Hub
 
-> **AI Agent × x402 Micropayments × Creator Bounties on Injective**
+> **Injective 社区的链上赏金工具 — 发推、评审、自动分 USDC**
 
-A decentralized content creation platform where AI Agents autonomously settle creator rewards using Injective's x402 micropayment protocol — no human intervention, instant USDC payouts.
-
-🌐 **Live Demo**: [localhost:3000](http://localhost:3000) (Testnet)
+🌐 **在线演示**: [localhost:3000](http://localhost:3000)（测试网）
 
 ---
 
-## 💡 What is this?
+## 💡 这是什么？
 
-Injective Creator Hub is an AI-native creator bounty platform built on Injective EVM. Content creators earn USDC through on-chain bounty campaigns — AI handles the settlement automatically.
+Injective Creator Hub 是一个去中心化内容创作平台。品牌/社区发布赏金活动，创作者发推/做内容提交链接，社区评审打分，USDC 按贡献自动分配到钱包。
 
-**The problem**: Creator payments across borders are slow (3-5 days), expensive (2-3% fees), and require bank accounts. In Web3, even simple transfers cost $5+ in gas on Ethereum.
+**解决的问题**：社区奖励创作者全靠人工统计 + 手动转账，效率低、容易漏发。
 
-**The solution**: AI Agents on Injective use x402 micropayments to automatically distribute USDC to creators — gas is $0.00008, settlement is instant (0.64s blocks), and no bank account needed.
+**我们的方案**：链上创建赏金 → 创作者提交内容 → 社区投票 → 智能合约自动分 USDC。全程透明，不可篡改。
 
 ---
 
-## 🔄 How it works
+## 🔄 使用流程
 
 ```
-Sponsor → creates campaign with USDC reward
+赞助商 → 创建活动，存入 USDC 奖金池
     ↓
-Creator → submits content (tweet, video, article)
+创作者 → 发推后提交链接
     ↓
-Community → votes (weight 1-5x)
+社区 → 投票评审（1-5 分）
     ↓
-AI Agent → automatically settles USDC proportionally
-    ↓
-Creator → claims reward on-chain
+结算 → USDC 按贡献自动到账
 ```
 
 ---
 
-## 🧠 AI × Web3 Integration (Innovation)
+## 🚀 快速开始
 
-1. **AI Assistant** — Natural language chat for onboarding. Ask "how do I earn?" and get guided through the flow. Powered by OpenAI-compatible API with local fallback.
-2. **x402 Protocol** — Injective's native micropayment protocol for AI Agents. Enables autonomous USDC payments without human sign-off.
-3. **Transaction Preview** — AI assesses transaction risk (Safe/Warning/Danger) before signing.
+### 环境要求
+- Node.js 18+
+- npm 或 yarn
 
----
-
-## ⛓️ Injective Network Integration (Technical Execution)
-
-| Component | Detail |
-|-----------|--------|
-| Smart Contract | `BountyCampaign.sol` (Solidity 0.8.20 + OpenZeppelin 5.x) |
-| Contract Address | `0xAc84d5A83DAfaC2eBfcEfE26773Da16229066f61` |
-| Chain | Injective EVM Testnet (Chain ID 1439) |
-| USDC | `0xF22bede237A07E121B56d91A491EB7bCDfD1F590` |
-| Functions | `createCampaign`, `submit`, `vote`, `settle`, `claimReward` |
-| Frontend | wagmi + viem read/write hooks (`src/hooks/useBounty.ts`) |
-| Block Explorer | [Testnet Blockscout](https://testnet.blockscout.injective.network) |
-
-### Why Injective?
-
-- **$0.00008 gas** — Micropayments become viable ($1 USDC bounty doesn't cost $5 in gas)
-- **0.64s finality** — Payments settle almost instantly
-- **Native EVM** — Full compatibility with Ethereum tooling
-- **x402 protocol** — Unique to Injective, purpose-built for AI Agent payments
-
----
-
-## ✨ Key Features
-
-### 🏆 Campaign System
-- Create bounty campaigns with USDC reward pools
-- Multi-phase flow: Create → Submit → Vote → Settle
-- Deadline enforcement on-chain
-- Weighted voting (1-5x multiplier)
-
-### 🤖 AI Assistant
-- Natural language onboarding ("What is Gas?", "How do I withdraw?")
-- 13+ preset Q&A shortcuts
-- Transaction risk assessment
-- Wallet-aware (shows address and balance)
-- LLM-powered with fallback to local responses
-
-### 💰 Live Earnings
-- Real-time USDC streaming counter
-- 7-day trend visualization
-- 30-day forecast
-- View-only mode (check any address)
-
-### 📊 Dashboard & Leaderboard
-- Creator earnings overview
-- Submission tracking
-- Reward claiming with confetti celebration
-- Ranked leaderboard with search and CSV export
-
-### 🌐 Multi-language
-- English / 中文 (next-intl)
-- Locale-based routing (`/en`, `/zh`)
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 16 (App Router, Turbopack) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| Wallet | RainbowKit + wagmi + viem |
-| Data | TanStack React Query |
-| Smart Contract | Solidity 0.8.20 (Hardhat) |
-| AI | OpenAI-compatible API |
-| i18n | next-intl |
-| Chain | Injective EVM (Testnet 1439) |
-
----
-
-## 🚀 Getting Started
+### 安装
 
 ```bash
-# Clone
 git clone https://github.com/lh1564803535-code/injective-creator-hub.git
 cd injective-creator-hub
-
-# Install
-npm install --legacy-peer-deps
-
-# Environment
-cp .env.example .env.local
-# Edit .env.local with your keys
-
-# Run
-npm run dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+### 配置
 
-### Environment Variables
+创建 `.env.local` 文件：
 
-```
+```env
+# 合约地址（Injective 测试网）
 NEXT_PUBLIC_BOUNTY_CONTRACT_ADDRESS=0xAc84d5A83DAfaC2eBfcEfE26773Da16229066f61
-NEXT_PUBLIC_INJECTIVE_RPC=https://k8s.testnet.json-rpc.injective.network/
+
+# RPC 节点
+NEXT_PUBLIC_INJECTIVE_RPC=https://k8s.testnet.lcd.injective.network
+
+# 链 ID（测试网 1439）
 NEXT_PUBLIC_INJECTIVE_CHAIN_ID=1439
-NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_key
-OPENAI_API_KEY=your_key          # Optional, has fallback
+
+# WalletConnect Project ID（可选）
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=你的ID
 ```
 
-### MetaMask Setup
+### 运行
 
-Add Injective EVM Testnet:
-- **RPC**: `https://k8s.testnet.json-rpc.injective.network/`
-- **Chain ID**: `1439`
-- **Explorer**: `https://testnet.blockscout.injective.network`
+```bash
+# 开发模式
+npm run dev
 
-Get testnet tokens: [Injective Faucet](https://testnet.faucet.injective.network/)
-
----
-
-## 📁 Project Structure
-
-```
-injective-creator-hub/
-├── contracts/
-│   ├── contracts/BountyCampaign.sol    # On-chain bounty logic
-│   ├── scripts/deploy.ts               # Deployment script
-│   └── hardhat.config.ts               # Network configs
-├── src/
-│   ├── app/[locale]/
-│   │   ├── page.tsx                    # Home (hero + campaigns)
-│   │   ├── dashboard/page.tsx          # Creator dashboard
-│   │   ├── create/page.tsx             # Create campaign
-│   │   ├── campaign/[id]/page.tsx      # Campaign detail
-│   │   └── leaderboard/page.tsx        # Rankings
-│   ├── components/
-│   │   ├── creator/AIAssistant.tsx     # AI chat
-│   │   ├── creator/LiveEarnings.tsx    # Real-time earnings
-│   │   ├── campaign/                   # Campaign components
-│   │   └── ui/                         # UI primitives
-│   ├── hooks/useBounty.ts             # Contract interaction hooks
-│   ├── lib/
-│   │   ├── contract-abi.ts            # ABI definitions
-│   │   ├── injective.ts               # Chain utilities
-│   │   └── wagmi.ts                   # Wallet config
-│   └── i18n/                          # Translations
-└── .env.example
+# 生产构建
+npm run build
+npm start
 ```
 
----
-
-## 🏗 Smart Contract
-
-`BountyCampaign.sol` — 145 lines of Solidity handling the full bounty lifecycle:
-
-- **createCampaign**: Sponsor deposits USDC, sets title/reward/duration
-- **submit**: Creators submit content URI before deadline
-- **vote**: Community votes with 1-5x weight after deadline
-- **settle**: USDC distributed proportionally by votes
-- **claimReward**: Creators claim their allocated reward
+访问 http://localhost:3000
 
 ---
 
-## 📋 Submission Checklist
+## 📁 项目结构
 
-- [x] GitHub open-source repo with README
-- [x] Smart contract deployed on Injective EVM Testnet
-- [x] Frontend with wallet connection (RainbowKit + wagmi)
-- [x] i18n support (English + Chinese)
-- [x] AI Assistant with OpenAI-compatible API
-- [ ] Demo video (≤ 3 minutes)
-- [ ] Pitch Deck
-- [ ] TypeForm submission
+```
+src/
+├── app/[locale]/          # 页面（支持 en/zh）
+│   ├── page.tsx           # 首页 — 活动流
+│   ├── create/            # 创建活动
+│   ├── campaign/[id]/     # 活动详情
+│   ├── leaderboard/       # 排行榜
+│   └── dashboard/         # 我的仪表盘
+├── components/
+│   ├── layout/            # 布局组件（三栏）
+│   │   ├── AppLayout.tsx  # 主布局
+│   │   ├── LeftNav.tsx    # 左侧导航
+│   │   ├── TopNav.tsx     # 顶部导航
+│   │   ├── RightPanel.tsx # 右侧信息面板
+│   │   └── MobileBottomNav.tsx  # 移动端底部导航
+│   ├── bounty/
+│   │   └── BountyCard.tsx # 活动卡片
+│   ├── campaign/          # 活动相关组件
+│   └── creator/           # 创作者相关组件
+├── hooks/
+│   └── useBounty.ts       # 合约交互 hooks
+├── lib/
+│   ├── contract-abi.ts    # 合约 ABI
+│   ├── injective.ts       # 工具函数
+│   └── wagmi.ts           # 钱包配置
+└── i18n/
+    ├── en.json            # 英文翻译
+    └── zh.json            # 中文翻译
+```
 
 ---
 
-## 📚 References
+## 🛠 技术栈
 
-- [Injective Documentation](https://docs.injective.network)
-- [x402 Protocol](https://docs.injective.network/developers-ai/x402)
-- [iAgent SDK](https://github.com/InjectiveLabs/iagent-ts)
-- [MCP Server](https://github.com/InjectiveLabs/mcp-server)
-- [Injective Nova Program](https://injectivenova.com)
+| 类别 | 技术 |
+|------|------|
+| 前端 | Next.js 16 + React 19 + TypeScript |
+| 样式 | Tailwind CSS 4（暗色主题） |
+| 区块链 | wagmi + viem + RainbowKit |
+| 国际化 | next-intl（中文/英文） |
+| 合约 | Solidity 0.8.20（Injective EVM 测试网） |
+
+---
+
+## 📋 合约信息
+
+| 项目 | 值 |
+|------|-----|
+| 合约地址 | `0xAc84d5A83DAfaC2eBfcEfE26773Da16229066f61` |
+| 链 | Injective EVM Testnet |
+| Chain ID | 1439 |
+| USDC | `0xF22bede237A07E121B56d91A491EB7bCDfD1F590` |
+
+### 合约功能
+
+```
+createCampaign(title, desc, reward, duration)  → 创建活动
+submit(campaignId, contentURI)                  → 提交内容
+vote(submissionId, weight)                      → 投票（1-5 分）
+settle(campaignId)                              → 结算分配
+claimReward(submissionId)                       → 领取奖励
+```
+
+---
+
+## 🎨 设计规范
+
+- **主题**：暗色（对标币安广场）
+- **背景**：`#0B0E11`
+- **卡片**：`#1E2329`
+- **主色**：`#00D4AA`（Injective 绿）
+- **奖金**：`#F0B90B`（金色）
+- **布局**：三栏（左侧导航 + 中间内容 + 右侧信息面板）
+
+---
+
+## 📱 响应式
+
+- **桌面**：完整三栏布局
+- **平板**：隐藏右侧面板
+- **手机**：底部 Tab 导航栏
+
+---
+
+## 🔗 相关链接
+
+- [Injective 官网](https://injective.com)
+- [Injective Discord](https://discord.gg/injective)
+- [Injective 测试网水龙头](https://testnet.faucet.injective.network)
 
 ---
 
